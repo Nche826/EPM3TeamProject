@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<!-- Main Sidebar Container -->
+	<aside class="main-sidebar sidebar-dark-primary elevation-4" th:fragment="leftmenuFragment">
+    <!-- Brand Logo -->
+    <a href="/" class="brand-link">
+      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-angle-right elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">EPM</span>
+    </a>    
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block" >프로필</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+               
+			<!-- 재고업무 시작 -->     
+			<li class="nav-item has-treeview">
+			  <a href="#{@}" class="nav-link">
+			    <i class="nav-icon fas fa-clipboard"></i>
+			     	<p>재고업무 
+			   			 <i class="right fas fa-angle-left"></i>
+			   		</p>
+			  </a>
+			  <ul class="nav nav-treeview">
+			    <li class="nav-item">
+			      <a href="#{@}" class="nav-link">
+			        <i class="fas fa-angle-right nav-icon"></i>
+			        <p style="font-size: small;">단말기 관리</p>
+			      </a>
+			    </li>
+			    <li class="nav-item">
+			      <a href="#{@}" class="nav-link">
+			        <i class="fas fa-angle-right nav-icon"></i>
+			        <p style="font-size: small;">유심 관리</p>
+			      </a>
+			    </li>
+			    <li class="nav-item">
+			      <a href="#{@}" class="nav-link">
+			        <i class="fas fa-angle-right nav-icon"></i>
+			        <p style="font-size: small;">중고 관리</p>
+			      </a>
+			    </li>
+				 <li class="nav-item">
+			      <a href="#{@}" class="nav-link">
+			        <i class="fas fa-angle-right nav-icon"></i>
+			        <p style="font-size: small;">보유 현황</p>
+			      </a>
+			    </li>
+			   <li class="nav-item">
+			      <a href="#{@}" class="nav-link">
+			        <i class="fas fa-angle-right nav-icon"></i>
+			        <p style="font-size: small;">판매 관리</p>
+			      </a>
+			    </li>
+			    <li class="nav-item">
+			      <a href="#{@}" class="nav-link">
+			        <i class="fas fa-angle-right nav-icon"></i>
+			        <p style="font-size: small;">재고 이력</p>
+			      </a>
+			    </li> 
+			  </ul>
+			</li>
+			<!-- 재고업무 끝 -->
+			
+			<!-- 개통업무 시작 -->
+          <li class="nav-item has-treeview">
+            <a href="#{@}" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+              	  개통업무
+                <i class="fas fa-angle-left right"></i>
+                
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">모바일</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">모바일 이력</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">홈상품</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">홈상품 이력</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!-- 개통업무 끝 -->
+          
+          <!-- 미결업무 시작 -->
+          <li class="nav-item has-treeview">
+            <a href="#{@}" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+              	  미결업무
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">미결 관리</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">미결 이력</p>
+                </a>
+              </li>
+         	</ul>
+          </li>
+          <!-- 미결업무 끝 -->
+          
+          <!-- 고객업무 시작 -->
+          <li class="nav-item has-treeview">
+            <a href="#{@}" class="nav-link">
+              <i class="nav-icon fas fa-handshake"></i>
+              <p>
+             	   고객업무
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">고객관리</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">고객이력</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+          <!-- 고객업무 시작 -->
+          
+          <!-- 장부업무 시작 -->
+          <li class="nav-item has-treeview">
+            <a href="#{@}" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                	장부업무
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">수납장부</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">장부이력</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
+          <!-- 장부업무 끝 -->
+          
+          <!-- 통계업무 시작 -->
+          <li class="nav-item has-treeview">
+            <a href="#{@}" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                	통계업무
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">일간통계</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">월간통계</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">매장통계</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">직원통계</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+         <!-- 통계업무 끝 -->
+         
+          <!-- SMS업무 시작 -->
+          <li class="nav-item has-treeview">
+            <a href="#{@}" class="nav-link">
+              <i class="nav-icon far fa-envelope"></i>
+              <p>
+                SMS업무
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">SMS목록</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">SMS이력</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">SMS등록설정</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!-- SMS업무 끝 -->
+          
+          <!-- 환경설정 시작 -->
+          <li class="nav-item has-treeview">
+            <a href="#{@}" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+               	 환경설정
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">거래처관리</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">직원관리</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">매장관리</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#{@}" class="nav-link">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p style="font-size: small;">회원관리</p>
+                </a>
+              </li>
+            </ul>
+          </li> 
+          <!-- 환경설정 끝 -->         
+         
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-list-alt"></i>
+              <p>
+              	  사내게시판
+              </p>
+            </a>
+          </li>
+          
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+</html>
