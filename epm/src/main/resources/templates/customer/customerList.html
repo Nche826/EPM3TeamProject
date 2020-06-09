@@ -14,13 +14,17 @@
     <!-- 페이지 화면 헤더  -->
     <section class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
-           <i class="ion ion-person-add" style="font-size:15mm;"></i>
-          <div class="col-sm-6">
-            <h5 style="font-weight: bold;">고객관리</h5>
-            <p style="font-size:small;">등록되어 있는 고객의 정보를 관리하실 수 있습니다.</p>
-          </div>
-        </div>
+       <div class="col-sm-6">
+      			<div class="row">
+		          	<div class="col-sm-1">
+			          	 <i class="ion ion-person-add" style="font-size:15mm;"></i>
+		          	</div>		          	
+		          	<div class="col-sm-11">
+			            <h5 style="font-weight: bold;">고객관리</h5>
+			            <p style="font-size:small;">등록되어 있는 고객의 정보를 관리하실 수 있습니다</p>
+		          	</div>
+	          	</div>
+         	    </div>
     <!-- /페이지 화면 헤더  -->
     <!-- 목록 추가 등록 버튼  -->
         <div class="input-group input-group-sm float-right " style="width: 150px; margin-bottom:5mm;">
@@ -39,15 +43,31 @@
               </button>
             </div>
             <div class="modal-body">
-              <form id="CustomerInsertForm" action="#" method="post" >
-             	<div class="form-group">
-             	
-             	</div>
-              </form>
+	              <form id="CustomerInsertForm" action="#" method="post" >
+	             	<div class="form-group">
+	                	<label for="inputDescription"><i style="color: red;">*</i>고객명</label>
+	                 	<input type="text" id="customerName" class="form-control">
+	             	</div>
+	             	<div class="form-group">
+	                	<label for="inputDescription"><i style="color: red;">*</i>연락처</label>
+	                 	<input type="text" id="customerName" class="form-control">
+	             	</div>
+	             	<div class="form-group">
+	                	<label for="inputDescription"><i style="color: red;">*</i>생년월일</label>
+	                 	<input type="text" id="customerName" class="form-control">
+	             	</div>
+	             	<div class="form-group">
+	                	<label for="inputDescription"><i style="color: red;">*</i>등록 직원 명</label>
+	                 	<input type="text" id="customerName" class="form-control">
+	             	</div>
+	             	<div class="form-group">
+	             	<input type="reset" value="Clear" class="btn btn-default float-left">
+	             	<button type="submit" id="CusBtn" class="btn btn-success float-right">고객등록하기</button>
+	             	</div>
+	              </form>
             </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success float-right" data-dismiss="modal">Close</button>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -224,9 +244,9 @@
    //Date range picker
     $('#reservation').daterangepicker()
 	
-    $(document).ready(function(){
+   /*  $(document).ready(function(){
 		alert('test');
-	});
+	}); */
 </script>
 </th:block>
 </html>

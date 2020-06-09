@@ -6,6 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class CustomerController {
 	
+	//고객이력화면 가져오기
+	@GetMapping("/customerTList")
+	public String customerTList() {
+		return"customer/customerTList";
+	}
+	
 	//고객수정화면 가져오기
 	@GetMapping("/customerUpdate")
 	public String customerUpdate() {
