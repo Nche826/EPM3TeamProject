@@ -18,10 +18,6 @@
 		<div th:replace="fragments/footer :: footerFragment"></div>
 		<div id="sidebar-overlay" class></div>
 	</div>
-	
-	<th:block layout:fragment="customFooterScript"></th:block>
-	
-
 		
 		<!-- jQuery -->
 		<script src="plugins/jquery/jquery.min.js"></script>
@@ -33,7 +29,7 @@
 		  $.widget.bridge('uibutton', $.ui.button)
 		</script>
 		
-		<!-- 공통 Script -->
+		<!-- 공통 Script 모바일 메뉴닫기 -->
   		<script type="text/javascript">
 			$(document).ready(
 	  			$(function(){
@@ -67,6 +63,8 @@
 		<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 		<!-- AdminLTE App -->
 		<script src="dist/js/adminlte.js"></script>
+		
+		<th:block layout:fragment="customFooterScript"></th:block>
 		
 </body>
 
