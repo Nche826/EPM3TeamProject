@@ -16,5 +16,10 @@ public class DeviceController {
 		
 		return "/device/deviceInsert";
 	}
+	@GetMapping("/deviceUpdate")
+	public String deviceUpdate() {
+		
+		return "/device/deviceUpdate";
+	}
 }
 
