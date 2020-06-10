@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>EPM | Unpaid List</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<!-- 컨텐트 랩퍼 시작 -->	
+	<div class="content-wrapper">
+		<!-- 컨텐츠 헤더 영역 -->
+		<section class="content-header">
+	      <div class="container-fluid">
+	        <div class="row mb-2">
+	          <div class="col-sm-6">
+	          <h1><i class="nav-icon fas fa-book"></i> 미결 관리</h1>
+	          </div>
+	          <div class="col-sm-6">
+	            <ol class="breadcrumb float-sm-right">
+					<button type="button" class="btn btn-block btn-secondary" data-toggle="modal" data-target="#modal" style="margin: 5px;">미결업무 등록</button>
+	            </ol>
+	          </div>
+	        </div>
+	      </div><!-- /.container-fluid -->
+	    </section>
+      	<!-- 컨텐츠 헤더 영역 끝 -->
+      	
+ 		<!-- 컨텐츠 영역 시작 -->
+		<section class="content">
+			<div class="container-fluid">
+				
+				<div class="row">
+					<div class="col-12" style="margin: 0 auto;">
+			            <div class="card">
+			              <div class="card-header">
+									<div class="row">
+											<form action="#" method="post">
+											
+											<div class="form-inline">
+										            <div style="margin: 5px;"><i class="fa fa-calendar"></i></div>
+										            <input type="text" class="form-control datetimepicker-input" id="datetimepicker1" data-toggle="datetimepicker" data-target="#datetimepicker1" placeholder="YYYY-MM-DD" name="startSearch" style="margin: 5px;"/>
+										            <div style="margin: 5px;"><i class="fas fa-minus"></i></div>
+										            <input type="text" class="form-control datetimepicker-input" id="datetimepicker2" data-toggle="datetimepicker" data-target="#datetimepicker2" placeholder="YYYY-MM-DD" name="endSearch" style="margin: 5px;"/>
+										          
+										            <button style="margin: 5px;" type="button" class="form-control btn btn-block btn-secondary btn-xs" id="today">오늘</button>
+										           
+										            <button style="margin: 5px;" type="button" class="form-control btn btn-block btn-secondary btn-xs" id="thisWeek">1주일</button>
+										           
+										            <button style="margin: 5px;" type="button" class="form-control btn btn-block btn-secondary btn-xs" id="thisMonth">1개월</button>
+										    </div>
+											
+											<div class="form-inline">											                  
+												<select class="form-control" name="statusSearch" id="statusSearch" style="margin: 5px;">
+						                          <option value="">상태</option>
+						                          <option value="take">접수</option>
+						                          <option value="solve">해결</option>
+						                          <option value="cancle">취소</option>
+						                        </select>
+												<select class="form-control" name="subjectSearch" id="subjectSearch" style="margin: 5px;">
+						                          <option value="">구분</option>
+						                          <option value="take">일반</option>
+						                          <option value="solve">모바일</option>
+						                          <option value="cancle">홈상품</option>
+						                        </select>
+						                        
+						                     <!-- *******접수직원 load******* -->
+												<select class="form-control" name="statusSearch" id="statusSearch" style="margin: 5px;">
+						                          <option value="">접수직원</option>
+						                          <option value="take">접수직원!!</option>
+						                        </select>
+			
+												<select class="form-control" name="searchK" style="margin: 5px;">
+						                          <option value="phone">연락처 (뒷4자리)</option>
+						                          <option value="customer">고객명</option>
+						                          <option value="contents">내용 (일반업무)</option>
+						                          <option value="memo">메모</option>
+						                        </select>
+												<input type="text" class="form-control" name="searchV" placeholder="Enter ..." style="margin: 5px;">
+												<button type="submit" class="form-control btn btn-block btn-secondary" style="margin: 5px;">검색</button>
+											</div>
+										</form>
+									</div>
+			              </div>
+			              <!-- /.card-header -->
+			              <div class="card-body table-responsive p-0">
+			                <table class="table table-hover text-nowrap">
+			                  <thead>
+			                    <tr>
+			                      <th>ID</th>
+			                      <th>User</th>
+			                      <th>Date</th>
+			                      <th>Status</th>
+			                      <th>Reason</th>
+			                    </tr>
+			                  </thead>
+			                  <tbody>
+			                  
+			                    <tr>
+			                      <td>183</td>
+			                      <td>John Doe</td>
+			                      <td>11-7-2014</td>
+			                      <td><span class="tag tag-success">Approved</span></td>
+			                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+			                    </tr>
+			                   
+			                  </tbody>
+			                </table>
+			              </div>
+			              <!-- /.card-body -->
+			              <div class="card-footer" style="text-align: center;">
+						       				<a href="#"><i class="right fas fa-angle-left"></i></a>
+						       				<a href="#">1</a>
+						       				<a href="#">2</a>
+						       				<a href="#">3</a>
+						       				<a href="#">4</a>
+						       				<a href="#">5</a>
+						       				<a href="#"><i class="right fas fa-angle-right"></i></a>
+							</div>
+			            </div>
+			            <!-- /.card -->
+         			 </div>
+				</div>
+				
+				<!-- 모달 -->
+				<div class="modal fade" id="modal" style="display: none;" aria-hidden="true">
+			        <div class="modal-dialog">
+			          <div class="modal-content">
+			            <div class="modal-header">
+			              <h4 class="modal-title"><i class="nav-icon fas fa-book"></i> 미결업무 등록</h4>
+			              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			                <span aria-hidden="true">×</span>
+			              </button>
+			            </div>
+			            <div class="modal-body">
+			              
+			              	<form action="#" method="post">
+				              <!-- 모달 바디 내용 -->
+				              <div class="row">
+					              	<div class="col-3" style="text-align: right;">
+					              		<p>매장</p>
+					              		<p>접수직원</p>
+					              		<p>미결예정일</p>
+					              		<p>내용</p>
+					              		<p>고객명</p>
+					              		<p>연락처</p>
+					              		<p>비고</p>
+					              	</div>
+					              	<div class="col-1"></div>
+					              	<div class="col-8">
+					              		<!-- 매장명 받아오기 -->
+					              		<p>폰클데모</p>
+					              		<!-- 접수직원 목록 받아오기 -->
+					              		<p>접수직원</p>
+					              		<!-- 데이트픽커 -->
+					              		<p>미결예정일</p>
+					              		<input type="text" class="form-control" name="name" style="margin: 5px;">
+					              		<input type="text" class="form-control" name="desc" style="margin: 5px;">
+					              		<input type="text" class="form-control" name="phone" style="margin: 5px;">
+					              		<textarea class="form-control" rows="3" name="memo" style="margin: 5px;"></textarea>
+					              	</div>
+			             	 </div>
+			              	</form>
+		              
+			            </div>
+			            <div class="modal-footer justify-content-between">
+			              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			              <button type="button" class="btn btn-secondary" id="modalSubmit">Save changes</button>
+			            </div>
+			          </div>
+			          <!-- /.modal-content -->
+			        </div>
+			        <!-- /.modal-dialog -->
+			      </div>
+				
+				
+			</div>
+		</section>
+		<!-- 컨텐츠 영역 끝 -->
+	</div>
+	<!-- 컨텐트 랩퍼 끝 -->
+</th:block>
+<th:block layout:fragment="customFooterScript">
+	<script type="text/javascript">
+	     $(function () {
+	         $('#datetimepicker1').datetimepicker({
+	        	 format: 'YYYY-MM-DD'
+	         });
+	         $('#datetimepicker2').datetimepicker({
+	        	 format: 'YYYY-MM-DD'
+	         });
+	         
+	         //today 버튼 클릭시 date picker 이벤트
+	         $('#today').click(function(){
+	        	 var currentDate = new Date();
+	        	 var yyyy = currentDate.getYear()+1900
+	        	 var mm = currentDate.getMonth()+1
+	        	 var dd = currentDate.getDate()
+	        	 
+	        	 if(mm <10){
+	        		mm = '0'+mm
+	        	 };
+	               	 
+	        	 if(dd <10){
+	        		dd = '0'+dd
+	        	 };
+	        	 
+	        	 var yyyymmdd = yyyy+'-'+mm+'-'+dd;        	 
+	        	 $('#datetimepicker1').val(yyyymmdd);
+	        	 $('#datetimepicker2').val(yyyymmdd);
+	         })
+	         
+	         //thisWeek 버튼 클릭시 date picker 이벤트
+	         $('#thisWeek').click(function(){
+	        	 var currentDate = new Date();
+	        	 var yyyy = currentDate.getYear()+1900
+	        	 var mm = currentDate.getMonth()+1
+	        	 var dd1 = currentDate.getDate()
+	        	 var dd2 = currentDate.getDate()+7
+	        	 
+	        	 if(mm <10){
+	        		mm = '0'+mm
+	        	 };
+	               	 
+	        	 if(dd1 <10){
+	        		dd1 = '0'+dd1
+	        	 };
+	        	 if(dd2 <10){
+	        		dd2 = '0'+dd2
+	        	 };
+	        	 
+	        	 var yyyymmdd1 = yyyy+'-'+mm+'-'+dd1;        	 
+	        	 var yyyymmdd2 = yyyy+'-'+mm+'-'+dd2;        	 
+	        	 $('#datetimepicker1').val(yyyymmdd1);
+	        	 $('#datetimepicker2').val(yyyymmdd2);
+	         })
+	         
+	         //thisMonth 버튼 클릭시 date picker 이벤트
+	         $('#thisMonth').click(function(){
+	        	 var currentDate = new Date();
+	        	 var yyyy = currentDate.getYear()+1900
+	        	 var mm1 = currentDate.getMonth()
+	        	 var mm2 = currentDate.getMonth()+1
+	        	 var dd = currentDate.getDate()
+	
+	        	 
+	        	 if(mm1 <10){
+	        		mm1 = '0'+mm1
+	        	 };
+	        	 if(mm2 <10){
+	        		mm2 = '0'+mm2
+	        	 };
+	               	 
+	        	 if(dd <10){
+	        		dd = '0'+dd
+	        	 };
+	        	 
+	        	 var yyyymm1dd = yyyy+'-'+mm1+'-'+dd;        	 
+	        	 var yyyymm2dd = yyyy+'-'+mm2+'-'+dd;        	 
+	        	 $('#datetimepicker1').val(yyyymm1dd);
+	        	 $('#datetimepicker2').val(yyyymm2dd);
+	         })
+	     });
+	 </script>
+</th:block>
+
+</html>
