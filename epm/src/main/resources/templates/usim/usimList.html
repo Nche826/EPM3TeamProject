@@ -20,9 +20,129 @@
       				</div>
       				<div class="col-sm-6">
       					<ol class="breadcrumb float-sm-right">
-							<a href="#" class="btn btn-outline-dark btn-sm bd-0 tx-gray-700 mg-r-20" data-toggle="modal" data-remote="/stock/usim-form-large" data-target="#modal-remote"><i class="fas fa-file-excel nav-icon"></i> 엑셀대량입고</a>
-						　	<a href="/usimInsert" class="btn btn-outline-dark btn-sm bd-0 tx-gray-700 mg-r-20" data-toggle="modal" data-remote="/stock/usim-form-write" data-target="#modal-remote"><i class="fas fa-pen-square nav-icon"></i> 유심 입고</a>
+							<button type="button" class="btn btn-outline-dark btn-sm bd-0 tx-gray-700 mg-r-20" data-toggle="modal" data-target="#excelUsimInsert"><i class="fas fa-file-excel nav-icon"></i>엑셀대량입고</button>
+						　	<button type="button" class="btn btn-outline-dark btn-sm bd-0 tx-gray-700 mg-r-20" data-toggle="modal" data-target="#usimInsert"><i class="fas fa-pen-square nav-icon"></i>유심 입고</button>
 						</ol>
+						<!-- Modal -->
+						<div class="modal fade" id="usimInsert">
+						  <div class="modal-dialog modal-sm">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h4 class="modal-title">유심 입고</h4>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body pd-20">
+						        
+						        		<form id="form-save">
+						        			<div class="row">
+						        				<label class="col-4" style="text-align: right;">매장</label>
+						        				<div class="col-8">
+						        					<div class="pd-y-5">삼삼1호점</div>
+						        					<input type="hidden" name="chain" value="1">
+						        				</div>
+						        			</div>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">입고직원</label>
+						        				<div class="col-8">
+						        					<select class="form-control form-control-sm select-sm" name="member" style="margin-top: 5px;">
+						        						<option value="1" selected>강대표</option>
+						        						<option value="2">홍점장</option>
+						        					</select>
+						        				</div>
+						        			</div>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">입고일</label>
+						        				<div class="col-8">
+						        					<input type="date" class="form-control form-control-sm" name="indate" maxlength="10" value="년도-월-일" id="indate" style="margin-top: 5px;">
+						        				</div>
+						        			</div>
+						        			<hr>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
+						        					<span style="color: red">*</span>
+						        					거래처
+						        				</label>
+						        				<div class="col-8">
+						        					<select class="form-control form-control-sm select-sm" name="dealer" style="margin-top: 5px;">
+														<option value="">- 선택 -</option>
+														<option value="4">M&S(KT)</option>
+														<option value="6">TNG(LG)</option>
+														<option value="2">금풍대리점(SK)</option>
+														<option value="5">동대구유통(LG)</option>
+														<option value="1">동블루골드(SK)</option>
+														<option value="3">라온KT</option>
+														<option value="6220">하우스</option>
+														<option value="11">하우스(CJ)</option>
+														<option value="6309">하우스(CJ-LGT)</option>
+														<option value="14">하우스(CJ-SKT)</option>
+													</select>
+						        				</div>
+						        			</div>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
+						        					<span style="color: red">*</span>
+						        					모델명
+						        				</label>
+						        				<div class="col-8">
+													<input type="text" class="form-control form-control-sm" id="form-save-model" name="model" maxlength="100" style="margin-top: 5px;">
+												</div>
+											</div>
+											<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
+						        					결제
+						        				</label>
+						        				<div class="col-8">
+													<select class="form-control form-control-sm select-sm" name="pay" style="margin-top: 5px;">
+														<option value="1">선결제</option>
+														<option value="2">후결제</option>
+													</select>
+												</div>
+											</div>
+											<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
+						        					입고가
+						        				</label>
+						        				<div class="col-8 input-group input-group-sm">
+						        					<input type="text" class="form-control form-control-sm" name="inprice" style="margin-top: 5px; text-align: right;">
+						        					<div class="input-group-append">
+						        						<span class="input-group-text" style="margin-top: 5px;">원
+						        						</span>
+						        					</div>
+						        				</div>
+						        			</div>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
+						        					<span style="color: red">*</span>
+						        					일련번호
+						        				</label>
+						        				<div class="col-8">
+													<input type="text" class="form-control form-control-sm" id="form-save-model" name="serialnumber" maxlength="100" style="margin-top: 5px;">
+												</div>
+											</div>
+											<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
+						        					비고
+						        				</label>
+						        				<div class="col-8">
+													<input type="text" class="form-control form-control-sm" id="form-save-model" name="memo" maxlength="100" style="margin-top: 5px;">
+												</div>
+											</div>
+						        		</form>
+						        	
+						        
+						      </div>
+						      <div class="modal-footer justify-content-between">
+						        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+						        <button type="button" class="btn btn-primary">입고 완료</button>
+						      </div>
+						    </div>
+						    <!-- /.modal-content -->
+						  </div>
+						  <!-- /.modal-dialog -->
+						</div>
+						<!-- / .model -->
 					</div>
       			</div>
       		</div>
@@ -40,6 +160,9 @@
 		<!-- 컨텐츠 영역 끝 -->
 	</div>
 	<!-- 컨텐트 랩퍼 끝 -->
+</th:block>
+
+<th:block layout:fragment="customScript">
 </th:block>
 <th:block layout:fragment="customFooterScript">
 </th:block>
