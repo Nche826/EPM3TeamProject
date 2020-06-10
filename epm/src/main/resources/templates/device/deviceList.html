@@ -5,7 +5,27 @@
 
 
 <th:block layout:fragment="customCss">
-
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+   <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </th:block>
 
 
@@ -31,7 +51,9 @@
           </div>
           <div class="col-sm-6">
    			<ol class="breadcrumb float-sm-right">
-			　	<a href="/deviceInsert" class="btn btn-info btn-sm pd-x-5 pd-y-0"><i class="fas fa-pen" ></i> 단말기 입고</a>							
+			　	<a href="/deviceInsert" class="btn btn-info btn-sm pd-x-5 pd-y-0"><i class="fas fa-pen" ></i> 단말기 입고</a>		
+				<button type="button"  class="btn btn-info btn-sm pd-x-5 pd-y-0" data-toggle="modal" data-target="#modal-xl"><i class="fas fa-pen" ></i> 단말기 입고</a>	
+                </button>				
 			</ol>
 		</div>   
         </div>
@@ -40,10 +62,29 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-          	<div class="card">
+      <div class="container-fluid">      
+      <!-- /.modal -->
+      <div class="modal fade" id="modal-xl">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Extra Large Modal</h4>
+              
+             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">  
+          
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          	</div>
+		</div>
+	</div>
+	</section>
               <div class="card-header">
                 <h3 class="card-title">휴대폰/태블릿 등의단말기를 관리하실 수 있습니다</h3>
               </div>
@@ -64,9 +105,7 @@
                     <th>매장</th>
                     <th>직원</th>
                     <th>비고</th>
-                    <th>관리</th>
-                    
-                         
+                    <th>관리</th>    
                 </tr>
                   </thead>
                   <tbody>                  
@@ -122,6 +161,7 @@
     $("#example1").DataTable({
       "responsive": true,
       "autoWidth": false,
+     
     });
     $('#example2').DataTable({
       "paging": true,
@@ -132,10 +172,15 @@
       "autoWidth": false,
       "responsive": true,
     });
-  });
+  });  
 </script>
 
-
+<!-- SweetAlert2 -->
+<script src="/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="/plugins/toastr/toastr.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/dist/js/demo.js"></script>
 
 </th:block>
 
