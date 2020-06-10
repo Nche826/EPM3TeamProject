@@ -22,10 +22,171 @@
       	</div>
       	<!-- 컨텐츠 헤더 영역 끝 -->
       	
+      	
  		<!-- 컨텐츠 영역 시작 -->
 		<section class="content">
 			<div class="container-fluid">
 				<div class="row">
+				
+				<!-- card-body -->
+				 <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>단말기</label>
+                 <input type="text"  class="form-control"  placeholder="단말기 일련번호를 입력해주세요.">
+                </div>
+                <!-- /.form-group -->
+        
+              </div>
+              <!-- /.col -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>유심</label>
+                   <input type="text"  class="form-control"  placeholder="유심 일련번호를 입력해주세요.">
+                </div>
+                <!-- /.form-group -->
+          
+               
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+
+            <h5>가입정보</h5>
+            
+            <div class="row">
+              <div class="col-12 col-sm-6">
+                
+                 <div class="form-group">
+                  <label>* 개통일자  </label>
+                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label>* 고객명  </label>
+                      <input type="text" class="form-control" placeholder="고객명">
+                </div>
+                <div class="form-group">
+                  <label>* 개통종류  </label>
+            	  <select class="form-control select2" style="width: 100%;">
+                    <option selected="selected">-선택-</option>
+                    <option>신규</option>
+                    <option>번호이동</option>
+                    <option>기변</option>
+                  </select>
+                </div>
+                 <div class="form-group">
+                  <label>단말기할부  </label>
+            	  <select class="form-control select2" style="width: 100%;">
+                    <option selected="selected">24개월</option>
+                    <option>12개월</option>
+                    <option>36개월</option>
+                    <option>48개월</option>
+                    <option>완납</option>
+                    <option>직접입력</option>
+                  </select>
+                </div>
+                   <div class="form-group">
+                  <label>약정개월  </label>
+            	  <select class="form-control select2" style="width: 100%;">
+                    <option selected="selected">24개월</option>
+                    <option>12개월</option>
+                    <option>24개월</option>
+                    <option>36개월</option>
+                    <option>무약정</option>
+                    <option>직접입력</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>요금제  </label>
+                      <input type="text" class="form-control" placeholder="요금제">
+                </div>
+                <div class="form-group">
+                  <label>요금제유지일  </label>
+                      <input type="text" class="form-control" placeholder="요금제유지일">
+                </div>
+                 <div class="form-group">
+                  <label>결합상품 </label>
+                      <input type="text" class="form-control" placeholder="결합상품">
+                </div>
+                 <div class="form-group">
+                  <label>단말기보험 </label>
+                       <input type="text" class="form-control" placeholder="단말기보험">
+                </div>
+              
+              
+                <!-- /.form-group -->
+              </div>
+              <!-- /.col -->
+              <div class="col-12 col-sm-6">
+                 <div class="form-group">
+                  <label>* 개통번호</label>
+
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                    </div>
+                    <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask>
+                  </div>
+                <!-- /.form-group -->
+              </div>
+                  <div class="form-group">
+                  <label>고객분류</label>
+                 <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
+                    <option>분류없음</option>
+                    <option>단골</option>
+                    <option>천사</option>
+                    <option>보통</option>
+                    <option>지인</option>
+                    <option>소개</option>
+                   
+                  </select>
+                </div>
+                   <div class="form-group">
+                  <label>유심비 </label>
+                       <input type="text" class="form-control" placeholder="유심비">
+                </div>
+                 <div class="form-group">
+                  <label>가입비 </label>
+                       <input type="text" class="form-control" placeholder="가입비">
+                </div>
+                <div class="form-group">
+                  <label>부가서비스 </label>
+                       <input type="text" class="form-control" placeholder="부가서비스">
+                </div>
+                <div class="form-group">
+                  <label>요금제유지비고 </label>
+                       <input type="text" class="form-control" placeholder="요금제유지비고 ">
+                </div>
+                <div class="form-group">
+                  <label>복지할인  </label>
+            	  <select class="form-control select2" style="width: 100%;">
+                    <option selected="selected">-선택-</option>
+                    <option>장애인</option>
+                    <option>복지할인</option>
+                    <option>국가유공자</option>
+                    <option>생계/의료 수급자</option>
+                    <option>차상위계층</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>할인카드 </label>
+                       <input type="text" class="form-control" placeholder="라이트할부/세이브/청구할인카드명 입력 ">
+                </div>
+             
+             
+              
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.card-body -->
+				
 				</div>
 			</div>
 		</section>
@@ -34,5 +195,83 @@
 	<!-- 컨텐트 랩퍼 끝 -->
 </th:block>
 <th:block layout:fragment="customFooterScript">
+<!-- Select2 -->
+<script src="../../plugins/select2/js/select2.full.min.js"></script>
+<!-- InputMask -->
+<script src="../../plugins/moment/moment.min.js"></script>
+<script src="../../plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+<script>
+$(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+    //Datemask dd/mm/yyyy
+    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    //Datemask2 mm/dd/yyyy
+    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    //Money Euro
+    $('[data-mask]').inputmask()
+
+    //Date range picker
+    $('#reservationdate').datetimepicker({
+        format: 'L'
+    });
+    //Date range picker
+    $('#reservation').daterangepicker()
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({
+      timePicker: true,
+      timePickerIncrement: 30,
+      locale: {
+        format: 'MM/DD/YYYY hh:mm A'
+      }
+    })
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+      {
+        ranges   : {
+          'Today'       : [moment(), moment()],
+          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate  : moment()
+      },
+      function (start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+      }
+    )
+
+    //Timepicker
+    $('#timepicker').datetimepicker({
+      format: 'LT'
+    })
+    
+    //Bootstrap Duallistbox
+    $('.duallistbox').bootstrapDualListbox()
+
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
+
+    $('.my-colorpicker2').on('colorpickerChange', function(event) {
+      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+    });
+
+    $("input[data-bootstrap-switch]").each(function(){
+      $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    });
+
+  })
+</script>
 </th:block>
 </html>
