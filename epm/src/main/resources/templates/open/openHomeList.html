@@ -1,10 +1,193 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
 
-</body>
+
+<th:block layout:fragment="customCss">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+   <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</th:block>
+
+
+<th:block layout:fragment="customTitle">
+	
+</th:block>
+
+<th:block layout:fragment="customScript">
+
+</th:block>
+
+
+
+<th:block layout:fragment="customContents">
+	<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>홈상품</h1>
+          </div>
+          <div class="col-sm-6">
+   			<ol class="breadcrumb float-sm-right">
+			　	<a href="/openHomeInsert" class="btn btn-info btn-sm pd-x-5 pd-y-0"><i class="fas fa-pen" ></i> 홈상품 개통</a>		
+				<button type="button"  class="btn btn-info btn-sm pd-x-5 pd-y-0" data-toggle="modal" data-target="#modal-xl"><i class="fas fa-pen" ></i> 홈상품 개통</a>	
+                </button>				
+			</ol>
+		</div>   
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">      
+      <!-- /.modal -->
+      <div class="modal fade" id="modal-xl">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Extra Large Modal</h4>
+              
+             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">  
+          
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          	</div>
+		</div>
+	</div>
+	</section>
+              <div class="card-header">
+                <h3 class="card-title">홈상품 개통과 관련된 모든 업무를 관리하실 수 있습니다.</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                 <tr>
+                    <th>상태</th>
+                    <th>신청일</th>
+                    <th>거래처</th>
+                    <th>고객명</th>
+                    <th>연락처</th>
+                    <th>구분</th>
+                    <th>가입상품</th>
+                    <th>정산금액</th>
+                    <th>실판매마진</th>
+                    <th>매장</th>
+                    <th>직원</th>
+                    <th>관리</th>    
+                </tr>
+                  </thead>
+                  <tbody>                  
+                  <tr>
+                    <td>완료</td>
+                    <td>20-05-14</td>
+                    <td>동대구유통(LG)</td>
+                    <td>홍길동</td>
+                    <td>010-1234-4567</td>
+                    <td>결합판매</td>
+                    <td>인터넷, TV(2)</td>
+                    <td>-450,000</td>
+                    <td>309,091</td>
+                    <td>epm 본점</td>
+                    <td>김대표</td>                   
+                    <td align="center"><a href="/openHomeUpdate" class="btn btn-info btn-sm pd-x-5 pd-y-0"><i class="icon ion-ios-browsers"></i></a></td>                   
+                  </tr>   
+                 </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+</th:block>
+<th:block layout:fragment="customFooterScript">
+
+<!-- Bootstrap 4 -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables -->
+<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/dist/js/demo.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+      "aaSorting":[],
+      "aoColumnDefs":[
+         {'bSortable': false, 'aTargets':[0,2,3,4,5,6,9,10,11]}
+      ]
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+      
+    });
+  });  
+</script>
+
+<!-- SweetAlert2 -->
+<script src="/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="/plugins/toastr/toastr.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/dist/js/demo.js"></script>
+
+</th:block>
+
+
+
+
+
 </html>

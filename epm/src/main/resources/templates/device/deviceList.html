@@ -161,7 +161,10 @@
     $("#example1").DataTable({
       "responsive": true,
       "autoWidth": false,
-     
+      "aaSorting":[],
+      "aoColumnDefs":[
+         {'bSortable': false, 'aTargets':[0,2,3,4,5,6,7,9,10,11,12]}
+      ]
     });
     $('#example2').DataTable({
       "paging": true,
@@ -171,6 +174,7 @@
       "info": true,
       "autoWidth": false,
       "responsive": true,
+      
     });
   });  
 </script>
