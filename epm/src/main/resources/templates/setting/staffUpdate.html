@@ -1,10 +1,153 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
 
-</body>
+<th:block layout:fragment="customTitle">
+	<title>EPM</title>
+</th:block>
+<th:block layout:fragment="customCss">
+  <!-- Bootstrap4 Duallistbox -->
+  <link rel="stylesheet" href="plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</th:block>  
+
+<th:block layout:fragment="customContents">
+	<!-- 컨텐트 랩퍼 시작 -->	
+	<div class="content-wrapper">
+		<!-- 컨텐츠 헤더 영역 -->
+		<div class="content-header">
+      		<div class="container-fluid">
+      			<div class="row">
+		          	<div class="col-sm-6">
+		      			<div class="row">
+				          	<div class="col-sm-1">
+					          	 <i class="ion ion-person-add" style="font-size:15mm;"></i>
+				          	</div>		          	
+				          	<div class="col-sm-11">
+					            <h5 style="font-weight: bold;">직원수정</h5>
+					            <p style="font-size:small;">직원 권한 수정 페이지 입니다.</p>
+				          	</div>
+			          	</div>
+	          	    </div>
+	          	    <div class="col-sm-6">
+			            <ol class="breadcrumb float-sm-right">
+			              <li class="breadcrumb-item"><a href="/">Home</a></li>
+			              <li class="breadcrumb-item active"><a href="/staffList">이전</a></li>
+			            </ol>
+	          	    </div>
+              	</div>
+      		</div>
+      	</div>
+      	<!-- 컨텐츠 헤더 영역 끝 -->
+      	
+      	<div class="mb-2 mt-4"></div>
+      	
+ 		<!-- 컨텐츠 영역 시작 -->
+ <!-- Main content -->
+    <section class="content">
+      <div class="row">
+       <div class="col-md-4">
+        </div>
+		<!-- left column -->
+		<div class="col-md-4">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">고객 정보 수정</h3>
+ 
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+            <form action="/staffList" method="post">
+              <div class="form-group" style="margin-top: 3%;">
+                <label for="inputName">아이디 </label>
+                <input type="text" id="inputName" class="form-control" value="솜뭉치">
+              </div>
+              <div class="form-group">
+                <label for="inputDescription">이름</label>
+                 <input type="text" id="inputClientCompany" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="inputStatus">매장</label>
+                <input type="text" id="inputEstimatedBudget" class="form-control">
+              </div>
+              <div class="form-group">
+	                	<label for="inputDescription"><i style="color: red;">*</i>권한</label>
+			                  <select class="select2 select2-hidden-accessible" multiple="multiple" data-placeholder="권한을 선택해주세요" style="width: 100%;">
+			                    <option>대표</option>
+			                    <option>점장</option>
+			                    <option>직원</option>
+			                    <option>회원</option>
+	                  		</select>
+	             	</div>
+              <div class="form-group" style="margin-top: 10%;">
+              	<input type="reset" value="cancle" class="btn btn-default float-left">
+              	<input type="submit" value="Save Changes" class="btn btn-primary float-right">
+              </div>
+            </form>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div><!-- /left column -->
+        <div class="col-md-4">
+        </div>
+    </section>
+    <!-- /.content -->
+	</div>
+	<!-- 컨텐트 랩퍼 끝 -->
+</th:block>
+<th:block layout:fragment="customFooterScript">
+<!-- Select2 -->
+<script src="plugins/select2/js/select2.full.min.js"></script>
+<script>
+$(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+
+    //Date range picker
+    $('#reservation').daterangepicker()
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({
+      timePicker: true,
+      timePickerIncrement: 30,
+      locale: {
+        format: 'MM/DD/YYYY hh:mm A'
+      }
+    })
+    $('#timepicker').datetimepicker({
+      format: 'LT'
+    })
+    
+    //Bootstrap Duallistbox
+    $('.duallistbox').bootstrapDualListbox()
+
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
+
+    $('.my-colorpicker2').on('colorpickerChange', function(event) {
+      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+    });
+	
+    $("input[data-bootstrap-switch]").each(function(){
+      $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    });
+
+  })
+</script>
+</th:block>
 </html>

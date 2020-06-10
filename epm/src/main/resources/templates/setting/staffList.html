@@ -1,10 +1,324 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
 
-</body>
+<th:block layout:fragment="customTitle">
+	<title>EPM</title>
+</th:block>
+ <th:block layout:fragment="customCss">
+  <!-- Bootstrap4 Duallistbox -->
+  <link rel="stylesheet" href="plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</th:block>  
+  
+<th:block layout:fragment="customContents">
+	<!-- 고개관리리스트 목록 시작  -->
+<!-- Content Wrapper. -->
+  <div class="content-wrapper">
+    <!-- 페이지 화면 헤더  -->
+    <section class="content-header">
+      <div class="container-fluid">
+       <div class="col-sm-6">
+      			<div class="row">
+		          	<div class="col-sm-1">
+			          	 <i class="fas fa-user-cog" style="font-size:11mm;"></i>
+		          	</div>		          	
+		          	<div class="col-sm-11">
+			            <h5 style="font-weight: bold;">직원관리</h5>
+			            <p style="font-size:small;">가입한 회원의 계정의 매장 권한을 등록,관리하실 수 있습니다.</p>
+		          	</div>
+	          	</div>
+         	    </div>
+    <!-- /페이지 화면 헤더  -->
+    <!-- 목록 추가 등록 버튼  -->
+        <div class="input-group input-group-sm float-right " style="width: 150px; margin-bottom:5mm;">
+          	 <button type="button" class="btn btn-block btn-info" data-toggle="modal" data-target="#modal-lg">
+                  	직원등록
+                </button>
+		</div>
+		<!-- 모달 클릭시 화면   -->
+		<div class="modal fade" id="modal-lg">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">직원 등록하기</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="card card-default">
+            	<div class="modal-body">
+	              <form id="StaffInsertForm" action="#" method="post" >
+	             	<div class="form-group">
+	                	<label for="inputDescription"><i style="color: red;">*</i>매장</label>
+			                  <select class="select2 select2-hidden-accessible" multiple="multiple" data-placeholder="매장을 선택해주세요" style="width: 100%;">
+			                    <option>삼성1호점</option>
+			                    <option>삼성2호점</option>
+			                    <option>삼성3호점</option>
+	                  		</select>
+	             	</div>
+	             	<div class="form-group">
+	                	<label for="inputDescription"><i style="color: red;">*</i>아이디</label>
+	                 	<input type="text" id="StaffId" class="form-control">
+	             	</div>
+	             	<div class="form-group">
+	                	<label for="inputDescription"><i style="color: red;">*</i>권한</label>
+			                  <select class="select2 select2-hidden-accessible" multiple="multiple" data-placeholder="권한을 선택해주세요" style="width: 100%;">
+			                    <option>대표</option>
+			                    <option>점장</option>
+			                    <option>직원</option>
+			                    <option>회원</option>
+	                  		</select>
+	             	</div>
+	             	<div class="form-group">
+	                	<label for="inputDescription"><i style="color: red;">*</i>등록자 명</label>
+	                 	<input type="text" id="StaffRegId" class="form-control">
+	             	</div>
+	             	<div class="form-group">
+	             	<input type="reset" value="Clear" class="btn btn-default float-left">
+	             	<button type="submit" id="StaffBtn" class="btn btn-info float-right">직원등록하기</button>
+	             	</div>
+	              </form>
+            	</div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-info float-right" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+		<div class="input-group">
+		</div>
+	<!-- 목록 추가 등록 버튼  -->
+	<!-- 목록 리스트 시작  -->
+       <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header" style="padding: 3%;">
+          <!-- 검색 Form  -->
+            <form class="form-inline" id="customerShc" action="#" method="post">
+              <!-- 날짜검색1 --> 
+                 <P style="font-weight:bolder;">Date Search </P>
+               <div class="form-group col-2">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="far fa-calendar-alt"></i>
+                      </span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" id="reservation">
+                  </div>
+                  <!-- /.input group -->
+                </div>
+         
+	          <!-- 셀렉트박스 검색창 -->
+	          <P style="font-weight:bolder; margin-right: 1%;">User </P>
+              <div class="form-group col-3">
+                <select name="gubun" class="form-control form-control-sm">
+					<option value="">정보선택</option>
+					<option value="opens">직원명</option>
+					<option value="homes">아이디</option>
+					<option value="bookings">매장명</option>
+					<option value="bookings">권한</option>
+				</select>
+			 </div>
+	    	<!-- 검색창 -->
+	            <div class="form-group offset-3">
+                    <input type="text" name="table_search" class="form-control" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                    </div>
+                 </div>
+              <!-- /.card-header -->
+              </div>
+              </form>
+              <!-- /.검색 From  -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>no</th>
+                      <th>직원명</th>
+                      <th>아이디</th>
+                      <th>매장</th>
+                      <th>권한</th>
+                      <th>접속수</th>
+                      <th>최근 접속</th>
+                      <th>등록날짜</th>
+                      <th>관리</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><input type="checkbox" value="#"></td>
+                      <td>1</td>
+                      <td>솜솜치</td>
+                      <td>id001</td>
+                      <td>삼성1호점</td>
+                      <td>대표</td>
+                      <td>1054</td>
+                      <td>20200610</td>
+                      <td>20190607</td>
+                      <td><a th:href="@{/staffUpdate}"><i class="fas fa-edit"></i></a></td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" value="#"></td>
+                      <td>1</td>
+                      <td>솜솜치</td>
+                      <td>id001</td>
+                      <td>삼성1호점</td>
+                      <td>점장</td>
+                      <td>1054</td>
+                      <td>20200610</td>
+                      <td>20190607</td>
+                      <td><a th:href="@{/staffUpdate}"><i class="fas fa-edit"></i></a></td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" value="#"></td>
+                      <td>1</td>
+                      <td>솜솜치</td>
+                      <td>id001</td>
+                      <td>삼성1호점</td>
+                      <td>직원</td>
+                      <td>1054</td>
+                      <td>20200610</td>
+                      <td>20190607</td>
+                      <td><a th:href="@{/staffUpdate}"><i class="fas fa-edit"></i></a></td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" value="#"></td>
+                      <td>1</td>
+                      <td>솜솜치</td>
+                      <td>id001</td>
+                      <td>삼성1호점</td>
+                      <td>직원</td>
+                      <td>1054</td>
+                      <td>20200610</td>
+                      <td>20190607</td>
+                      <td><a th:href="@{/staffUpdate}"><i class="fas fa-edit"></i></a></td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+         <!-- 페이징  -->
+                <div class="card-footer clearfix">
+                <div style="width: 30%; float:none; margin:0 auto;" >
+                <ul class="pagination pagination-sm">
+                  <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">4</a></li>
+                  <li class="page-item"><a class="page-link" href="#">5</a></li>
+                  <li class="page-item"><a class="page-link" href="#">6</a></li>
+                  <li class="page-item"><a class="page-link" href="#">7</a></li>
+                  <li class="page-item"><a class="page-link" href="#">8</a></li>
+                  <li class="page-item"><a class="page-link" href="#">9</a></li>
+                  <li class="page-item"><a class="page-link" href="#">10</a></li>
+                  <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                </ul>
+                <div>
+              </div>
+            </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+			
+			
+		<div class= "btn"style="width: 100px;">
+          	<button type="button" class="btn btn-block btn-secondary btn-sm" onclick="location.href='#'">삭제</button>
+		</div>
+		</div>	<!-- /row -->
+      </div><!-- /.container-fluid -->
+    </section>
+</div><!-- /.Content Wrapper. Contains page content -->	
+</th:block>
+<th:block layout:fragment="customFooterScript">
+<!-- Select2 -->
+<script src="plugins/select2/js/select2.full.min.js"></script>
+<script>
+
+$('#reservation').daterangepicker()
+
+$(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+    //Datemask dd/mm/yyyy
+    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    //Datemask2 mm/dd/yyyy
+    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    //Money Euro
+    $('[data-mask]').inputmask()
+
+    //Date range picker
+    $('#reservation').daterangepicker()
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({
+      timePicker: true,
+      timePickerIncrement: 30,
+      locale: {
+        format: 'MM/DD/YYYY hh:mm A'
+      }
+    })
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+      {
+        ranges   : {
+          'Today'       : [moment(), moment()],
+          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate  : moment()
+      },
+      function (start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+      }
+    )
+
+    //Timepicker
+    $('#timepicker').datetimepicker({
+      format: 'LT'
+    })
+    
+    //Bootstrap Duallistbox
+    $('.duallistbox').bootstrapDualListbox()
+
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
+
+    $('.my-colorpicker2').on('colorpickerChange', function(event) {
+      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+    });
+	
+    $("input[data-bootstrap-switch]").each(function(){
+      $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    });
+
+  })
+</script>
+</th:block>
 </html>
