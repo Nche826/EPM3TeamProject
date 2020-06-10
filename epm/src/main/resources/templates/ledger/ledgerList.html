@@ -28,33 +28,34 @@
     <!-- /페이지 화면 헤더  -->
     <!-- 목록 추가 등록 버튼  -->
         <div class="input-group input-group-sm float-right " style="width: 150px; margin-bottom:5mm;">
-          	 <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-lg">
+                  	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-primary">
                   	수납장부 등록
                 </button>
 		</div>
 		<!-- 모달 클릭시 화면   -->
-		<div class="modal fade" id="modal-lg">
-        <div class="modal-dialog modal-lg">
+		<div class="modal fade" id="modal-primary">
+        <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title">수납장부 등록</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
 	              <form id="ledgerInsertForm" action="#" method="post" >
-	             	<div class="form-group" style="width: 60%;">
+	             	<div class="form-group">
 	                	<label for="inputDescription"><i style="color: red;">*</i>매장명</label>
 	                 	<input type="text" id="customerName" class="form-control">
 	             	</div>
-	             	<div class="form-group" style="width: 60%;">
+	             	<div class="form-group">
 	                	<label for="inputDescription"><i style="color: red;">*</i>수납직원</label>
 	                 	<input type="text" id="customerName" class="form-control">
 	             	</div>
-	             	<div class="form-group" style="width: 60%;">
+	             	<div class="form-group">
 	                	<label for="inputDescription"><i style="color: red;">*</i>수납일</label>
-	                 	<input type="text" id="customerName" class="form-control">
+	                 	<input type="date" id="customerName" class="form-control">
 	             	</div>
 	             	<hr>
 	             	<div class="form-group">
@@ -76,23 +77,53 @@
 	                	<label for="inputDescription"><i style="color: red;">*</i>연락처</label>
 	                 	<input type="text" id="customerName" class="form-control">
 	             	</div>
-	             	<div class="form-group">
-	                	<label for="inputDescription"><i style="color: red;">*</i>현금수납</label>
-	                 	<input type="text" id="customerName" class="form-control">원
+	             	<div class="form-group form-inline">
+	             	<label for="inputDescription">카드사 </label>
+	             	<input type="text" class="form-control" placeholder="카드결제시 카드사입력" style="width: 60%; margin-left: 10%">
+	             	</div>
+	             	<div class="form-group form-inline">
+	                	<label for="inputDescription"><i style="color: red;">*</i>수납 금액   </label>
+	                 	<input type="text" id="customerName" class="form-control" 
+	                 		placeholder="금액입력" style="width: 51%; margin-left: 5%">
+	                 	<div class="input-group-append">
+                        <span class="input-group-text" id="">원</span>
+                      	</div>
 	             	</div>
 	             	<div class="form-group">
-	                	<label for="inputDescription"><i style="color: red;">*</i>고객카드수납</label>
-	                 	<input type="text" id="customerName" class="form-control" placeholder="카드사">
-	                 	<input type="text" id="customerName" class="form-control">원
+	                	<label for="inputDescription"><i style="color: red;">*</i>거래처</label>
+	                 	<input type="text" id="receive_dealler" class="form-control">
 	             	</div>
+	             	<div class="form-group">
+	             		<label for="inputDescription"><i style="color: red;">*</i>송금일/송금액</label>
+	             	</div>
+	             	<div class="form-group form-inline">
+		             		<input type="date" class="form-control">
+		             		<input type="text" class="form-control">
+	             		<div class="input-group-append">
+                       		<span class="input-group-text" id="">원</span>
+                      	</div>
+                    </div>
+	             	<div class="form-group">
+	                	<label for="inputDescription"><i style="color: red;">*</i>송금상태</label>
+	                	<div class="form-check">
+	                 	<input type="checkbox" id="customerName" class="form-check-input" value="처리중">
+	                 	<label class="form-check-label" style="margin-right: 6mm;">처리중</label>
+	                 	<input type="checkbox" id="customerName" class="form-check-input" value="완료">
+	                 	<label class="form-check-label" style="margin-right: 6mm;">완료</label>
+	                 	</div>
+	             	</div>
+	             	<Div class="form-group">
+	             	<label  for="inputDescription">비고</label>
+	             	<textarea rows="3" cols="50" class="form-control"></textarea>
+	             	</Div>
 	             	<div class="form-group">
 	             	<input type="reset" value="Clear" class="btn btn-default float-left">
-	             	<button type="submit" id="CusBtn" class="btn btn-success float-right">고객등록하기</button>
+	             	<button type="submit" id="CusBtn" class="btn btn-primary float-right">수납장부등록하기</button>
 	             	</div>
 	              </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-success float-right" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary float-right" data-dismiss="modal">Close</button>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -126,24 +157,17 @@
          
 	          <!-- 셀렉트박스 검색창 -->
 	          <P style="font-weight:bolder; margin-right: 1%;">User </P>
-              <div class="form-group col-offset-3">
+              <div class="form-group ">
                 <select name="gubun" class="form-control form-control-sm">
 					<option value="">고객정보</option>
 					<option value="opens">고객명</option>
 					<option value="homes">핸드폰뒷자리</option>
-					<option value="bookings">생년월일</option>
+					<option value="homes">직원명</option>
+					<option value="homes">구 분</option>
 				</select>
 			 </div>
-			 <div class="form-group col-3">
-	                <select name="staff" class="form-control form-control-sm select-sm">
-					<option value="">고객 등록 직원</option>
-					<option value="">1</option>
-					<option value="">2</option>
-					<option value="">3</option>
-					</select>
-			 </div>
 	    <!-- 검색창 -->
-	            <div class="form-group">
+	            <div class="form-group offset-3">
                     <input type="text" name="table_search" class="form-control" placeholder="Search">
 
                     <div class="input-group-append">
@@ -160,69 +184,74 @@
                     <tr>
                       <th></th>
                       <th>no</th>
-                      <th>고객명</th>
+                      <th>수납일</th>
+                      <th>수납자명</th>
                       <th>연락처</th>
-                      <th>생년월일</th>
-                      <th>모바일</th>
-                      <th>홈상품</th>
-                      <th>등록직원</th>
-                      <th>등록날짜</th>
+                      <th>구분</th>
+                      <th>수납금액</th>
+                      <th>상태</th>
                       <th>매장</th>
-                      <th>관리</th>
+                      <th>직원</th>
+                      <th>비고</th>
+                      <th>상세</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td><input type="checkbox" value="#"></td>
                       <td>1</td>
-                      <td>솜뭉치</td>
-                      <td>010-0000-0000</td>
-                      <td>200606</td>
-                      <td>1</td>
-                      <td>3</td>
+                      <td>20200610</td>
+                      <td>김뭉치</td>
+                      <td>010-1234-1111</td>
+                      <td>현금 수납</td>
+                      <td>300,000</td>
+                      <td>완료</td>
+                      <td>삼성1호점</td>
                       <td>김수지</td>
-                      <td>20200607</td>
-                      <td>매장1호점</td>
-                      <td><a th:href="@{/customerUpdate}"><i class="fas fa-edit"></i></a></td>
+                      <td>비고다.비고오오.</td>
+                      <td><a th:href="@{/ledgerUpdate}"><i class="fas fa-edit"></i></a></td>
                     </tr>
                     <tr>
                       <td><input type="checkbox" value="#"></td>
-                      <td>2</td>
-                      <td>뭉탱이</td>
-                      <td>010-0000-0000</td>
-                      <td>200606</td>
                       <td>1</td>
-                      <td>3</td>
+                      <td>20200610</td>
+                      <td>김뭉치</td>
+                      <td>010-1234-1111</td>
+                      <td>현금 수납</td>
+                      <td>300,000</td>
+                      <td>완료</td>
+                      <td>삼성1호점</td>
                       <td>김수지</td>
-                      <td>20200607</td>
-                      <td>매장1호점</td>
-                      <td><a th:href="@{/customerUpdate}"><i class="fas fa-edit"></i></a></td>
+                      <td>비고다.비고오오.</td>
+                      <td><a th:href="@{/ledgerUpdate}"><i class="fas fa-edit"></i></a></td>
+                    </tr>
+                    <tr>
+                       <td><input type="checkbox" value="#"></td>
+                      <td>1</td>
+                      <td>20200610</td>
+                      <td>김뭉치</td>
+                      <td>010-1234-1111</td>
+                      <td>현금 수납</td>
+                      <td>300,000</td>
+                      <td>완료</td>
+                      <td>삼성1호점</td>
+                      <td>김수지</td>
+                      <td>비고다.비고오오.</td>
+                      <td><a th:href="@{/ledgerUpdate}"><i class="fas fa-edit"></i></a></td>
                     </tr>
                     <tr>
                       <td><input type="checkbox" value="#"></td>
-                      <td>3</td>
-                      <td>솜뭉이</td>
-                      <td>010-0000-0000</td>
-                      <td>200606</td>
                       <td>1</td>
-                      <td>3</td>
+                      <td>20200610</td>
+                      <td>김뭉치</td>
+                      <td>010-1234-1111</td>
+                      <td>현금 수납</td>
+                      <td>300,000</td>
+                      <td>완료</td>
+                      <td>삼성1호점</td>
                       <td>김수지</td>
-                      <td>20200607</td>
-                      <td>매장3호점</td>
-                      <td><a th:href="@{/customerUpdate}"><i class="fas fa-edit"></i></a></td>
-                    </tr>
-                    <tr>
-                      <td><input type="checkbox" value="#"></td>
-                      <td>4</td>
-                      <td>김뚜지</td>
-                      <td>010-0000-0000</td>
-                      <td>200606</td>
-                      <td>1</td>
-                      <td>3</td>
-                      <td>김수지</td>
-                      <td>20200607</td>
-                      <td>매장2호점</td>
-                      <td><a th:href="@{/customerUpdate}"><i class="fas fa-edit"></i></a></td>
+                      <td>비고다.비고오오.</td>
+                      <td><a th:href="@{/ledgerUpdate}"><i class="fas fa-edit"></i></a></td>
                     </tr>
                     
                   </tbody>

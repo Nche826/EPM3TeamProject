@@ -1,10 +1,231 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
 
-</body>
+<th:block layout:fragment="customTitle">
+	<title>EPM</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<!-- 컨텐트 랩퍼 시작 -->	
+	<div class="content-wrapper">
+		<!-- 컨텐츠 헤더 영역 -->
+		<div class="content-header">
+      		<div class="container-fluid">
+      			<div class="row">
+		          	<div class="col-sm-6">
+		      			<div class="row">
+				          	<div class="col-sm-1">
+					          	 <i class="ion ion-person-add" style="font-size:15mm;"></i>
+				          	</div>		          	
+				          	<div class="col-sm-11">
+					            <h5 style="font-weight: bold;">고객수정</h5>
+					            <p style="font-size:small;">*모바일/홈상품/매장정보등은 고객명과 연락처로 검색된 정보입니다</p>
+				          	</div>
+			          	</div>
+	          	    </div>
+	          	    <div class="col-sm-6">
+			            <ol class="breadcrumb float-sm-right">
+			              <li class="breadcrumb-item"><a href="/">Home</a></li>
+			              <li class="breadcrumb-item active"><a href="/customerList">이전</a></li>
+			            </ol>
+	          	    </div>
+              	</div>
+      		</div>
+      	</div>
+      	<!-- 컨텐츠 헤더 영역 끝 -->
+      	
+      	<div class="mb-2 mt-4"></div>
+      	
+ 		<!-- 컨텐츠 영역 시작 -->
+ <!-- Main content -->
+    <section class="content">
+      <div class="row">
+		<!-- left column -->
+		<div class="col-md-4">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">고객 정보 수정</h3>
+ 
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+            <form action="#" method="post">
+              <div class="form-group" style="margin-top: 3%;">
+                <label for="inputName">고객 명 </label>
+                <input type="text" id="inputName" class="form-control" value="솜뭉치">
+              </div>
+              <div class="form-group">
+                <label for="inputDescription">연락처</label>
+                 <input type="text" id="inputClientCompany" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="inputStatus">생년월일</label>
+                <input type="text" id="inputEstimatedBudget" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="inputClientCompany">고객 등록 날짜 </label>
+                <input type="date" id="inputClientCompany" class="form-control" value="Deveint Inc">
+              </div>
+              <div class="form-group" style="margin-top: 10%;">
+              	<input type="reset" value="cancle" class="btn btn-default float-left">
+              	<input type="submit" value="Save Changes" class="btn btn-primary float-right">
+              </div>
+            </form>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div><!-- /left column -->
+      <!-- right column -->
+        <div class="col-md-8">
+          <div class="card card-secondary">
+            <div class="card-header">
+              <h3 class="card-title">매장정보</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+            <form id="storeInfo" method="get">
+	            <table class="table">
+		          <tr>
+		          <td>매장명</td>
+		          <td>삼성1호점</td>
+		          </tr>   
+		          <tr>
+		          <td>매장 주소</td>
+		          <td>서울특별시 광진구 자양동 123-23</td>
+		          </tr>   
+		          <tr>
+		          <td>등록 직원</td>
+		          <td>김 수지</td>
+		          </tr>   
+		          <tr>
+		          <td>매장 연락처</td>
+		          <td>02-3333-4456</td>
+		          </tr>   
+	            </table>
+            </form>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+      <!-- 단말기 가입내역 -->
+          <div class="card card-info">
+            <div class="card-header">
+              <h3 class="card-title">단말기 가입 정보 </h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+            <form id="storeInfo" method="get">
+	            <table class="table">
+	            <thead>
+	            <tr>
+	            <th>상품구분</th>
+	            <th>상품명</th>
+	            <th>요금제명</th>
+	            <th>개통 날짜</th>
+	            <th>할부 개월 수</th>
+	            <th>개통 직원</th>
+	            </tr>
+	            </thead>
+	            <tbody>
+		          <tr>
+		          <td>핸드폰</td>
+		          <td>갤럭시 20 울트라</td>
+		          <td>알뜰살뜰요금제</td>
+		          <td>200609</td>
+		          <td>24개월</td>
+		          <td>김수지</td>
+		          </tr>   
+		          <tr>
+		          <td>태블릿</td>
+		          <td>아이패드6세대</td>
+		          <td>데이터무제한69</td>
+		          <td>200609</td>
+		          <td>24개월</td>
+		          <td>김수지</td>
+		          </tr>   
+		          </tbody>   
+	            </table>
+            </form>
+            
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+       <!-- 홈상품 가입내역 -->
+          <div class="card card-danger">
+            <div class="card-header">
+              <h3 class="card-title">홈상품 가입 정보 </h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+            <form id="storeInfo" method="get">
+	            <table class="table">
+	            <thead>
+	            <tr>
+	            <th>가입상품명</th>
+	            <th>개통 구분</th>
+	            <th>개통판매방식</th>
+	            <th>개통신청날짜</th>
+	            <th>개통 날짜</th>
+	            <th>개통 직원</th>
+	            </tr>
+	            </thead>
+	            <tbody>
+		          <tr>
+		          <td>tv1, 인터넷1</td>
+		          <td>완료</td>
+		          <td>결합 판매</td>
+		          <td>200609</td>
+		          <td>200610</td>
+		          <td>김수지</td>
+		          </tr>   
+		          <tr>
+		          <td>tv1, 인터넷1</td>
+		          <td>예약</td>
+		          <td>사전 예약</td>
+		          <td>200609</td>
+		          <td>200611</td>
+		          <td>김수지</td>
+		          </tr>   
+		          </tbody>   
+	            </table>
+            </form>
+            
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div><!-- /right column -->
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <a href="/customerList" class="btn btn-secondary">이전페이지</a>
+          <a href="/customerList" class="btn btn-primary float-right">저장후 리스트로가기</a>
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+	</div>
+	<!-- 컨텐트 랩퍼 끝 -->
+</th:block>
+<th:block layout:fragment="customFooterScript">
+</th:block>
 </html>
