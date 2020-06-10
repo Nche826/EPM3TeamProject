@@ -6,23 +6,157 @@
 <th:block layout:fragment="customTitle">
 	<title>EPM</title>
 </th:block>
+<th:block layout:fragment="customCss">
+	 <!-- DataTables -->
+  <link rel="stylesheet" href="/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+</th:block>
 
 <th:block layout:fragment="customContents">
 	<!-- 컨텐트 랩퍼 시작 -->	
 	<div class="content-wrapper">
+		
 		<!-- 컨텐츠 헤더 영역 -->
 		<div class="content-header">
       		<div class="container-fluid">
-      			제목
+      			<h1>모바일이력</h1>
+      			<!--datatable 특정 컬럼 정렬 해야함 !!!!  
+      			  "aaSorting":[],
+        		  "aoColumnDefs":[
+        	 	  {'bSortable': false, 'aTargets':[0,1,2,3,4,5,6,8]}
+         		]
+      			-->
+      			모바일 개통과 관련된 이력을 확인하실 수 있습니다.
       		</div>
       	</div>
       	<!-- 컨텐츠 헤더 영역 끝 -->
-      	
+
  		<!-- 컨텐츠 영역 시작 -->
 		<section class="content">
+			<div>
+			
+	
+                  
+             
+			
 			<div class="container-fluid">
-				<div class="row">
-					컨텐츠
+				<div class="row md-2">
+				
+					<!-- 컨텐츠 -->
+			
+	
+							      	      	      	
+					 <div class="card">
+              <div class="card-header">
+              <div class="btn-group">
+				<button type="button" class="btn btn-default">데모본점</button>		
+				<button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                      <span class="sr-only">Toggle Dropdown</span>
+                      <div class="dropdown-menu" role="menu">
+                        <a class="dropdown-item" href="#">데모본점</a>
+                        <a class="dropdown-item" href="#">데모매장 1호</a>
+                        <a class="dropdown-item" href="#">데모매장 2호</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                      </div>
+                    </button>
+	
+			</div>
+			<div class="btn-group">
+				<button type="button" class="btn btn-default">직원</button>		
+				<button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                      <span class="sr-only">Toggle Dropdown</span>
+                      <div class="dropdown-menu" role="menu">
+                        <a class="dropdown-item" href="#">데모본점</a>
+                        <a class="dropdown-item" href="#">데모매장 1호</a>
+                        <a class="dropdown-item" href="#">데모매장 2호</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                      </div>
+                    </button>
+	
+			</div>
+			<div class="btn-group">
+				<button type="button" class="btn btn-default">구분</button>		
+				<button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                      <span class="sr-only">Toggle Dropdown</span>
+                      <div class="dropdown-menu" role="menu">
+                        <a class="dropdown-item" href="#">데모본점</a>
+                        <a class="dropdown-item" href="#">데모매장 1호</a>
+                        <a class="dropdown-item" href="#">데모매장 2호</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                      </div>
+                    </button>
+			
+			
+			
+            </div>
+            <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+						개통번호
+                    </button>
+                    <div class="dropdown-menu" style="">
+                      <a class="dropdown-item" href="#">개통번호</a>
+                      <a class="dropdown-item" href="#">일련번호</a>
+                      <a class="dropdown-item" href="#">내용</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">비고</a>
+                    </div>
+                    <input type="text" class="form-control">
+                    
+			</div>
+			<button type="button" class="btn btn-info btn-flat">검색</button>
+               
+              </div>
+              <!-- /.card-header -->
+              
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>매장</th>
+                    <th>직원</th>
+                    <th>구분</th>
+                    <th>거래처</th>
+                    <th>일련번호</th>
+                    <th>개통번호</th>
+                    <th>내용</th>
+                    <th>처리일</th>
+                    <th>비고</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>이이모바일</td>
+                    <td>은성배</td>
+                    <td>삭제</td>
+                    <td>mns</td>
+                    <td>333666</td>
+                    <td>010-6206-0607</td>
+                    <td>없음</td>
+                    <td>2020-06-08</td>
+                    <td></td>
+                  </tr>
+                   <tr>
+                    <td>이이모바일</td>
+                    <td>은성배</td>
+                    <td>삭제</td>
+                    <td>mns</td>
+                    <td>333666</td>
+                    <td>010-6206-0607</td>
+                    <td>없음</td>
+                    <td>2020-06-08</td>
+                    <td></td>
+                  </tr>
+                  </tbody>
+           
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            
 				</div>
 			</div>
 		</section>
@@ -31,5 +165,34 @@
 	<!-- 컨텐트 랩퍼 끝 -->
 </th:block>
 <th:block layout:fragment="customFooterScript">
+<!-- DataTables -->
+<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script>
+  $(function () {
+    $("#example1").DataTable({
+    	 "paging": true,
+         "lengthChange": false,
+         "searching": false,
+         "ordering": true,
+         "info": true,
+         "autoWidth": false,
+         "responsive": true,
+        
+         "aaSorting":[],
+         "aoColumnDefs":[
+        	 {'bSortable': false, 'aTargets':[0,1,2,3,4,5,6,8]}
+         ]
+
+         
+    
+
+    });
+ 
+  });
+</script>
+
 </th:block>
 </html>
