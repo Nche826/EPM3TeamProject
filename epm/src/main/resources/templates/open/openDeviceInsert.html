@@ -7,7 +7,12 @@
 	<title>EPM</title>
 </th:block>
 <!--커스텀 Css -->
-<th:block layout:fragment="customCss"></th:block>
+<th:block layout:fragment="customCss">
+ <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</th:block>
 
 <th:block layout:fragment="customContents">
 	<!-- 컨텐트 랩퍼 시작 -->	
@@ -26,12 +31,13 @@
  		<!-- 컨텐츠 영역 시작 -->
 		<section class="content">
 			<div class="container-fluid">
+				
 				<div class="row">
 				
 				<!-- card-body -->
 				 <div class="card-body">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <div class="form-group">
                   <label>단말기</label>
                  <input type="text"  class="form-control"  placeholder="단말기 일련번호를 입력해주세요.">
@@ -40,7 +46,7 @@
         
               </div>
               <!-- /.col -->
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <div class="form-group">
                   <label>유심</label>
                    <input type="text"  class="form-control"  placeholder="유심 일련번호를 입력해주세요.">
@@ -56,7 +62,7 @@
             <h5>가입정보</h5>
             
             <div class="row">
-              <div class="col-12 col-sm-6">
+              <div class="col-12 col-sm-3">
                 
                  <div class="form-group">
                   <label>* 개통일자  </label>
@@ -123,7 +129,7 @@
                 <!-- /.form-group -->
               </div>
               <!-- /.col -->
-              <div class="col-12 col-sm-6">
+              <div class="col-12 col-sm-3">
                  <div class="form-group">
                   <label>* 개통번호</label>
 
