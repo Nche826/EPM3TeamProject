@@ -49,9 +49,9 @@
           <div class="card card-primary">
             <div class="card-header">
               <h3 class="card-title">가입정보</h3>          
-            </div>
-            <div>
-            <div class="form-group" align="center">
+            </div> 
+            <div class="row">     
+            <div class="col-sm-6">
                 <label for="inputName">구분</label>
                 <form>
 				  <input type="radio" id="normal" name="insert">
@@ -60,9 +60,9 @@
 				  <label>결합판매</label>
 				  <input type="radio" id="barcode" name="insert">
 				  <label>동시판매</label>				  
-				</form>		
-				</div>
-				 <div class="form-group" align="center">		
+				</form>	
+			</div>	
+			<div class="col-sm-6">
 				<label for="inputName">상태</label>
                 <form>
 				  <input type="radio" id="normal" name="insert">
@@ -71,67 +71,69 @@
 				  <label>신청</label>
 				  <input type="radio" id="barcode" name="insert">
 				  <label>완료</label>				  
-				</form>
-              </div>
-              </div>
-            <div class="card-body">
-              <div class="form-group">
-                <label for="inputName">매장</label>
-                <input type="text" id="inputName" class="form-control" value="epm 본점">
-              </div>
-              <div class="form-group">
-                <label for="inputStatus">입고직원</label>
+				</form>           
+             </div>
+             </div>    
+             <div class="row">     
+            <div class="col-sm-6">
+               <label for="inputStatus">거래처</label>
+                <select class="form-control custom-select">                  
+                  <option selected>거래처1</option>
+                  <option>거래처2</option>
+                  <option>거래처3</option>
+                </select>
+			</div>	
+			<div class="col-sm-6">
+				<label for="inputStatus">개통직원</label>
                 <select class="form-control custom-select">                  
                   <option selected>직원1</option>
                   <option>직원2</option>
                   <option>직원3</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="inputName">입고방법</label>
-                <form>
-				  <input type="radio" id="normal" name="insert">
-				  <label>일반입고</label>
-				  <input type="radio" id="barcode" name="insert">
-				  <label>바코드입고</label><br>				  
-				</form>
-              </div>
-              <div class="form-group">
-                <label for="inputStatus">거래처</label>
-                <select class="form-control custom-select">                  
-                  <option selected>-선택-</option>
-                  <option>거래처1</option>
-                  <option>거래처2</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="inputName">모델명</label>
-                <input type="text" id="inputName" class="form-control" >
-              </div>
-              <div class="form-group">
-                <label for="inputStatus">종류</label>
-                <select class="form-control custom-select">                  
-                  <option selected>휴대폰</option>
-                  <option>태블릿</option>             
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="inputName">색상</label>
-                <input type="text" id="inputName" class="form-control" >
-              </div>
-              <div class="form-group">
-                <label for="inputName">입고가</label>
-                <input type="text" id="inputName" class="form-control" >            
-              </div>
-              <div class="form-group">
-                <label for="inputName">일련번호</label>
-                <input type="text" id="inputName" class="form-control" >            
-              </div>
-              <div class="form-group">
-                <label for="inputName">비고</label>
-                <input type="text" id="inputName" class="form-control" >            
-              </div>
+                </select>  
              </div>
+             </div>  
+             <div class="row">     
+	            <div class="col-sm-6">
+	               <label for="inputName">신청일</label>
+	                <input type="date" id="inputName" class="form-control" value="epm 본점">
+				</div>	
+				<div class="col-sm-6">
+					<label for="inputName">개통일</label>
+	                <input type="date" id="inputName" class="form-control" value="epm 본점">
+	             </div>
+             </div>  
+              <div class="row">     
+	            <div class="col-sm-6">
+	               <label for="inputName">고객명</label>
+	                <input type="date" id="inputName" class="form-control" value="epm 본점">
+				</div>	
+				<div class="col-sm-6">
+				<label for="inputName">연락처</label>
+				<div class="row">
+					<div class="col-sm-4">
+					 <select class="form-control custom-select">                  
+	                  <option selected>010</option>
+	                  <option>011</option>
+	                  <option>018</option>
+                </select>  
+					</div>
+					<div class="col-sm-4">
+					<input type="input" id="inputName" class="form-control" >
+					</div>
+					<div class="col-sm-4">
+					<input type="input" id="inputName" class="form-control" >
+					</div>
+					</div>	                
+	             </div>
+	             <div class="col-sm-12">
+	              <label for="inputName">주소</label>
+	                <input type="input" id="inputName" class="form-control" >
+				</div>	
+	             
+             </div>  
+             
+             
+             
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
