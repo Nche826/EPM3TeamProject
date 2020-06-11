@@ -83,22 +83,30 @@
                   <thead>
                   
                     <tr>
-                      <th>ID</th>
-                      <th>User</th>
-                      <th>Date</th>
-                      <th>Status</th>
-                      <th>Reason</th>
+                      <th>매장</th>
+                      <th>직원</th>
+                      <th>구분</th>
+                      <th>고객명</th>
+                      <th>연락처</th>
+                      <th>내용</th>
+                      <th>처리일</th>
+                      <th>비고</th>
+                      <th>삭제</th>
                     </tr>
                     
                   </thead>
                   <tbody>
                   
                     <tr>
-                      <td>183</td>
-                      <td>John Doe</td>
-                      <td>11-7-2014</td>
-                      <td><span class="tag tag-success">Approved</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                      <td>매장</td>
+                      <td>직원</td>
+                      <td>구분</td>
+                      <td>고객명</td>
+                      <td>연락처</td>
+                      <td>내용</td>
+                      <td>2020-06-10</td>
+                      <td><i class="fas fa-envelope-square" data-toggle="tooltip" data-placement="left" title="비고"></i></td>
+                      <td><i class="far fa-trash-alt"></i></td>
                     </tr>
 
                   </tbody>
@@ -152,7 +160,7 @@
 	        	 var yyyymmdd = yyyy+'-'+mm+'-'+dd;        	 
 	        	 $('#datetimepicker1').val(yyyymmdd);
 	        	 $('#datetimepicker2').val(yyyymmdd);
-	         })
+	         });
 	         
 	         //thisWeek 버튼 클릭시 date picker 이벤트
 	         $('#thisWeek').click(function(){
@@ -177,7 +185,7 @@
 	        	 var yyyymmdd2 = yyyy+'-'+mm+'-'+dd2;        	 
 	        	 $('#datetimepicker1').val(yyyymmdd1);
 	        	 $('#datetimepicker2').val(yyyymmdd2);
-	         })
+	         });
 	         
 	         //thisMonth 버튼 클릭시 date picker 이벤트
 	         $('#thisMonth').click(function(){
@@ -203,7 +211,12 @@
 	        	 var yyyymm2dd = yyyy+'-'+mm2+'-'+dd;        	 
 	        	 $('#datetimepicker1').val(yyyymm1dd);
 	        	 $('#datetimepicker2').val(yyyymm2dd);
-	         })
+	         });
+	         
+	         //tooltip
+	         $(function () {
+				  $('[data-toggle="tooltip"]').tooltip()
+				});
 	     });
 	 </script>
 </th:block>
