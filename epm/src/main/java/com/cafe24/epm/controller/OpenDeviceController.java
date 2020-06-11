@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class OpenDeviceController {
 
+	@GetMapping("/test")
+	public String test() {
+		return "open/openList2";
+		
+	}
 	@GetMapping("/openList")
 	public String openList() {
 		return "open/openList";

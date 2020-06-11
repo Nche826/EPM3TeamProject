@@ -9,7 +9,7 @@
 <!--커스텀 Css -->
 <th:block layout:fragment="customCss">
  <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </th:block>
@@ -36,34 +36,51 @@
 				
 				<!-- card-body -->
 			<div class="card-body">
+            
+            <div class="card card-secondary">
             <div class="row">
+            
               <div class="col-md-3">
-                <div class="form-group">
-                  <label>단말기</label>
-                 <input type="text"  class="form-control"  placeholder="단말기 일련번호를 입력해주세요.">
+              <label>단말기</label>
+                <div class="form-inline form-group">
+                
+                 
+                 <div class="col-sm-3">일련번호</div>
+                 <div class="col-sm-9" >
+                 <input  type="text"  class="form-control"  placeholder="단말기 일련번호를 입력해주세요."></input>
+                 </div>
+                
+                 
                 </div>
                 <!-- /.form-group -->
         
               </div>
               <!-- /.col -->
               <div class="col-md-3">
-                <div class="form-group">
-                  <label>유심</label>
+              <label>유심</label>
+                <div class="form-inline form-group">
+                
+                  <div class="col-sm-3">일련번호</div>
+                  <div class="col-sm-9">
                    <input type="text"  class="form-control"  placeholder="유심 일련번호를 입력해주세요.">
+                  </div>
                 </div>
                 <!-- /.form-group -->
           
                
               </div>
               <!-- /.col -->
+			</div>
+			<!-- /.card-secondary --> 
+			          
             </div>
             <!-- /.row -->
 
             <h5>가입정보</h5>
-            
-            <div class="row">
+            <!-- card-secondary -->
+            <div class="card card-secondary">
+            <div class="row">         
               <div class="col-12 col-sm-3">
-                
                  <div class="form-group">
                   <label>* 개통일자  </label>
                     <div class="input-group date" id="reservationdate" data-target-input="nearest">
@@ -129,12 +146,9 @@
                 <!-- /.form-group -->
               </div>
               <!-- /.col -->
-              
-              
-              
               <div class="col-12 col-sm-3">
               <!-- card  -->
-              <div class="card card-secondary">
+            
                  <div class="form-group">
                   <label>* 개통번호</label>
 
@@ -189,28 +203,17 @@
                   <label>할인카드 </label>
                        <input type="text" class="form-control" placeholder="라이트할부/세이브/청구할인카드명 입력 ">
                 </div>
-             
-             
-              
               <!-- /.col -->
-            </div>
-            
-            
-             <div class="card card-secondary">
-             aaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaaa
-             aaaaaaaaaaaaaaaa
-             <!-- ./card -->
-             </div>
-             
-           
-         	 <!-- ./card -->
-         	 </div>
+            </div>	 
           <!-- /.row -->	 
+          </div>
+         
+          <!-- /.card-secondary -->
           </div>
           <!-- /.card-body -->
 				
 				</div>
+			
 			</div>
 		</section>
 		<!-- 컨텐츠 영역 끝 -->
