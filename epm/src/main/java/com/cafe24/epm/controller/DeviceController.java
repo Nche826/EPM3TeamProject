@@ -6,10 +6,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class DeviceController {	
 	
-	@GetMapping("/deviceInsert")
-	public String login() {
+	@GetMapping("/deviceList")
+	public String deviceList() {
 		
 		return "/device/deviceList";
+	}
+	@GetMapping("/deviceInsert")
+	public String deviceInsert() {
+		
+		return "/device/deviceInsert";
+	}
+	@GetMapping("/deviceUpdate")
+	public String deviceUpdate() {
+		
+		return "/device/deviceUpdate";
 	}
 }
 

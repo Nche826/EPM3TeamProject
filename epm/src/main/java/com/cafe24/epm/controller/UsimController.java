@@ -6,12 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class UsimController {
-	@GetMapping("/usimInsert")
-	public String usimInsert(Model model) {
-		model.addAttribute("title", "유심 등록");
-		return "usim/usimInsert";
-	}
-	
+
+	//유심 관리 화면
 	@GetMapping("/usimList")
 	public String usimList(Model model) {
 		model.addAttribute("title", "유심 리스트");
