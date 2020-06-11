@@ -6,9 +6,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class StoreController {
 
-	@GetMapping("/storeInsert")
-	public String login() {
+	
+	@GetMapping("/storeList")
+	public String storeList() {
 		
 		return "/setting/storeList";
 	}
+	@GetMapping("/storeInsert")
+	public String storeInsert() {
+		
+		return "/setting/storeInsert";
+	}
+	@GetMapping("/storeUpdate")
+	public String storeUpdate() {
+		
+		return "/setting/storeUpdate";
+	}
+
 }
