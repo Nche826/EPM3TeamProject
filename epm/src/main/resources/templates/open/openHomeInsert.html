@@ -1,10 +1,172 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
 
-</body>
+
+<th:block layout:fragment="customCss">
+
+</th:block>
+
+
+<th:block layout:fragment="customTitle">
+	
+</th:block>
+
+<th:block layout:fragment="customScript">
+
+</th:block>
+
+
+
+<th:block layout:fragment="customContents">
+
+	 <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+     
+  
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>홈상품 개통</h1>
+          </div>
+          <div class="col-sm-6">
+	   			<ol class="breadcrumb float-sm-right">
+				　	<a href="/openHomeList" class="btn btn-info btn-sm pd-x-5 pd-y-0"><i class="far fa-file-alt" ></i> 홈상품 개통 목록</a>							
+				</ol>
+			</div> 
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+<th:block layout:fragment="insertMordal">
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+      <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">가입정보</h3>          
+            </div> 
+            <div class="row">     
+            <div class="col-sm-6">
+                <label for="inputName">구분</label>
+                <form>
+				  <input type="radio" id="normal" name="insert">
+				  <label>단품판매</label>
+				  <input type="radio" id="barcode" name="insert">
+				  <label>결합판매</label>
+				  <input type="radio" id="barcode" name="insert">
+				  <label>동시판매</label>				  
+				</form>	
+			</div>	
+			<div class="col-sm-6">
+				<label for="inputName">상태</label>
+                <form>
+				  <input type="radio" id="normal" name="insert">
+				  <label>예약</label>
+				  <input type="radio" id="barcode" name="insert">
+				  <label>신청</label>
+				  <input type="radio" id="barcode" name="insert">
+				  <label>완료</label>				  
+				</form>           
+             </div>
+             </div>    
+             <div class="row">     
+            <div class="col-sm-6">
+               <label for="inputStatus">거래처</label>
+                <select class="form-control custom-select">                  
+                  <option selected>거래처1</option>
+                  <option>거래처2</option>
+                  <option>거래처3</option>
+                </select>
+			</div>	
+			<div class="col-sm-6">
+				<label for="inputStatus">개통직원</label>
+                <select class="form-control custom-select">                  
+                  <option selected>직원1</option>
+                  <option>직원2</option>
+                  <option>직원3</option>
+                </select>  
+             </div>
+             </div>  
+             <div class="row">     
+	            <div class="col-sm-6">
+	               <label for="inputName">신청일</label>
+	                <input type="date" id="inputName" class="form-control" value="epm 본점">
+				</div>	
+				<div class="col-sm-6">
+					<label for="inputName">개통일</label>
+	                <input type="date" id="inputName" class="form-control" value="epm 본점">
+	             </div>
+             </div>  
+              <div class="row">     
+	            <div class="col-sm-6">
+	               <label for="inputName">고객명</label>
+	                <input type="date" id="inputName" class="form-control" value="epm 본점">
+				</div>	
+				<div class="col-sm-6">
+				<label for="inputName">연락처</label>
+				<div class="row">
+					<div class="col-sm-4">
+					 <select class="form-control custom-select">                  
+	                  <option selected>010</option>
+	                  <option>011</option>
+	                  <option>018</option>
+                </select>  
+					</div>
+					<div class="col-sm-4">
+					<input type="input" id="inputName" class="form-control" >
+					</div>
+					<div class="col-sm-4">
+					<input type="input" id="inputName" class="form-control" >
+					</div>
+					</div>	                
+	             </div>
+	             <div class="col-sm-12">
+	              <label for="inputName">주소</label>
+	                <input type="input" id="inputName" class="form-control" >
+				</div>	
+	             
+             </div>  
+             
+             
+             
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+                <div class="row">
+        <div class="col-12">
+          <a href="#" class="btn btn-secondary">Cancel</a>
+          <input type="submit" value="Save Changes" class="btn btn-success">
+        </div>
+      </div>
+        </div>
+        
+      </div>
+
+    </section>
+   </th:block>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+</th:block>
+<th:block layout:fragment="customFooterScript">
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+</th:block>
+
+
+
+
+
 </html>

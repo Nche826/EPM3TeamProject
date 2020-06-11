@@ -6,9 +6,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class OpenHomeController {
 
-	@GetMapping("/OpenHome")
-	public String login() {
+	@GetMapping("/openHomeList")
+	public String openHomeList() {
 		
 		return "/open/openHomeList";
+	}
+	@GetMapping("/openHomeInsert")
+	public String openHomeInsert() {
+		
+		return "/open/openHomeInsert";
+	}
+	@GetMapping("/openHomeUpdate")
+	public String openHomeUpdate() {
+		
+		return "/open/openHomeUpdate";
 	}
 }
