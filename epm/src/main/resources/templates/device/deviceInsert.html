@@ -1,10 +1,148 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
 
-</body>
+
+<th:block layout:fragment="customCss">
+
+</th:block>
+
+
+<th:block layout:fragment="customTitle">
+	
+</th:block>
+
+<th:block layout:fragment="customScript">
+
+</th:block>
+
+
+
+<th:block layout:fragment="customContents">
+
+	 <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+     
+  
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>단말기 입고</h1>
+          </div>
+          <div class="col-sm-6">
+	   			<ol class="breadcrumb float-sm-right">
+				　	<a href="/deviceList" class="btn btn-info btn-sm pd-x-5 pd-y-0"><i class="far fa-file-alt" ></i> 단말기 목록</a>							
+				</ol>
+			</div> 
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+<th:block layout:fragment="insertMordal">
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+      <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">정보입력</h3>
+
+           
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="inputName">매장</label>
+                <input type="text" id="inputName" class="form-control" value="epm 본점">
+              </div>
+              <div class="form-group">
+                <label for="inputStatus">입고직원</label>
+                <select class="form-control custom-select">                  
+                  <option selected>직원1</option>
+                  <option>직원2</option>
+                  <option>직원3</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inputName">입고방법</label>
+                <form>
+				  <input type="radio" id="normal" name="insert">
+				  <label>일반입고</label>
+				  <input type="radio" id="barcode" name="insert">
+				  <label>바코드입고</label><br>				  
+				</form>
+              </div>
+              <div class="form-group">
+                <label for="inputStatus">거래처</label>
+                <select class="form-control custom-select">                  
+                  <option selected>-선택-</option>
+                  <option>거래처1</option>
+                  <option>거래처2</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inputName">모델명</label>
+                <input type="text" id="inputName" class="form-control" >
+              </div>
+              <div class="form-group">
+                <label for="inputStatus">종류</label>
+                <select class="form-control custom-select">                  
+                  <option selected>휴대폰</option>
+                  <option>태블릿</option>             
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inputName">색상</label>
+                <input type="text" id="inputName" class="form-control" >
+              </div>
+              <div class="form-group">
+                <label for="inputName">입고가</label>
+                <input type="text" id="inputName" class="form-control" >            
+              </div>
+              <div class="form-group">
+                <label for="inputName">일련번호</label>
+                <input type="text" id="inputName" class="form-control" >            
+              </div>
+              <div class="form-group">
+                <label for="inputName">비고</label>
+                <input type="text" id="inputName" class="form-control" >            
+              </div>
+             </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+                <div class="row">
+        <div class="col-12">
+          <a href="#" class="btn btn-secondary">Cancel</a>
+          <input type="submit" value="Save Changes" class="btn btn-success">
+        </div>
+      </div>
+        </div>
+        
+      </div>
+
+    </section>
+   </th:block>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+</th:block>
+<th:block layout:fragment="customFooterScript">
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+</th:block>
+
+
+
+
+
 </html>

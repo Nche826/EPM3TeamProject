@@ -1,10 +1,100 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
 
-</body>
+<th:block layout:fragment="customTitle">
+	<title>EPM | MemberList</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<!-- 컨텐트 랩퍼 시작 -->	
+	<div class="content-wrapper">
+		<!-- 컨텐츠 헤더 영역 -->
+		<section class="content-header">
+	      <div class="container-fluid">
+	        <div class="row mb-2">
+	          <div class="col-sm-6">
+	            <h1><i class="nav-icon fas fa-list-alt"></i> 사내게시판</h1>
+	          </div>
+	          <div class="col-sm-6">
+	            <ol class="breadcrumb float-sm-right">
+					<button type="button" class="btn btn-block btn-secondary" style="margin: 5px;">게시물작성</button>
+	            </ol>
+	          </div>
+	        </div>
+	      </div><!-- /.container-fluid -->
+	    </section>
+      	<!-- 컨텐츠 헤더 영역 끝 -->
+      	
+ 		<!-- 컨텐츠 영역 시작 -->
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12" style="margin: 0 auto;">
+            <div class="card">
+              <div class="card-header">
+	                <div class="card-tools">
+	                   <div class="row">
+						<form class="form-inline float-right" action="#" method="post">
+							<select class="form-control" name="searchK">
+	                          <option value="name">글쓴이</option>
+	                          <option value="title">제목</option>
+	                          <option value="contents">내용</option>
+	                        </select>
+							<input type="text" class="form-control" name="searchV" placeholder="Enter ...">
+							<button type="submit" class="form-control btn btn-block btn-secondary">검색</button>
+						</form>
+					</div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                  
+                    <tr>
+                      <th>ID</th>
+                      <th>User</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                      <th>Reason</th>
+                    </tr>
+                    
+                  </thead>
+                  <tbody>
+                  
+                    <tr>
+                      <td>183</td>
+                      <td>John Doe</td>
+                      <td>11-7-2014</td>
+                      <td><span class="tag tag-success">Approved</span></td>
+                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer" style="text-align: center;">
+			       				<a href="#"><i class="right fas fa-angle-left"></i></a>
+			       				<a href="#">1</a>
+			       				<a href="#">2</a>
+			       				<a href="#">3</a>
+			       				<a href="#">4</a>
+			       				<a href="#">5</a>
+			       				<a href="#"><i class="right fas fa-angle-right"></i></a>
+				</div>
+            </div>
+            <!-- /.card -->
+          </div>
+				</div>
+			</div>
+		</section>
+		<!-- 컨텐츠 영역 끝 -->
+	</div>
+	<!-- 컨텐트 랩퍼 끝 -->
+</th:block>
+<th:block layout:fragment="customFooterScript">
+</th:block>
 </html>
