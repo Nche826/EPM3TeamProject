@@ -7,6 +7,12 @@
 	<title th:text="${title}"></title>
 </th:block>
 
+<th:block layout:fragment="customCss">
+	<!-- jsGrid -->
+	<link rel="stylesheet" href="../../plugins/jsgrid/jsgrid.min.css">
+	<link rel="stylesheet" href="../../plugins/jsgrid/jsgrid-theme.min.css">
+</th:block>
+
 <th:block layout:fragment="customContents">
 	<!-- 컨텐트 랩퍼 시작 -->	
 	<div class="content-wrapper">
@@ -25,7 +31,7 @@
 						</ol>
 						<!-- Modal -->
 						<div class="modal fade" id="usimInsert">
-						  <div class="modal-dialog modal-sm">
+						  <div class="modal-dialog modal-ml">
 						    <div class="modal-content">
 						      <div class="modal-header">
 						        <h4 class="modal-title">유심 입고</h4>
@@ -80,15 +86,6 @@
 													</select>
 						        				</div>
 						        			</div>
-						        			<div class="row">
-						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
-						        					<span style="color: red">*</span>
-						        					모델명
-						        				</label>
-						        				<div class="col-8">
-													<input type="text" class="form-control form-control-sm" id="form-save-model" name="model" maxlength="100" style="margin-top: 5px;">
-												</div>
-											</div>
 											<div class="row">
 						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
 						        					결제
@@ -117,7 +114,7 @@
 						        					<span style="color: red">*</span>
 						        					일련번호
 						        				</label>
-						        				<div class="col-8">
+						        					<div class="col-8">
 													<input type="text" class="form-control form-control-sm" id="form-save-model" name="serialnumber" maxlength="100" style="margin-top: 5px;">
 												</div>
 											</div>
@@ -134,7 +131,7 @@
 						        
 						      </div>
 						      <div class="modal-footer justify-content-between">
-						        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+						        <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
 						        <button type="button" class="btn btn-primary">입고 완료</button>
 						      </div>
 						    </div>
@@ -153,7 +150,322 @@
 		<section class="content">
 			<div class="container-fluid">
 				<div class="row">
-					컨텐츠
+					<div class="col-12">
+			            <div class="card">
+							<!-- card-header -->
+							<div class="card-header">
+								<form id="usimSearch" onsubmit="return false;">
+									<input type="hidden" name="start" value="">
+									<input type="hidden" name="sort" value="indate">
+									<input type="hidden" name="by" value="desc">
+									<div class="row">
+										<div class="input-group input-group-sm" style="width: 250px;">
+										<input type="text" name="start_date" class="form-control float-right" placeholder="YYYY-MM-DD">
+										<div class="input-group-append">
+												<span class="input-group-text">-</span>
+										</div>
+										<input type="text" name="end_date" class="form-control float-right" placeholder="YYYY-MM-DD">
+										</div>　
+										<div class="btn-group btn-group-sm btn-group-toggle" date-toggle="buttons">
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range1">오늘
+										</label>
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range2">7일
+										</label>
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range3">한달
+										</label>
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range4">두달
+										</label>
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range5">세달
+										</label>
+										</div>　
+										<label>
+											<input type="checkbox"><span style="font-size: 14px;"> 전체매장 재고</span>
+										</label>
+									</div>
+									<div class="row" style="margin-top: 10px;">
+										<select name="usimin_status" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="1">보유</option>
+											<option value="2">신규</option>
+											<option value="3">교품</option>
+											<option value="4">철회</option>
+											<option value="5">개통</option>
+											<option value="6">판매</option>
+											<option value="7">반품</option>
+										</select>　
+										<select name="usimin_dealler" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="">거래처</option>
+											<option value="1">M&amp;S</option>
+											<option value="2">하이엔드인터네셔널</option>
+											<option value="3">유진텔러콤</option>
+											<option value="4">하우스</option>
+										</select>　
+										<input type="text" name="usimin_serial" class="form-control form-control-sm" placeholder="일련번호" style="width: auto;">　
+										<button type="button" class="btn btn-danger btn-sm">검색</button>　
+										<button type="button" class="btn btn-primary btn-sm">초기화</button>
+										<select name="usimList" class="form-control form-control-sm select-sm" style="width: auto; margin-left: 645px;">
+											<option value="">목록</option>
+											<option value="1">1개</option>
+											<option value="5">5개</option>
+											<option value="10">10개</option>
+											<option value="15">15개</option>
+											<option value="20">20개</option>
+											<option value="50">50개</option>
+											<option value="100">100개</option>
+										</select>
+									</div>
+								</form>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
+								<div id="jsGrid1" class="jsgrid" style="position: relative; height: 100%; width: 100%;">
+									<div class="jsgrid-grid-header jsgrid-header-scrollbar" style="font-size: 14px;">
+										<table class="jsgrid-table">
+											<tbody>
+												<tr class="jsgrid-header-row">
+													<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 10px;"><input type="checkbox"></th>
+													<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 20px;">상태</th>
+													<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 50px;">입고일</th>
+													<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 50px;">거래처</th>
+													<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 30px;">통신사</th>
+													<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 50px;">일련번호</th>
+													<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 30px;">결제</th>
+													<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 50px;">입고가</th>
+													<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 50px;">매장</th>
+													<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 30px;">직원</th>
+													<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 40px;">비고</th>
+													<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 20px;">관리</th>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="jsgrid-grid-body" style="height: 821px; font-size: 14px;">
+										<table class="jsgrid-table jsgrid-selected-row">
+											<tbody>
+												<tr class="jsgrid-row">
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 10px;"><input type="checkbox"></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;">신규</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">2020-06-11</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">M&amp;S</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">KT</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">11112938</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">선불</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">7,000</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">삼삼본점</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">강대표</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 40px;"><span name="usimin_memo">메모</span></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;"><button type="button" class="btn btn-sm btn-dark"><i class="fas fa-clone"></i></button></td>
+												</tr>
+												<tr class="jsgrid-alt-row">
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 10px;"><input type="checkbox"></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;">신규</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">2020-06-11</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">M&amp;S</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">KT</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">11112938</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">선불</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">7,000</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">삼삼본점</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">강대표</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 40px;"><span name="usimin_memo">메모</span></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;"><button type="button" class="btn btn-sm btn-dark"><i class="fas fa-clone"></i></button></td>
+												</tr>
+												<tr class="jsgrid-row">
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 10px;"><input type="checkbox"></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;">신규</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">2020-06-11</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">M&amp;S</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">KT</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">11112938</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">선불</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">7,000</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">삼삼본점</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">강대표</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 40px;"><span name="usimin_memo">메모</span></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;"><button type="button" class="btn btn-sm btn-dark"><i class="fas fa-clone"></i></button></td>
+												</tr>
+												<tr class="jsgrid-alt-row">
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 10px;"><input type="checkbox"></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;">신규</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">2020-06-11</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">M&amp;S</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">KT</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">11112938</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">선불</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">7,000</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">삼삼본점</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">강대표</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 40px;"><span name="usimin_memo">메모</span></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;"><button type="button" class="btn btn-sm btn-dark"><i class="fas fa-clone"></i></button></td>
+												</tr>
+												<tr class="jsgrid-row">
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 10px;"><input type="checkbox"></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;">신규</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">2020-06-11</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">M&amp;S</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">KT</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">11112938</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">선불</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">7,000</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">삼삼본점</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">강대표</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 40px;"><span name="usimin_memo">메모</span></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;"><button type="button" class="btn btn-sm btn-dark"><i class="fas fa-clone"></i></button></td>
+												</tr>
+												<tr class="jsgrid-alt-row">
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 10px;"><input type="checkbox"></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;">신규</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">2020-06-11</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">M&amp;S</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">KT</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">11112938</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">선불</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">7,000</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">삼삼본점</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">강대표</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 40px;"><span name="usimin_memo">메모</span></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;"><button type="button" class="btn btn-sm btn-dark"><i class="fas fa-clone"></i></button></td>
+												</tr>
+												<tr class="jsgrid-row">
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 10px;"><input type="checkbox"></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;">신규</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">2020-06-11</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">M&amp;S</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">KT</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">11112938</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">선불</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">7,000</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">삼삼본점</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">강대표</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 40px;"><span name="usimin_memo">메모</span></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;"><button type="button" class="btn btn-sm btn-dark"><i class="fas fa-clone"></i></button></td>
+												</tr>
+												<tr class="jsgrid-alt-row">
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 10px;"><input type="checkbox"></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;">신규</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">2020-06-11</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">M&amp;S</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">KT</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">11112938</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">선불</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">7,000</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">삼삼본점</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">강대표</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 40px;"><span name="usimin_memo">메모</span></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;"><button type="button" class="btn btn-sm btn-dark"><i class="fas fa-clone"></i></button></td>
+												</tr>
+												<tr class="jsgrid-row">
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 10px;"><input type="checkbox"></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;">신규</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">2020-06-11</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">M&amp;S</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">KT</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">11112938</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">선불</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">7,000</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">삼삼본점</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">강대표</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 40px;"><span name="usimin_memo">메모</span></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;"><button type="button" class="btn btn-sm btn-dark"><i class="fas fa-clone"></i></button></td>
+												</tr>
+												<tr class="jsgrid-alt-row">
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 10px;"><input type="checkbox"></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;">신규</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">2020-06-11</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">M&amp;S</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">KT</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">11112938</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">선불</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">7,000</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">삼삼본점</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">강대표</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 40px;"><span name="usimin_memo">메모</span></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;"><button type="button" class="btn btn-sm btn-dark"><i class="fas fa-clone"></i></button></td>
+												</tr>
+												<tr class="jsgrid-row">
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 10px;"><input type="checkbox"></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;">신규</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">2020-06-11</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">M&amp;S</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">KT</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">11112938</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">선불</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">7,000</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">삼삼본점</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">강대표</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 40px;"><span name="usimin_memo">메모</span></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;"><button type="button" class="btn btn-sm btn-dark"><i class="fas fa-clone"></i></button></td>
+												</tr>
+												<tr class="jsgrid-alt-row">
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 10px;"><input type="checkbox"></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;">신규</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">2020-06-11</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">M&amp;S</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">KT</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">11112938</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">선불</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">7,000</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">삼삼본점</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">강대표</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 40px;"><span name="usimin_memo">메모</span></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;"><button type="button" class="btn btn-sm btn-dark"><i class="fas fa-clone"></i></button></td>
+												</tr>
+												<tr class="jsgrid-row">
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 10px;"><input type="checkbox"></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;">신규</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">2020-06-11</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">M&amp;S</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">KT</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">11112938</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">선불</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">7,000</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">삼삼본점</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">강대표</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 40px;"><span name="usimin_memo">메모</span></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;"><button type="button" class="btn btn-sm btn-dark"><i class="fas fa-clone"></i></button></td>
+												</tr>
+												<tr class="jsgrid-alt-row">
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 10px;"><input type="checkbox"></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;">신규</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">2020-06-11</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">M&amp;S</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">KT</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">11112938</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">선불</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">7,000</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">삼삼본점</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">강대표</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 40px;"><span name="usimin_memo">메모</span></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;"><button type="button" class="btn btn-sm btn-dark"><i class="fas fa-clone"></i></button></td>
+												</tr>
+												<tr class="jsgrid-row">
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 10px;"><input type="checkbox"></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;">신규</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">2020-06-11</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">M&amp;S</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">KT</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">11112938</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">선불</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">7,000</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 50px;">삼삼본점</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 30px;">강대표</td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 40px;"><span name="usimin_memo">메모</span></td>
+													<td class="jsgrid-cell jsgrid-align-center" style="width: 20px;"><button type="button" class="btn btn-sm btn-dark"><i class="fas fa-clone"></i></button></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									
+								</div>
+							</div>
+							<!-- /.card-body -->
+			            </div>
+         			    <!-- /.card -->
+          			</div>
 				</div>
 			</div>
 		</section>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>EPM</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<!-- 컨텐트 랩퍼 시작 -->	
+	<div class="content-wrapper">
+		<!-- 컨텐츠 헤더 영역 -->
+		<div class="content-header">
+      		<div class="container-fluid">
+      			<div class="row">
+		          	<div class="col-sm-6">
+		      			<div class="row">
+				          	<div class="col-sm-1">
+					          	 <i class="ion ion-person-add" style="font-size:15mm;"></i>
+				          	</div>		          	
+				          	<div class="col-sm-11">
+					            <h5 style="font-weight: bold;">수납 장부 상세</h5>
+					            <p style="font-size:small;">수납 수정과 거래처 수납 정보를 확인하실 수 있습니다.</p>
+				          	</div>
+			          	</div>
+	          	    </div>
+	          	    <div class="col-sm-6">
+			            <ol class="breadcrumb float-sm-right">
+			              <li class="breadcrumb-item"><a href="/">Home</a></li>
+			              <li class="breadcrumb-item active"><a href="/ledgerList">이전</a></li>
+			            </ol>
+	          	    </div>
+              	</div>
+      		</div>
+      	</div>
+      	<!-- 컨텐츠 헤더 영역 끝 -->
+      	
+      	<div class="mb-2 mt-4"></div>
+      	
+ 		<!-- 컨텐츠 영역 시작 -->
+ <!-- Main content -->
+    <section class="content">
+      <div class="row">
+		<!-- left column -->
+		<div class="col-md-5">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">고객 정보 수정</h3>
+ 
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+            <form id="ledgerInsertForm" action="#" method="post" >
+	             	<div class="form-group">
+	                	<label for="inputDescription"><i style="color: red;">*</i>매장명</label>
+	                 	<input type="text" id="customerName" class="form-control">
+	             	</div>
+	             	<div class="form-group">
+	                	<label for="inputDescription"><i style="color: red;">*</i>수납직원</label>
+	                 	<input type="text" id="customerName" class="form-control">
+	             	</div>
+	             	<div class="form-group">
+	                	<label for="inputDescription"><i style="color: red;">*</i>수납일</label>
+	                 	<input type="date" id="customerName" class="form-control">
+	             	</div>
+	             	<hr>
+	             	<div class="form-group">
+	                	<label for="inputDescription"><i style="color: red;">*</i>구분</label>
+	                	<div class="form-check">
+	                 	<input type="checkbox" id="customerName" class="form-check-input" value="고객현금수납">
+	                 	<label class="form-check-label" style="margin-right: 6mm;">고객현금수납</label>
+	                 	<input type="checkbox" id="customerName" class="form-check-input" value="고객카드수납">
+	                 	<label class="form-check-label" style="margin-right: 6mm;">고객카드수납</label>
+	                 	<input type="checkbox" id="customerName" class="form-check-input" value="매장 대납">
+	                 	<label class="form-check-label" style="margin-right: 6mm;">매장 대납</label>
+	                 	</div>
+	             	</div>
+	             	<div class="form-group">
+	                	<label for="inputDescription"><i style="color: red;">*</i>고객명</label>
+	                 	<input type="text" id="customerName" class="form-control">
+	             	</div>
+	             	<div class="form-group">
+	                	<label for="inputDescription"><i style="color: red;">*</i>연락처</label>
+	                 	<input type="text" id="customerName" class="form-control">
+	             	</div>
+	             	<div class="form-group form-inline">
+	             	<label for="inputDescription">카드사 </label>
+	             	<input type="text" class="form-control" placeholder="카드결제시 카드사입력" style="width: 60%; margin-left: 10%">
+	             	</div>
+	             	<div class="form-group form-inline">
+	                	<label for="inputDescription"><i style="color: red;">*</i>수납 금액   </label>
+	                 	<input type="text" id="customerName" class="form-control" 
+	                 		placeholder="금액입력" style="width: 51%; margin-left: 5%">
+	                 	<div class="input-group-append">
+                        <span class="input-group-text" id="">원</span>
+                      	</div>
+	             	</div>
+	             	<div class="form-group">
+	                	<label for="inputDescription"><i style="color: red;">*</i>거래처</label>
+	                 	<input type="text" id="receive_dealler" class="form-control">
+	             	</div>
+	             	<div class="form-group">
+	             		<label for="inputDescription"><i style="color: red;">*</i>송금일/송금액</label>
+	             	</div>
+	             	<div class="form-group form-inline">
+		             		<input type="date" class="form-control">
+		             		<input type="text" class="form-control">
+	             		<div class="input-group-append">
+                       		<span class="input-group-text" id="">원</span>
+                      	</div>
+                    </div>
+	             	<div class="form-group">
+	                	<label for="inputDescription"><i style="color: red;">*</i>송금상태</label>
+	                	<div class="form-check">
+	                 	<input type="checkbox" id="customerName" class="form-check-input" value="처리중">
+	                 	<label class="form-check-label" style="margin-right: 6mm;">처리중</label>
+	                 	<input type="checkbox" id="customerName" class="form-check-input" value="완료">
+	                 	<label class="form-check-label" style="margin-right: 6mm;">완료</label>
+	                 	</div>
+	             	</div>
+	             	<Div class="form-group">
+	             	<label  for="inputDescription">비고</label>
+	             	<textarea rows="3" cols="50" class="form-control"></textarea>
+	             	</Div>
+	             	<div class="form-group">
+	             	<input type="reset" value="Clear" class="btn btn-default float-left">
+	             	<button type="submit" id="CusBtn" class="btn btn-primary float-right">수납장부수정</button>
+	             	</div>
+	              </form>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div><!-- /left column -->
+      <!-- right column -->
+        <div class="col-md-7">
+          <div class="card card-secondary">
+            <div class="card-header">
+              <h3 class="card-title">수납 정보</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+            <form id="storeInfo" method="get">
+	            <table class="table">
+	            <thead>
+	              <tr>
+		          <th>수납자명</th>
+		          <th>수납금액</th>
+		          <th>수납거래처</th>
+		          <th>송금일</th>
+		          <th>송금액</th>
+		          <th>송금상태</th>
+		          </tr>   
+	            </thead>
+	            <tbody>
+		          <tr>
+		          <td>솜망치</td>
+		          <td>300,000</td>
+		          <td>하이앤드인터네셔널</td>
+		          <td>2020-06-11</td>
+		          <td>150,000</td>
+		          <td>처리중</td>
+		          </tr>   
+		          <tr>
+		          <td>솜망치</td>
+		          <td>300,000</td>
+		          <td>하이앤드인터네셔널</td>
+		          <td>2020-06-11</td>
+		          <td>150,000</td>
+		          <td>처리완료</td>
+		          </tr>   
+	            </tbody>
+	            </table>
+            </form>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+      <!-- 단말기 가입내역 -->
+          <div class="card card-info">
+            <div class="card-header">
+              <h3 class="card-title">거래처 정보 </h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+            <form id="storeInfo" method="get">
+	            <table class="table">
+	            <thead>
+	            <tr>
+	            <th>거래처명</th>
+	            <th>통신사명</th>
+	            <th>주소</th>
+	            <th>연락처</th>
+	            <th>거래처 담당자</th>
+	            </tr>
+	            </thead>
+	            <tbody>
+		          <tr>
+		          <td>하이앤드인터네셔널</td>
+		          <td>LG</td>
+		          <td>전주시 덕진구 진북동</td>
+		          <td>010-1111-2222</td>
+		          <td>김거래</td>
+		          </tr>   
+		          </tbody>   
+	            </table>
+            </form>
+            
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div><!-- /right column -->
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <a href="/ledgerList" class="btn btn-secondary">이전페이지</a>
+          <a href="/ledgerList" class="btn btn-primary float-right">저장후 리스트로가기</a>
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+	</div>
+	<!-- 컨텐트 랩퍼 끝 -->
+</th:block>
+<th:block layout:fragment="customFooterScript">
+</th:block>
+</html>

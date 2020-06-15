@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+<th:block layout:fragment="customCss">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+</th:block>
+<th:block layout:fragment="customTitle">
+	<title>EPM</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<!-- 컨텐트 랩퍼 시작 -->	
+	<div class="content-wrapper">
+		<!-- 컨텐츠 헤더 영역 -->
+		<div class="content-header">
+      		<div class="container-fluid">
+      			<div class="col-sm-6">
+	      			<div class="row">
+			          	<div class="col-sm-1">
+				          	 <i class="ion ion-person-add" style="font-size:15mm;"></i>
+			          	</div>		          	
+			          	<div class="col-sm-11">
+				            <h5 style="font-weight: bold;">고객이력</h5>
+				            <p style="font-size:small;">고객업무와 관련된 이력을 확인하실 수 있습니다.</p>
+			          	</div>
+		          	</div>
+         	    </div>
+      		</div>
+      	</div>
+      	<!-- 컨텐츠 헤더 영역 끝 -->
+      	
+ 		<!-- 컨텐츠 영역 시작 -->
+		 <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-12">
+          <div class="card card-secondary">
+            <div class="card-header">
+              <h3 class="card-title">고객 이력 리스트</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped" style="text-align: center;">
+                <thead>
+                <tr>
+                  <th></th>
+                  <th>매장</th>
+                  <th>직원</th>
+                  <th>구분</th>
+                  <th>고객명</th>
+                  <th>연락처</th>
+                  <th>내용</th>
+                  <th>처리일</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><input type="checkbox" ></td>
+                  <td>삼성1호점</td>
+                  <td>김수지</td>
+                  <td>고객등록</td>
+                  <td>솜뭉치</td>
+                  <td>010-0232-1234</td>
+                  <td>개통고객[솜뭉치]님을 등록하였습니다.</td>
+                  <td>2020-06-10</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" ></td>
+                  <td>삼성2호점</td>
+                  <td>김수지</td>
+                  <td>고객등록</td>
+                  <td>솜뭉치</td>
+                  <td>010-0232-1234</td>
+                  <td>개통고객[솜뭉치]님을 등록하였습니다.</td>
+                  <td>2020-06-10</td>
+                </tr>
+                <tr>
+                 <td><input type="checkbox" ></td>
+                  <td>삼성3호점</td>
+                  <td>김수지</td>
+                  <td>고객등록</td>
+                  <td>솜뭉치</td>
+                  <td>010-0232-1234</td>
+                  <td>개통고객[솜뭉치]님을 등록하였습니다.</td>
+                  <td>2020-06-10</td>
+                </tr>
+                <tr>
+                 <td><input type="checkbox" ></td>
+                  <td>삼성4호점</td>
+                  <td>김수지</td>
+                  <td>고객등록</td>
+                  <td>솜망치</td>
+                  <td>010-0232-0000</td>
+                  <td>개통고객[솜망치]님을 등록하였습니다.</td>
+                  <td>2020-06-11</td>
+                </tr>
+                <tr>
+                 <td><input type="checkbox" ></td>
+                  <td>삼성1호점</td>
+                  <td>김수지</td>
+                  <td>고객등록</td>
+                  <td>솜뭉탱이</td>
+                  <td>010-0232-1234</td>
+                  <td>개통고객[솜뭉탱이]님을 등록하였습니다.</td>
+                  <td>2020-06-12</td>
+                </tr>
+                <tr>
+                 <td><input type="checkbox" ></td>
+                  <td>삼성1호점</td>
+                  <td>김수지</td>
+                  <td>고객등록</td>
+                  <td>솜뭉치</td>
+                  <td>010-0232-1234</td>
+                  <td>개통고객[솜뭉치]님을 등록하였습니다.</td>
+                  <td>2020-06-10</td>
+                </tr>
+                <tr>
+                 <td><input type="checkbox" ></td>
+                  <td>삼성1호점</td>
+                  <td>김수지</td>
+                  <td>고객등록</td>
+                  <td>솜뭉치</td>
+                  <td>010-0232-1234</td>
+                  <td>개통고객[솜뭉치]님을 등록하였습니다.</td>
+                  <td>2020-06-10</td>
+                </tr>
+                <tr>
+                 <td><input type="checkbox" ></td>
+                  <td>삼성1호점</td>
+                  <td>김수지</td>
+                  <td>고객등록</td>
+                  <td>솜뭉치</td>
+                  <td>010-0232-1234</td>
+                  <td>개통고객[솜뭉치]님을 등록하였습니다.</td>
+                  <td>2020-06-10</td>
+                </tr>
+               <tr>
+                 <td><input type="checkbox" ></td>
+                  <td>삼성1호점</td>
+                  <td>김수지</td>
+                  <td>고객등록</td>
+                  <td>솜뭉치</td>
+                  <td>010-0232-1234</td>
+                  <td>개통고객[솜뭉치]님을 등록하였습니다.</td>
+                  <td>2020-06-10</td>
+                </tr>
+                 <tr>
+                 <td><input type="checkbox" ></td>
+                  <td>삼성1호점</td>
+                  <td>김수지</td>
+                  <td>고객등록</td>
+                  <td>솜뭉치</td>
+                  <td>010-0232-1234</td>
+                  <td>개통고객[솜뭉치]님을 등록하였습니다.</td>
+                  <td>2020-06-10</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                 <th><button type="submit" class="btn btn-danger btn-sm">삭제</button></th>
+                  <th>매장</th>
+                  <th>직원</th>
+                  <th>구분</th>
+                  <th>고객명</th>
+                  <th>연락처</th>
+                  <th>내용</th>
+                  <th>처리일</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+</th:block>
+
+<th:block layout:fragment="customFooterScript">
+<!-- DataTables -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
+</th:block>
+</html>

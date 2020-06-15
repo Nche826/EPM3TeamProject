@@ -19,7 +19,7 @@
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-					<button type="button" class="btn btn-block btn-secondary" data-toggle="modal" data-target="#modal" style="margin: 5px;">미결업무 등록</button>
+					<button type="button" class="btn btn-block btn-secondary" data-toggle="modal" data-target="#modalUnpaidInsert" style="margin: 5px;">미결업무 등록</button>
 	            </ol>
 	          </div>
 	        </div>
@@ -88,21 +88,35 @@
 			                <table class="table table-hover text-nowrap">
 			                  <thead>
 			                    <tr>
-			                      <th>ID</th>
-			                      <th>User</th>
-			                      <th>Date</th>
-			                      <th>Status</th>
-			                      <th>Reason</th>
+			                      <th>상태</th>
+			                      <th>예정일</th>
+			                      <th>구분</th>
+			                      <th>내용</th>
+			                      <th>고객명</th>
+			                      <th>연락처</th>
+			                      <th>매장</th>
+			                      <th>접수직원</th>
+			                      <th>처리일</th>
+			                      <th>처리직원</th>
+			                      <th>비고</th>
+			                      <th>관리</th>
 			                    </tr>
 			                  </thead>
 			                  <tbody>
 			                  
 			                    <tr>
-			                      <td>183</td>
-			                      <td>John Doe</td>
-			                      <td>11-7-2014</td>
-			                      <td><span class="tag tag-success">Approved</span></td>
-			                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+			                      <td>상태</td>
+			                      <td>예정일</td>
+			                      <td>구분</td>
+			                      <td>내용</td>
+			                      <td>고객명</td>
+			                      <td>연락처</td>
+			                      <td>매장</td>
+			                      <td>접수직원</td>
+			                      <td>처리일</td>
+			                      <td>처리직원</td>
+			                      <td><i class="fas fa-envelope-square" data-toggle="tooltip" data-placement="left" title="비고" ></i></td>
+			                      <td><a href="#" data-toggle="modal" data-target="#modalUnpaidDetail" ><i class="fas fa-file-signature"></i></a></td>
 			                    </tr>
 			                   
 			                  </tbody>
@@ -123,8 +137,8 @@
          			 </div>
 				</div>
 				
-				<!-- 모달 -->
-				<div class="modal fade" id="modal" style="display: none;" aria-hidden="true">
+				<!-- 모달 modalUnpaidInsert -->
+				<div class="modal fade" id="modalUnpaidInsert" style="display: none;" aria-hidden="true">
 			        <div class="modal-dialog">
 			          <div class="modal-content">
 			            <div class="modal-header">
@@ -142,31 +156,190 @@
 					              		<p>매장</p>
 					              		<p>접수직원</p>
 					              		<p>미결예정일</p>
+									</div>
+									<div class="col-1"></div>
+									
+					              	<div class="col-8">
+					              		<!-- 매장명 받아오기 -->
+					              		<p>EPM</p>
+					              		<!-- 접수직원 목록 받아오기 -->
+					              		<p>접수직원</p>
+					              		<!-- 데이트픽커 -->
+					              		<input type="date" name="unpaid" style="width: 100%; margin: 5px;">
+					              	</div>
+								</div>
+									
+									<hr>
+									
+								<div class="row">
+									<div class="col-3" style="text-align: right;">
 					              		<p>내용</p>
 					              		<p>고객명</p>
 					              		<p>연락처</p>
 					              		<p>비고</p>
-					              	</div>
+					              	</div>  	
 					              	<div class="col-1"></div>
-					              	<div class="col-8">
-					              		<!-- 매장명 받아오기 -->
-					              		<p>폰클데모</p>
-					              		<!-- 접수직원 목록 받아오기 -->
-					              		<p>접수직원</p>
-					              		<!-- 데이트픽커 -->
-					              		<p>미결예정일</p>
+									<div class="col-8">
 					              		<input type="text" class="form-control" name="name" style="margin: 5px;">
 					              		<input type="text" class="form-control" name="desc" style="margin: 5px;">
 					              		<input type="text" class="form-control" name="phone" style="margin: 5px;">
 					              		<textarea class="form-control" rows="3" name="memo" style="margin: 5px;"></textarea>
-					              	</div>
-			             	 </div>
+									</div>
+								</div>
 			              	</form>
 		              
 			            </div>
 			            <div class="modal-footer justify-content-between">
 			              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			              <button type="button" class="btn btn-secondary" id="modalSubmit">Save changes</button>
+			            </div>
+			          </div>
+			          <!-- /.modal-content -->
+			        </div>
+			        <!-- /.modal-dialog -->
+			      </div>
+			      
+				<!-- 모달 modalUnpaidDetail -->
+				<div class="modal fade" id="modalUnpaidDetail" style="display: none;" aria-hidden="true">
+			        <div class="modal-dialog modal-xl" style="min-width: 789px;">
+			          <div class="modal-content">
+			            <div class="modal-header">
+			              <h4 class="modal-title"><i class="nav-icon fas fa-book"></i> 미결 정보</h4>
+			              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			                <span aria-hidden="true">×</span>
+			              </button>
+			            </div>
+			            <div class="modal-body">
+			                <!-- 모달 바디 내용 -->
+				              <div class="row">
+				              		
+				              </div>
+				              <div class="row">
+					              
+					              <div class="col-md-6">
+						            <div class="card">
+						              <div class="card-header">
+						                <h3 class="card-title">
+						                  		기본정보
+						                </h3>
+						              </div>
+						              <!-- /.card-header -->
+						              <div class="card-body">
+											<div>
+												<div class="row">
+													<div class="col-3">예정일</div>
+													<div class="col-8">2020-12-10</div>
+												</div>
+												<hr>
+												<div class="row">
+													<div class="col-3">구분</div>
+													<div class="col-8">모바일</div>
+												</div>
+												<hr>
+												<div class="row">
+													<div class="col-3">기 요금제</div>
+													<div class="col-8">LTE 베이직</div>
+												</div>
+												<hr>
+												<div class="row">
+													<div class="col-3">고객명</div>
+													<div class="col-8">류마당</div>
+												</div>
+												<hr>
+												<div class="row">
+													<div class="col-3">연락처</div>
+													<div class="col-8">010-1234-5678</div>
+												</div>
+												<hr>
+												<div class="row">
+													<div class="col-3">비고</div>
+													<div class="col-8">비고</div>
+												</div>
+												<hr>
+												<div class="row">
+													<div class="col-3">등록일</div>
+													<div class="col-8">2020-06-08</div>
+												</div>
+											</div>
+						              </div>
+						              <!-- /.card-body -->
+						            </div>
+						            <!-- /.card -->
+						          </div>
+						          
+						          <div class="col-md-6">
+							            <div class="card">
+							              <div class="card-header">
+							                <h3 class="card-title">
+							                  		상태정보
+							                </h3>
+							              </div>
+							              <!-- /.card-header -->
+							              <div class="card-body">
+												<div>
+													<div class="row">
+														<div class="col-3">상태</div>
+														<div class="col-8">접수</div>
+													</div>
+													<hr>
+													<div class="row">
+														<div class="col-3">처리일</div>
+														<div class="col-8">처리직원</div>
+													</div>
+													<hr>
+													<div class="row">
+														<div class="col-3">매장</div>
+														<div class="col-8">삼삼본점</div>
+													</div>
+													<hr>
+													<div class="row">
+														<div class="col-3">접수직원</div>
+														<div class="col-8">박총괄</div>
+													</div>
+												</div>
+							              </div>
+							              <!-- /.card-body -->
+							            </div>
+							            <!-- /.card -->
+
+							            <div class="card">
+							              <div class="card-header">
+							                <h3 class="card-title">
+							                  		개통정보
+							                </h3>
+							              </div>
+							              <!-- /.card-header -->
+							              <div class="card-body">
+												<div>
+													<div class="row">
+														<div class="col-3">개통일</div>
+														<div class="col-8">2020-06-08</div>
+													</div>
+													<hr>
+													<div class="row">
+														<div class="col-3">거래처</div>
+														<div class="col-8">라온KT</div>
+													</div>
+												</div>
+							              </div>
+							              <!-- /.card-body -->
+							            </div>
+							            <!-- /.card -->
+							          </div>
+							          
+
+						          </div>
+						        </div>
+								
+									<hr>
+
+			            <div class="modal-footer justify-content-between">
+			              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			              <button type="button" class="btn btn-secondary" id="modalSubmit">미결 완료 처리</button>
+				              <div>
+					              <a href="#"><button type="button" class="btn btn-default" >수정</button></a>
+					              <a href="#"><button type="button" class="btn btn-default" href="#">삭제</button></a>
+				              </div>
 			            </div>
 			          </div>
 			          <!-- /.modal-content -->
@@ -209,7 +382,7 @@
 	        	 var yyyymmdd = yyyy+'-'+mm+'-'+dd;        	 
 	        	 $('#datetimepicker1').val(yyyymmdd);
 	        	 $('#datetimepicker2').val(yyyymmdd);
-	         })
+	         });
 	         
 	         //thisWeek 버튼 클릭시 date picker 이벤트
 	         $('#thisWeek').click(function(){
@@ -234,7 +407,7 @@
 	        	 var yyyymmdd2 = yyyy+'-'+mm+'-'+dd2;        	 
 	        	 $('#datetimepicker1').val(yyyymmdd1);
 	        	 $('#datetimepicker2').val(yyyymmdd2);
-	         })
+	         });
 	         
 	         //thisMonth 버튼 클릭시 date picker 이벤트
 	         $('#thisMonth').click(function(){
@@ -260,7 +433,12 @@
 	        	 var yyyymm2dd = yyyy+'-'+mm2+'-'+dd;        	 
 	        	 $('#datetimepicker1').val(yyyymm1dd);
 	        	 $('#datetimepicker2').val(yyyymm2dd);
-	         })
+	         });
+	         
+	         //tooltip
+	         $(function () {
+				  $('[data-toggle="tooltip"]').tooltip()
+				});
 	     });
 	 </script>
 </th:block>

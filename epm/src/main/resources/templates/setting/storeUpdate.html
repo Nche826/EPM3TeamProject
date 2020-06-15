@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>EPM</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<!-- 컨텐트 랩퍼 시작 -->	
+	<div class="content-wrapper">
+		<!-- 컨텐츠 헤더 영역 -->
+		<div class="content-header">
+      		<div class="container-fluid">
+      			<div class="row">
+		          	<div class="col-sm-6">
+		      			<div class="row">
+				          	<div class="col-sm-1">
+					          	 <i class="ion ion-person-add" style="font-size:15mm;"></i>
+				          	</div>		          	
+				          	<div class="col-sm-11">
+					            <h5 style="font-weight: bold;">매장 상세 정보</h5>
+					            <p style="font-size:small;">매장 정보를 수정하고 매장 내 직원들의 정보를 확인할 수 있습니다.</p>
+				          	</div>
+			          	</div>
+	          	    </div>
+	          	    <div class="col-sm-6">
+			            <ol class="breadcrumb float-sm-right">
+			              <li class="breadcrumb-item"><a href="/">Home</a></li>
+			              <li class="breadcrumb-item active"><a href="/storeList">이전</a></li>
+			            </ol>
+	          	    </div>
+              	</div>
+      		</div>
+      	</div>
+      	<!-- 컨텐츠 헤더 영역 끝 -->
+      	
+      	<div class="mb-2 mt-4"></div>
+      	
+ 		<!-- 컨텐츠 영역 시작 -->
+ <!-- Main content -->
+    <section class="content">
+      <div class="row">
+		<!-- left column -->
+		<div class="col-md-4">
+          <div class="card card-secondary">
+            <div class="card-header">
+              <h3 class="card-title">매장 정보 수정</h3>
+ 
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+            <form action="#" method="post">
+              <div class="form-group" style="margin-top: 3%;">
+                <label for="inputName">매장 명 </label>
+                <input type="text" id="inputName" class="form-control" value="삼성 본점">
+              </div>
+              <div class="form-group">
+                <label for="inputDescription">주소</label>
+                 <input type="text" id="inputClientCompany" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="inputStatus">연락처</label>
+                <input type="text" id="inputEstimatedBudget" class="form-control">
+              </div>
+              <div class="form-group" style="margin-top: 10%;">
+              	<input type="reset" value="cancle" class="btn btn-default float-left">
+              	<input type="submit" value="Save Changes" class="btn btn-primary float-right">
+              </div>
+            </form>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div><!-- /left column -->
+      <!-- right column -->
+        <div class="col-md-8">
+          <div class="card card-danger">
+            <div class="card-header">
+              <h3 class="card-title">매장 인원 목록</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+            <form id="storeInfo" method="get">
+	            <table class="table">
+	            <thead>
+	            	<tr>
+	            	<th>no</th>
+	            	<th>권한</th>
+	            	<th>이름</th>
+	            	<th>연락처</th>
+	            	</tr>
+	            </thead>
+	            <tbody>
+	            	<tr>
+	            	<td>1</td>
+	            	<td>대표</td>
+	            	<td>김수지</td>
+	            	<td>010-0000-0000</td>
+	            	</tr>
+	            	<tr>
+	            	<td>2</td>
+	            	<td>점장</td>
+	            	<td>김뭉치</td>
+	            	<td>010-0000-0000</td>
+	            	</tr>
+	            	<tr>
+	            	<td>3</td>
+	            	<td>사원</td>
+	            	<td>김스디</td>
+	            	<td>010-0000-0000</td>
+	            	</tr>
+	            	<tr>
+	            	<td>4</td>
+	            	<td>사원</td>
+	            	<td>김두디</td>
+	            	<td>010-0000-0000</td>
+	            	</tr>
+	            
+	            </tbody>
+	            </table>
+            </form>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div><!-- /right column -->
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <a href="/storeList" class="btn btn-secondary">이전페이지</a>
+          <a href="/staffList" class="btn btn-danger float-right">직원 관리 페이지 이동</a>
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+	</div>
+	<!-- 컨텐트 랩퍼 끝 -->
+</th:block>
+<th:block layout:fragment="customFooterScript">
+</th:block>

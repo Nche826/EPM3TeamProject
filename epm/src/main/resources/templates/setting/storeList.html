@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+<th:block layout:fragment="customCss">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+</th:block>
+<th:block layout:fragment="customTitle">
+	<title>EPM</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<!-- 컨텐트 랩퍼 시작 -->	
+	<div class="content-wrapper">
+		<!-- 컨텐츠 헤더 영역 -->
+		<div class="content-header">
+      		<div class="container-fluid">
+      			<div class="col-sm-6">
+	      			<div class="row">
+			          	<div class="col-sm-1">
+				          	 <i class="fas fa-store-alt" style="font-size:10mm;"></i>
+			          	</div>		          	
+			          	<div class="col-sm-11">
+				            <h5 style="font-weight: bold;">매장관리</h5>
+				            <p style="font-size:small;">등록하신 매장의 정보를 관리하시거나 필요에 따라 다매장으로 등록하여 사용하실 수 있습니다.</p>
+			          	</div>
+		          	</div>
+         	    </div>
+		      <!-- 매장 등록 버튼  -->
+			      <div class="row">
+			        <div class="col-sm-12">
+				        <div class="input-group input-group-sm float-right " style="width: 150px; margin-bottom:10mm;">
+				          	 <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-lg">
+				                  	매장등록
+				                </button>
+						</div>
+					</div>
+				 </div>
+				<!-- 모달 클릭시 화면   -->
+					<div class="modal fade" id="modal-lg">
+				        <div class="modal-dialog modal-lg">
+				          <div class="modal-content">
+				            <div class="modal-header">
+				              <h4 class="modal-title">매장 등록</h4>
+					              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					                <span aria-hidden="true">&times;</span>
+					              </button>
+				            </div>
+				            <div class="modal-body">
+					              <form id="CustomerInsertForm" action="#" method="post" >
+					             	<div class="form-group">
+					                	<label for="inputDescription"><i style="color: red;">*</i>매장명</label>
+					                 	<input type="text" id="customerName" class="form-control" placeholder="매장명을 입력해주세요">
+					             	</div>
+					             	<div class="form-group">
+					                	<label for="inputDescription"><i style="color: red;">*</i>주소</label>
+					                 	<input type="text" id="customerName" class="form-control" placeholder="주소를 입력해주세요">
+					             	</div>
+					             	<div class="form-group">
+					                	<label for="inputDescription"><i style="color: red;">*</i>연락처</label>
+					                 	<input type="text" id="customerName" class="form-control" placeholder="-제외  010부터 입력해주세요">
+					             	</div>
+					             	<div class="form-group">
+					                	<label for="inputDescription"><i style="color: red;">*</i>등록자ID</label>
+					                 	<input type="text" id="customerName" class="form-control" placeholder="등록자 아이디를 입력해주세요">
+					             	</div>
+					             	<div class="form-group">
+					             	<input type="reset" value="Clear" class="btn btn-default float-left">
+					             	<button type="submit" id="CusBtn" class="btn btn-danger float-right">매장등록하기</button>
+					             	</div>
+					              </form>
+				            </div>
+				            <div class="modal-footer">
+				              <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
+				            </div>
+				          </div>
+				          <!-- /.modal-content -->
+				        </div>
+			        <!-- /.modal-dialog -->
+			      </div>
+		      <!-- /.modal -->
+      		</div>
+      	<!-- 컨텐츠 헤더 영역 끝 -->
+      	
+ 		<!-- 컨텐츠 영역 시작 -->
+		 <!-- Main content -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card card-danger">
+            <div class="card-header">
+              <h3 class="card-title" style="text-align: center;">Store List</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped" style="text-align: center;">
+                <thead>
+                <tr>
+                  <th></th>
+                  <th>no</th>
+                  <th>매장 명</th>
+                  <th>직원 수</th>
+                  <th>연락처</th>
+                  <th>담당자</th>
+                  <th>휴대폰</th>
+                  <th>등록일</th>
+                  <th>관 리</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><input type="checkbox" ></td>
+                  <td>1</td>
+                  <td>삼성1호점</td>
+                  <td>4</td>
+                  <td>02-111-2233</td>
+                  <td>김수지</td>
+                  <td>010-0000-0000</td>
+                  <td>2020-06-10</td>
+                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
+                </tr>
+                <tr>
+                 <td><input type="checkbox" ></td>
+                  <td>2</td>
+                  <td>삼성2호점</td>
+                  <td>4</td>
+                  <td>02-111-2233</td>
+                  <td>김수지</td>
+                  <td>010-0000-0000</td>
+                  <td>2020-06-10</td>
+                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
+                </tr>
+                <tr>
+                 <td><input type="checkbox" ></td>
+                  <td>3</td>
+                  <td>삼성4호점</td>
+                  <td>4</td>
+                  <td>02-111-2233</td>
+                  <td>김수지</td>
+                  <td>010-0000-0000</td>
+                  <td>2020-06-10</td>
+                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
+                </tr>
+                <tr>
+                 <td><input type="checkbox" ></td>
+                  <td>4</td>
+                  <td>삼성3호점</td>
+                  <td>4</td>
+                  <td>02-111-2233</td>
+                  <td>김수지</td>
+                  <td>010-0000-0000</td>
+                  <td>2020-06-10</td>
+                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
+                </tr>
+                <tr>
+                 <td><input type="checkbox" ></td>
+                  <td>5</td>
+                  <td>삼성1호점</td>
+                  <td>4</td>
+                  <td>02-111-2233</td>
+                  <td>김수지</td>
+                  <td>010-0000-0000</td>
+                  <td>2020-06-10</td>
+                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
+                </tr>
+                <tr>
+                 <td><input type="checkbox" ></td>
+                  <td>6</td>
+                  <td>삼성1호점</td>
+                  <td>4</td>
+                  <td>02-111-2233</td>
+                  <td>김수지</td>
+                  <td>010-0000-0000</td>
+                  <td>2020-06-10</td>
+                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
+                </tr>
+                <tr>
+                <td><input type="checkbox" ></td>
+                  <td>7</td>
+                  <td>삼성1호점</td>
+                  <td>4</td>
+                  <td>02-111-2233</td>
+                  <td>김수지</td>
+                  <td>010-0000-0000</td>
+                  <td>2020-06-10</td>
+                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
+                </tr>
+                <tr>
+                <td><input type="checkbox" ></td>
+                  <td>8</td>
+                  <td>삼성1호점</td>
+                  <td>4</td>
+                  <td>02-111-2233</td>
+                  <td>김수지</td>
+                  <td>010-0000-0000</td>
+                  <td>2020-06-10</td>
+                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
+                </tr>
+               <tr>
+                 <td><input type="checkbox" ></td>
+                  <td>9</td>
+                  <td>삼성1호점</td>
+                  <td>4</td>
+                  <td>02-111-2233</td>
+                  <td>김수지</td>
+                  <td>010-0000-0000</td>
+                  <td>2020-06-10</td>
+                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
+                </tr>
+                 <tr>
+                 <td><input type="checkbox" ></td>
+                  <td>10</td>
+                  <td>삼성1호점</td>
+                  <td>4</td>
+                  <td>02-111-2233</td>
+                  <td>김수지</td>
+                  <td>010-0000-0000</td>
+                  <td>2020-06-10</td>
+                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                 <th><button type="submit" class="btn btn-danger btn-sm">삭제</button></th>
+                  <th>no</th>
+                  <th>매장 명</th>
+                  <th>직원 수</th>
+                  <th>연락처</th>
+                  <th>담당자</th>
+                  <th>휴대폰</th>
+                  <th>등록일</th>
+                  <th>관 리</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+</th:block>
+
+<th:block layout:fragment="customFooterScript">
+<!-- DataTables -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
+</th:block>
+</html>
