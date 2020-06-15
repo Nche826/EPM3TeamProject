@@ -22,10 +22,10 @@
 <th:block layout:fragment="customContents">
 
 	 <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" >
     <!-- Content Header (Page header) -->
      
-  <th:block th:fragment="dInsert">
+ 
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -40,7 +40,7 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-    <!-- Main content -->
+    <!-- Main content -->    
     <section class="content">
     <div class="container-fluid">
       <div class="row">
@@ -52,7 +52,7 @@
 
            
             </div>
-            <div class="card-body">
+            <div class="card-body" th:fragment="dInsert">
               <div class="form-group">
                 <label for="inputName">매장</label>
                 <input type="text" id="inputName" class="form-control" value="epm 본점">
@@ -113,18 +113,13 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-                <div class="row">
-        <div class="col-12">
-          <a href="#" class="btn btn-secondary">Cancel</a>
-          <input type="submit" value="Save Changes" class="btn btn-success">
-        </div>
-      </div>
+         
         </div>
         
       </div>
  		</div>
     </section>
-    </th:block>
+   
     </div>
 
     <!-- /.content -->
