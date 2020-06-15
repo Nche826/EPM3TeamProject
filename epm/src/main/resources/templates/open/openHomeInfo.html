@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+
+<th:block layout:fragment="customCss">
+
+</th:block>
+
+
+<th:block layout:fragment="customTitle">
+	
+</th:block>
+
+<th:block layout:fragment="customScript">
+
+</th:block>
+
+
+
+<th:block layout:fragment="customContents">
+	 <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" th:fragment="oInfo">
+  <!-- Content Header (Page header) -->
+    <!-- <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>단말기 입고</h1>
+          </div>
+	        <div class="col-sm-6">
+	   			<ol class="breadcrumb float-sm-right" >
+				　	<a href="/usedList"  class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px"><i class="far fa-file-alt" ></i> 단말기 목록</a>
+					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px"><i class="icon ion-md-create"></i>수정</button> 
+					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" ><i class="icon ion-md-trash"></i>삭제</button>
+					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px"><i class="icon ion-md-close"></i>종료</button>
+											
+				</ol>
+			</div>     
+        </div>
+      </div>
+    </section>
+ -->
+
+
+
+
+
+
+
+
+
+    <!-- Main content -->
+    <div class="br-pagetitle" style="padding:0">
+		<i class="icon ion-md-paper"></i>
+	
+	
+	</div>
+		
+		
+		<div class="row mg-t-20 mg-b-20">
+		<div class="col-8" style="padding-right:10px">
+			
+			<div class="rounded table-responsive">
+				<table class="table mg-b-0">
+					<colgroup><col width="15%">
+					<col width="35%">
+					<col width="15%">
+					<col width="35%">
+					</colgroup><thead class="thead-colored thead-light">
+						<tr>
+							<th colspan="4">
+								<span class="tx-14">기본정보</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th class="tx-right">매장</th>
+							<td>폰클데모 본점</td>
+							<th class="tx-right">직원</th>
+							<td>김대표</td>
+						</tr>
+						<tr>
+							<th class="tx-right">거래처</th>
+							<td>동대구유통(LG)</td>
+							<th class="tx-right">구분</th>
+							<td>결합판매</td>
+						</tr>
+						<tr>
+							<th class="tx-right">신청일</th>
+							<td>2020-05-14</td>
+							<th class="tx-right">개통일</th>
+							<td></td>
+						</tr>
+						<tr>
+							<th class="tx-right">고객명</th>
+							<td>홍길동</td>
+							<th class="tx-right">연락처</th>
+							<td>010-1234-4567</td>
+						</tr>
+						<tr>
+							<th class="tx-right">주소</th>
+							<td colspan="3">제주도</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<div class="rounded table-responsive mg-t-20">
+				<table class="table mg-b-0">
+					<colgroup><col width="15%">
+					<col width="35%">
+					<col width="15%">
+					<col width="35%">
+					</colgroup><thead class="thead-colored thead-light">
+						<tr>
+							<th colspan="4">
+								<span class="tx-14">상품정보 - 인터넷</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th class="tx-right">상품/요금제</th>
+							<td>스마트500</td>
+							<th class="tx-right">고유번호</th>
+							<td></td>
+						</tr>
+						<tr>
+							<th class="tx-right">정책금액</th>
+							<td>-</td>
+							<th class="tx-right">약정</th>
+							<td>36개월</td>
+						</tr>
+						<tr>
+							<th class="tx-right">유통지원</th>
+							<td>-</td>
+							<th class="tx-right">비고</th>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="rounded table-responsive mg-t-20">
+				<table class="table mg-b-0">
+					<colgroup><col width="15%">
+					<col width="35%">
+					<col width="15%">
+					<col width="35%">
+					</colgroup><thead class="thead-colored thead-light">
+						<tr>
+							<th colspan="4">
+								<span class="tx-14">상품정보 - TV</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th class="tx-right">상품/요금제</th>
+							<td>프리미엄</td>
+							<th class="tx-right">고유번호</th>
+							<td></td>
+						</tr>
+						<tr>
+							<th class="tx-right">정책금액</th>
+							<td>-</td>
+							<th class="tx-right">약정</th>
+							<td>36개월</td>
+						</tr>
+						<tr>
+							<th class="tx-right">유통지원</th>
+							<td>-</td>
+							<th class="tx-right">비고</th>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="rounded table-responsive mg-t-20">
+				<table class="table mg-b-0">
+					<colgroup><col width="15%">
+					<col width="35%">
+					<col width="15%">
+					<col width="35%">
+					</colgroup><thead class="thead-colored thead-light">
+						<tr>
+							<th colspan="4">
+								<span class="tx-14">상품정보 - TV 2</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th class="tx-right">상품/요금제</th>
+							<td>베이직</td>
+							<th class="tx-right">고유번호</th>
+							<td></td>
+						</tr>
+						<tr>
+							<th class="tx-right">정책금액</th>
+							<td>-</td>
+							<th class="tx-right">약정</th>
+							<td>36개월</td>
+						</tr>
+						<tr>
+							<th class="tx-right">유통지원</th>
+							<td>-</td>
+							<th class="tx-right">비고</th>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<div class="rounded table-responsive mg-t-20">
+				<table class="table mg-b-0">
+					<colgroup><col width="15%">
+					<col width="85%">
+					</colgroup><thead class="thead-colored thead-light">
+						<tr>
+							<th colspan="2">
+								<span class="tx-14">기타정보</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th class="tx-right">메모</th>
+							<td></td>
+						</tr>
+						<tr>
+							<th class="tx-right">등록일</th>
+							<td>2020년 05월 14일 16시 47분</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-4" style="padding-left:10px">
+			<div class="rounded table-responsive">
+				<table class="table mg-b-0">
+					<colgroup><col width="40%">
+					<col width="60%">
+					</colgroup><thead class="thead-colored thead-light">
+						<tr>
+							<th colspan="2" style="background:#868E96">
+								<span class="tx-14 tx-white">진행정보</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th class="tx-right">상태</th>
+							<td><span class="tx-gray-700">완료</span></td>
+						</tr>
+						<tr>
+							<th class="tx-right"><div class="mg-t-5">변경</div></th>
+							<td>
+								
+								<form id="form-cond" onsubmit="return false">
+								<input type="hidden" name="idx" value="19238">
+								
+								<div class="pull-left" style="width:100px">
+									<select class="form-control form-control-sm select-sm" name="cond">
+										<option value="">- 선택 -</option>
+										<option value="1">예약</option>
+										<option value="2">신청</option>
+										<option value="3">완료</option>
+									</select>
+									<i class="fa fa-angle-down"></i>
+								</div>
+								<div class="pull-left mg-l-10">
+									<button type="button" onclick="condHome()" class="btn btn-sm btn-dark">확인</button>
+								</div>
+								<div style="clear:both"></div>
+								
+								</form>
+								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<div class="rounded table-responsive mg-t-20">
+				<table class="table mg-b-0">
+					<colgroup><col width="40%">
+					<col width="60%">
+					</colgroup><thead class="thead-colored thead-light">
+						<tr>
+							<th colspan="2" style="background:#868E96">
+								<span class="tx-14 tx-white">정산정보</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th class="tx-right">기본정책</th>
+							<td>-</td>
+						</tr>
+						<tr>
+							<th class="tx-right">추가정책</th>
+							<td>450,000원</td>
+						</tr>
+						<tr>
+							<th class="tx-right">할인금액</th>
+							<td class="tx-danger">100,000원</td>
+						</tr>
+						<tr>
+							<th class="tx-right">정산금액</th>
+							<td class="tx-primary"><span class="tx-bold tx-14">-450,000</span>원</td>
+						</tr>
+						
+					</tbody>
+				</table>
+			</div>
+			
+			<div class="rounded table-responsive mg-t-20">
+				<table class="table mg-b-0">
+					<colgroup><col width="40%">
+					<col width="60%">
+					</colgroup><thead class="thead-colored thead-light">
+						<tr>
+							<th colspan="2" style="background:#868E96">
+								<span class="tx-14 tx-white">마진정보</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th class="tx-right">판매마진</th>
+							<td class="tx-dark"><span class="tx-bold tx-14">350,000</span>원</td>
+						</tr>
+						<tr>
+							<th class="tx-right">정산부가세 10%</th>
+							<td class="tx-danger">40,909원</td>
+						</tr>
+						<tr>
+							<th class="tx-right">실판매마진</th>
+							<td class="tx-dark"><span class="tx-bold tx-14">309,091</span>원</td>
+						</tr>
+						
+					</tbody>
+				</table>
+			</div>
+			
+		</div>
+	</div>
+		
+		
+			
+	
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+</th:block>
+<th:block layout:fragment="customFooterScript">
+
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+</th:block>
+
+
+
+
+
+</html>

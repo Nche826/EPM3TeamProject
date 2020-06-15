@@ -21,4 +21,9 @@ public class UsedController {
 		
 		return "/used/usedUpdate";
 	}
+	@GetMapping("/usedInfo")
+	public String usedInfo() {
+		
+		return "/used/usedInfo";
+	}
 }
