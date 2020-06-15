@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="com.cafe24.epm.mapper.CustomerMapper">
+    
+    <insert id="addCustomer" parameterType="Customer">
+    <selectKey order="BEFORE" keyProperty="customer_code" resultType="String">
+	    	select
+	    	(case COUNT(*)
+ 			when 0 then 'customer_1'
+	    	else concat('customer_',Max(cast(SUBSTR('customer',9) AS DECIMAL))+1)
+	    	end) as customer_code
+	    	from
+	    	  	tb_customer as c 
+	</selectKey> 
+		    INSERT INTO tb_customer
+			(customer_code, customer_name, customer_tel, customer_birth, staff_code, customer_reg_date)
+			VALUES (#{customer_code}
+					,#{customer_name}
+					, #{customer_tel}
+					, #{customer_birth}
+					, #{staff_code}
+					, NOW())
+    </insert>
+    </mapper>
