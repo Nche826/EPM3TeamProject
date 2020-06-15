@@ -30,8 +30,7 @@
             <h1>중고 관리</h1>
           </div>
           <div class="col-sm-6">
-   			<ol class="breadcrumb float-sm-right">
-			　	<a href="/usedInsert" class="btn btn-info btn-sm pd-x-5 pd-y-0"><i class="fas fa-pen" ></i> 중고 입고</a>	
+   			<ol class="breadcrumb float-sm-right">	
 				<button type="button" class="btn btn-info btn-sm pd-x-5 pd-y-0" data-toggle="modal" data-target="#modal-lg"> 중고 입고 </button>						
 			</ol>
 		</div>   
@@ -149,7 +148,40 @@
                     <td>epm 본점</td>
                     <td>김대표</td>
                     <td>퀵배송</td>                   
-                    <td align="center"><a href="/usedUpdate" class="btn btn-info btn-sm pd-x-5 pd-y-0"><i class="icon ion-ios-browsers"></i></a></td>                   
+                    <td align="center">
+                     <button type="button" class="btn btn-info btn-sm pd-x-5 pd-y-0" data-toggle="modal" data-target="#modal-Info"><i class="icon ion-ios-browsers"></i></button>
+                    
+                      <!-- /.modal -->
+      <div class="modal fade" id="modal-Info" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title col-sm-6">중고 정보</h4>
+              <div class="col-sm-6" >	   			
+				　	<a href="/usedList"  class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px"><i class="far fa-file-alt" ></i></a>
+					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px"><i class="icon ion-md-create"></i>수정</button> 
+					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" ><i class="icon ion-md-trash"></i>삭제</button>
+					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px"><i class="icon ion-md-close"></i>종료</button>
+			</div> 
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                            
+              <div th:include="used/usedInfo :: uInfo"></div>
+              
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div> 
+                    </td>                   
                   </tr>   
                  </tbody>
                 </table>
