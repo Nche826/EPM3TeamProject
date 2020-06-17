@@ -2,6 +2,7 @@ package com.cafe24.epm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -12,6 +13,12 @@ import com.cafe24.epm.service.CustomerService;
 public class CustomerController {
 	
 	@Autowired private CustomerService customerService;
+	
+	
+	
+	
+	
+	
 	
 	//고객등록하기
 	@PostMapping("/addCustomer")
@@ -40,7 +47,8 @@ public class CustomerController {
 	
 	//고객리스트 화면 가져오기
 	@GetMapping("/customerList")
-	public String customerList() {
+	public String customerList(Model model,Customer customer ) {
+		
 		return "customer/customerList";
 	}
 	
