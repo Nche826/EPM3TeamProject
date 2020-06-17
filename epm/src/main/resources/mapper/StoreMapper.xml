@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.epm.mapper.StoreMapper">
+
+		<resultMap type="Store" id="StoreSelect">
+   			<result property="store_Code" 	column="store_code"/>
+   			<result property="store_Name" 	column="store_name"/>
+   			<result property="store_Addr" 	column="store_addr"/>
+   			<result property="store_Tel" 	column="store_tel"/>
+   			<result property="store_Reg_id" 	column="member_id"/>
+   			<result property="store_Reg_date" 	column="store_reg_date"/>
+   		</resultMap>
+
+	<insert id="addStore" parameterType="store">
+	<selectKey order="BEFORE" keyProperty="store_Code" resultType="String">
+		    	select
+		    	(case COUNT(*)
+	 			when 0 then 'store_1'
+		    	else concat('store_',Max(cast(SUBSTR(store_code,7) AS DECIMAL))+1)
+		    	end) as store_code
+		    	from
+		    	  	tb_store as s
+		</selectKey> 
+		INSERT INTO tb_store
+				(store_code
+				, store_name
+				, store_addr
+				, store_tel
+				, member_id
+				, store_reg_date)
+		VALUES (#{store_Code}
+				,#{store_Name}
+				,#{store_Addr}
+				,#{store_Tel}
+				,#{store_Reg_id}
+				, NOW())
+	
+	</insert>
+
+</mapper>

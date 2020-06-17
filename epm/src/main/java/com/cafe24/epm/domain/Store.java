@@ -8,6 +8,7 @@ public class Store {
 	private String store_Tel;
 	private String store_Reg_id;
 	private String store_Reg_date;
+	
 	public String getStore_Code() {
 		return store_Code;
 	}
