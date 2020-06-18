@@ -2,13 +2,186 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/default}">
-<head>
-<meta charset="UTF-8">
+
 <th:block layout:fragment="customTitle">
 	<title th:text="${title}"></title>
 </th:block>
-</head>
-<body>
-	
-</body>
+
+<th:block layout:fragment="customCss">
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<!-- 컨텐트 랩퍼 시작 -->	
+	<div class="content-wrapper">
+		<!-- 컨텐츠 헤더 영역 -->
+		<section class="content-header">
+      		<div class="container-fluid">
+      			<div class="row">
+      				<div class="col-sm-6">
+      					<h4>SMS발송</h4>
+						<p>고객에게 SMS발송을 할 수 있습니다.</p>
+      				</div>
+      				<div class="col-sm-6">
+					</div>
+      			</div>
+      		</div>
+      	</section>
+      	<!-- 컨텐츠 헤더 영역 끝 -->
+      	
+ 		<!-- 컨텐츠 영역 시작 -->
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-6">
+			            <div class="card">
+							<!-- card-header -->
+							<div class="card-header">
+								<h4>기본 발송</h4>
+							</div>
+							<!-- /.card-header -->
+							<!-- card-body -->
+							<form id="form-save" style="margin-bottom: 10px;">
+								<div class="row" style="margin-top: 10px;">
+			        				<label class="col-3" style="text-align: right;">
+			        					<span style="color: red;">*</span> 수신 연락처</label>
+			        				<div class="col-6">
+			        					<input type="text" class="form-control form-control-sm select-sm" name="sms_tel">
+			        				</div>
+			        				<div class="col-3">
+			        				<button type="button" class="btn btn-info btn-sm" style="width: 80%;">번호 추가</button>
+			        				</div>
+			        			</div>
+			        			<div class="row" style="margin-top: 10px; font-size: small;">
+			        				<div class="col-9 offset-3 form-group">
+			        					<span>받는 사람 연락처를 추가해주세요.</span>
+			        					<div class="row">
+			        						<div class="col-6">
+				        						<a class="btn btn-dark btn-xs pointer">
+				        							<span style="color: white;">전체삭제</span>
+				        						</a>
+			        						</div>
+			        						<div class="col-6">
+				        						총<span style="color: orange;"> 0
+			        							</span> 명
+			        						</div>
+			        					</div>
+			        				</div>
+			        			</div>
+			        			<div class="row" style="margin-top: 10px;">
+			        				<label class="col-3" style="text-align: right;">
+			        					<span style="color: red;">*</span> 내용</label>
+			        				<div class="col-9">
+			        					<textarea class="form-control form-control-sm" name="sms_content" placeholder="내용 입력해주세요." rows="8" style="width: 95%;"></textarea>
+			        					<span>단문</span>
+			        					<span style="margin-left: 70%;">0/140 bytes</span>
+			        				</div>
+			        			</div>
+			        			<div class="row" style="margin-top: 10px;">
+			        				<label class="col-3" style="text-align: right;">
+			        					 발송일자</label>
+			        				<div class="col-9">
+			        					<input type="date" class="form-control form-control-sm select-sm" name="sms_reg_date" readonly="readonly" value="2020-06-18" style="width: 95%;">
+			        				</div>
+			        			</div>
+			        			<div class="row" style="margin-top: 10px;">
+			        				<label class="col-3" style="text-align: right;">
+			        					 발송시간</label>
+			        				<div class="col-9">
+			        					<input type="time" class="form-control form-control-sm select-sm" name="sms_reg_date" readonly="readonly" value="20:20" style="width: 95%;">
+			        				</div>
+			        			</div>
+							</form>
+							<!-- /.card-body -->
+							<!-- /card-footer -->
+							<div class="card-footer" style="text-align: center;">
+								<button type="button" class="btn btn-sm btn-primary">발송</button>　
+			        			<button type="button" class="btn btn-sm btn-danger">취소</button>
+							</div>
+							<!-- /.card-footer -->
+							
+			            </div>
+         			    <!-- /.card -->
+          			</div>
+          			<div class="col-6">
+          				<div class="card">
+							<!-- card-header -->
+							<div class="card-header">
+								<h4>예약 발송</h4>
+							</div>
+							<!-- /.card-header -->
+							<!-- card-body -->
+							<form id="form-save" style="margin-bottom: 10px;">
+								<div class="row" style="margin-top: 10px;">
+			        				<label class="col-3" style="text-align: right;">
+			        					<span style="color: red;">*</span> 수신 연락처</label>
+			        				<div class="col-6">
+			        					<input type="text" class="form-control form-control-sm select-sm" name="sms_tel">
+			        				</div>
+			        				<div class="col-3">
+			        				<button type="button" class="btn btn-info btn-sm" style="width: 80%;">번호 추가</button>
+			        				</div>
+			        			</div>
+			        			<div class="row" style="margin-top: 10px; font-size: small;">
+			        				<div class="col-9 offset-3 form-group">
+			        					<span>받는 사람 연락처를 추가해주세요.</span>
+			        					<div class="row">
+			        						<div class="col-6">
+				        						<a class="btn btn-dark btn-xs pointer">
+				        							<span style="color: white;">전체삭제</span>
+				        						</a>
+			        						</div>
+			        						<div class="col-6">
+				        						총<span style="color: orange;"> 0
+			        							</span> 명
+			        						</div>
+			        					</div>
+			        				</div>
+			        			</div>
+			        			<div class="row" style="margin-top: 10px;">
+			        				<label class="col-3" style="text-align: right;">
+			        					<span style="color: red;">*</span> 내용</label>
+			        				<div class="col-9">
+			        					<textarea class="form-control form-control-sm" name="sms_content" placeholder="내용 입력해주세요." rows="8" style="width: 95%;"></textarea>
+			        					<span>단문</span>
+			        					<span style="margin-left: 70%;">0/140 bytes</span>
+			        				</div>
+			        			</div>
+			        			<div class="row" style="margin-top: 10px;">
+			        				<label class="col-3" style="text-align: right;">
+			        					 발송일자</label>
+			        				<div class="col-9">
+			        					<input type="date" class="form-control form-control-sm select-sm" name="sms_reg_date" style="width: 95%;">
+			        				</div>
+			        			</div>
+			        			<div class="row" style="margin-top: 10px;">
+			        				<label class="col-3" style="text-align: right;">
+			        					 발송시간</label>
+			        				<div class="col-9">
+			        					<input type="time" class="form-control form-control-sm select-sm" name="sms_reg_date" style="width: 95%;">
+			        				</div>
+			        			</div>
+							</form>
+							<!-- /.card-body -->
+							<!-- /card-footer -->
+							<div class="card-footer" style="text-align: center;">
+								<button type="button" class="btn btn-sm btn-primary">발송</button>　
+			        			<button type="button" class="btn btn-sm btn-danger">취소</button>
+							</div>
+							<!-- /.card-footer -->
+							
+			            </div>
+          			</div>
+          			
+				</div>
+			</div>
+		</section>
+		<!-- 컨텐츠 영역 끝 -->
+	</div>
+	<!-- 컨텐트 랩퍼 끝 -->
+</th:block>
+
+<th:block layout:fragment="customScript">
+</th:block>
+<th:block layout:fragment="customFooterScript">
+</th:block>
 </html>

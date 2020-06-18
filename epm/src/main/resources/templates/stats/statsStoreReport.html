@@ -1,14 +1,236 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/default}">
-<head>
-<meta charset="UTF-8">
+   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+   layout:decorate="~{layout/default}">
+
 <th:block layout:fragment="customTitle">
-	<title th:text="${title}"></title>	
+   <title th:text="${title}"></title>
 </th:block>
-</head>
-<body>
-	
-</body>
+
+<th:block layout:fragment="customCss">
+</th:block>
+
+<th:block layout:fragment="customContents">
+   <!-- 컨텐트 랩퍼 시작 -->   
+   <div class="content-wrapper">
+      <!-- 컨텐츠 헤더 영역 -->
+      <section class="content-header">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-sm-6">
+                     <h4>매장통계</h4>
+                  <p>등록되어 있는 매장의 개통자료를 비교하실 수 있습니다.</p>
+                  </div>
+               </div>               
+         </div>
+      </section>
+         <!-- 컨텐츠 헤더 영역 끝 -->
+         
+       <!-- 컨텐츠 영역 시작 -->
+      <section class="content">
+         <div class="container-fluid">
+            <div class="row">
+               <div class="col-12">
+                  <div class="card">
+                     <div class="card-body">
+                        <div class="row">
+                           <div class="col-sm-2" style="margin-top: 10px;">
+                              <div class="input-group">
+                                       <div class="input-group-prepend">
+                                         <button type="button" class="btn btn-dark"><i class="icon ion-ios-arrow-back"></i></button>
+                                 </div>
+                                     <div id="year_mon" class="pd-x-10 tx-20 tx-gray-700" style="font-size: 20px; padding-top: 5px;">　2020년 6월　</div>
+                                     <div class="input-group-append">
+                                         <button type="button" class="btn btn-dark"><i class="icon ion-ios-arrow-forward"></i></button>
+                                 </div>
+                                 </div>
+                           </div>
+                           <div class="col-9">
+                           </div>
+                           <div class="col-1" style="margin-top: 10px; margin-left: auto;">
+                              <select class="form-control">
+                                 <option>삼삼본점</option>
+                                 <option>삼삼1호점</option>
+                                 <option>삼삼2호점</option>
+                                 <option>삼삼3호점</option>
+                              </select>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-6">
+                        <div class="card" style="font-size: small;">
+                           <div class="card-header">
+                              <h6>단말기</h6>
+                           </div>
+                           <div class="card-body">
+                              <div class="row" style="text-align: center;">
+                                 <!-- 컬럼명 정한거로 바꾸기 -->
+                                 <div class="col-3 tx-center">
+                                    <span class="tx-13">입고</span>
+                                    <h6 id="stock_mobile-cnt1" class="mg-t-10 tx-inverse">-</h6> 
+                                 </div>
+                                 <div class="col-3 tx-center">
+                                    <span class="tx-13">개통</span>
+                                    <h6 id="stock_mobile-cnt2" class="mg-t-10 tx-inverse">-</h6>
+                                 </div>
+                                 <div class="col-3 tx-center">
+                                    <span class="tx-13">판매</span>
+                                    <h6 id="stock_mobile-cnt3" class="mg-t-10 tx-inverse">-</h6>
+                                 </div>
+                                 <div class="col-3 tx-center">
+                                    <span class="tx-13">반품</span>
+                                    <h6 id="stock_mobile-cnt4" class="mg-t-10 tx-danger">-</h6>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-sm-6">
+                        <div class="card" style="font-size: small;">
+                           <div class="card-header">
+                              <h6>유심</h6>
+                           </div>
+                           <div class="card-body">
+                              <div class="row" style="text-align: center;">
+                                 <!-- 컬럼명 정한거로 바꾸기 -->
+                                 <div class="col-3 tx-center">
+                                    <span class="tx-13">입고</span>
+                                    <h6 id="stock_mobile-cnt1" class="mg-t-10 tx-inverse">-</h6> 
+                                 </div>
+                                 <div class="col-3 tx-center">
+                                    <span class="tx-13">개통</span>
+                                    <h6 id="stock_mobile-cnt2" class="mg-t-10 tx-inverse">-</h6>
+                                 </div>
+                                 <div class="col-3 tx-center">
+                                    <span class="tx-13">판매</span>
+                                    <h6 id="stock_mobile-cnt3" class="mg-t-10 tx-inverse">-</h6>
+                                 </div>
+                                 <div class="col-3 tx-center">
+                                    <span class="tx-13">반품</span>
+                                    <h6 id="stock_mobile-cnt4" class="mg-t-10 tx-danger">-</h6>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <div class="card">
+                           <div class="card-header">
+                              <div class="row">
+                                 <div class="col-6">
+                                    <h6>모바일 개통
+                                    <span id="devicein_open"></span>
+                                    </h6>
+                                 </div>
+                                 <ol>
+                                    <div id="open_mobile-sum" style="display: block;">
+                                       정산합계 : <span style="">
+                                       <span id="open_mobile-realprice">-169,200</span>
+                                       원
+                                       </span>
+                                       실마진합계 : <span class="tx-gray-900">
+                                       <span id="open_mobile-marginprice">153,818</span>
+                                       원
+                                       </span>
+                                       <div style="clear:both"></div>
+                           </div>
+                        </ol>
+                     </div>
+                              
+                              
+                     </div>
+                     <div class="card-body">
+                        <div id="open_mobile-report" class="rounded table-responsive mg-b-5" style="min-height: 91px;">
+                           <table class="table" style="font-size: small;">
+                              <thead class="thead-colored thead-light">
+                                 <tr>
+                                    <th class="tx-center" style="padding:5px">번호</th>
+                                    <th style="padding:5px">매장</th>
+                                    <th style="padding:5px">직원</th>
+                                    <th style="padding:5px">상태</th>
+                                    <th style="padding:5px">거래처</th>
+                                    <th style="padding:5px">고객명</th>
+                                    <th style="padding:5px">개통번호</th>
+                                    <th style="padding:5px">종류</th>
+                                    <th style="padding:5px">통신사</th>
+                                    <th style="padding:5px">모델명</th>
+                                    <th style="padding:5px">정산금액</th>
+                                    <th style="padding:5px">실판매마진</th>
+                                 </tr>
+                              </thead>
+                              <tbody id="open_mobile-list">
+                                 <tr>
+                                    <td class="tx-center" style="padding:5px">1</td>
+                                    <td style="padding:5px">폰클데모 본점</td>
+                                    <td style="padding:5px">김대표</td>
+                                    <td class="tx-gray-700" style="padding:5px">개통</td>
+                                    <td style="padding:5px">금풍대리점(SK)</td>
+                                    <td style="padding:5px">장우담</td>
+                                    <td style="padding:5px">010-7571-9337</td>
+                                    <td style="padding:5px">번호이동</td>
+                                    <td style="padding:5px">SK텔레콤</td>
+                                    <td style="padding:5px">RE_SM-G975N_512G 세라믹 화이트</td>
+                                    <td class="tx-orange" style="padding:5px">-436,900</td>
+                                    <td style="padding:5px">489,482</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                          </div>
+               </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <div class="card">
+                           <div class="card-header">
+                                 홈상품 판매
+                           </div>
+                           <div class="card-body">
+                                 자료가 없습니다.
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <div class="card">
+                           <div class="card-header">
+                                 간편장부
+                           </div>
+                           <div class="card-body">
+                                 자료가 없습니다.
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <div class="card">
+                           <div class="card-header">
+                                 수납장부
+                           </div>
+                           <div class="card-body">
+                                 자료가 없습니다.
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- 컨텐츠 영역 끝 -->
+   </div>
+   <!-- 컨텐트 랩퍼 끝 -->
+</th:block>
+
+<th:block layout:fragment="customScript">
+</th:block>
+<th:block layout:fragment="customFooterScript">
+</th:block>
 </html>
