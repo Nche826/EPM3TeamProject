@@ -16,6 +16,11 @@ public class StoreService {
 	@Autowired private StoreMapper storeMapper;
 	
 	
+	//매장수정 전단계, 매장명 선택
+	public Store getStoreSelect(String store_Name) {
+		return storeMapper.getStoreSelect(store_Name);
+	}
+	
 	//매장등록
 	public int addStore(Store store) {
 		System.out.println("===Store 서비스 시작===");

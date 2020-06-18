@@ -17,6 +17,20 @@
    			<result property="member_tel" 	column="member_tel"/>
    		</resultMap>
 		
+		
+		
+	<select id="getStoreSelect" parameterType="String" resultMap="StoreSelect">
+		SELECT 
+			store_code
+			,store_name
+			,store_addr
+			,store_tel
+			,member_id
+			,store_reg_date
+		FROM tb_store
+		where
+		 store_name =#{store_Name};
+	</select>
 
 	<select id="storeList" parameterType="String" resultMap="StoreSelect" >
 		SELECT 

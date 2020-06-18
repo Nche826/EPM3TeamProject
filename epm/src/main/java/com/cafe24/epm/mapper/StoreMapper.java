@@ -9,6 +9,10 @@ import com.cafe24.epm.domain.Store;
 @Mapper
 public interface StoreMapper {
 	
+	
+	//매장수정전단계
+	public Store getStoreSelect(String store_Name);
+	
 	//매장등록
 	public int addStore(Store store);
 	
