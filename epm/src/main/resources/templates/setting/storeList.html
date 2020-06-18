@@ -56,15 +56,15 @@
 					             	</div>
 					             	<div class="form-group">
 					                	<label for="inputDescription"><i style="color: red;">*</i>주소</label>
-					                 	<input type="text" name="store_Addr" class="form-control" placeholder="주소를 입력해주세요">
+					                 	<input type="text" name="store_Addr" class="form-control" placeholder="시.군.구 -동-번지수 까지 입력해주세요">
 					             	</div>
 					             	<div class="form-group">
 					                	<label for="inputDescription"><i style="color: red;">*</i>연락처</label>
-					                 	<input type="text" name="store_Tel" class="form-control" placeholder="-제외  010부터 입력해주세요">
+					                 	<input type="text" name="store_Tel" class="form-control" placeholder="000-0000-0000 -포함 입력해주세요">
 					             	</div>
 					             	<div class="form-group">
 					                	<label for="inputDescription"><i style="color: red;">*</i>등록자ID</label>
-					                 	<input type="text" name="store_Reg_id" class="form-control" placeholder="등록자 아이디를 입력해주세요">
+					                 	<input type="text" name="store_Reg_id" class="form-control" placeholder="매장 담당자 아이디를 입력해주세요">
 					             	</div>
 					             	<div class="form-group">
 					             	<input type="reset" value="Clear" class="btn btn-default float-left">
@@ -94,13 +94,14 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
+            <form action="/storeList" method="get">
               <table id="example1" class="table table-bordered table-striped" style="text-align: center;">
                 <thead>
                 <tr>
                   <th></th>
                   <th>no</th>
                   <th>매장 명</th>
-                  <th>직원 수</th>
+                  <th>주 소</th>
                   <th>연락처</th>
                   <th>담당자</th>
                   <th>휴대폰</th>
@@ -109,114 +110,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr th:each= "s,i : ${storeList}" >
                   <td><input type="checkbox" ></td>
-                  <td>1</td>
-                  <td>삼성1호점</td>
-                  <td>4</td>
-                  <td>02-111-2233</td>
-                  <td>김수지</td>
-                  <td>010-0000-0000</td>
-                  <td>2020-06-10</td>
-                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>2</td>
-                  <td>삼성2호점</td>
-                  <td>4</td>
-                  <td>02-111-2233</td>
-                  <td>김수지</td>
-                  <td>010-0000-0000</td>
-                  <td>2020-06-10</td>
-                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>3</td>
-                  <td>삼성4호점</td>
-                  <td>4</td>
-                  <td>02-111-2233</td>
-                  <td>김수지</td>
-                  <td>010-0000-0000</td>
-                  <td>2020-06-10</td>
-                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>4</td>
-                  <td>삼성3호점</td>
-                  <td>4</td>
-                  <td>02-111-2233</td>
-                  <td>김수지</td>
-                  <td>010-0000-0000</td>
-                  <td>2020-06-10</td>
-                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>5</td>
-                  <td>삼성1호점</td>
-                  <td>4</td>
-                  <td>02-111-2233</td>
-                  <td>김수지</td>
-                  <td>010-0000-0000</td>
-                  <td>2020-06-10</td>
-                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>6</td>
-                  <td>삼성1호점</td>
-                  <td>4</td>
-                  <td>02-111-2233</td>
-                  <td>김수지</td>
-                  <td>010-0000-0000</td>
-                  <td>2020-06-10</td>
-                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
-                </tr>
-                <tr>
-                <td><input type="checkbox" ></td>
-                  <td>7</td>
-                  <td>삼성1호점</td>
-                  <td>4</td>
-                  <td>02-111-2233</td>
-                  <td>김수지</td>
-                  <td>010-0000-0000</td>
-                  <td>2020-06-10</td>
-                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
-                </tr>
-                <tr>
-                <td><input type="checkbox" ></td>
-                  <td>8</td>
-                  <td>삼성1호점</td>
-                  <td>4</td>
-                  <td>02-111-2233</td>
-                  <td>김수지</td>
-                  <td>010-0000-0000</td>
-                  <td>2020-06-10</td>
-                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
-                </tr>
-               <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>9</td>
-                  <td>삼성1호점</td>
-                  <td>4</td>
-                  <td>02-111-2233</td>
-                  <td>김수지</td>
-                  <td>010-0000-0000</td>
-                  <td>2020-06-10</td>
-                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
-                </tr>
-                 <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>10</td>
-                  <td>삼성1호점</td>
-                  <td>4</td>
-                  <td>02-111-2233</td>
-                  <td>김수지</td>
-                  <td>010-0000-0000</td>
-                  <td>2020-06-10</td>
+                  <td th:text = ${i.count}></td>
+                  <td th:text = ${s.store_Name}></td>
+                  <td th:text = ${s.store_Addr}></td>
+                  <td th:text = ${s.store_Tel}></td>
+                  <td th:text = ${s.member_name}></td>
+                  <td th:text = ${s.member_tel}></td>
+                  <td th:text = ${s.store_Reg_date}></td>
                   <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
                 </tr>
                 </tbody>
@@ -234,6 +136,7 @@
                 </tr>
                 </tfoot>
               </table>
+              </form>
             </div>
             <!-- /.card-body -->
           </div>

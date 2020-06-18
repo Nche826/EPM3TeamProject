@@ -1,7 +1,10 @@
 package com.cafe24.epm.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -16,6 +19,7 @@ public class StoreController {
 	//매장 수정 화면 가져오기
 	@GetMapping("/storeUpdate")
 	public String storeUpdate() {
+		
 		return "setting/storeUpdate";
 	}
 	
@@ -26,14 +30,19 @@ public class StoreController {
 		System.out.println(store.toString());
 		int i = storeService.addStore(store);
 		System.out.println("매장 실행 결과되면 1이 떠요-->"+i);
-		return "setting/storeList";
+		return "redirect:/storeList";
 	}
 	
 	
 	
 	//매장 관리 리스트 화면 가져오기
 	@GetMapping("/storeList")
-	public String storeList() {
+	public String storeList(Model model , Store store) {
+		System.out.println("=====매장 리스트 컨트롤러 시작 ======");
+		List<Store> storeList = storeService.storeList();
+		System.out.println("매장 리스트 --->"+storeList);
+		System.out.println("===========================");
+		model.addAttribute("storeList", storeList);
 		return "setting/storeList";
 	}
 }

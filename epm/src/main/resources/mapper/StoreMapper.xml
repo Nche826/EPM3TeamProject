@@ -13,8 +13,30 @@
    			<result property="store_Tel" 	column="store_tel"/>
    			<result property="store_Reg_id" 	column="member_id"/>
    			<result property="store_Reg_date" 	column="store_reg_date"/>
+   			<result property="member_name" 	column="member_name"/>
+   			<result property="member_tel" 	column="member_tel"/>
    		</resultMap>
+		
 
+	<select id="storeList" parameterType="String" resultMap="StoreSelect" >
+		SELECT 
+			s.store_code 
+			,s.store_name 
+			,s.store_addr 
+			,s.store_tel 
+			,m.member_name 
+			,m.member_tel 
+			,s.store_reg_date
+		FROM tb_store AS s
+		JOIN tb_member AS m
+		on
+		s.member_id = m.member_id
+		ORDER by
+		m.member_name
+		,m.member_tel;
+	</select>
+
+	
 	<insert id="addStore" parameterType="store">
 	<selectKey order="BEFORE" keyProperty="store_Code" resultType="String">
 		    	select

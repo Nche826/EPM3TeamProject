@@ -8,7 +8,21 @@ public class Store {
 	private String store_Tel;
 	private String store_Reg_id;
 	private String store_Reg_date;
+	private String member_name;
+	private String member_tel;
 	
+	public String getMember_name() {
+		return member_name;
+	}
+	public void setMember_name(String member_name) {
+		this.member_name = member_name;
+	}
+	public String getMember_tel() {
+		return member_tel;
+	}
+	public void setMember_tel(String member_tel) {
+		this.member_tel = member_tel;
+	}
 	public String getStore_Code() {
 		return store_Code;
 	}
@@ -49,7 +63,7 @@ public class Store {
 	public String toString() {
 		return "Store [store_Code=" + store_Code + ", store_Name=" + store_Name + ", store_Addr=" + store_Addr
 				+ ", store_Tel=" + store_Tel + ", store_Reg_id=" + store_Reg_id + ", store_Reg_date=" + store_Reg_date
-				+ "]";
+				+ ", member_name=" + member_name + ", member_tel=" + member_tel + "]";
 	}
 	
 	
