@@ -41,7 +41,6 @@
           <div class="col-sm-6">
    			<ol class="breadcrumb float-sm-right">			　	
 				<button type="button" class="btn btn-info btn-sm pd-x-5 pd-y-0" data-toggle="modal" data-target="#modal-lg"> 단말기 입고 </button>
-								
 			</ol>
 		</div>   
         </div>
@@ -75,13 +74,13 @@
           <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
-      </div> 
-      
-      
+      </div>      
       
      
-	</div>
-	</section>
+
+		<div class="row">
+          <div class="col-12">
+          	<div class="card">
               <div class="card-header">
                 <h3 class="card-title">휴대폰/태블릿 등의단말기를 관리하실 수 있습니다</h3>
               </div>
@@ -179,7 +178,7 @@
                     <td>epm 본점</td>
                     <td>김대표</td>
                     <td>퀵배송</td>                   
-                    <td align="center">
+                    <td>
                     <button type="button" class="btn btn-info btn-sm pd-x-5 pd-y-0" data-toggle="modal" data-target="#modal-Info"><i class="icon ion-ios-browsers"></i></button>
                    
                     <!-- /.modal -->
@@ -189,9 +188,9 @@
             <div class="modal-header">
               <h4 class="modal-title col-sm-6">단말기 정보</h4>
               <div class="col-sm-6" >
-					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" data-toggle="modal" data-target="#modal-Update"><i class="icon ion-md-create"></i>수정</button> 					
-					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" ><i class="icon ion-md-trash"></i>삭제</button>
-			</div> 
+					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" data-toggle="modal" data-target="#modal-Update"><i class="fa fa-wrench"></i></button> 					
+					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" data-toggle="modal" data-target="#modal-Delete"><i class="fa fa-trash"></i></button>
+					</div> 
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
               </button>
@@ -234,16 +233,47 @@
         </div>
         <!-- /.modal-dialog -->
       </div> 
+       <!-- modal delete -->
+      <div class="modal fade" id="modal-Delete" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title col-sm-6">안내</h4>              
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">            
+            	  삭제하시겠습니까?
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+              <button type="button" class="btn btn-primary">확인</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>    
                     
                     </td>                   
-                  </tr> 
-                  
+                  </tr>   
                  </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
 
 
 </th:block>
