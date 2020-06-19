@@ -43,23 +43,20 @@
 									<input type="hidden" name="sort" value="cnt">
 									<input type="hidden" name="by" value="desc">
 									<div class="row" style="margin-top: 10px;">
-										<select name="inven_duu" class="form-control form-control-sm select-sm" style="width: auto;">
-											<option value="device">단말기</option>
-											<option value="usim">유심</option>
-											<option value="used">중고</option>
-										</select>　
-										<select name="inven_dealler" class="form-control form-control-sm select-sm" style="width: auto;">
-											<option value="">거래처</option>
-											<option value="1">M&amp;S</option>
-											<option value="2">하이엔드인터네셔널</option>
-											<option value="3">유진텔러콤</option>
-											<option value="4">하우스</option>
-										</select>　
 										<select name="inven_status" class="form-control form-control-sm select-sm" style="width: auto;">
-											<option value="status1">보유</option>
-											<option value="status2">신규</option>
-											<option value="status3">교품</option>
-											<option value="status4">철회</option>
+											<option value="all">전체</option>
+											<option value="mobile">휴대폰</option>
+											<option value="tablet">태블릿</option>
+											<option value="wearable">웨어러블</option>
+											<option value="wi-fi">와이파이</option>
+											<option value="smart-device">스마트기기</option>
+											<option value="etc">기타</option>
+										</select>　
+										<select name="inven_store" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="0">삼삼본점</option>
+											<option value="1">삼삼1호점</option>
+											<option value="2">삼삼2호점</option>
+											<option value="3">삼삼3호점</option>
 										</select>　
 										<input type="text" name="inven_model" class="form-control form-control-sm" placeholder="모델명" style="width: auto;">　
 										<button type="button" class="btn btn-outline-primary btn-sm">검색</button>　
@@ -70,19 +67,15 @@
 							<!-- /.card-header -->
 							<!-- card-body -->
 							<div class="card-body">
-								<!-- 단말기 재고 -->
+								<!-- 중고 재고 -->
 								<div id="device_inven" class="table-responsive" style="position: relative; height: 100%; width: 100%;">
 									<table class="table table-sm table-bordered" style="text-align: center; font-size: small;">
 										<thead>
 											<tr>
-												<th style="width: 20%;">통신사</th>
-												<th style="width: 20%;">모델명</th>
-												<th style="width: 10%;">색상</th>
-												<th style="width: 10%;">전매장</th>
-												<th style="width: 10%;">삼삼본점</th>
-												<th style="width: 10%;">삼삼1호점</th>
-												<th style="width: 10%;">삼삼2호점</th>
-												<th style="width: 10%;">삼삼3호점</th>
+												<th style="width: 25%;">통신사</th>
+												<th style="width: 25%;">모델명</th>
+												<th style="width: 25%;">색상</th>
+												<th style="width: 25%;">수량</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -90,20 +83,12 @@
 												<td>SK</td>
 												<td>sm-970</td>
 												<td>아우라화이트</td>
-												<td>5</td>
 												<td>2</td>
-												<td>1</td>
-												<td>1</td>
-												<td>1</td>
 											</tr>
 										</tbody>
 										<tfoot id="sum">
 											<tr>
 												<th colspan="3">합계</th>
-												<th></th>
-												<th></th>
-												<th></th>
-												<th></th>
 												<th></th>
 											</tr>
 										</tfoot>

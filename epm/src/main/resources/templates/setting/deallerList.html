@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customTitle">
+	<title th:text="${title}"></title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<!-- 컨텐트 랩퍼 시작 -->	
+	<div class="content-wrapper">
+		<!-- 컨텐츠 헤더 영역 -->
+		<section class="content-header">
+      		<div class="container-fluid">
+      			<div class="row">
+      				<div class="col-sm-6">
+      					<h4>거래처관리</h4>
+						<p>거래하고 있는 대리점, 입고처를 등록 혹은 관리하실 수 있습니다.</p>
+      				</div>
+      				<div class="col-sm-6">
+      					<ol class="breadcrumb float-sm-right">
+      						<a href="/dealerInsert" class="btn btn-outline-dark btn-sm bd-0 tx-gray-700 mg-r-20" data-toggle="modal" data-target="#dealerInsert"><i class="fas fa-pen-square nav-icon"></i> 거래처 등록</a>
+						</ol>
+						<!-- dealerInsert Modal -->
+						<div class="modal fade" id="dealerInsert">
+							<div class="modal-dialog modal-ml">
+					    		<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title">거래처 등록</h4>
+						        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          			<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body pd-20">
+						        		<form>
+						        			<div class="row">
+						        				<label class="col-4" style="text-align: right;">매장</label>
+						        				<div class="col-8">
+						        					<div class="pd-y-5">삼삼1호점</div>
+						        					<input type="hidden" name="chain" value="1">
+						        				</div>
+						        			</div>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
+						        					<span style="color: red">*</span>
+						        					거래처명
+						        				</label>
+						        				<div class="col-8">
+						        					<input type="text" class="form-control form-control-sm select-sm" name="dealler_name" style="margin-top: 5px;">
+						        				</div>
+						        			</div>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
+						        					<span style="color: red">*</span>
+						        					통신사
+						        				</label>
+						        				<div class="col-8">
+						        					<select class="form-control form-control-sm select-sm" name="dealler_telecom" style="margin-top: 5px;">
+														<option value="">- 선택 -</option>
+														<option value="4">KT</option>
+														<option value="6">SK</option>
+														<option value="2">LG</option>
+													</select>
+						        				</div>
+						        			</div>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">주소</label>
+						        				<div class="col-8">
+						        					<input type="text" class="form-control form-control-sm select-sm" name="dealler_addr" style="margin-top: 5px;">
+						        				</div>
+						        			</div>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">전화번호</label>
+						        				<div class="col-8">
+						        					<input type="text" class="form-control form-control-sm select-sm" name="dealler_tel" style="margin-top: 5px;">
+						        				</div>
+						        			</div>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">담당자</label>
+						        				<div class="col-8">
+						        					<input type="text" class="form-control form-control-sm select-sm" name="dealler_manager" style="margin-top: 5px;">
+						        				</div>
+						        			</div>
+						        			<hr>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">등록자</label>
+						        				<div class="col-8">
+						        					<input type="text" class="form-control form-control-sm select-sm" name="dealler_manager" style="margin-top: 5px;">
+						        				</div>
+						        			</div>
+											<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">등록일자</label>
+						        				<div class="col-8">
+						        					<input type="date" class="form-control form-control-sm" name="indate" maxlength="10" style="margin-top: 5px;">
+						        				</div>
+						        			</div>
+						        		</form>
+					  			    </div>
+								    <div class="modal-footer justify-content-between">
+										<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+										<button type="button" class="btn btn-primary">등록 완료</button>
+								    </div>
+							    </div>
+							    <!-- /.modal-content -->
+							</div>
+							<!-- /.modal-dialog -->
+						</div>
+						<!-- /. dealerInsert Modal -->
+						
+						<!-- dealerUpdate Modal -->
+						<div class="modal fade" id="dealerUpdate">
+							<div class="modal-dialog modal-ml">
+					    		<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title">거래처 수정</h4>
+						        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          			<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body pd-20">
+						        		<form>
+						        			<div class="row">
+						        				<label class="col-4" style="text-align: right;">매장</label>
+						        				<div class="col-8">
+						        					<div class="pd-y-5">삼삼1호점</div>
+						        					<input type="hidden" name="chain" value="1">
+						        				</div>
+						        			</div>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
+						        					<span style="color: red">*</span>
+						        					거래처명
+						        				</label>
+						        				<div class="col-8">
+						        					<input type="text" class="form-control form-control-sm select-sm" name="member" style="margin-top: 5px;">
+						        				</div>
+						        			</div>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
+						        					<span style="color: red">*</span>
+						        					통신사
+						        				</label>
+						        				<div class="col-8">
+						        					<select class="form-control form-control-sm select-sm" name="dealer" style="margin-top: 5px;">
+														<option value="">- 선택 -</option>
+														<option value="4">KT</option>
+														<option value="6">SK</option>
+														<option value="2">LG</option>
+													</select>
+						        				</div>
+						        			</div>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">주소</label>
+						        				<div class="col-8">
+						        					<input type="text" class="form-control form-control-sm select-sm" name="dealler_addr" style="margin-top: 5px;">
+						        				</div>
+						        			</div>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">전화번호</label>
+						        				<div class="col-8">
+						        					<input type="text" class="form-control form-control-sm select-sm" name="dealler_tel" style="margin-top: 5px;">
+						        				</div>
+						        			</div>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">담당자</label>
+						        				<div class="col-8">
+						        					<input type="text" class="form-control form-control-sm select-sm" name="dealler_manager" style="margin-top: 5px;">
+						        				</div>
+						        			</div>
+						        			<hr>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">등록자</label>
+						        				<div class="col-8">
+						        					<input type="text" class="form-control form-control-sm select-sm" name="dealler_manager" style="margin-top: 5px;">
+						        				</div>
+						        			</div>
+											<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">수정일자</label>
+						        				<div class="col-8">
+						        					<input type="date" class="form-control form-control-sm" name="indate" maxlength="10" style="margin-top: 5px;">
+						        				</div>
+						        			</div>
+						        		</form>
+					  			    </div>
+								    <div class="modal-footer justify-content-between">
+										<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+										<button type="button" class="btn btn-primary">수정 완료</button>
+								    </div>
+							    </div>
+							    <!-- /.modal-content -->
+							</div>
+							<!-- /.modal-dialog -->
+						</div>
+						<!-- / .dealerUpdate model -->
+        			
+					</div>
+      			</div>
+      		</div>
+      	</section>
+      	<!-- 컨텐츠 헤더 영역 끝 -->
+      	
+ 		<!-- 컨텐츠 영역 시작 -->
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+			            <div class="card">
+							<!-- card-header -->
+							<div class="card-header">
+								<form id="usimSearch" onsubmit="return false;">
+									<input type="hidden" name="start" value="">
+									<input type="hidden" name="sort" value="indate">
+									<input type="hidden" name="by" value="desc">
+									<div class="row">
+										<div class="input-group input-group-sm" style="width: 250px;">
+										<input type="text" name="start_date" class="form-control float-right" placeholder="YYYY-MM-DD">
+										<div class="input-group-append">
+												<span class="input-group-text">-</span>
+										</div>
+										<input type="text" name="end_date" class="form-control float-right" placeholder="YYYY-MM-DD">
+										</div>　
+										<div class="btn-group btn-group-sm btn-group-toggle" date-toggle="buttons">
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range1">오늘
+										</label>
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range2">어제
+										</label>
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range3">7일
+										</label>
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range4">15일
+										</label>
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range5">한달
+										</label>
+										</div>　
+										
+									</div>
+									<div class="row" style="margin-top: 10px;">
+										<select name="usimin_status" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="">삼삼본점</option>
+											<option value="1">삼삼1호점</option>
+											<option value="2">삼삼2호점</option>
+											<option value="2">삼삼3호점</option>
+										</select>　
+										<select name="usimin_status" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="">상태</option>
+											<option value="1">사용</option>
+											<option value="2">정지</option>
+										</select>　
+										<select name="usimin_dealler" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="">업체명</option>
+											<option value="1">담당자</option>
+										</select>　
+										<input type="text" name="usimin_serial" class="form-control form-control-sm" style="width: 20%;">　
+										<button type="button" class="btn btn-outline-primary btn-sm">검색</button>　
+										<button type="button" class="btn btn-outline-danger btn-sm">초기화</button>
+										<select name="usimList" class="form-control form-control-sm select-sm" style="width: auto; margin-left: 40%;">
+											<option value="">목록</option>
+											<option value="1">1개</option>
+											<option value="5">5개</option>
+											<option value="10">10개</option>
+											<option value="15">15개</option>
+											<option value="20">20개</option>
+											<option value="50">50개</option>
+											<option value="100">100개</option>
+										</select>
+									</div>
+								</form>
+							</div>
+							<!-- /.card-header -->
+							<!-- card-body -->
+							<div id="usim_list" class="card-body table-responsive" style="position: relative; height: 100%; width: 100%;">
+								<table class="table table-hover text-nowrap table-bold" style="text-align: center; font-size: small;">
+									<thead>
+										<tr>
+											<th style="width: 5%;"><input type="checkbox"></th>
+											<th style="width: 10%;">상태</th>
+											<th style="width: 10%;">매장</th>
+											<th style="width: 10%;">업체명</th>
+											<th style="width: 10%;">통신사</th>
+											<th style="width: 15%;">주소</th>
+											<th style="width: 10%;">전화번호</th>
+											<th style="width: 10%;">담당자</th>
+											<th style="width: 10%;">등록일</th>
+											<th style="width: 5%;">수정</th>
+											<th style="width: 5%;">삭제</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td style="width: 5%;"><input type="checkbox"></td>
+											<td style="width: 10%;">사용</td>
+											<td style="width: 10%;">삼삼본점</td>
+											<td style="width: 10%">M&amp;S</td>
+											<td style="width: 10%;">KT</td>
+											<td style="width: 15%;">전주시 덕진구</td>
+											<td style="width: 10%;">063-000-1111</td>
+											<td style="width: 10%;">홍점장</td>
+											<td style="width: 10%;">2020-05-05</td>
+											<td style="width: 5%;"><button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#dealerUpdate"><i class="fas fa-pen"></i></button></td>
+											<td style="width: 5%;"><button type="button" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+									</tbody>	
+								</table>
+							</div>
+							<!-- /.card-body -->
+							<!-- /card-footer -->
+							<div class="card-footer">
+								<div class="row">
+									<button class="btn btn-sm btn-dark" style="height: 100%;">사용</button>　
+									<button class="btn btn-sm btn-dark" style="height: 100%;">정지</button>　
+									<button class="btn btn-sm btn-dark" style="height: 100%;">복사</button>
+								<div style="width:40%; margin: 0 auto; float: none;">
+									<ul class="pagination pagination-sm">
+										<li class="paginate_button page-item previous disabled" id="example2_previous">
+											<a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">이전</a>
+										</li>
+										<li class="paginate_button page-item active">
+											<a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">7</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="8" tabindex="0" class="page-link">8</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="9" tabindex="0" class="page-link">9</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="10" tabindex="0" class="page-link">10</a>
+										</li>
+										<li class="paginate_button page-item next" id="example2_next">
+											<a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">다음</a>
+										</li>
+									</ul>
+								</div>
+								</div>
+								
+							</div>
+							<!-- /.card-footer -->
+			            </div>
+         			    <!-- /.card -->
+          			</div>
+				</div>
+			</div>
+		</section>
+		<!-- 컨텐츠 영역 끝 -->
+	</div>
+	<!-- 컨텐트 랩퍼 끝 -->
+</th:block>
+
+<th:block layout:fragment="customScript">
+</th:block>
+<th:block layout:fragment="customFooterScript">
+</th:block>
+</html>

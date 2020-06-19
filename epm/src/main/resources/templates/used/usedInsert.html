@@ -43,13 +43,17 @@
       <div class="row">
       <div class="col-md-3"></div>
         <div class="col-md-6">
-          <div class="card card-primary">
+          <div class="card card-secondary">
             <div class="card-header">
               <h3 class="card-title">정보입력</h3>
 
            
+           
+           
             </div>
-            <div class="card-body">
+            <div class="card-body" th:fragment="uInsert">
+            <div class="row mg-t-20 mg-b-20">
+             <div class="col-6" style="padding-right:10px">      
               <div class="form-group">
                 <label for="inputName">매장</label>
                 <input type="text" id="inputName" class="form-control" value="epm 본점">
@@ -77,6 +81,8 @@
                   <option>태블릿</option>             
                 </select>
               </div>
+              </div>
+              <div class="col-6" style="padding-right:10px"> 
                <div class="form-group">
                 <label for="inputStatus">통신망</label>
                 <select class="form-control custom-select">                  
@@ -102,6 +108,7 @@
                 <label for="inputName">비고</label>
                 <input type="text" id="inputName" class="form-control" >            
               </div>
+              </div>
              </div>
             <!-- /.card-body -->
           </div>
@@ -122,12 +129,7 @@
   <!-- /.content-wrapper -->
 </th:block>
 <th:block layout:fragment="customFooterScript">
-<!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
 </th:block>

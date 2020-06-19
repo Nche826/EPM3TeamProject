@@ -2,14 +2,345 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/default}">
-<head>
-<meta charset="UTF-8">
+
 <th:block layout:fragment="customTitle">
 	<title th:text="${title}"></title>
-	
 </th:block>
-</head>
-<body>
-	
-</body>
+
+<th:block layout:fragment="customCss">
+	<!-- jsGrid -->
+	<link rel="stylesheet" href="../../plugins/jsgrid/jsgrid.min.css">
+	<link rel="stylesheet" href="../../plugins/jsgrid/jsgrid-theme.min.css">
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<!-- 컨텐트 랩퍼 시작 -->	
+	<div class="content-wrapper">
+		<!-- 컨텐츠 헤더 영역 -->
+		<section class="content-header">
+      		<div class="container-fluid">
+      			<div class="row">
+      				<div class="col-sm-6">
+      					<h4>재고이력</h4>
+						<p>단말기 및 유심의 변동이력을 확인하실 수 있습니다.</p>
+      				</div>
+      				<div class="col-sm-6">
+					</div>
+      			</div>
+      		</div>
+      	</section>
+      	<!-- 컨텐츠 헤더 영역 끝 -->
+      	
+ 		<!-- 컨텐츠 영역 시작 -->
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+			            <div class="card">
+							<!-- card-header -->
+							<div class="card-header">
+								<form id="usimSearch" onsubmit="return false;">
+									<input type="hidden" name="start" value="">
+									<input type="hidden" name="sort" value="indate">
+									<input type="hidden" name="by" value="desc">
+									<div class="row">
+										<select name="invendate" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="1">변동일 기준</option>
+											<option value="1">처리일 기준</option>
+										</select>　
+										<div class="input-group input-group-sm" style="width: 250px;">
+										<input type="text" name="start_date" class="form-control float-right" placeholder="YYYY-MM-DD">
+										<div class="input-group-append">
+												<span class="input-group-text">-</span>
+										</div>
+										<input type="text" name="end_date" class="form-control float-right" placeholder="YYYY-MM-DD">
+										</div>　
+										<div class="btn-group btn-group-sm btn-group-toggle" date-toggle="buttons">
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range1">오늘
+										</label>
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range2">7일
+										</label>
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range3">한달
+										</label>
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range4">두달
+										</label>
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range5">세달
+										</label>
+										</div>　
+										<label>
+											<input type="checkbox"><span style="font-size: 14px;"> 전체매장 재고</span>
+										</label>
+									</div>
+									<div class="row" style="margin-top: 10px;">
+										<select name="usimin_dealler" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="">전체</option>
+											<option value="1">단말기</option>
+											<option value="2">유심</option>
+											<option value="3">중고</option>
+										</select>　
+										<select name="usimin_dealler" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="">매장</option>
+											<option value="1">삼삼본점</option>
+											<option value="2">삼삼1호점</option>
+											<option value="3">삼삼2호점</option>
+											<option value="4">삼삼3호점</option>
+										</select>　
+										<select name="usimin_status" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="">직원</option>
+											<option value="1">강대표</option>
+											<option value="2">홍점장</option>
+											<option value="3">이사원</option>
+										</select>　
+										<select name="usimin_status" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="">구분</option>
+											<option value="1">입고</option>
+											<option value="2">개통</option>
+											<option value="3">판매</option>
+											<option value="4">반품</option>
+											<option value="5">이동</option>
+											<option value="6">수정</option>
+											<option value="7">삭제</option>
+											<option value="8">개통철회</option>
+											<option value="9">판매철회</option>
+											<option value="10">입고가변경</option>
+										</select>　
+										<select name="usimin_status" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="">일련번호</option>
+											<option value="1">내용</option>
+											<option value="2">비고</option>
+										</select>　
+										<input type="text" name="usimin_serial" class="form-control form-control-sm" style="width: auto;">　
+										<button type="button" class="btn btn-outline-primary btn-sm">검색</button>　
+										<button type="button" class="btn btn-outline-danger btn-sm">초기화</button>
+										<select name="usimList" class="form-control form-control-sm select-sm" style="width: auto; margin-left: 342px;">
+											<option value="">목록</option>
+											<option value="1">1개</option>
+											<option value="5">5개</option>
+											<option value="10">10개</option>
+											<option value="15">15개</option>
+											<option value="20">20개</option>
+											<option value="50">50개</option>
+											<option value="100">100개</option>
+										</select>
+									</div>
+								</form>
+							</div>
+							<!-- /.card-header -->
+							<!-- card-body -->
+							<div id="usim_list" class="card-body table-responsive" style="position: relative; height: 100%; width: 100%;">
+								<table class="table table-hover text-nowrap table-bold" style="text-align: center; font-size: small;">
+									<thead>
+										<tr>
+											<th style="width: 5%;"><input type="checkbox"></th>
+											<th style="width: 10%;">매장</th>
+											<th style="width: 5%;">직원</th>
+											<th style="width: 10%;">변동일</th>
+											<th style="width: 5%;">구분</th>
+											<th style="width: 10%;">거래처</th>
+											<th style="width: 10%;">일련번호</th>
+											<th style="width: 15%;">내용</th>
+											<th style="width: 10%;">처리일</th>
+											<th style="width: 15%;">비고</th>
+											<th style="width: 5%;">삭제</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><input type="checkbox"></td>
+											<td>삼삼본점</td>
+											<td>이직원</td>
+											<td>2020-06-11</td>
+											<td>개통</td>
+											<td>하우스</td>
+											<td>123165</td>
+											<td>기기 개통</td>
+											<td>2020-06-11</td>
+											<td>메모</td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#usimUpdate"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+										<tr>
+											<td><input type="checkbox"></td>
+											<td>삼삼본점</td>
+											<td>이직원</td>
+											<td>2020-06-11</td>
+											<td>개통</td>
+											<td>하우스</td>
+											<td>123165</td>
+											<td>기기 개통</td>
+											<td>2020-06-11</td>
+											<td>메모</td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#usimUpdate"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+										<tr>
+											<td><input type="checkbox"></td>
+											<td>삼삼본점</td>
+											<td>이직원</td>
+											<td>2020-06-11</td>
+											<td>개통</td>
+											<td>하우스</td>
+											<td>123165</td>
+											<td>기기 개통</td>
+											<td>2020-06-11</td>
+											<td>메모</td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#usimUpdate"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+										<tr>
+											<td><input type="checkbox"></td>
+											<td>삼삼본점</td>
+											<td>이직원</td>
+											<td>2020-06-11</td>
+											<td>개통</td>
+											<td>하우스</td>
+											<td>123165</td>
+											<td>기기 개통</td>
+											<td>2020-06-11</td>
+											<td>메모</td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#usimUpdate"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+										<tr>
+											<td><input type="checkbox"></td>
+											<td>삼삼본점</td>
+											<td>이직원</td>
+											<td>2020-06-11</td>
+											<td>개통</td>
+											<td>하우스</td>
+											<td>123165</td>
+											<td>기기 개통</td>
+											<td>2020-06-11</td>
+											<td>메모</td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#usimUpdate"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+										<tr>
+											<td><input type="checkbox"></td>
+											<td>삼삼본점</td>
+											<td>이직원</td>
+											<td>2020-06-11</td>
+											<td>개통</td>
+											<td>하우스</td>
+											<td>123165</td>
+											<td>기기 개통</td>
+											<td>2020-06-11</td>
+											<td>메모</td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#usimUpdate"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+										<tr>
+											<td><input type="checkbox"></td>
+											<td>삼삼본점</td>
+											<td>이직원</td>
+											<td>2020-06-11</td>
+											<td>개통</td>
+											<td>하우스</td>
+											<td>123165</td>
+											<td>기기 개통</td>
+											<td>2020-06-11</td>
+											<td>메모</td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#usimUpdate"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+										<tr>
+											<td><input type="checkbox"></td>
+											<td>삼삼본점</td>
+											<td>이직원</td>
+											<td>2020-06-11</td>
+											<td>개통</td>
+											<td>하우스</td>
+											<td>123165</td>
+											<td>기기 개통</td>
+											<td>2020-06-11</td>
+											<td>메모</td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#usimUpdate"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+										<tr>
+											<td><input type="checkbox"></td>
+											<td>삼삼본점</td>
+											<td>이직원</td>
+											<td>2020-06-11</td>
+											<td>개통</td>
+											<td>하우스</td>
+											<td>123165</td>
+											<td>기기 개통</td>
+											<td>2020-06-11</td>
+											<td>메모</td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#usimUpdate"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+										<tr>
+											<td><input type="checkbox"></td>
+											<td>삼삼본점</td>
+											<td>이직원</td>
+											<td>2020-06-11</td>
+											<td>개통</td>
+											<td>하우스</td>
+											<td>123165</td>
+											<td>기기 개통</td>
+											<td>2020-06-11</td>
+											<td>메모</td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#usimUpdate"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+									</tbody>	
+								</table>
+							</div>
+							<!-- /.card-body -->
+							<!-- /card-footer -->
+							<div class="card-footer">
+								<div style="width:30%; margin: 0 auto; float: none;">
+									<ul class="pagination pagination-sm">
+										<li class="paginate_button page-item previous disabled" id="example2_previous">
+											<a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">이전</a>
+										</li>
+										<li class="paginate_button page-item active">
+											<a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">7</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="8" tabindex="0" class="page-link">8</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="9" tabindex="0" class="page-link">9</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="10" tabindex="0" class="page-link">10</a>
+										</li>
+										<li class="paginate_button page-item next" id="example2_next">
+											<a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">다음</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<!-- /.card-footer -->
+			            </div>
+         			    <!-- /.card -->
+          			</div>
+				</div>
+			</div>
+		</section>
+		<!-- 컨텐츠 영역 끝 -->
+	</div>
+	<!-- 컨텐트 랩퍼 끝 -->
+</th:block>
+
+<th:block layout:fragment="customScript">
+</th:block>
+<th:block layout:fragment="customFooterScript">
+</th:block>
 </html>

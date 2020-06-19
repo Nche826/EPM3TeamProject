@@ -30,8 +30,8 @@
             <h1>중고 관리</h1>
           </div>
           <div class="col-sm-6">
-   			<ol class="breadcrumb float-sm-right">
-			　	<a href="/usedInsert" class="btn btn-info btn-sm pd-x-5 pd-y-0"><i class="fas fa-pen" ></i> 중고 입고</a>							
+   			<ol class="breadcrumb float-sm-right">	
+				<button type="button" class="btn btn-info btn-sm pd-x-5 pd-y-0" data-toggle="modal" data-target="#modal-lg"> 중고 입고 </button>						
 			</ol>
 		</div>   
         </div>
@@ -41,6 +41,33 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+      
+      <!-- /.modal -->
+      <div class="modal fade" id="modal-lg" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">중고 입고</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                            
+              <div th:include="used/usedInsert :: uInsert"></div>
+              
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+              <button type="button" class="btn btn-primary">확인</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div> 
+      
+      
         <div class="row">
           <div class="col-12">
           	<div class="card">
@@ -49,8 +76,48 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example2" class="table table-bordered table-striped">
                   <thead>
+                  <div class="form-inline">
+                  <div class="pull-left mg-b-10 mg-r-10 input-group input-group-sm wd-250">
+					<input type="text" name="sdate" class="form-control form-control-sm fc-datepicker hasDatepicker" maxlength="10" placeholder="YYYY-MM-DD" id="dp1592198183298">
+					-
+					<input type="text" name="edate" class="form-control form-control-sm fc-datepicker hasDatepicker" maxlength="10" placeholder="YYYY-MM-DD" id="dp1592198183299">
+				  </div> 
+				  
+				  <div class="pull-left mg-b-10 mg-r-10" style="margin: 5px;">
+					<input type="button" class="btn btn-secondary btn-sm" onclick="inputDateDay(0)" value="오늘">
+					<input type="button" class="btn btn-secondary btn-sm" onclick="inputDateDay(-7)" value="1주일">
+					<input type="button" class="btn btn-secondary btn-sm" onclick="inputDateMon(0)" value="당월">
+					<input type="button" class="btn btn-secondary btn-sm" onclick="inputDateMon(-1)" value="전월">
+					<input type="button" class="btn btn-secondary btn-sm" onclick="inputDateMon(-2)" value="전전월">
+					<input type="button" class="btn btn-secondary btn-sm" onclick="inputDateClean()" value="X">
+				</div>			  
+				           
+						</div>	
+					<div class="form-inline">
+					                  
+							<select class="form-control" style="margin: 5px;">
+	                          <option value="">보유</option>
+	                          <option value="">판매</option>
+	                        </select>
+	                        <input type="text" class="form-control form-control-sm" placeholder="모델명">
+
+							<div id="example1_filter" class="dataTables_filter">
+								<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example1" style="margin: 5px;">
+							</div>
+						
+							<button type="submit" class="form-control btn btn-block btn-secondary" style="margin: 5px;">검색</button>	
+							
+							<div class="dataTables_length" id="example1_length" style="margin: 10px;">							
+									<select name="example1_length" aria-controls="example1" class="custom-select custom-select-sm form-control form-control-sm" style="align: bottom;">
+										<option value="10">목록 10개씩 보기</option>
+										<option value="25">목록 25개씩 보기</option>
+										<option value="50">목록 50개씩 보기</option>
+										<option value="100">목록 100개씩 보기</option>
+									</select>											
+							</div>
+							</div>
                  <tr>
                     <th>상태</th>
                     <th>입고일</th>                    
@@ -81,7 +148,38 @@
                     <td>epm 본점</td>
                     <td>김대표</td>
                     <td>퀵배송</td>                   
-                    <td align="center"><a href="/usedUpdate" class="btn btn-info btn-sm pd-x-5 pd-y-0"><i class="icon ion-ios-browsers"></i></a></td>                   
+                    <td align="center">
+                     <button type="button" class="btn btn-info btn-sm pd-x-5 pd-y-0" data-toggle="modal" data-target="#modal-Info"><i class="icon ion-ios-browsers"></i></button>
+                    
+                      <!-- /.modal -->
+      <div class="modal fade" id="modal-Info" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title col-sm-6">중고 정보</h4>
+              <div class="col-sm-6" >	   			
+					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px"><i class="icon ion-md-create"></i>수정</button> 
+					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" ><i class="icon ion-md-trash"></i>삭제</button>
+			</div> 
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                            
+              <div th:include="used/usedInfo :: uInfo"></div>
+              
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+              <button type="button" class="btn btn-primary">확인</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div> 
+                    </td>                   
                   </tr>   
                  </tbody>
                 </table>
@@ -103,15 +201,13 @@
 </th:block>
 <th:block layout:fragment="customFooterScript">
 
-<!-- Bootstrap 4 -->
-<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 <!-- DataTables -->
 <script src="/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<!-- AdminLTE App -->
-<script src="/dist/js/adminlte.min.js"></script>
+
 <!-- AdminLTE for demo purposes -->
 <script src="/dist/js/demo.js"></script>
 <!-- page script -->
@@ -129,6 +225,7 @@
       "info": true,
       "autoWidth": false,
       "responsive": true,
+      
     });
   });
 </script>

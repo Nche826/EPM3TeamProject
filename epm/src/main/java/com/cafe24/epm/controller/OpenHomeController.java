@@ -21,4 +21,16 @@ public class OpenHomeController {
 		
 		return "/open/openHomeUpdate";
 	}
+	
+	@GetMapping("/openHomeInfo")
+	public String openHomeInfo() {
+		
+		return "/open/openHomeInfo";
+	}
+	
+	@GetMapping("/openHomeTList")
+	public String openHomeTList() {
+		
+		return "/open/openHomeTList";
+	}
 }

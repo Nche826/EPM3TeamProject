@@ -1,14 +1,246 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/default}">
-<head>
-<meta charset="UTF-8">
+   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+   layout:decorate="~{layout/default}">
+
 <th:block layout:fragment="customTitle">
-	<title th:text="${title}"></title>
+   <title th:text="${title}"></title>
 </th:block>
-</head>
-<body>
-	
-</body>
+
+<th:block layout:fragment="customCss">
+</th:block>
+
+<th:block layout:fragment="customContents">
+   <!-- 컨텐트 랩퍼 시작 -->   
+   <div class="content-wrapper">
+      <!-- 컨텐츠 헤더 영역 -->
+      <section class="content-header">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-sm-6">
+                     <h4>직원통계</h4>
+                  <p>각 매장별 등록된 직원에 대한 통계를 상세히 확인하실 수 있습니다.</p>
+                  </div>
+               </div>               
+         </div>
+      </section>
+         <!-- 컨텐츠 헤더 영역 끝 -->
+         
+       <!-- 컨텐츠 영역 시작 -->
+      <section class="content">
+         <div class="container-fluid">
+            <div class="row">
+               <div class="col-12">
+                  <div class="card">
+                     <div class="card-body">
+                        <div class="row">
+                           <div class="col-sm-2" style="margin-top: 10px;">
+                              <div class="input-group">
+                                       <div class="input-group-prepend">
+                                         <button type="button" class="btn btn-dark"><i class="icon ion-ios-arrow-back"></i></button>
+                                 </div>
+                                     <div id="year_mon" class="pd-x-10 tx-20 tx-gray-700" style="font-size: 20px; padding-top: 5px;">　2020년 6월　</div>
+                                     <div class="input-group-append">
+                                         <button type="button" class="btn btn-dark"><i class="icon ion-ios-arrow-forward"></i></button>
+                                 </div>
+                                 </div>
+                           </div>
+                           <div class="col-8">
+                           </div>
+                           <div class="col-2" style="margin-top: 10px; margin-left: auto;">
+                              <select class="form-control">
+                                 <option>삼삼본점</option>
+                                 <option>삼삼1호점</option>
+                                 <option>삼삼2호점</option>
+                                 <option>삼삼3호점</option>
+                              </select>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-6">
+                        <div class="card" style="font-size: small;">
+                           <div class="card-header">
+                              <h6>모바일 순위</h6>
+                           </div>
+                           <div class="card-body">
+                              	<div class="chart">
+                              		<div class="chartjs-size-monitor">
+                              			<div class="chartjs-size-monitor-expand">
+                              				<div class=""></div>
+                              			</div>
+                              			<div class="chartjs-size-monitor-shrink">
+                              				<div class=""></div>
+                              			</div>
+                              		</div>
+                  				<canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block;" width="333" height="250" class="chartjs-render-monitor"></canvas>
+               					</div>
+							</div>
+                        </div>
+                     </div>
+                     <div class="col-sm-6">
+                        <div class="card" style="font-size: small;">
+                           <div class="card-header">
+                              <h6>홈상품 순위</h6>
+                           </div>
+                           <div class="card-body">
+                              <div class="row" style="text-align: center;">
+                                 <!-- 컬럼명 정한거로 바꾸기 -->
+                                 <div class="chart">
+                              		<div class="chartjs-size-monitor">
+                              			<div class="chartjs-size-monitor-expand">
+                              				<div class=""></div>
+                              			</div>
+                              			<div class="chartjs-size-monitor-shrink">
+                              				<div class=""></div>
+                              			</div>
+                              		</div>
+                  					<canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block;" width="333" height="250" class="chartjs-render-monitor"></canvas>
+               					</div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <div class="card">
+                           <div class="card-header">
+                              <div class="row">
+                                 <div class="col-6">
+                                    <h6>개통 목록
+                                    <span id="devicein_open"></span>
+                                    </h6>
+                                 </div>	
+                     </div>
+                              
+                              
+                     </div>
+                     <div class="card-body">
+                        <div id="open_mobile-report" class="rounded table-responsive mg-b-5" style="min-height: 91px;">
+                           <table class="table" style="font-size: small;">
+                              <thead class="thead-colored thead-light">
+                                 <tr>
+									<th class="tx-center">매장</th>
+									<th class="tx-center">직원</th>
+									<th class="tx-center">단말기개통</th>
+									<th class="tx-center">유심개통</th>
+									<th class="tx-center">홈상품</th>
+									<th class="tx-center">정산금액</th>
+									<th class="tx-center">할인금액<div class="tx-11 tx-gray-600">+기타할인</div></th>
+									<th class="tx-center">판매마진</th>
+									<th class="tx-center">정산부가세</th>
+									<th class="tx-center">실판매마진</th>
+									<th class="tx-center">평균마진</th>
+							</tr>
+                              </thead>
+                              	<tbody id="list">
+                              		<tr class="list">
+                              			<td class="tx-center">폰클데모 본점</td>
+                              			<td class="tx-center"><a href="#" class="tx-gray-900" data-toggle="modal" data-remote="/report/member-view?year=2020&amp;mon=6&amp;chain=1&amp;member=1" data-target="#modal-remote">김대표</a></td>
+                              			<td class="tx-center">3</td>
+                              			<td class="tx-center"></td>
+                              			<td class="tx-center"></td>
+                              			<td class="tx-center bg-gray-100 tx-gray-900">-1,163,000</td>
+                              			<td class="tx-center bg-gray-100 tx-danger">400,000</td>
+                              			<td class="tx-center">1,047,600</td><td class="tx-center">105,727</td>
+                              			<td class="tx-center tx-gray-900">941,873</td>
+                              			<td class="tx-center tx-primary">313,960</td>
+                              		</tr>
+                              		<tr class="list">
+                              			<td class="tx-center"></td>
+                              			<td class="tx-center"><a href="#" class="tx-gray-900" data-toggle="modal" data-remote="/report/member-view?year=2020&amp;mon=6&amp;chain=1&amp;member=1&amp;chain=1&amp;member=5" data-target="#modal-remote">박총괄</a></td>
+                              			<td class="tx-center">1</td>
+                              			<td class="tx-center"></td>
+                              			<td class="tx-center"></td>
+                              			<td class="tx-center bg-gray-100 tx-gray-900">-62,900</td>
+                              			<td class="tx-center bg-gray-100 tx-danger"></td>
+                              			<td class="tx-center">429,200</td>
+                              			<td class="tx-center">39,718</td>
+                              			<td class="tx-center tx-gray-900">389,482</td>
+                              			<td class="tx-center tx-primary">389,480</td>
+                              		</tr>
+                              		<tr class="list">
+                              			<td class="tx-center"></td>
+                              			<td class="tx-center"><a href="#" class="tx-gray-900" data-toggle="modal" data-remote="/report/member-view?year=2020&amp;mon=6&amp;chain=1&amp;member=1&amp;chain=1&amp;member=5&amp;chain=1&amp;member=2" data-target="#modal-remote">이팀장</a></td>
+                              			<td class="tx-center">1</td>
+                              			<td class="tx-center"></td>
+                              			<td class="tx-center"></td>
+                              			<td class="tx-center bg-gray-100 tx-gray-900"></td>
+                              			<td class="tx-center bg-gray-100 tx-danger">168,000</td>
+                              			<td class="tx-center">282,000</td><td class="tx-center"></td>
+                              			<td class="tx-center tx-gray-900">282,000</td>
+                              			<td class="tx-center tx-primary">282,000</td>
+                              		</tr>
+                              	</tbody>
+                              	<tfoot id="sum" class="thead-colored thead-light">
+									<tr>
+										<td class="tx-center">합계</td>
+										<td class="tx-center"></td>
+										<td class="tx-center" id="sum1">5</td>
+										<td class="tx-center" id="sum2"></td>
+										<td class="tx-center" id="sum3"></td>
+										<td class="tx-center" id="sum4">-1,225,900</td>
+										<td class="tx-center" id="sum5">568,000</td>
+										<td class="tx-center" id="sum6">1,758,800</td>
+										<td class="tx-center" id="sum7">145,445</td>
+										<td class="tx-center" id="sum9">1,613,355</td>
+										<td class="tx-center" id="sum10">322,670</td>
+									</tr>
+								</tfoot>
+                           	</table>
+						</div>
+                    </div>
+               	</div>
+           	</div>
+        </div>
+
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- 컨텐츠 영역 끝 -->
+   </div>
+   <!-- 컨텐트 랩퍼 끝 -->
+</th:block>
+
+<th:block layout:fragment="customScript">
+<script type="text/javascript">
+$(document).ready(
+	$(function () {
+		  /* ChartJS
+		   * -------
+		   * Here we will create a few charts using ChartJS
+		   */
+
+		  //-------------
+		  //- BAR CHART -
+		  //-------------
+		  var barChartCanvas = $('#barChart').get(0).getContext('2d')
+		  var barChartData = jQuery.extend(true, {}, areaChartData)
+		  var temp0 = areaChartData.datasets[0]
+		  var temp1 = areaChartData.datasets[1]
+		  barChartData.datasets[0] = temp1
+		  barChartData.datasets[1] = temp0
+
+		  var barChartOptions = {
+		    responsive              : true,
+		    maintainAspectRatio     : false,
+		    datasetFill             : false
+		  }
+
+		  var barChart = new Chart(barChartCanvas, {
+		    type: 'bar', 
+		    data: barChartData,
+		    options: barChartOptions
+		  })
+
+		})
+	)
+
+</script>
+</th:block>
+<th:block layout:fragment="customFooterScript">
+</th:block>
 </html>

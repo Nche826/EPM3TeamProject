@@ -22,34 +22,22 @@
 <th:block layout:fragment="customContents">
 	 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>단말기 수정</h1>
-          </div>
-	     	<div class="col-sm-6">
-	   			<ol class="breadcrumb float-sm-right">
-				　	<a href="/deviceList" class="btn btn-info btn-sm pd-x-5 pd-y-0"><i class="far fa-file-alt" ></i> 단말기 목록</a>							
-				</ol>
-			</div>    
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
-
+   
+   
     <!-- Main content -->
     <section class="content">
       <div class="row">
       <div class="col-md-3"></div>
         <div class="col-md-6">
-          <div class="card card-primary">
+          <div class="card card-secondary">
             <div class="card-header">
               <h3 class="card-title">정보수정</h3>
 
            
             </div>
-            <div class="card-body">
+            <div class="card-body" th:fragment="dUpdate">
+             <div class="row mg-t-20 mg-b-20" align="left">
+             <div class="col-6" style="padding-right:10px">     
               <div class="form-group">
                 <label for="inputName">매장</label>
                 <input type="text" id="inputName" class="form-control" value="epm 본점">
@@ -87,6 +75,8 @@
                 <label for="inputName">모델명</label>
                 <input type="text" id="inputName" class="form-control" >
               </div>
+              </div>
+             <div class="col-6" style="padding-right:10px">     
               <div class="form-group">
                 <label for="inputStatus">종류</label>
                 <select class="form-control custom-select">                  
@@ -110,6 +100,7 @@
                 <label for="inputName">비고</label>
                 <input type="text" id="inputName" class="form-control" >            
               </div>
+              </div>
              </div>
             <!-- /.card-body -->
           </div>
@@ -119,6 +110,7 @@
           <a href="#" class="btn btn-secondary">Cancel</a>
           <input type="submit" value="Save Changes" class="btn btn-success">
         </div>
+      </div>
       </div>
         </div>
         
@@ -130,12 +122,7 @@
   <!-- /.content-wrapper -->
 </th:block>
 <th:block layout:fragment="customFooterScript">
-<!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
 </th:block>

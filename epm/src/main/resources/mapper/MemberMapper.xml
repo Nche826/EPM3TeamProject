@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.cafe24.epm.mapper.MemberMapper">
+		<resultMap type="Member" id="memberSelect">
+			<result property="memberId" column="member_id"/>
+			<result property="memberPw" column="member_pw"/>
+			<result property="memberName" column="member_name"/>
+			<result property="memberTel" column="member_tel"/>
+			<result property="memberPicture" column="member_picture"/>
+			<result property="memberRegDate" column="member_reg_date"/>
+		</resultMap>
+		
+		<!-- 회원가입 -->
+		<insert id="memberInsert" parameterType="Member">
+			INSERT INTO tb_member
+			(member_id, member_pw, member_name, member_tel, member_picture, member_reg_date)
+			VALUES (#{memberId}
+					, #{memberPw}
+					, #{memberName}
+					, #{memberTel}
+					, #{memberPicture}
+					, now())
+		</insert>
+		
+		<!-- 회원수정 -->
+		<update id="memberUpdate" parameterType="Member">
+			UPDATE tb_member
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="memberPw != null and memberPw !=''.toString()">member_pw=#{memberPw},</if>
+				<if test="memberName != null and memberName !=''.toString()">member_name=#{memberName}</if>
+				<if test="memberTel != null and memberTel !=''.toString()">member_tel=#{memberTel}</if>
+				<if test="memberPicture != null and memberPicture !=''.toString()">member_Picture=#{memberPicture}</if>
+			</trim>
+			<where>
+				<if test="memberId != null and memberId !=''.toString()">member_id=#{memberId}</if>
+			</where>
+		</update>
+		
+		<!-- 회원선택 -->
+		<select id="memberSelect" parameterType="Member" resultMap="memberSelect">
+			SELECT 
+			member_id, member_pw, member_name, member_tel, member_picture, member_reg_date
+			FROM tb_member
+			where
+			member_id = #{memberId}
+		</select>
+		
+		<!-- 회원리스트 -->
+		<select id="memberList" parameterType="Member" resultMap="memberSelect">
+			SELECT member_id, member_pw, member_name, member_tel, member_picture, member_reg_date
+			FROM tb_member
+		</select>
+
+	</mapper>
+	    
