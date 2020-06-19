@@ -17,8 +17,18 @@ public class StoreController {
 	
 	@Autowired private StoreService storeService;
 	
-	//매장 수정 처리 
 	
+	//매장 삭제 
+	
+	
+	//매장 수정 처리 
+	@PostMapping("/storeUpdate")
+	public String storeUpdate(Store store) {
+		System.out.println("==========내용 수정 시작 =========");
+		System.out.println("업데이트 할 내용 store"+store.toString());
+		storeService.storeUpdate(store);
+		return "redirect:/storeList";
+	}
 	
 	//매장 수정 화면 가져오기
 	@GetMapping("/storeUpdate")

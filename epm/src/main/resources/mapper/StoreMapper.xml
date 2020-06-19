@@ -17,7 +17,16 @@
    			<result property="member_tel" 	column="member_tel"/>
    		</resultMap>
 		
+	<update id="storeUpdate" parameterType="store">
+		UPDATE tb_store
+			SET
+				store_addr=#{store_Addr}
+				,store_tel=#{store_Tel}
 		
+			WHERE store_name=#{store_Name}
+	
+	
+	</update>	
 		
 	<select id="getStoreSelect" parameterType="String" resultMap="StoreSelect">
 		SELECT 
