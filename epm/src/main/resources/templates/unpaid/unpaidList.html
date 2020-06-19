@@ -103,19 +103,19 @@
 			                    </tr>
 			                  </thead>
 			                  <tbody>
-			                  
-			                    <tr>
-			                      <td>상태</td>
-			                      <td>예정일</td>
-			                      <td>구분</td>
-			                      <td>내용</td>
-			                      <td>고객명</td>
-			                      <td>연락처</td>
-			                      <td>매장</td>
-			                      <td>접수직원</td>
-			                      <td>처리일</td>
-			                      <td>처리직원</td>
-			                      <td><i class="fas fa-envelope-square" data-toggle="tooltip" data-placement="left" title="비고" ></i></td>
+
+			                    <tr th:each="upl : ${unpaidList}">
+			                      <td th:text="${upl.unpaidStatus}">a</td>
+			                      <td th:text="${upl.unpaidExpDate}">a</td>
+			                      <td th:text="${upl.unpaidPart}">a</td>
+			                      <td th:text="${upl.unpaidDesc}">a</td>
+			                      <td th:text="${upl.customerName}">a</td>
+			                      <td th:text="${upl.customerTel}">a</td>
+			                      <td th:text="${upl.storeName}">a</td>
+			                      <td th:text="${upl.memberName}">a</td>
+			                      <td th:text="${upl.unpaidProDate}">a</td>
+			                      <td th:text="${upl.memberName}">a</td>
+			                      <td><i class="fas fa-envelope-square" data-toggle="tooltip" data-placement="left" title="메모.." ></i></td>
 			                      <td><a href="#" data-toggle="modal" data-target="#modalUnpaidDetail" ><i class="fas fa-file-signature"></i></a></td>
 			                    </tr>
 			                   
@@ -190,8 +190,8 @@
 		              
 			            </div>
 			            <div class="modal-footer justify-content-between">
-			              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			              <button type="button" class="btn btn-secondary" id="modalSubmit">Save changes</button>
+			              <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			              <button type="button" class="btn btn-secondary" id="modalUnpaidInsertSubmit">미결업무 등록</button>
 			            </div>
 			          </div>
 			          <!-- /.modal-content -->
@@ -326,7 +326,7 @@
 							            </div>
 							            <!-- /.card -->
 							          </div>
-							          
+							          <form action="#" method="post" id="unpaidDetailOverForm"><input type="text" name="unpaidDetailOver" value="해결" hidden="hidden"></form>
 
 						          </div>
 						        </div>
@@ -334,11 +334,93 @@
 									<hr>
 
 			            <div class="modal-footer justify-content-between">
-			              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			              <button type="button" class="btn btn-secondary" id="modalSubmit">미결 완료 처리</button>
+			              <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			              <button type="button" class="btn btn-secondary" id="modalUnpaidDetailOver">미결 완료 처리</button>
 				              <div>
-					              <a href="#"><button type="button" class="btn btn-default" >수정</button></a>
-					              <a href="#"><button type="button" class="btn btn-default" href="#">삭제</button></a>
+					              <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#modalUnpaidModify" id="modalUnpaidDetailModify">수정</button>
+					              <button type="button" class="btn btn-default" id="modalUnpaidDetailDelete">삭제</button>
+				              </div>
+			            </div>
+			          </div>
+			          <!-- /.modal-content -->
+			        </div>
+			        <!-- /.modal-dialog -->
+			      </div>
+			      
+			      
+			      
+				<!-- 모달 modalUnpaidModify -->
+				<div class="modal fade" id="modalUnpaidModify" style="display: none;" aria-hidden="true">
+			        <div class="modal-dialog modal-lg" style="min-width: 500px;">
+			          <div class="modal-content">
+			            <div class="modal-header">
+			              <h4 class="modal-title"><i class="nav-icon fas fa-book"></i> 미결 정보</h4>
+			              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			                <span aria-hidden="true">×</span>
+			              </button>
+			            </div>
+			            <div class="modal-body">
+			                <!-- 모달 바디 내용 -->
+				              <div class="row">
+				              		
+				              </div>
+				              <div class="row">
+					              
+					              <div class="col-md-6"  style="margin: 0 auto;">
+						            <div class="card" >
+						              <div class="card-header">
+						                <h3 class="card-title">
+						                  		기본정보
+						                </h3>
+						              </div>
+						              <!-- /.card-header -->
+						              <div class="card-body">
+											<div>
+												<form action="#" method="post" id="modalUnpaidDetailModifyForm">
+													<div class="row">
+														<div class="col-3">예정일</div>
+														<div class="col-8"><input type="date" name="reserveDate" value=""></div>
+													</div>
+													<hr>
+													<div class="row">
+														<div class="col-3">구분</div>
+														<div class="col-8"><input type="text" name="status" value=""></div>
+													</div>
+													<hr>
+													<div class="row">
+														<div class="col-3">기 요금제</div>
+														<div class="col-8"><input type="text" name="fee" value=""></div>
+													</div>
+													<hr>
+													<div class="row">
+														<div class="col-3">고객명</div>
+														<div class="col-8"><input type="text" name="customerName" value=""></div>
+													</div>
+													<hr>
+													<div class="row">
+														<div class="col-3">연락처</div>
+														<div class="col-8"><input type="text" name="phone" value=""></div>
+													</div>
+													<hr>
+													<div class="row">
+														<div class="col-3">비고</div>
+														<div class="col-8"><input type="text" name="memo" value=""></div>
+													</div>
+												</form>
+											</div>
+						              </div>
+						              <!-- /.card-body -->
+						            </div>
+						            <!-- /.card -->
+						          </div>
+						          
+						        </div>
+								<hr>
+			            <div class="modal-footer justify-content-between">
+			              <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				              <div>
+					              <button type="button" class="btn btn-default" id="modalUnpaidDetailModifyDo">수정</button>
+					              <button type="button" class="btn btn-default"  data-dismiss="modal">취소</button>
 				              </div>
 			            </div>
 			          </div>
@@ -356,7 +438,21 @@
 </th:block>
 <th:block layout:fragment="customFooterScript">
 	<script type="text/javascript">
-	     $(function () {
+	
+	
+			//미결정보수정처리
+		    $(function () {
+		   	 $('#modalUnpaidDetailModifyDo').click(function(){
+		   		 $('#modalUnpaidDetailModifyForm').submit()
+		   	 })
+	 
+			//미결완료처리
+		     $(function () {
+		    	 $('#modalUnpaidDetailOver').click(function(){
+		    		 $('#unpaidDetailOverForm').submit()
+		    	 })
+	    	 
+	    	 //datetimepicker format
 	         $('#datetimepicker1').datetimepicker({
 	        	 format: 'YYYY-MM-DD'
 	         });
@@ -435,7 +531,7 @@
 	        	 $('#datetimepicker2').val(yyyymm2dd);
 	         });
 	         
-	         //tooltip
+	         //비고 tooltip
 	         $(function () {
 				  $('[data-toggle="tooltip"]').tooltip()
 				});

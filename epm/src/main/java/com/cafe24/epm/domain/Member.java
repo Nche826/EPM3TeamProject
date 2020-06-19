@@ -5,7 +5,7 @@ public class Member {
 	public String memberPw;
 	public String memberName;
 	public String memberTel;
-	public String memberPicture;
+	public String file;
 	public String memberRegDate;
 	
 	public String getMemberId() {
@@ -32,11 +32,11 @@ public class Member {
 	public void setMemberTel(String memberTel) {
 		this.memberTel = memberTel;
 	}
-	public String getMemberPicture() {
-		return memberPicture;
+	public String getFile() {
+		return file;
 	}
-	public void setMemberPicture(String memberPicture) {
-		this.memberPicture = memberPicture;
+	public void setMemberFile(String file) {
+		this.file = file;
 	}
 	public String getMemberRegDate() {
 		return memberRegDate;
@@ -56,8 +56,8 @@ public class Member {
 		builder.append(memberName);
 		builder.append(", memberTel=");
 		builder.append(memberTel);
-		builder.append(", memberPicture=");
-		builder.append(memberPicture);
+		builder.append(", file=");
+		builder.append(file);
 		builder.append(", memberRegDate=");
 		builder.append(memberRegDate);
 		builder.append("]");

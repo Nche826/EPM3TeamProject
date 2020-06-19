@@ -17,7 +17,8 @@ public interface MemberMapper {
 	//회원수정
 	public int memberUpdate (Member member);
 	  
-	//회원삭제 public int memberDelete (Member member);
+	//회원삭제
+	public int memberDelete (Member member);
 	  
 	//회원리스트
 	public List<Member> memberList ();

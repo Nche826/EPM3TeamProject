@@ -24,13 +24,19 @@ public class MemberService {
 	}
 	
 	//회원수정
-	public Member memberUpdateConfirm (Member member) {
-		return null;
+	public int memberUpdate (Member member) {
+		return memberMapper.memberUpdate(member);
 	}
+	
+	//회원삭제
+	public int memberDelete (Member member) {
+		return memberMapper.memberDelete(member);
+	}
+	 
 	
 	//회원리스트
 	public List<Member> memberList () {
 		return memberMapper.memberList();
 	}
-	
+
 }

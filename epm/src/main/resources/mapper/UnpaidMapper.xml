@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.cafe24.epm.mapper.UnpaidMapper">
+		<resultMap type="Unpaid" id="unpaidSelect">
+			<result property="unpaidCode" column="unpaid_code"/>
+			<result property="unpaidExpDate" column="unpaid_exp_date"/>
+			<result property="unpaidPart" column="unpaid_part"/>
+			<result property="unpaidSubName" column="unpaid_sub_name"/>
+			<result property="unpaidDesc" column="unpaid_desc"/>
+			<result property="customerCode" column="customer_code"/>
+			<result property="customerName" column="customer_name"/>
+			<result property="customerTel" column="customer_tel"/>
+			<result property="unpaidMemo" column="unpaid_memo"/>
+			<result property="unpaidStatus" column="unpaid_status"/>
+			<result property="unpaidProDate" column="unpaid_pro_date"/>
+			<result property="staffCode" column="staff_code"/>
+			<result property="memberName" column="member_name"/>
+			<result property="storeName" column="store_name"/>
+			<result property="unpaidRegDate" column="unpaid_reg_date"/>
+		</resultMap>
+		
+
+		<!-- 처리업무리스트 -->
+		<select id="unpaidList" parameterType="Unpaid" resultMap="unpaidSelect">
+			SELECT
+				u.unpaid_code
+				, u.unpaid_exp_date
+				, u.unpaid_part
+				, u.unpaid_sub_name
+				, u.unpaid_desc
+				, u.customer_code
+				, c.customer_name
+				, c.customer_tel
+				, u.unpaid_memo
+				, u.unpaid_status
+				, u.unpaid_pro_date
+				, u.staff_code
+				, st.store_name
+				, m.member_name
+				, u.unpaid_reg_date
+			FROM
+				tb_unpaid as u
+				join 
+				tb_staff as s
+				on
+				s.staff_code = u.staff_code
+				JOIN
+				tb_member AS m
+				ON
+				s.member_id = m.member_id
+				JOIN
+				tb_customer AS c
+				ON
+				u.customer_code = c.customer_code
+				join
+				tb_store as st
+				on
+				st.store_code = s.store_code
+			ORDER BY unpaid_code
+		</select>
+	</mapper>
