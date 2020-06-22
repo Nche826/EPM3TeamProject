@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.epm.mapper.DeallerMapper">
+	<!-- resultMap -->
+	<resultMap type="Dealler" id="deallerSelect">
+		<result property="deallerCode" 	column="dealler_code"/>
+		<result property="deallerName" 	column="dealler_name"/>
+		<result property="deallerStatus" 	column="dealler_status"/>
+		<result property="deallerTelecom" 	column="dealler_telecom"/>
+		<result property="deallerAddr" 	column="dealler_addr"/>
+		<result property="deallerTel" 	column="dealler_tel"/>
+		<result property="deallerManager" 	column="dealler_manager"/>
+		<result property="memberId" 	column="member_id"/>
+		<result property="deallerRegDate" 	column="dealler_reg_date"/>
+	</resultMap>
+	
+	<update id="deallerUpdate" parameterType="com.cafe24.epm.domain.Dealler">
+ 		UPDATE tb_dealler
+ 		<trim prefix="SET" suffixOverrides=",">
+ 			<if test="deallerName neq null and deallerName neq ''.toString()">
+ 				dealler_name=#{deallerName},
+ 			</if>
+ 			<if test="deallerStatus neq null and deallerStatus neq ''.toString()">
+ 				dealler_status=#{deallerStatus},
+ 			</if>
+ 			<if test="deallerTelecom neq null and deallerTelecom neq ''.toString()">
+ 				dealler_telecom=#{deallerTelecom},
+ 			</if>
+ 			<if test="deallerAddr neq null and deallerAddr neq ''.toString()">
+ 				dealler_addr=#{deallerAddr},
+ 			</if>
+ 			<if test="deallerTel neq null and deallerTel neq ''.toString()">
+ 				dealler_tel=#{deallerTel},
+ 			</if>
+ 			<if test="deallerManager neq null and deallerManager neq ''.toString()">
+ 				dealler_manager=#{deallerManager}
+ 			</if>
+ 			<if test="memberId neq null and memberId neq ''.toString()">
+ 				member_id=#{memberId}
+ 			</if>
+ 			<if test="deallerRegDate neq null and deallerRegDate neq ''.toString()">
+ 				dealler_reg_date=#{deallerRegDate}
+ 			</if>
+ 		</trim>
+ 		WHERE dealler_code = #{deallerCode}
+ 	</update>
+	
+	<select	id="getDeallerByCode" parameterType="String" resultType="com.cafe24.epm.domain.Dealler">
+ 		SELECT
+ 			 dealler_code 	AS deallerCode 
+			,dealler_name 	AS deallerName
+			,dealler_status 	AS deallerStatus
+			,dealler_telecom 	AS deallerTelecom
+			,dealler_addr 	AS deallerAddr
+			,dealler_tel 	AS deallerTel
+			,dealler_manager 	AS deallerManager
+			,member_id 	AS memberId
+			,dealler_reg_date AS deallerRegDate
+		FROM tb_dealler
+		WHERE 
+			dealler_code = #{deallerCode}
+	</select>
+	
+	<!-- 거래처 리스트 -->
+	<select	id="deallerList" resultMap="deallerSelect">
+		SELECT 
+		d.dealler_code, 
+		d.dealler_name, 
+		d.dealler_status, 
+		d.dealler_telecom, 
+		d.dealler_addr, 
+		d.dealler_tel, 
+		d.dealler_manager, 
+		d.member_id, 
+		d.dealler_reg_date
+	FROM 
+		tb_dealler AS d INNER JOIN tb_member AS m
+		ON d.member_id = m.member_id
+	</select>
+	
+	<!-- 거래처 등록 -->
+	<insert	id="deallerInsert" parameterType="com.cafe24.epm.domain.Dealler">
+ 		<selectKey keyProperty="deallerCode" resultType="String" order="BEFORE">
+ 			SELECT
+ 				(CASE COUNT(*) 
+ 					WHEN 0 THEN 'dealler_1'
+ 					ELSE CONCAT('dealler_', MAX(CAST(SUBSTRING(dealler_code,9) AS DECIMAL)+1)) 
+ 					END) AS deallerCode 
+			FROM tb_dealler
+ 		</selectKey>
+ 		
+ 		INSERT INTO tb_dealler(
+			 dealler_code
+			,dealler_name
+			,dealler_status
+			,dealler_telecom
+			,dealler_addr
+			,dealler_tel
+			,dealler_manager
+			,member_id
+			,dealler_reg_date
+		)VALUES(
+			 #{deallerCode}
+			,#{deallerName}
+			,'사용'
+			,#{deallerTelecom}
+			,#{deallerAddr}
+			,#{deallerTel}
+			,#{deallerManager}
+			,#{memberId}
+			,curdate()
+		)
+ 	</insert>
+</mapper>

@@ -20,34 +20,24 @@
       				</div>
       				<div class="col-sm-6">
       					<ol class="breadcrumb float-sm-right">
-      						<a href="/dealerInsert" class="btn btn-outline-dark btn-sm bd-0 tx-gray-700 mg-r-20" data-toggle="modal" data-target="#dealerInsert"><i class="fas fa-pen-square nav-icon"></i> 거래처 등록</a>
+      						<a href="/deallerInsert" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#deallerInsert"><i class="fas fa-pen-square nav-icon"></i> 거래처 등록</a>
 						</ol>
 						<!-- dealerInsert Modal -->
-						<div class="modal fade" id="dealerInsert">
+						<div class="modal fade" id="deallerInsert">
 							<div class="modal-dialog modal-ml">
 					    		<div class="modal-content">
 									<div class="modal-header">
 										<h4 class="modal-title">거래처 등록</h4>
-						        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						          			<span aria-hidden="true">&times;</span>
-										</button>
 									</div>
-									<div class="modal-body pd-20">
-						        		<form>
-						        			<div class="row">
-						        				<label class="col-4" style="text-align: right;">매장</label>
-						        				<div class="col-8">
-						        					<div class="pd-y-5">삼삼1호점</div>
-						        					<input type="hidden" name="chain" value="1">
-						        				</div>
-						        			</div>
-						        			<div class="row">
+									<form action="/deallerInsert" method="post">
+										<div class="modal-body">
+											<div class="row">
 						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
 						        					<span style="color: red">*</span>
 						        					거래처명
 						        				</label>
 						        				<div class="col-8">
-						        					<input type="text" class="form-control form-control-sm select-sm" name="dealler_name" style="margin-top: 5px;">
+						        					<input type="text" class="form-control form-control-sm" name="deallerName" style="margin-top: 5px;">
 						        				</div>
 						        			</div>
 						        			<div class="row">
@@ -56,51 +46,42 @@
 						        					통신사
 						        				</label>
 						        				<div class="col-8">
-						        					<select class="form-control form-control-sm select-sm" name="dealler_telecom" style="margin-top: 5px;">
-														<option value="">- 선택 -</option>
-														<option value="4">KT</option>
-														<option value="6">SK</option>
-														<option value="2">LG</option>
+						        					<select class="form-control form-control-sm select-sm" name="deallerTelecom" style="margin-top: 5px;">
+														<option>- 선택 -</option>
+														<option>KT</option>
+														<option>SK</option>
+														<option>LG</option>
 													</select>
 						        				</div>
 						        			</div>
 						        			<div class="row">
 						        				<label class="col-4" style="margin-top: 5px; text-align: right;">주소</label>
 						        				<div class="col-8">
-						        					<input type="text" class="form-control form-control-sm select-sm" name="dealler_addr" style="margin-top: 5px;">
+						        					<input type="text" class="form-control form-control-sm" name="deallerAddr" style="margin-top: 5px;">
 						        				</div>
 						        			</div>
 						        			<div class="row">
 						        				<label class="col-4" style="margin-top: 5px; text-align: right;">전화번호</label>
 						        				<div class="col-8">
-						        					<input type="text" class="form-control form-control-sm select-sm" name="dealler_tel" style="margin-top: 5px;">
+						        					<input type="text" class="form-control form-control-sm" name="deallerTel" style="margin-top: 5px;">
 						        				</div>
 						        			</div>
 						        			<div class="row">
 						        				<label class="col-4" style="margin-top: 5px; text-align: right;">담당자</label>
 						        				<div class="col-8">
-						        					<input type="text" class="form-control form-control-sm select-sm" name="dealler_manager" style="margin-top: 5px;">
+						        					<input type="text" class="form-control form-control-sm" name="deallerManager" style="margin-top: 5px;">
 						        				</div>
 						        			</div>
-						        			<hr>
-						        			<div class="row">
-						        				<label class="col-4" style="margin-top: 5px; text-align: right;">등록자</label>
-						        				<div class="col-8">
-						        					<input type="text" class="form-control form-control-sm select-sm" name="dealler_manager" style="margin-top: 5px;">
-						        				</div>
-						        			</div>
-											<div class="row">
-						        				<label class="col-4" style="margin-top: 5px; text-align: right;">등록일자</label>
-						        				<div class="col-8">
-						        					<input type="date" class="form-control form-control-sm" name="indate" maxlength="10" style="margin-top: 5px;">
-						        				</div>
-						        			</div>
-						        		</form>
-					  			    </div>
-								    <div class="modal-footer justify-content-between">
-										<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
-										<button type="button" class="btn btn-primary">등록 완료</button>
-								    </div>
+							        	</div>
+									    <div class="modal-footer justify-content-between">
+											<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+											<button type="submit" class="btn btn-primary">등록 완료</button>
+									  	</div>
+							  			<input type="hidden" name="deallerCode">
+							  			<input type="hidden" name="deallerStatus" value='사용'>
+							  			<input type="hidden" name="memberId" value='1'>
+							  			<input type="hidden" class="form-control form-control-sm" name="deallerRegDate" value=''>
+								  	</form>
 							    </div>
 							    <!-- /.modal-content -->
 							</div>
@@ -109,31 +90,23 @@
 						<!-- /. dealerInsert Modal -->
 						
 						<!-- dealerUpdate Modal -->
-						<div class="modal fade" id="dealerUpdate">
+						<div class="modal fade" id="deallerUpdate">
 							<div class="modal-dialog modal-ml">
 					    		<div class="modal-content">
 									<div class="modal-header">
 										<h4 class="modal-title">거래처 수정</h4>
-						        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						          			<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body pd-20">
-						        		<form>
-						        			<div class="row">
-						        				<label class="col-4" style="text-align: right;">매장</label>
-						        				<div class="col-8">
-						        					<div class="pd-y-5">삼삼1호점</div>
-						        					<input type="hidden" name="chain" value="1">
-						        				</div>
-						        			</div>
+						        	</div>
+									<form action="/deallerUpdate" method="post">
+										
+										<div class="modal-body">
+											
 						        			<div class="row">
 						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
 						        					<span style="color: red">*</span>
 						        					거래처명
 						        				</label>
 						        				<div class="col-8">
-						        					<input type="text" class="form-control form-control-sm select-sm" name="member" style="margin-top: 5px;">
+						        					<input type="text" class="form-control form-control-sm" name="deallerName" style="margin-top: 5px;" th:value="${dealler.deallerName}">
 						        				</div>
 						        			</div>
 						        			<div class="row">
@@ -142,7 +115,7 @@
 						        					통신사
 						        				</label>
 						        				<div class="col-8">
-						        					<select class="form-control form-control-sm select-sm" name="dealer" style="margin-top: 5px;">
+						        					<select class="form-control form-control-sm select-sm" name="deallerTelecom" style="margin-top: 5px;">
 														<option value="">- 선택 -</option>
 														<option value="4">KT</option>
 														<option value="6">SK</option>
@@ -153,40 +126,29 @@
 						        			<div class="row">
 						        				<label class="col-4" style="margin-top: 5px; text-align: right;">주소</label>
 						        				<div class="col-8">
-						        					<input type="text" class="form-control form-control-sm select-sm" name="dealler_addr" style="margin-top: 5px;">
+						        					<input type="text" class="form-control form-control-sm" name="deallerAddr" style="margin-top: 5px;">
 						        				</div>
 						        			</div>
 						        			<div class="row">
 						        				<label class="col-4" style="margin-top: 5px; text-align: right;">전화번호</label>
 						        				<div class="col-8">
-						        					<input type="text" class="form-control form-control-sm select-sm" name="dealler_tel" style="margin-top: 5px;">
+						        					<input type="text" class="form-control form-control-sm" name="deallerTel" style="margin-top: 5px;">
 						        				</div>
 						        			</div>
 						        			<div class="row">
 						        				<label class="col-4" style="margin-top: 5px; text-align: right;">담당자</label>
 						        				<div class="col-8">
-						        					<input type="text" class="form-control form-control-sm select-sm" name="dealler_manager" style="margin-top: 5px;">
+						        					<input type="text" class="form-control form-control-sm" name="deallerManager" style="margin-top: 5px;">
 						        				</div>
 						        			</div>
-						        			<hr>
-						        			<div class="row">
-						        				<label class="col-4" style="margin-top: 5px; text-align: right;">등록자</label>
-						        				<div class="col-8">
-						        					<input type="text" class="form-control form-control-sm select-sm" name="dealler_manager" style="margin-top: 5px;">
-						        				</div>
-						        			</div>
-											<div class="row">
-						        				<label class="col-4" style="margin-top: 5px; text-align: right;">수정일자</label>
-						        				<div class="col-8">
-						        					<input type="date" class="form-control form-control-sm" name="indate" maxlength="10" style="margin-top: 5px;">
-						        				</div>
-						        			</div>
-						        		</form>
-					  			    </div>
-								    <div class="modal-footer justify-content-between">
-										<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
-										<button type="button" class="btn btn-primary">수정 완료</button>
-								    </div>
+						        			
+				  			  			</div>
+								 		<div class="modal-footer justify-content-between">
+											<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+											<button type="submit" class="btn btn-primary" id="deallerUpdateBtn">수정 완료</button>
+								    	</div>
+								    	
+								    </form>
 							    </div>
 							    <!-- /.modal-content -->
 							</div>
@@ -208,7 +170,7 @@
 			            <div class="card">
 							<!-- card-header -->
 							<div class="card-header">
-								<form id="usimSearch" onsubmit="return false;">
+								<form id="desllerList" onsubmit="return false;">
 									<input type="hidden" name="start" value="">
 									<input type="hidden" name="sort" value="indate">
 									<input type="hidden" name="by" value="desc">
@@ -273,39 +235,49 @@
 							</div>
 							<!-- /.card-header -->
 							<!-- card-body -->
-							<div id="usim_list" class="card-body table-responsive" style="position: relative; height: 100%; width: 100%;">
-								<table class="table table-hover text-nowrap table-bold" style="text-align: center; font-size: small;">
-									<thead>
-										<tr>
-											<th style="width: 5%;"><input type="checkbox"></th>
-											<th style="width: 10%;">상태</th>
-											<th style="width: 10%;">매장</th>
-											<th style="width: 10%;">업체명</th>
-											<th style="width: 10%;">통신사</th>
-											<th style="width: 15%;">주소</th>
-											<th style="width: 10%;">전화번호</th>
-											<th style="width: 10%;">담당자</th>
-											<th style="width: 10%;">등록일</th>
-											<th style="width: 5%;">수정</th>
-											<th style="width: 5%;">삭제</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td style="width: 5%;"><input type="checkbox"></td>
-											<td style="width: 10%;">사용</td>
-											<td style="width: 10%;">삼삼본점</td>
-											<td style="width: 10%">M&amp;S</td>
-											<td style="width: 10%;">KT</td>
-											<td style="width: 15%;">전주시 덕진구</td>
-											<td style="width: 10%;">063-000-1111</td>
-											<td style="width: 10%;">홍점장</td>
-											<td style="width: 10%;">2020-05-05</td>
-											<td style="width: 5%;"><button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#dealerUpdate"><i class="fas fa-pen"></i></button></td>
-											<td style="width: 5%;"><button type="button" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button></td>
-										</tr>
-									</tbody>	
-								</table>
+							<div id="deallerList" class="card-body table-responsive" style="position: relative; height: 100%; width: 100%;">
+								<form action="/deallerList" method="get">
+									<table class="table table-hover text-nowrap table-bold" style="text-align: center; font-size: small;">
+										<thead>
+											<tr>
+												<th style="width: 5%;"><input type="checkbox"></th>
+												<th style="width: 10%;">거래처 코드</th>
+												<th style="width: 10%;">상태</th>
+												<th style="width: 10%;">업체명</th>
+												<th style="width: 10%;">통신사</th>
+												<th style="width: 15%;">주소</th>
+												<th style="width: 10%;">전화번호</th>
+												<th style="width: 10%;">담당자</th>
+												<th style="width: 10%;">등록자</th>
+												<th style="width: 10%;">등록일</th>
+												<th style="width: 5%;">수정</th>
+												<th style="width: 5%;">삭제</th>
+											</tr>
+										</thead>
+										<tbody>
+											<th:block th:each = "d:${deallerList}">
+												<tr>
+													<td style="width: 5%;"><input type="checkbox"></td>
+													<td th:text="${d.deallerCode}"></td>
+													<td th:text="${d.deallerStatus}"></td>
+													<td th:text="${d.deallerName}"></td>
+													<td th:text="${d.deallerTelecom}"></td>
+													<td th:text="${d.deallerAddr}"></td>
+													<td th:text="${d.deallerTel}"></td>
+													<td th:text="${d.deallerManager}"></td>
+													<td th:text="${d.memberId}"></td>
+													<td th:text="${d.deallerRegDate}"></td>
+													<td>
+														<a href="/deallerUpdate" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#deallerUpdate"><i class="fas fa-pen"></i></a>
+													</td>
+													<td>
+														<a href="/deallerDelete" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deallerDelete"><i class="fas fa-trash-alt"></i></a>
+													</td>
+												</tr>
+											</th:block>
+										</tbody>	
+									</table>
+								</form>
 							</div>
 							<!-- /.card-body -->
 							<!-- /card-footer -->
@@ -370,6 +342,9 @@
 </th:block>
 
 <th:block layout:fragment="customScript">
+	<script type="text/javascript">
+		
+	</script>
 </th:block>
 <th:block layout:fragment="customFooterScript">
 </th:block>

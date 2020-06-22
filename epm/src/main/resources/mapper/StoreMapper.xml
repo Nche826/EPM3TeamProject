@@ -16,6 +16,14 @@
    			<result property="member_name" 	column="member_name"/>
    			<result property="member_tel" 	column="member_tel"/>
    		</resultMap>
+	
+	
+	<delete id="storeDelete" parameterType="String" statementType="PREPARED" >
+		DELETE 
+			FROM tb_store 
+		WHERE 
+			store_name=#{store_Name};
+	</delete>
 		
 	<update id="storeUpdate" parameterType="store">
 		UPDATE tb_store

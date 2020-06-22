@@ -111,7 +111,7 @@
                 </thead>
                 <tbody>
                 <tr th:each= "s,i : ${storeList}" >
-                  <td><input type="checkbox" ></td>
+                  <td><input type="checkbox" name="storeNames" id="storeNames" th:value=${s.store_Name}></td>
                   <td th:text = ${i.count}></td>
                   <td th:text = ${s.store_Name}></td>
                   <td th:text = ${s.store_Addr}></td>
@@ -124,7 +124,7 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                 <th><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-sm">삭제</button></th>
+                 <th><button type="button" id="storeDelBtn" class="delBtn btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-sm">삭제</button></th>
                   <th>no</th>
                   <th>매장 명</th>
                   <th>주 소</th>
@@ -151,7 +151,7 @@
 			            </div>
 			            <div class="modal-footer justify-content-between">
 			              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-			              <button type="button" class="btn btn-outline-light">삭제하기</button>
+			              <button type="button" class="storeDel btn btn-outline-light deleteCheckValue">삭제하기</button>
 			            </div>
 			          </div>
 			          <!-- /.modal-content -->
@@ -201,6 +201,45 @@
       "responsive": true,
     });
   });
+  
+	  $(function(){
+		$('input:checkbox[name="storeNames"]').click(function(){
+			console.log($(this).val());
+		})
+	  });
+	  
+	  
+	  $('.deleteCheckValue').click(function(){
+		  var chkArr = [];
+		  $('input:checkbox[name="storeNames"]:checked').each(function(){
+			  chkArr.push($(this).val());
+		  });
+		 console.log(chkArr);
+	  
+	  
+
+		$.ajax({
+			url: '/storeDelete'	 
+			,type:'post'
+			,dataType:'json'
+			,data:{ 'storeNames' : chkArr }
+		 
+	 	})
+		.done(function(data) {
+			if(data ==1){
+			alert("삭제되었습니다.");
+			window.location.href = "/storeList";
+				
+			}
+		})
+			 
+		.fail(function( jqXHR, textStatus ) {
+			  alert( "삭제 처리가 실패되었습니다." );
+			 
+		}); 
+ 
+	  });
+  
 </script>
 </th:block>
 </html>

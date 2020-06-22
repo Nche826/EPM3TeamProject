@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.epm.domain.Store;
 import com.cafe24.epm.service.StoreService;
@@ -19,7 +20,19 @@ public class StoreController {
 	
 	
 	//매장 삭제 
-	
+	@PostMapping("/storeDelete")
+	@ResponseBody
+	public int storeDelete(Model model, @RequestParam(value="storeNames[]",required = false) String[] storeNames) {
+		System.out.println("storeNames ---->"+storeNames);
+		System.out.println("==========매장 삭제 시작 ===========");
+		int re =0;
+		  for(String store_Name : storeNames) { //향상된 for문 처리 
+		  System.out.println("사용자 삭제  :"+store_Name); //int delete_count 
+		 re = storeService.storeDelete(store_Name); 
+		 System.out.println("re ==> "+re);}
+		 
+		return re;
+	}
 	
 	//매장 수정 처리 
 	@PostMapping("/storeUpdate")

@@ -15,49 +15,141 @@
 			<result property="unpaidMemo" column="unpaid_memo"/>
 			<result property="unpaidStatus" column="unpaid_status"/>
 			<result property="unpaidProDate" column="unpaid_pro_date"/>
-			<result property="staffCode" column="staff_code"/>
-			<result property="memberName" column="member_name"/>
-			<result property="storeName" column="store_name"/>
+			<result property="unpaidProStaffCode" column="pro_staff_code"/>
+			<result property="unpaidProMemberName" column="pro_member_name"/>
+			<result property="unpaidProStoreName" column="pro_store_name"/>
 			<result property="unpaidRegDate" column="unpaid_reg_date"/>
+			<result property="unpaidRegStaffCode" column="staff_reg_staff_code"/>
+			<result property="unpaidRegMemberName" column="unpaid_reg_member_name"/>
+			<result property="unpaidRegStoreName" column="unpaid_Reg_Store_Name"/>
 		</resultMap>
+		
+		<!-- 처리업무선택 -->
+		<select id="unpaidSelect" parameterType="Unpaid" resultMap="unpaidSelect">
+			SELECT
+				u.unpaid_code AS 'unpaid_code'
+				, u.unpaid_exp_date AS 'unpaid_exp_date'
+				, u.unpaid_part AS 'unpaid_part'
+				, u.unpaid_sub_name AS 'unpaid_sub_name'
+				, u.unpaid_desc AS 'unpaid_desc'
+				, u.customer_code AS 'customer_code'
+				, c.customer_name AS 'customer_name'
+				, c.customer_tel AS 'customer_tel'
+				, u.unpaid_memo AS 'unpaid_memo'
+				, u.unpaid_status AS 'unpaid_status'
+				, u.unpaid_pro_date AS 'unpaid_pro_date'
+				, u.staff_code AS 'pro_staff_code'
+				, st1.store_name AS 'pro_store_name'
+				, m1.member_name AS 'pro_member_name'
+				, u.unpaid_reg_date AS 'unpaid_reg_date'
+				, u.staff_reg_staff_code AS 'staff_reg_staff_code'
+				, m2.member_name AS 'unpaid_reg_member_name'
+				, s2.store_code AS 'unpaid_Reg_Store_Name'
+				, st2.store_name AS 'unpaid_Reg_Store_Name'
+			FROM
+				tb_unpaid as u
+				
+				JOIN  
+				tb_staff AS s1
+				ON 
+				s1.staff_code = u.staff_code
+				
+				JOIN 
+				tb_staff AS s2
+				on
+				s2.staff_code = u.staff_reg_staff_code
+				
+				JOIN
+				tb_member AS m1
+				ON
+				s1.member_id = m1.member_id
+				
+				JOIN 
+				tb_member AS m2
+				ON
+				s2.member_id = m2.member_id
+	
+				JOIN
+				tb_customer AS c
+				ON
+				u.customer_code = c.customer_code
+				
+				JOIN 
+				tb_store AS  st1
+				ON 
+				st1.store_code = s1.store_code
+				
+				JOIN
+				tb_store AS st2
+				on
+				st2.store_code = s2.store_code
+
+			WHERE
+				unpaid_code = #{unpaidCode}
+		</select>
 		
 
 		<!-- 처리업무리스트 -->
 		<select id="unpaidList" parameterType="Unpaid" resultMap="unpaidSelect">
 			SELECT
-				u.unpaid_code
-				, u.unpaid_exp_date
-				, u.unpaid_part
-				, u.unpaid_sub_name
-				, u.unpaid_desc
-				, u.customer_code
-				, c.customer_name
-				, c.customer_tel
-				, u.unpaid_memo
-				, u.unpaid_status
-				, u.unpaid_pro_date
-				, u.staff_code
-				, st.store_name
-				, m.member_name
-				, u.unpaid_reg_date
+				u.unpaid_code AS 'unpaid_code'
+				, u.unpaid_exp_date AS 'unpaid_exp_date'
+				, u.unpaid_part AS 'unpaid_part'
+				, u.unpaid_sub_name AS 'unpaid_sub_name'
+				, u.unpaid_desc AS 'unpaid_desc'
+				, u.customer_code AS 'customer_code'
+				, c.customer_name AS 'customer_name'
+				, c.customer_tel AS 'customer_tel'
+				, u.unpaid_memo AS 'unpaid_memo'
+				, u.unpaid_status AS 'unpaid_status'
+				, u.unpaid_pro_date AS 'unpaid_pro_date'
+				, u.staff_code AS 'pro_staff_code'
+				, st1.store_name AS 'pro_store_name'
+				, m1.member_name AS 'pro_member_name'
+				, u.unpaid_reg_date AS 'unpaid_reg_date'
+				, u.staff_reg_staff_code AS 'staff_reg_staff_code'
+				, m2.member_name AS 'unpaid_reg_member_name'
+				, s2.store_code AS 'unpaid_Reg_Store_Name'
+				, st2.store_name AS 'unpaid_Reg_Store_Name'
 			FROM
 				tb_unpaid as u
-				join 
-				tb_staff as s
+				
+				JOIN  
+				tb_staff AS s1
+				ON 
+				s1.staff_code = u.staff_code
+				
+				JOIN 
+				tb_staff AS s2
 				on
-				s.staff_code = u.staff_code
+				s2.staff_code = u.staff_reg_staff_code
+				
 				JOIN
-				tb_member AS m
+				tb_member AS m1
 				ON
-				s.member_id = m.member_id
+				s1.member_id = m1.member_id
+				
+				JOIN 
+				tb_member AS m2
+				ON
+				s2.member_id = m2.member_id
+	
+				
 				JOIN
 				tb_customer AS c
 				ON
 				u.customer_code = c.customer_code
+				
+				JOIN 
+				tb_store AS  st1
+				ON 
+				st1.store_code = s1.store_code
+				
 				join
-				tb_store as st
+				tb_store AS st2
 				on
-				st.store_code = s.store_code
-			ORDER BY unpaid_code
+				st2.store_code = s2.store_code
+
+			ORDER BY unpaid_reg_date
 		</select>
 	</mapper>

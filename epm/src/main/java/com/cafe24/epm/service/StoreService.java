@@ -15,6 +15,10 @@ public class StoreService {
 	
 	@Autowired private StoreMapper storeMapper;
 	
+	//매장삭제처리
+	public int storeDelete(String store_Name) {
+		return storeMapper.storeDelete(store_Name);
+	}
 	
 	//매장수정 전단계, 매장명 선택
 	public Store getStoreSelect(String store_Name) {
