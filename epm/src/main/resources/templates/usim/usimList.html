@@ -7,6 +7,12 @@
 	<title th:text="${title}"></title>
 </th:block>
 
+<th:block layout:fragment="customCss">
+	<!-- jsGrid -->
+	<link rel="stylesheet" href="../../plugins/jsgrid/jsgrid.min.css">
+	<link rel="stylesheet" href="../../plugins/jsgrid/jsgrid-theme.min.css">
+</th:block>
+
 <th:block layout:fragment="customContents">
 	<!-- 컨텐트 랩퍼 시작 -->	
 	<div class="content-wrapper">
@@ -23,19 +29,18 @@
 							<button type="button" class="btn btn-outline-dark btn-sm bd-0 tx-gray-700 mg-r-20" data-toggle="modal" data-target="#excelUsimInsert"><i class="fas fa-file-excel nav-icon"></i>엑셀대량입고</button>
 						　	<button type="button" class="btn btn-outline-dark btn-sm bd-0 tx-gray-700 mg-r-20" data-toggle="modal" data-target="#usimInsert"><i class="fas fa-pen-square nav-icon"></i>유심 입고</button>
 						</ol>
-						<!-- Modal -->
+						<!-- usimInsert Modal -->
 						<div class="modal fade" id="usimInsert">
-						  <div class="modal-dialog modal-sm">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <h4 class="modal-title">유심 입고</h4>
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						          <span aria-hidden="true">&times;</span>
-						        </button>
-						      </div>
-						      <div class="modal-body pd-20">
-						        
-						        		<form id="form-save">
+							<div class="modal-dialog modal-ml">
+					    		<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title">유심 입고</h4>
+						        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          			<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body pd-20">
+						        		<form>
 						        			<div class="row">
 						        				<label class="col-4" style="text-align: right;">매장</label>
 						        				<div class="col-8">
@@ -55,7 +60,7 @@
 						        			<div class="row">
 						        				<label class="col-4" style="margin-top: 5px; text-align: right;">입고일</label>
 						        				<div class="col-8">
-						        					<input type="date" class="form-control form-control-sm" name="indate" maxlength="10" value="년도-월-일" id="indate" style="margin-top: 5px;">
+						        					<input type="date" class="form-control form-control-sm" maxlength="10" style="margin-top: 5px;">
 						        				</div>
 						        			</div>
 						        			<hr>
@@ -80,15 +85,6 @@
 													</select>
 						        				</div>
 						        			</div>
-						        			<div class="row">
-						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
-						        					<span style="color: red">*</span>
-						        					모델명
-						        				</label>
-						        				<div class="col-8">
-													<input type="text" class="form-control form-control-sm" id="form-save-model" name="model" maxlength="100" style="margin-top: 5px;">
-												</div>
-											</div>
 											<div class="row">
 						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
 						        					결제
@@ -117,8 +113,8 @@
 						        					<span style="color: red">*</span>
 						        					일련번호
 						        				</label>
-						        				<div class="col-8">
-													<input type="text" class="form-control form-control-sm" id="form-save-model" name="serialnumber" maxlength="100" style="margin-top: 5px;">
+						        					<div class="col-8">
+													<input type="text" class="form-control form-control-sm" name="serialnumber" maxlength="100" style="margin-top: 5px;">
 												</div>
 											</div>
 											<div class="row">
@@ -126,23 +122,119 @@
 						        					비고
 						        				</label>
 						        				<div class="col-8">
-													<input type="text" class="form-control form-control-sm" id="form-save-model" name="memo" maxlength="100" style="margin-top: 5px;">
+													<input type="text" class="form-control form-control-sm" name="memo" maxlength="100" style="margin-top: 5px;">
 												</div>
 											</div>
 						        		</form>
-						        	
+					  			    </div>
+								    <div class="modal-footer justify-content-between">
+										<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+										<button type="button" class="btn btn-primary">입고 완료</button>
+								    </div>
+							    </div>
+							    <!-- /.modal-content -->
+							</div>
+							<!-- /.modal-dialog -->
+						</div>
+						<!-- / .usimInsert model -->
+        				
+        				<!-- usimUpdate Modal -->
+						<div class="modal fade" id="usimUpdate">
+							<div class="modal-dialog modal-ml">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h4 class="modal-title">유심 수정</h4>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body pd-20">
 						        
+						        		<form>
+						        			<div class="row">
+						        				<label class="col-4" style="text-align: right;">매장</label>
+						        				<div class="col-8">
+						        					<div class="pd-y-5">삼삼1호점</div>
+						        					<input type="hidden" name="chain" value="1">
+						        				</div>
+						        			</div>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">입고직원</label>
+						        				<div class="col-8">
+						        					<select class="form-control form-control-sm select-sm" name="member" style="margin-top: 5px;">
+						        						<option value="1" selected>강대표</option>
+						        						<option value="2">홍점장</option>
+						        					</select>
+						        				</div>
+						        			</div>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">입고일</label>
+						        				<div class="col-8">
+						        					<input type="date" class="form-control form-control-sm" maxlength="10" style="margin-top: 5px;">
+						        				</div>
+						        			</div>
+						        			<hr>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
+						        					<span style="color: red">*</span>
+						        					거래처
+						        				</label>
+						        				<div class="col-8">
+						        					<div class="pd-y-5" style="margin-top: 5px;">M&amp;S</div>
+						        				</div>
+						        			</div>
+											<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
+						        					결제
+						        				</label>
+						        				<div class="col-8">
+													<select class="form-control form-control-sm select-sm" name="pay" style="margin-top: 5px;">
+														<option value="1">선결제</option>
+														<option value="2">후결제</option>
+													</select>
+												</div>
+											</div>
+											<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
+						        					입고가
+						        				</label>
+						        				<div class="col-8 input-group input-group-sm">
+						        					<input type="text" class="form-control form-control-sm" name="inprice" style="margin-top: 5px; text-align: right;">
+						        					<div class="input-group-append">
+						        						<span class="input-group-text" style="margin-top: 5px;">원
+						        						</span>
+						        					</div>
+						        				</div>
+						        			</div>
+						        			<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
+						        					<span style="color: red">*</span>
+						        					일련번호
+						        				</label>
+						        					<div class="col-8">
+													<div class="pd-y-5" style="margin-top: 5px;">11123456</div>
+												</div>
+											</div>
+											<div class="row">
+						        				<label class="col-4" style="margin-top: 5px; text-align: right;">
+						        					비고
+						        				</label>
+						        				<div class="col-8">
+													<input type="text" class="form-control form-control-sm" name="memo" maxlength="100" style="margin-top: 5px;">
+												</div>
+											</div>
+						        		</form>
 						      </div>
 						      <div class="modal-footer justify-content-between">
-						        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-						        <button type="button" class="btn btn-primary">입고 완료</button>
+						        <button type="button" class="btn btn-danger" data-dismiss="modal">수정 취소</button>
+						        <button type="button" class="btn btn-primary">수정 완료</button>
 						      </div>
 						    </div>
 						    <!-- /.modal-content -->
 						  </div>
-						  <!-- /.modal-dialog -->
+							<!-- / .modal-header -->
 						</div>
-						<!-- / .model -->
+        				<!-- / .usimUpdate model -->
 					</div>
       			</div>
       		</div>
@@ -153,7 +245,299 @@
 		<section class="content">
 			<div class="container-fluid">
 				<div class="row">
-					컨텐츠
+					<div class="col-12">
+			            <div class="card">
+							<!-- card-header -->
+							<div class="card-header">
+								<form id="usimSearch" onsubmit="return false;">
+									<input type="hidden" name="start" value="">
+									<input type="hidden" name="sort" value="indate">
+									<input type="hidden" name="by" value="desc">
+									<div class="row">
+										<div class="input-group input-group-sm" style="width: 250px;">
+										<input type="text" name="start_date" class="form-control float-right" placeholder="YYYY-MM-DD">
+										<div class="input-group-append">
+												<span class="input-group-text">-</span>
+										</div>
+										<input type="text" name="end_date" class="form-control float-right" placeholder="YYYY-MM-DD">
+										</div>　
+										<div class="btn-group btn-group-sm btn-group-toggle" date-toggle="buttons">
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range1">오늘
+										</label>
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range2">7일
+										</label>
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range3">한달
+										</label>
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range4">두달
+										</label>
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range5">세달
+										</label>
+										</div>　
+										<label>
+											<input type="checkbox"><span style="font-size: 14px;"> 전체매장 재고</span>
+										</label>
+									</div>
+									<div class="row" style="margin-top: 10px;">
+										<select name="usimin_status" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="1">보유</option>
+											<option value="2">신규</option>
+											<option value="3">교품</option>
+											<option value="4">철회</option>
+											<option value="5">개통</option>
+											<option value="6">판매</option>
+											<option value="7">반품</option>
+										</select>　
+										<select name="usimin_dealler" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="">거래처</option>
+											<option value="1">M&amp;S</option>
+											<option value="2">하이엔드인터네셔널</option>
+											<option value="3">유진텔러콤</option>
+											<option value="4">하우스</option>
+										</select>　
+										<input type="text" name="usimin_serial" class="form-control form-control-sm" placeholder="일련번호" style="width: auto;">　
+										<button type="button" class="btn btn-outline-primary btn-sm">검색</button>　
+										<button type="button" class="btn btn-outline-danger btn-sm">초기화</button>
+										<select name="usimList" class="form-control form-control-sm select-sm" style="width: auto; margin-left: 629px;">
+											<option value="">목록</option>
+											<option value="1">1개</option>
+											<option value="5">5개</option>
+											<option value="10">10개</option>
+											<option value="15">15개</option>
+											<option value="20">20개</option>
+											<option value="50">50개</option>
+											<option value="100">100개</option>
+										</select>
+									</div>
+								</form>
+							</div>
+							<!-- /.card-header -->
+							<!-- card-body -->
+							<div id="usim_list" class="card-body table-responsive" style="position: relative; height: 100%; width: 100%;">
+								<table class="table table-hover text-nowrap table-bold" style="text-align: center; font-size: small;">
+									<thead>
+										<tr>
+											<th style="width: 10px;"><input type="checkbox"></th>
+											<th style="width: 20px;">상태</th>
+											<th style="width: 50px;">입고일</th>
+											<th style="width: 50px;">거래처</th>
+											<th style="width: 30px;">통신사</th>
+											<th style="width: 50px;">일련번호</th>
+											<th style="width: 30px;">결제</th>
+											<th style="width: 50px;">입고가</th>
+											<th style="width: 50px;">매장</th>
+											<th style="width: 30px;">직원</th>
+											<th style="width: 40px;">비고</th>
+											<th style="width: 20px;">수정</th>
+											<th style="width: 20px;">삭제</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td style="width: 10px;"><input type="checkbox"></td>
+											<td style="width: 20px;">신규</td>
+											<td style="width: 50px;">2020-06-11</td>
+											<td style="width: 50px;">M&amp;S</td>
+											<td style="width: 30px;">KT</td>
+											<td style="width: 50px;">11112938</td>
+											<td style="width: 30px;">선불</td>
+											<td style="width: 50px;">7,000</td>
+											<td style="width: 50px;">삼삼본점</td>
+											<td style="width: 30px;">강대표</td>
+											<td style="width: 40px;"><span name="usimin_memo">메모</span></td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#usimUpdate"><i class="fas fa-pen"></i></button></td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+										<tr>
+											<td style="width: 10px;"><input type="checkbox"></td>
+											<td style="width: 20px;">신규</td>
+											<td style="width: 50px;">2020-06-11</td>
+											<td style="width: 50px;">M&amp;S</td>
+											<td style="width: 30px;">KT</td>
+											<td style="width: 50px;">11112938</td>
+											<td style="width: 30px;">선불</td>
+											<td style="width: 50px;">7,000</td>
+											<td style="width: 50px;">삼삼본점</td>
+											<td style="width: 30px;">강대표</td>
+											<td style="width: 40px;"><span name="usimin_memo">메모</span></td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#usimUpdate"><i class="fas fa-pen"></i></button></td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+										<tr>
+											<td style="width: 10px;"><input type="checkbox"></td>
+											<td style="width: 20px;">신규</td>
+											<td style="width: 50px;">2020-06-11</td>
+											<td style="width: 50px;">M&amp;S</td>
+											<td style="width: 30px;">KT</td>
+											<td style="width: 50px;">11112938</td>
+											<td style="width: 30px;">선불</td>
+											<td style="width: 50px;">7,000</td>
+											<td style="width: 50px;">삼삼본점</td>
+											<td style="width: 30px;">강대표</td>
+											<td style="width: 40px;"><span name="usimin_memo">메모</span></td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#usimUpdate"><i class="fas fa-pen"></i></button></td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+										<tr>
+											<td style="width: 10px;"><input type="checkbox"></td>
+											<td style="width: 20px;">신규</td>
+											<td style="width: 50px;">2020-06-11</td>
+											<td style="width: 50px;">M&amp;S</td>
+											<td style="width: 30px;">KT</td>
+											<td style="width: 50px;">11112938</td>
+											<td style="width: 30px;">선불</td>
+											<td style="width: 50px;">7,000</td>
+											<td style="width: 50px;">삼삼본점</td>
+											<td style="width: 30px;">강대표</td>
+											<td style="width: 40px;"><span name="usimin_memo">메모</span></td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#usimUpdate"><i class="fas fa-pen"></i></button></td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+										<tr>
+											<td style="width: 10px;"><input type="checkbox"></td>
+											<td style="width: 20px;">신규</td>
+											<td style="width: 50px;">2020-06-11</td>
+											<td style="width: 50px;">M&amp;S</td>
+											<td style="width: 30px;">KT</td>
+											<td style="width: 50px;">11112938</td>
+											<td style="width: 30px;">선불</td>
+											<td style="width: 50px;">7,000</td>
+											<td style="width: 50px;">삼삼본점</td>
+											<td style="width: 30px;">강대표</td>
+											<td style="width: 40px;"><span name="usimin_memo">메모</span></td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#usimUpdate"><i class="fas fa-pen"></i></button></td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+										<tr>
+											<td style="width: 10px;"><input type="checkbox"></td>
+											<td style="width: 20px;">신규</td>
+											<td style="width: 50px;">2020-06-11</td>
+											<td style="width: 50px;">M&amp;S</td>
+											<td style="width: 30px;">KT</td>
+											<td style="width: 50px;">11112938</td>
+											<td style="width: 30px;">선불</td>
+											<td style="width: 50px;">7,000</td>
+											<td style="width: 50px;">삼삼본점</td>
+											<td style="width: 30px;">강대표</td>
+											<td style="width: 40px;"><span name="usimin_memo">메모</span></td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#usimUpdate"><i class="fas fa-pen"></i></button></td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+										<tr>
+											<td style="width: 10px;"><input type="checkbox"></td>
+											<td style="width: 20px;">신규</td>
+											<td style="width: 50px;">2020-06-11</td>
+											<td style="width: 50px;">M&amp;S</td>
+											<td style="width: 30px;">KT</td>
+											<td style="width: 50px;">11112938</td>
+											<td style="width: 30px;">선불</td>
+											<td style="width: 50px;">7,000</td>
+											<td style="width: 50px;">삼삼본점</td>
+											<td style="width: 30px;">강대표</td>
+											<td style="width: 40px;"><span name="usimin_memo">메모</span></td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#usimUpdate"><i class="fas fa-pen"></i></button></td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+										<tr>
+											<td style="width: 10px;"><input type="checkbox"></td>
+											<td style="width: 20px;">신규</td>
+											<td style="width: 50px;">2020-06-11</td>
+											<td style="width: 50px;">M&amp;S</td>
+											<td style="width: 30px;">KT</td>
+											<td style="width: 50px;">11112938</td>
+											<td style="width: 30px;">선불</td>
+											<td style="width: 50px;">7,000</td>
+											<td style="width: 50px;">삼삼본점</td>
+											<td style="width: 30px;">강대표</td>
+											<td style="width: 40px;"><span name="usimin_memo">메모</span></td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#usimUpdate"><i class="fas fa-pen"></i></button></td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+										<tr>
+											<td style="width: 10px;"><input type="checkbox"></td>
+											<td style="width: 20px;">신규</td>
+											<td style="width: 50px;">2020-06-11</td>
+											<td style="width: 50px;">M&amp;S</td>
+											<td style="width: 30px;">KT</td>
+											<td style="width: 50px;">11112938</td>
+											<td style="width: 30px;">선불</td>
+											<td style="width: 50px;">7,000</td>
+											<td style="width: 50px;">삼삼본점</td>
+											<td style="width: 30px;">강대표</td>
+											<td style="width: 40px;"><span name="usimin_memo">메모</span></td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#usimUpdate"><i class="fas fa-pen"></i></button></td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+										<tr>
+											<td style="width: 10px;"><input type="checkbox"></td>
+											<td style="width: 20px;">신규</td>
+											<td style="width: 50px;">2020-06-11</td>
+											<td style="width: 50px;">M&amp;S</td>
+											<td style="width: 30px;">KT</td>
+											<td style="width: 50px;">11112938</td>
+											<td style="width: 30px;">선불</td>
+											<td style="width: 50px;">7,000</td>
+											<td style="width: 50px;">삼삼본점</td>
+											<td style="width: 30px;">강대표</td>
+											<td style="width: 40px;"><span name="usimin_memo">메모</span></td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#usimUpdate"><i class="fas fa-pen"></i></button></td>
+											<td style="width: 20px;"><button type="button" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+										</tr>
+									</tbody>	
+								</table>
+							</div>
+							<!-- /.card-body -->
+							<!-- /card-footer -->
+							<div class="card-footer">
+								<div style="width:30%; margin: 0 auto; float: none;">
+									<ul class="pagination pagination-sm">
+										<li class="paginate_button page-item previous disabled" id="example2_previous">
+											<a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">이전</a>
+										</li>
+										<li class="paginate_button page-item active">
+											<a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">7</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="8" tabindex="0" class="page-link">8</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="9" tabindex="0" class="page-link">9</a>
+										</li>
+										<li class="paginate_button page-item ">
+											<a href="#" aria-controls="example2" data-dt-idx="10" tabindex="0" class="page-link">10</a>
+										</li>
+										<li class="paginate_button page-item next" id="example2_next">
+											<a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">다음</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<!-- /.card-footer -->
+			            </div>
+         			    <!-- /.card -->
+          			</div>
 				</div>
 			</div>
 		</section>

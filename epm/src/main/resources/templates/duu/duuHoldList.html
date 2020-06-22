@@ -20,10 +20,10 @@
       				</div>
       				<div class="col-sm-6">
       					<ol class="breadcrumb float-sm-right">
-							<a href="#" class="btn btn-outline-dark btn-sm bd-0 tx-gray-700 mg-r-20" data-toggle="modal" data-remote="/stock/usim-form-large" data-target="#modal-remote"><i class="fas fa-pen-square nav-icon"></i> 단말기 재고 현황</a>
-						　	<a href="#" class="btn btn-outline-dark btn-sm bd-0 tx-gray-700 mg-r-20" data-toggle="modal" data-remote="/stock/usim-form-write" data-target="#modal-remote"><i class="fas fa-pen-square nav-icon"></i> 유심 재고 현황</a>
-				　			<a href="#" class="btn btn-outline-dark btn-sm bd-0 tx-gray-700 mg-r-20" data-toggle="modal" data-remote="/stock/usim-form-write" data-target="#modal-remote"><i class="fas fa-pen-square nav-icon"></i> 중고 재고 현황</a>
-				　			<a href="#" class="btn btn-outline-dark btn-sm bd-0 tx-gray-700 mg-r-20" data-toggle="modal" data-remote="/stock/usim-form-write" data-target="#modal-remote"><i class="fas fa-pen-square nav-icon"></i> 전체 매장 재고</a>
+							<a href="/deviceInven#" class="btn btn-outline-dark btn-sm"><i class="fas fa-pen-square"></i> 단말기 재고 현황</a>
+						　	<a href="/usimInven#" class="btn btn-outline-dark btn-sm"><i class="fas fa-pen-square"></i> 유심 재고 현황</a>
+				　			<a href="/usedInven#" class="btn btn-outline-dark btn-sm"><i class="fas fa-pen-square"></i> 중고 재고 현황</a>
+				　			<a href="/duuHoldList#" class="btn btn-outline-dark btn-sm"><i class="fas fa-pen-square"></i> 전체 매장 재고</a>
 						</ol>
 					</div>
       			</div>
@@ -31,11 +31,89 @@
       	</section>
       	<!-- 컨텐츠 헤더 영역 끝 -->
       	
- 		<!-- 컨텐츠 영역 시작 -->
+		<!-- 컨텐츠 영역 시작 -->
 		<section class="content">
 			<div class="container-fluid">
 				<div class="row">
-					컨텐츠
+					<div class="col-12">
+			            <div class="card">
+							<!-- card-header -->
+							<div class="card-header">
+								<form id="duuSearch" onsubmit="return false;">
+									<input type="hidden" name="sort" value="cnt">
+									<input type="hidden" name="by" value="desc">
+									<div class="row" style="margin-top: 10px;">
+										<select name="inven_duu" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="device">단말기</option>
+											<option value="usim">유심</option>
+											<option value="used">중고</option>
+										</select>　
+										<select name="inven_dealler" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="">거래처</option>
+											<option value="1">M&amp;S</option>
+											<option value="2">하이엔드인터네셔널</option>
+											<option value="3">유진텔러콤</option>
+											<option value="4">하우스</option>
+										</select>　
+										<select name="inven_status" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="status1">보유</option>
+											<option value="status2">신규</option>
+											<option value="status3">교품</option>
+											<option value="status4">철회</option>
+										</select>　
+										<input type="text" name="inven_model" class="form-control form-control-sm" placeholder="모델명" style="width: auto;">　
+										<button type="button" class="btn btn-outline-primary btn-sm">검색</button>　
+										<button type="button" class="btn btn-outline-danger btn-sm">초기화</button>
+									</div>
+								</form>
+							</div>
+							<!-- /.card-header -->
+							<!-- card-body -->
+							<div class="card-body">
+								<!-- 단말기 재고 -->
+								<div id="device_inven" class="table-responsive" style="position: relative; height: 100%; width: 100%;">
+									<table class="table table-sm table-bordered" style="text-align: center; font-size: small;">
+										<thead>
+											<tr>
+												<th style="width: 20%;">통신사</th>
+												<th style="width: 20%;">모델명</th>
+												<th style="width: 10%;">색상</th>
+												<th style="width: 10%;">전매장</th>
+												<th style="width: 10%;">삼삼본점</th>
+												<th style="width: 10%;">삼삼1호점</th>
+												<th style="width: 10%;">삼삼2호점</th>
+												<th style="width: 10%;">삼삼3호점</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>SK</td>
+												<td>sm-970</td>
+												<td>아우라화이트</td>
+												<td>5</td>
+												<td>2</td>
+												<td>1</td>
+												<td>1</td>
+												<td>1</td>
+											</tr>
+										</tbody>
+										<tfoot id="sum">
+											<tr>
+												<th colspan="3">합계</th>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th></th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+							<!-- /.card-body -->
+			            </div>
+         			    <!-- /.card -->
+          			</div>
 				</div>
 			</div>
 		</section>

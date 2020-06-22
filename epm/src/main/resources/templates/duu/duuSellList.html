@@ -2,14 +2,254 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/default}">
-<head>
-<meta charset="UTF-8">
+
 <th:block layout:fragment="customTitle">
 	<title th:text="${title}"></title>
-	
 </th:block>
-</head>
-<body>
-	
-</body>
+
+<th:block layout:fragment="customCss">
+	<!-- jsGrid -->
+	<link rel="stylesheet" href="../../plugins/jsgrid/jsgrid.min.css">
+	<link rel="stylesheet" href="../../plugins/jsgrid/jsgrid-theme.min.css">
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<!-- 컨텐트 랩퍼 시작 -->	
+	<div class="content-wrapper">
+		<!-- 컨텐츠 헤더 영역 -->
+		<section class="content-header">
+      		<div class="container-fluid">
+      			<div class="row">
+      				<div class="col-sm-6">
+      					<h4>판매관리</h4>
+						<p>단말기 및 유심의 판매내역을 확인하실 수 있습니다.</p>
+      				</div>
+      				
+      			</div>
+      		</div>
+      	</section>
+      	<!-- 컨텐츠 헤더 영역 끝 -->
+      	
+ 		<!-- 컨텐츠 영역 시작 -->
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+			            <div class="card">
+							<!-- card-header -->
+							<div class="card-header">
+								<form id="duuSellSearch" onsubmit="return false;">
+									<input type="hidden" name="start" value="">
+									<input type="hidden" name="sort" value="indate">
+									<input type="hidden" name="by" value="desc">
+									<div class="row">
+										<div class="input-group input-group-sm" style="width: 250px;">
+										<input type="text" name="start_date" class="form-control float-right" placeholder="YYYY-MM-DD">
+										<div class="input-group-append">
+												<span class="input-group-text">-</span>
+										</div>
+										<input type="text" name="end_date" class="form-control float-right" placeholder="YYYY-MM-DD">
+										</div>　
+										<div class="btn-group btn-group-sm btn-group-toggle" date-toggle="buttons">
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range1">오늘
+										</label>
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range2">7일
+										</label>
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range3">한달
+										</label>
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range4">두달
+										</label>
+										<label class="btn btn-outline-dark" style="width: 50px;">
+											<input type="radio" name="date_range" id="range5">세달
+										</label>
+										</div>　
+										<label>
+											<input type="checkbox"><span style="font-size: 14px;"> 전체매장 판매</span>
+										</label>
+									</div>
+									<div class="row" style="margin-top: 10px;">
+										<select name="usimin_status" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="1">전체</option>
+											<option value="2">단말기</option>
+											<option value="3">유심</option>
+											<option value="4">중고</option>
+										</select>　
+										<select name="usimin_status" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="1">판매직원</option>
+											<option value="2">강대표</option>
+											<option value="3">홍점장</option>
+											<option value="4">이직원</option>
+										</select>　
+										<select name="usimin_dealler" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="">결제방법</option>
+											<option value="1">현금</option>
+											<option value="2">카드</option>
+										</select>　
+										<select name="usimin_dealler" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="">구매자</option>
+											<option value="1">모델명</option>
+											<option value="2">일련번호</option>
+										</select>　
+										<input type="text" name="usimin_serial" class="form-control form-control-sm" style="width: auto;">　
+										<button type="button" class="btn btn-outline-primary btn-sm">검색</button>　
+										<button type="button" class="btn btn-outline-danger btn-sm">초기화</button>
+										<select name="usimList" class="form-control form-control-sm select-sm" style="width: auto; margin-left: 478px;">
+											<option value="">목록</option>
+											<option value="1">1개</option>
+											<option value="5">5개</option>
+											<option value="10">10개</option>
+											<option value="15">15개</option>
+											<option value="20">20개</option>
+											<option value="50">50개</option>
+											<option value="100">100개</option>
+										</select>
+									</div>
+								</form>
+							</div>
+							<!-- /.card-header -->
+							<!-- card-body -->
+							<div id="duu_sell_list" class="card-body table-responsive" style="position: relative; height: 100%; width: 100%;">
+								
+								<table class="table table-hover text-nowrap table-bold" style="text-align: center; font-size: small;">
+									<thead>
+										<tr>
+											<th style="width: 3%;"><input type="checkbox"></th>
+											<th style="width: 10%;">판매일</th>
+											<th style="width: 8%;">구분</th>
+											<th style="width: 8%;">모델명</th>
+											<th style="width: 5%;">색상</th>
+											<th style="width: 8%;">일련번호</th>
+											<th style="width: 6%">구매자</th>
+											<th style="width: 6%;">결제</th>
+											<th style="width: 8%;">입고가</th>
+											<th style="width: 8%;">판매가</th>
+											<th style="width: 8%;">마진</th>
+											<th style="width: 8%;">매장</th>
+											<th style="width: 6%">직원</th>
+											<th style="width: 8%;">비고</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><input type="checkbox"></td>
+											<td>2020-06-11</td>
+											<td>단말기</td>
+											<td>SM-G970N</td>
+											<td>블랙</td>
+											<td>13248</td>
+											<td>김고객</td>
+											<td>현금</td>
+											<td>1,000,000</td>
+											<td>900,000</td>
+											<td>-100,000</td>
+											<td>삼삼본점</td>
+											<td>이사원</td>
+											<td>메모</td>
+										</tr>
+										<tr>
+											<td><input type="checkbox"></td>
+											<td>2020-06-11</td>
+											<td>단말기</td>
+											<td>SM-G970N</td>
+											<td>블랙</td>
+											<td>13248</td>
+											<td>김고객</td>
+											<td>현금</td>
+											<td>1,000,000</td>
+											<td>900,000</td>
+											<td>-100,000</td>
+											<td>삼삼본점</td>
+											<td>이사원</td>
+											<td>메모</td>
+										</tr>
+										<tr>
+											<td><input type="checkbox"></td>
+											<td>2020-06-11</td>
+											<td>단말기</td>
+											<td>SM-G970N</td>
+											<td>블랙</td>
+											<td>13248</td>
+											<td>김고객</td>
+											<td>현금</td>
+											<td>1,000,000</td>
+											<td>900,000</td>
+											<td>-100,000</td>
+											<td>삼삼본점</td>
+											<td>이사원</td>
+											<td>메모</td>
+										</tr>
+										<tr>
+											<td><input type="checkbox"></td>
+											<td>2020-06-11</td>
+											<td>단말기</td>
+											<td>SM-G970N</td>
+											<td>블랙</td>
+											<td>13248</td>
+											<td>김고객</td>
+											<td>현금</td>
+											<td>1,000,000</td>
+											<td>900,000</td>
+											<td>-100,000</td>
+											<td>삼삼본점</td>
+											<td>이사원</td>
+											<td>메모</td>
+										</tr>
+										<tr>
+											<td><input type="checkbox"></td>
+											<td>2020-06-11</td>
+											<td>단말기</td>
+											<td>SM-G970N</td>
+											<td>블랙</td>
+											<td>13248</td>
+											<td>김고객</td>
+											<td>현금</td>
+											<td>1,000,000</td>
+											<td>900,000</td>
+											<td>-100,000</td>
+											<td>삼삼본점</td>
+											<td>이사원</td>
+											<td>메모</td>
+										</tr>
+									</tbody>
+								</table>
+								
+							</div>
+							<!-- /.card-body -->
+							<!-- /card-footer -->
+							<div class="card-footer">
+								<div class="row">
+									<div class="col-sm-6">
+										<button class="btn btn-dark btn-sm">철회</button>
+										<button class="btn btn-dark btn-sm">삭제</button>
+									</div>
+									<div class="col-sm-6" style="text-align: right; font-size: 14px;">
+										판매 합계 : <span class="sell_sum">135,335,100
+													<span class="won">원</span>
+												</span>　
+										마진 합계 : <span class="margine_sum">140,128,230
+													<span class="won">원</span>
+												</span>
+									</div>
+								</div>
+							</div>
+							<!-- /.card-footer -->
+			            </div>
+         			    <!-- /.card -->
+          			</div>
+				</div>
+			</div>
+		</section>
+		<!-- 컨텐츠 영역 끝 -->
+	</div>
+	<!-- 컨텐트 랩퍼 끝 -->
+</th:block>
+
+<th:block layout:fragment="customScript">
+</th:block>
+<th:block layout:fragment="customFooterScript">
+</th:block>
 </html>

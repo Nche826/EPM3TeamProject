@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>EPM</title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<!-- 컨텐트 랩퍼 시작 -->	
+	<div class="content-wrapper">
+		<!-- 컨텐츠 헤더 영역 -->
+		<div class="content-header">
+      		<div class="container-fluid">
+	        <div class="row mb-2">
+	          <div class="col-sm-6">
+	            <h1><i class="nav-icon fas fa-edit"></i> 회원수정</h1>
+	          </div>
+	          <div class="col-sm-6">
+	            <ol class="breadcrumb float-sm-right">
+
+	            </ol>
+	          </div>
+	        </div>
+	      </div><!-- /.container-fluid -->
+      	</div>
+      	<!-- 컨텐츠 헤더 영역 끝 -->
+      	
+ 		<!-- 컨텐츠 영역 시작 -->
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-5" style="margin:auto;">
+					  <div class="card">
+					    <div class="card-body register-card-body">
+					      <p class="login-box-msg">Manage account</p>
+					
+					      <form action="/memberUpdateConfirm" method="post">
+					        <div class="input-group mb-3">
+					          <input type="password" class="form-control" placeholder="Password">
+					          <div class="input-group-append">
+					            <div class="input-group-text">
+					              <span class="fas fa-lock"></span>
+					            </div>
+					          </div>
+					        </div>
+					       
+					        <div class="row">
+					          
+					          <div class="col-12">
+					            <button type="submit" class="btn btn-secondary btn-block">Modify</button>
+					          </div>
+					          <!-- /.col -->
+					        </div>
+					      </form>
+					      
+					    </div>
+					    <!-- /.form-box -->
+					  </div><!-- /.card -->
+				  </div>
+				</div>
+			</div>
+		</section>
+		<!-- 컨텐츠 영역 끝 -->
+	</div>
+	<!-- 컨텐트 랩퍼 끝 -->
+</th:block>
+<th:block layout:fragment="customFooterScript">
+</th:block>
+</html>

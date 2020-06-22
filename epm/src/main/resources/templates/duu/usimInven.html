@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customTitle">
+	<title th:text="${title}"></title>
+</th:block>
+
+<th:block layout:fragment="customContents">
+	<!-- 컨텐트 랩퍼 시작 -->	
+	<div class="content-wrapper">
+		<!-- 컨텐츠 헤더 영역 -->
+		<section class="content-header">
+      		<div class="container-fluid">
+      			<div class="row">
+      				<div class="col-sm-6">
+      					<h4>보유현황</h4>
+						<p>매장에서 보유 중인 단말기, 유심, 중고의 재고현황을 확인하실 수 있습니다.</p>
+      				</div>
+      				<div class="col-sm-6">
+      					<ol class="breadcrumb float-sm-right">
+							<a href="/deviceInven#" class="btn btn-outline-dark btn-sm"><i class="fas fa-pen-square"></i> 단말기 재고 현황</a>
+						　	<a href="/usimInven#" class="btn btn-outline-dark btn-sm"><i class="fas fa-pen-square"></i> 유심 재고 현황</a>
+				　			<a href="/usedInven#" class="btn btn-outline-dark btn-sm"><i class="fas fa-pen-square"></i> 중고 재고 현황</a>
+				　			<a href="/duuHoldList#" class="btn btn-outline-dark btn-sm"><i class="fas fa-pen-square"></i> 전체 매장 재고</a>
+						</ol>
+					</div>
+      			</div>
+      		</div>
+      	</section>
+      	<!-- 컨텐츠 헤더 영역 끝 -->
+      	
+		<!-- 컨텐츠 영역 시작 -->
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+			            <div class="card">
+							<!-- card-header -->
+							<div class="card-header">
+								<form id="duuSearch" onsubmit="return false;">
+									<input type="hidden" name="sort" value="cnt">
+									<input type="hidden" name="by" value="desc">
+									<div class="row" style="margin-top: 10px;">
+										<select name="inven_store" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="0">삼삼본점</option>
+											<option value="1">삼삼1호점</option>
+											<option value="2">삼삼2호점</option>
+											<option value="3">삼삼3호점</option>
+										</select>　
+										<select name="inven_dealler" class="form-control form-control-sm select-sm" style="width: auto;">
+											<option value="">거래처</option>
+											<option value="1">M&amp;S</option>
+											<option value="2">하이엔드인터네셔널</option>
+											<option value="3">유진텔러콤</option>
+											<option value="4">하우스</option>
+										</select>　
+										<input type="text" name="inven_model" class="form-control form-control-sm" placeholder="모델명" style="width: auto;">　
+										<button type="button" class="btn btn-outline-primary btn-sm">검색</button>　
+										<button type="button" class="btn btn-outline-danger btn-sm">초기화</button>
+									</div>
+								</form>
+							</div>
+							<!-- /.card-header -->
+							<!-- card-body -->
+							<div class="card-body">
+								<!-- 유심 재고 -->
+								<div id="device_inven" class="table-responsive" style="position: relative; height: 100%; width: 100%;">
+									<table class="table table-sm table-bordered" style="text-align: center; font-size: small;">
+										<thead>
+											<tr>
+												<th style="width: 20%;">통신사</th>
+												<th style="width: 20%;">결제</th>
+												<th style="width: 15%;">수량</th>
+												<th style="width: 15%;">신규</th>
+												<th style="width: 15%;">교품</th>
+												<th style="width: 15%;">철회</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>SK</td>
+												<td>선불</td>
+												<td>4</td>
+												<td>2</td>
+												<td>1</td>
+												<td>1</td>
+											</tr>
+										</tbody>
+										<tfoot id="sum">
+											<tr>
+												<th colspan="2">합계</th>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th></th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+							<!-- /.card-body -->
+			            </div>
+         			    <!-- /.card -->
+          			</div>
+				</div>
+			</div>
+		</section>
+		<!-- 컨텐츠 영역 끝 -->
+	</div>
+	<!-- 컨텐트 랩퍼 끝 -->
+</th:block>
+<th:block layout:fragment="customFooterScript">
+</th:block>
+</html>

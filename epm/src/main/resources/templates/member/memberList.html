@@ -8,6 +8,7 @@
 </th:block>
 
 <th:block layout:fragment="customContents">
+
 	<!-- 컨텐트 랩퍼 시작 -->	
 	<div class="content-wrapper">
 		<!-- 컨텐츠 헤더 영역 -->
@@ -19,7 +20,7 @@
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-					<button type="button" class="btn btn-block btn-secondary" style="margin: 5px;">회원등록</button>
+					<button type="button" class="btn btn-block btn-secondary"  data-toggle="modal" data-target="#modalMemberInsert" style="margin: 5px;">회원등록</button>
 	            </ol>
 	          </div>
 	        </div>
@@ -53,22 +54,26 @@
                   <thead>
                   
                     <tr>
-                      <th>ID</th>
-                      <th>User</th>
-                      <th>Date</th>
-                      <th>Status</th>
-                      <th>Reason</th>
+                      <th>프로필</th>
+                      <th>아이디</th>
+                      <th>이름</th>
+                      <th>전화번호</th>
+                      <th>가입일자</th>
+                      <th>수정</th>
+                      <th>삭제</th>
                     </tr>
                     
                   </thead>
                   <tbody>
                   
-                    <tr>
-                      <td>183</td>
-                      <td>John Doe</td>
-                      <td>11-7-2014</td>
-                      <td><span class="tag tag-success">Approved</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                    <tr th:each = "ml : ${memberList}">
+                      <td th:text = "${ml.file}"></td>
+                      <td th:text = "${ml.memberId}"></td>
+                      <td th:text = "${ml.memberName}"></td>
+                      <td th:text = "${ml.memberTel}"></td>
+                      <td th:text = "${ml.memberRegDate}"></td>
+                      <td><a th:href="@{/memberUpdateConfirm(member_id=${ml.memberId})}"><i class="fas fa-file-signature"></i></a></td>
+                      <td><a th:href="@{/memberDelete(member_id=${ml.memberId})}"><i class="far fa-trash-alt"></i></a></td>
                     </tr>
 
                   </tbody>
@@ -89,11 +94,114 @@
           </div>
 				</div>
 			</div>
+			
+			<!-- 모달 modalMemberInsert -->
+				<div class="modal fade" id="modalMemberInsert" style="display: none;" aria-hidden="true">
+			        <div class="modal-dialog">
+			          <div class="modal-content">
+			            <div class="modal-header">
+			              <h4 class="modal-title"><i class="nav-icon fas fa-book"></i> 회원등록</h4>
+			              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			                <span aria-hidden="true">×</span>
+			              </button>
+			            </div>
+			            <div class="modal-body">
+			              
+			              	<form action="/memberInsert" method="post">
+					              <!-- 모달 바디 내용 -->
+					             <div class="row">
+									<div class="col-12" style="margin:auto;">
+									  <div class="card">
+									    <div class="card-body register-card-body">
+									      <p class="login-box-msg">회원 등록</p>
+									
+									        <div class="input-group mb-3">
+									          <input name="memberId" type="text" class="form-control" placeholder="ID">
+									          <div class="input-group-append">
+									            <div class="input-group-text">
+									              <span class="fas fa-user"></span>
+									            </div>
+									          </div>
+									        </div>
+									        <div class="input-group mb-3">
+									          <input name="memberName" type="text" class="form-control" placeholder="Name">
+									          <div class="input-group-append">
+									            <div class="input-group-text">
+									              <span class="fas fa-user"></span>
+									            </div>
+									          </div>
+									        </div>
+									        <div class="input-group mb-3">
+									          <input type="password" class="form-control" placeholder="Password">
+									          <div class="input-group-append">
+									            <div class="input-group-text">
+									              <span class="fas fa-lock"></span>
+									            </div>
+									          </div>
+									        </div>
+									        <div class="input-group mb-3">
+									          <input name="memberPw" type="password" class="form-control" placeholder="Retype Password">
+									          <div class="input-group-append">
+									            <div class="input-group-text">
+									              <span class="fas fa-lock"></span>
+									            </div>
+									          </div>
+									        </div>
+									        <div class="input-group mb-3">
+									          <input name="memberTel" type="text" class="form-control" placeholder="Phone">
+									          <div class="input-group-append">
+									            <div class="input-group-text">
+				
+									            </div>
+									          </div>
+									        </div>
+									        <div class="form-group">
+									           <div class="input-group">
+									             <div class="custom-file">
+									               <input name="memberPicture" type="file" class="custom-file-input" id="inputFile">
+									               <label class="custom-file-label" for="inputFile">Choose file</label>
+									             </div>
+									             <div class="input-group-append">
+									               <span class="input-group-text" id="">Upload</span>
+									             </div>
+									           </div>
+									         </div>
+									        <div class="row">
+									          
+									          <div class="col-12">
+									            <button type="submit" class="btn btn-secondary btn-block">회원등록</button>
+									          </div>
+									          <!-- /.col -->
+									        </div>
+									      
+									    </div>
+									    <!-- /.form-box -->
+									  </div><!-- /.card -->
+								  </div>
+								</div>
+			              	</form>
+		              
+			            </div>
+			          
+			          </div>
+			          <!-- /.modal-content -->
+			        </div>
+			        <!-- /.modal-dialog -->
+			      </div>
+			
+			
 		</section>
 		<!-- 컨텐츠 영역 끝 -->
 	</div>
 	<!-- 컨텐트 랩퍼 끝 -->
 </th:block>
 <th:block layout:fragment="customFooterScript">
+<!-- 	get방식으로 받아온 키값 어떻게 alert창에 출력하는지??
+		<script type="text/javascript"> 
+		var message = 
+		if(null != message && ""!=message){
+			alert(message); 
+		}
+	</script>  -->
 </th:block>
 </html>

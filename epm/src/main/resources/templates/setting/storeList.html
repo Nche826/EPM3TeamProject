@@ -29,78 +29,79 @@
 		          	</div>
          	    </div>
 		      <!-- 매장 등록 버튼  -->
-		        <div class="col-sm-12">
-		        <div class="input-group input-group-sm float-right " style="width: 150px; margin-bottom:5mm;">
-		          	 <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-lg">
-		                  	매장등록
-		                </button>
-				</div>
-				</div>
+			      <div class="row">
+			        <div class="col-sm-12">
+				        <div class="input-group input-group-sm float-right " style="width: 150px; margin-bottom:10mm;">
+				          	 <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-lg">
+				                  	매장등록
+				                </button>
+						</div>
+					</div>
+				 </div>
 				<!-- 모달 클릭시 화면   -->
-				<div class="modal fade" id="modal-lg">
-		        <div class="modal-dialog modal-lg">
-		          <div class="modal-content">
-		            <div class="modal-header">
-		              <h4 class="modal-title">매장 등록</h4>
-		              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		                <span aria-hidden="true">&times;</span>
-		              </button>
-		            </div>
-		            <div class="modal-body">
-			              <form id="CustomerInsertForm" action="#" method="post" >
-			             	<div class="form-group">
-			                	<label for="inputDescription"><i style="color: red;">*</i>매장명</label>
-			                 	<input type="text" id="customerName" class="form-control">
-			             	</div>
-			             	<div class="form-group">
-			                	<label for="inputDescription"><i style="color: red;">*</i>주소</label>
-			                 	<input type="text" id="customerName" class="form-control">
-			             	</div>
-			             	<div class="form-group">
-			                	<label for="inputDescription"><i style="color: red;">*</i>연락처</label>
-			                 	<input type="text" id="customerName" class="form-control">
-			             	</div>
-			             	<div class="form-group">
-			                	<label for="inputDescription"><i style="color: red;">*</i>등록자ID</label>
-			                 	<input type="text" id="customerName" class="form-control">
-			             	</div>
-			             	<div class="form-group">
-			             	<input type="reset" value="Clear" class="btn btn-default float-left">
-			             	<button type="submit" id="CusBtn" class="btn btn-danger float-right">매장등록하기</button>
-			             	</div>
-			              </form>
-		            </div>
-		            <div class="modal-footer">
-		              <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
-		            </div>
-		          </div>
-		          <!-- /.modal-content -->
-		        </div>
-		        <!-- /.modal-dialog -->
-		      </div>
+					<div class="modal fade" id="modal-lg">
+				        <div class="modal-dialog modal-lg">
+				          <div class="modal-content">
+				            <div class="modal-header">
+				              <h4 class="modal-title">매장 등록</h4>
+					              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					                <span aria-hidden="true">&times;</span>
+					              </button>
+				            </div>
+				            <div class="modal-body">
+					              <form id="CustomerInsertForm" action="/addstore" method="post" >
+					             	<div class="form-group">
+					                	<label for="inputDescription"><i style="color: red;">*</i>매장명</label>
+					                 	<input type="text" name="store_Name" class="form-control" placeholder="매장명을 입력해주세요">
+					             	</div>
+					             	<div class="form-group">
+					                	<label for="inputDescription"><i style="color: red;">*</i>주소</label>
+					                 	<input type="text" name="store_Addr" class="form-control" placeholder="시.군.구 -동-번지수 까지 입력해주세요">
+					             	</div>
+					             	<div class="form-group">
+					                	<label for="inputDescription"><i style="color: red;">*</i>연락처</label>
+					                 	<input type="text" name="store_Tel" class="form-control" placeholder="000-0000-0000 -포함 입력해주세요">
+					             	</div>
+					             	<div class="form-group">
+					                	<label for="inputDescription"><i style="color: red;">*</i>등록자ID</label>
+					                 	<input type="text" name="store_Reg_id" class="form-control" placeholder="매장 담당자 아이디를 입력해주세요">
+					             	</div>
+					             	<div class="form-group">
+					             	<input type="reset" value="Clear" class="btn btn-default float-left">
+					             	<button type="submit" id="CusBtn" class="btn btn-danger float-right">매장등록하기</button>
+					             	</div>
+					              </form>
+				            </div>
+				            <div class="modal-footer">
+				              <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
+				            </div>
+				          </div>
+				          <!-- /.modal-content -->
+				        </div>
+			        <!-- /.modal-dialog -->
+			      </div>
 		      <!-- /.modal -->
       		</div>
-      	</div>
       	<!-- 컨텐츠 헤더 영역 끝 -->
       	
  		<!-- 컨텐츠 영역 시작 -->
 		 <!-- Main content -->
-    <section class="content">
       <div class="row">
         <div class="col-12">
-          <div class="card">
+          <div class="card card-danger">
             <div class="card-header">
-              <h3 class="card-title">매장 목록</h3>
+              <h3 class="card-title" style="text-align: center;">Store List</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example1" class="table table-bordered table-striped">
+            <form action="/storeList" method="get">
+              <table id="example1" class="table table-bordered table-striped" style="text-align: center;">
                 <thead>
                 <tr>
                   <th></th>
                   <th>no</th>
                   <th>매장 명</th>
-                  <th>직원 수</th>
+                  <th>주 소</th>
                   <th>연락처</th>
                   <th>담당자</th>
                   <th>휴대폰</th>
@@ -109,123 +110,24 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr th:each= "s,i : ${storeList}" >
                   <td><input type="checkbox" ></td>
-                  <td>1</td>
-                  <td>삼성1호점</td>
-                  <td>4</td>
-                  <td>02-111-2233</td>
-                  <td>김수지</td>
-                  <td>010-0000-0000</td>
-                  <td>2020-06-10</td>
-                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>2</td>
-                  <td>삼성2호점</td>
-                  <td>4</td>
-                  <td>02-111-2233</td>
-                  <td>김수지</td>
-                  <td>010-0000-0000</td>
-                  <td>2020-06-10</td>
-                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>3</td>
-                  <td>삼성4호점</td>
-                  <td>4</td>
-                  <td>02-111-2233</td>
-                  <td>김수지</td>
-                  <td>010-0000-0000</td>
-                  <td>2020-06-10</td>
-                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>4</td>
-                  <td>삼성3호점</td>
-                  <td>4</td>
-                  <td>02-111-2233</td>
-                  <td>김수지</td>
-                  <td>010-0000-0000</td>
-                  <td>2020-06-10</td>
-                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>5</td>
-                  <td>삼성1호점</td>
-                  <td>4</td>
-                  <td>02-111-2233</td>
-                  <td>김수지</td>
-                  <td>010-0000-0000</td>
-                  <td>2020-06-10</td>
-                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>6</td>
-                  <td>삼성1호점</td>
-                  <td>4</td>
-                  <td>02-111-2233</td>
-                  <td>김수지</td>
-                  <td>010-0000-0000</td>
-                  <td>2020-06-10</td>
-                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
-                </tr>
-                <tr>
-                <td><input type="checkbox" ></td>
-                  <td>7</td>
-                  <td>삼성1호점</td>
-                  <td>4</td>
-                  <td>02-111-2233</td>
-                  <td>김수지</td>
-                  <td>010-0000-0000</td>
-                  <td>2020-06-10</td>
-                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
-                </tr>
-                <tr>
-                <td><input type="checkbox" ></td>
-                  <td>8</td>
-                  <td>삼성1호점</td>
-                  <td>4</td>
-                  <td>02-111-2233</td>
-                  <td>김수지</td>
-                  <td>010-0000-0000</td>
-                  <td>2020-06-10</td>
-                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
-                </tr>
-               <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>9</td>
-                  <td>삼성1호점</td>
-                  <td>4</td>
-                  <td>02-111-2233</td>
-                  <td>김수지</td>
-                  <td>010-0000-0000</td>
-                  <td>2020-06-10</td>
-                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
-                </tr>
-                 <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>10</td>
-                  <td>삼성1호점</td>
-                  <td>4</td>
-                  <td>02-111-2233</td>
-                  <td>김수지</td>
-                  <td>010-0000-0000</td>
-                  <td>2020-06-10</td>
-                  <td><a th:href="@{/storeUpdate}"><i class="fas fa-edit"></i></a></td>
+                  <td th:text = ${i.count}></td>
+                  <td th:text = ${s.store_Name}></td>
+                  <td th:text = ${s.store_Addr}></td>
+                  <td th:text = ${s.store_Tel}></td>
+                  <td th:text = ${s.member_name}></td>
+                  <td th:text = ${s.member_tel}></td>
+                  <td th:text = ${s.store_Reg_date}></td>
+                  <td><a th:href="@{/storeUpdate(store_Name=${s.store_Name})}"><i class="fas fa-edit"></i></a></td>
                 </tr>
                 </tbody>
                 <tfoot>
                 <tr>
-                 <th><button type="submit" class="btn btn-danger btn-sm">삭제</button></th>
+                 <th><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-sm">삭제</button></th>
                   <th>no</th>
                   <th>매장 명</th>
-                  <th>직원 수</th>
+                  <th>주 소</th>
                   <th>연락처</th>
                   <th>담당자</th>
                   <th>휴대폰</th>
@@ -234,6 +136,30 @@
                 </tr>
                 </tfoot>
               </table>
+	              <div class="modal fade" id="modal-sm">
+			        <div class="modal-dialog modal-sm">
+			          <div class="modal-content bg-danger">
+			            <div class="modal-header">
+			              <h4 class="modal-title">안내</h4>
+			              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			                <span aria-hidden="true">&times;</span>
+			              </button>
+			            </div>
+			            <div class="modal-body">
+			              <p>선택한 매장을 삭제 하시겠습니까?</p>
+			              <p style="font-size: small;">(주의)!삭제된 자료는 복구되지 않습니다.</p>
+			            </div>
+			            <div class="modal-footer justify-content-between">
+			              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+			              <button type="button" class="btn btn-outline-light">삭제하기</button>
+			            </div>
+			          </div>
+			          <!-- /.modal-content -->
+			        </div>
+			        <!-- /.modal-dialog -->
+	     		 </div>
+	     		 <!-- /.modal -->
+              </form>
             </div>
             <!-- /.card-body -->
           </div>

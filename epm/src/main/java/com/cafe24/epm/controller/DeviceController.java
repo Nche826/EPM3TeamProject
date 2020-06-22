@@ -21,5 +21,10 @@ public class DeviceController {
 		
 		return "/device/deviceUpdate";
 	}
+	@GetMapping("/deviceInfo")
+	public String deviceInfo() {
+		
+		return "/device/deviceInfo";
+	}
 }
 

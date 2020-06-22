@@ -28,13 +28,13 @@
     <!-- /페이지 화면 헤더  -->
     <!-- 목록 추가 등록 버튼  -->
         <div class="input-group input-group-sm float-right " style="width: 150px; margin-bottom:5mm;">
-          	 <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#modal-lg">
+          	 <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#customodal">
                   	고객등록
                 </button>
 		</div>
 		<!-- 모달 클릭시 화면   -->
-		<div class="modal fade" id="modal-lg">
-        <div class="modal-dialog modal-lg">
+		<div class="modal fade" id="customodal">
+        <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title">고객 등록</h4>
@@ -43,22 +43,22 @@
               </button>
             </div>
             <div class="modal-body">
-	              <form id="CustomerInsertForm" action="#" method="post" >
+	              <form id="CustomerInsertForm" action="/addCustomer" method="post" >
 	             	<div class="form-group">
 	                	<label for="inputDescription"><i style="color: red;">*</i>고객명</label>
-	                 	<input type="text" id="customerName" class="form-control">
+	                 	<input type="text" name="customer_name" class="form-control" placeholder="고객명을 입력해주세요">
 	             	</div>
 	             	<div class="form-group">
 	                	<label for="inputDescription"><i style="color: red;">*</i>연락처</label>
-	                 	<input type="text" id="customerName" class="form-control">
+	                 	<input type="text" name="customer_tel" class="form-control" placeholder="-제외  010부터 입력해주세요">
 	             	</div>
 	             	<div class="form-group">
 	                	<label for="inputDescription"><i style="color: red;">*</i>생년월일</label>
-	                 	<input type="text" id="customerName" class="form-control">
+	                 	<input type="text" name="customer_birth" class="form-control" placeholder="00년도-00월-00일     -제외 6자리숫자입력">
 	             	</div>
 	             	<div class="form-group">
 	                	<label for="inputDescription"><i style="color: red;">*</i>등록 직원 명</label>
-	                 	<input type="text" id="customerName" class="form-control">
+	                 	<input type="text" name="staff_code" class="form-control" placeholder="등록하는 직원의 이름을 입력해주세요">
 	             	</div>
 	             	<div class="form-group">
 	             	<input type="reset" value="Clear" class="btn btn-default float-left">
@@ -118,7 +118,7 @@
 					</select>
 			 </div>
 	    <!-- 검색창 -->
-	            <div class="form-group">
+	            <div class="form-group offset-1">
                     <input type="text" name="table_search" class="form-control" placeholder="Search">
 
                     <div class="input-group-append">
@@ -130,7 +130,7 @@
               </form>
               <!-- /.검색 From  -->
               <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
+                <table class="table table-hover text-nowrap" style="text-align: center;">
                   <thead>
                     <tr>
                       <th></th>
