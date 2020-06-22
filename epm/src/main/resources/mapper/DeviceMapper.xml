@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.epm.mapper.DeviceMapper">
+
+	<resultMap type="Device" id="DeviceSelect">
+		<result property="deviceCode" 		column="devicein_code"/>
+		<result property="deviceSerial"		column="devicein_serial"/>
+		<result property="deviceDealler"	column="dealler_code"/>
+		<result property="deviceDevice"		column="device_code"/>
+		<result property="deviceStatus"		column="devicein_status"/>
+		<result property="deviceStatDate"	column="devicein_stat_date"/>
+		<result property="deviceDate"		column="devicein_date"/>
+		<result property="deviceMemo"		column="devicein_memo"/>
+		<result property="deviceStaff"		column="staff_code"/>
+		<result property="deviceRegDate"	column="devicein_reg_date"/>
+	</resultMap>
+
+	<select id = "getDeviceSelect" parameterType="String" resultMap="DeviceSelect">
+	SELECT
+		devicein_code
+		,devicein_serial
+		,dealler_code
+		,device_code
+		,devicein_status
+		,devicein_stat_date
+		,devicein_date
+		,devicein_memo
+		,staff_code
+		,devicein_reg_date
+	FROM
+		tb_devicein		
+	WHERE
+		devicein_serial = #{deviceSerial}
+	</select>
+		
+	<select id = "deviceList" parameterType="String" resultMap="DeviceSelect">
+	SELECT
+		devicein_code
+		,devicein_serial
+		,dealler_code
+		,device_code
+		,devicein_status
+		,devicein_stat_date
+		,devicein_date
+		,devicein_memo
+		,staff_code
+		,devicein_reg_date
+	FROM
+		tb_devicein		
+	</select>
+	
+	<insert id="deviceInsert" parameterType="Device">
+		insert into tb_devicein
+		(devicein_code, devicein_serial, dealler_code, device_code, devicein_status, devicein_stat_date,
+		devicein_date, devicein_memo, staff_code, devicein_reg_date)
+		values(
+		#{deviceCode}
+		,#{deviceSerial}
+		,#{deviceDealler}
+		,#{deviceDevice}
+		,#{deviceStatus}
+		,#{deviceStatDate}
+		,#{deviceDate}
+		,#{deviceMemo}
+		,#{deviceStaff}
+		,#{deviceRegDate}		
+		);
+		
+	</insert>
+</mapper>
+	
