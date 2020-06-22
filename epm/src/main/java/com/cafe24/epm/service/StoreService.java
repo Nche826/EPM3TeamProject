@@ -21,6 +21,14 @@ public class StoreService {
 		return storeMapper.getStoreSelect(store_Name);
 	}
 	
+	//수정처리
+	public int storeUpdate(Store store) {
+		Store result = storeMapper.getStoreSelect(store.getStore_Name());
+		System.out.println("result.toString()--->"+result.toString());
+		
+		return storeMapper.storeUpdate(store);
+	}
+	
 	//매장등록
 	public int addStore(Store store) {
 		System.out.println("===Store 서비스 시작===");
