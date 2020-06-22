@@ -52,71 +52,72 @@
             </div>
             
             <div class="card-body" th:fragment="dInsert">
-            
-            <div class="row mg-t-20 mg-b-20">
-             <div class="col-6" style="padding-right:10px">             	
-              <div class="form-group">
-                <label for="inputName">매장</label>
-                <input type="text" id="inputName" class="form-control" value="epm 본점">
-              </div>
-              <div class="form-group">
-                <label for="inputStatus">입고직원</label>
-                <select class="form-control custom-select">                  
-                  <option selected>직원1</option>
-                  <option>직원2</option>
-                  <option>직원3</option>                  
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="inputName">입고방법</label>
-                <form>
-				  <input type="radio" id="normal" name="insert">
-				  <label>일반입고</label>
-				  <input type="radio" id="barcode" name="insert">
-				  <label>바코드입고</label><br>				  
-				</form>
-              </div>
-              <div class="form-group">
-                <label for="inputStatus">거래처</label>
-                <select class="form-control custom-select">                  
-                  <option selected>-선택-</option>
-                  <option>거래처1</option>
-                  <option>거래처2</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="inputName">모델명</label>
-                <input type="text" id="inputName" class="form-control" >
-              </div>
-              </div>
-              
-              <div class="col-6" style="padding-right:10px">              
-              <div class="form-group">
-                <label for="inputStatus">종류</label>
-                <select class="form-control custom-select">                  
-                  <option selected>휴대폰</option>
-                  <option>태블릿</option>             
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="inputName">색상</label>
-                <input type="text" id="inputName" class="form-control" >
-              </div>
-              <div class="form-group">
-                <label for="inputName">입고가</label>
-                <input type="text" id="inputName" class="form-control" >            
-              </div>
-              <div class="form-group">
-                <label for="inputName">일련번호</label>
-                <input type="text" id="inputName" class="form-control" >            
-              </div>
-              <div class="form-group">
-                <label for="inputName">비고</label>
-                <input type="text" id="inputName" class="form-control" >            
-              </div>
-              </div>
-              </div>
-              
+            <form action ="/deviceInsert" method="post">
+	            <div class="row mg-t-20 mg-b-20">
+	             <div class="col-6" style="padding-right:10px">             	
+	              <div class="form-group">
+	                <label for="inputName">매장</label>
+	                <input type="text" id="inputName" class="form-control" th:value="${session.SID}">
+	              </div>
+	              <div class="form-group">
+	                <label for="inputStatus">입고직원</label>
+	                <select class="form-control custom-select" name="deviceStaff">                  
+	                  <option selected>직원1</option>
+	                  <option>직원2</option>
+	                  <option>직원3</option>                  
+	                </select>
+	              </div>
+	              <div class="form-group">
+	                <label for="inputName">입고방법</label>
+	                <form>
+					  <input type="radio" id="normal" name="insert">
+					  <label>일반입고</label>
+					  <input type="radio" id="barcode" name="insert">
+					  <label>바코드입고</label><br>				  
+					</form>
+	              </div>
+	              <div class="form-group">
+	                <label for="inputStatus">거래처</label>
+	                <select class="form-control custom-select">                  
+	                  <option selected>-선택-</option>
+	                  <option>거래처1</option>
+	                  <option>거래처2</option>
+	                </select>
+	              </div>
+	              <div class="form-group">
+	                <label for="inputName">모델명</label>
+	                <input type="text" id="inputName" class="form-control" >
+	              </div>
+	              </div>
+	              
+	              <div class="col-6" style="padding-right:10px">              
+	              <div class="form-group">
+	                <label for="inputStatus">종류</label>
+	                <select class="form-control custom-select">                  
+	                  <option selected>휴대폰</option>
+	                  <option>태블릿</option>             
+	                </select>
+	              </div>
+	              <div class="form-group">
+	                <label for="inputName">색상</label>
+	                <input type="text" id="inputColor" class="form-control" >
+	              </div>
+	              <div class="form-group">
+	                <label for="inputName">입고가</label>
+	                <input type="text" id="inputPrice" class="form-control" >            
+	              </div>
+	              <div class="form-group">
+	                <label for="inputName">일련번호</label>
+	                <input type="text" id="inputSerial" class="form-control" >            
+	              </div>
+	              <div class="form-group">
+	                <label for="inputName">비고</label>
+	                <input type="text" id="inputEtc" class="form-control" >            
+	              </div>
+	              </div>
+	              </div>
+	              
+              </form>
              </div>
             <!-- /.card-body -->
           </div>
