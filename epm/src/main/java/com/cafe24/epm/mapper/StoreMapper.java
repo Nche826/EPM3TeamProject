@@ -9,6 +9,8 @@ import com.cafe24.epm.domain.Store;
 @Mapper
 public interface StoreMapper {
 	
+	//매장삭제처리
+	public int storeDelete(String store_Name);
 	
 	//매장 수정
 	public int storeUpdate(Store store);
