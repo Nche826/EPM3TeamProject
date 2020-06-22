@@ -158,8 +158,8 @@
             <div class="modal-header">
               <h4 class="modal-title col-sm-6">중고 정보</h4>
               <div class="col-sm-6" >	   			
-					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px"><i class="icon ion-md-create"></i>수정</button> 
-					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" ><i class="icon ion-md-trash"></i>삭제</button>
+					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" data-toggle="modal" data-target="#modal-Update"><i class="fa fa-wrench"></i></button> 					
+					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" data-toggle="modal" data-target="#modal-Delete"><i class="fa fa-trash"></i></button>
 			</div> 
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
@@ -179,6 +179,52 @@
         </div>
         <!-- /.modal-dialog -->
       </div> 
+      <!-- /.modal -->
+      <div class="modal fade" id="modal-Update" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title col-sm-6">중고 정보 수정</h4>              
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                            
+              <div th:include="used/usedUpdate :: uUpdate"></div>
+              
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+              <button type="button" class="btn btn-primary">확인</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div> 
+       <!-- modal delete -->
+      <div class="modal fade" id="modal-Delete" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title col-sm-6">안내</h4>              
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">            
+            	  삭제하시겠습니까?
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+              <button type="button" class="btn btn-primary">확인</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>    
                     </td>                   
                   </tr>   
                  </tbody>

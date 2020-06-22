@@ -63,8 +63,9 @@
     <section class="content">
       <div class="container-fluid">      
       
-	</div>
-	</section>
+	<div class="row">
+          <div class="col-12">
+          	<div class="card">
               <div class="card-header">
                 <h3 class="card-title">홈상품 개통과 관련된 모든 업무를 관리하실 수 있습니다.</h3>
               </div>
@@ -155,7 +156,7 @@
                     <td>309,091</td>
                     <td>epm 본점</td>
                     <td>김대표</td>                   
-                    <td align="center">
+                    <td>
                     	<button type="button" class="btn btn-info btn-sm pd-x-5 pd-y-0" data-toggle="modal" data-target="#modal-Info"><i class="icon ion-ios-browsers"></i></button>
                     
                       <!-- /.modal -->
@@ -165,9 +166,9 @@
             <div class="modal-header">
               <h4 class="modal-title col-sm-6">단말기 정보</h4>
               <div class="col-sm-6" >	   			
-					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px"><i class="icon ion-md-create"></i>수정</button> 
-					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" ><i class="icon ion-md-trash"></i>삭제</button>
-			</div> 
+					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" data-toggle="modal" data-target="#modal-Update"><i class="fa fa-wrench"></i></button> 					
+					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" data-toggle="modal" data-target="#modal-Delete"><i class="fa fa-trash"></i></button>
+					</div> 
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
               </button>
@@ -185,8 +186,54 @@
           <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
-      </div> 
-                    
+      </div>              
+       <!-- modal update -->
+      <div class="modal fade" id="modal-Update" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title col-sm-6">단말기 정보</h4>              
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                            
+              <div th:include="open/openHomeUpdate :: oUpdate"></div>
+              
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+              <button type="button" class="btn btn-primary">확인</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      
+       <!-- modal delete -->
+      <div class="modal fade" id="modal-Delete" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title col-sm-6">안내</h4>              
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">            
+            	  삭제하시겠습니까?
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+              <button type="button" class="btn btn-primary">확인</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>                
                     
                     </td>                   
                   </tr>   
@@ -247,6 +294,415 @@
       
     });
   });  
+  <!-- modal script -->
+  var product = new Array();
+  $(function(){
+  	$(".fc-datepicker").datepicker();
+  	
+  	$("#product1").click(function(){
+  		if($(this).is(":checked") == true){
+  			$(".product1").show();
+  			product.push(1);
+  		}else{
+  			$(".product1").hide();
+  			product.splice(product.indexOf(1),1);
+  		}
+  		setProduct();
+  	});
+  	$("#product2").click(function(){
+  		if($(this).is(":checked") == true){
+  			$(".product2").show();
+  			product.push(2);
+  		}else{
+  			$(".product2").hide();
+  			product.splice(product.indexOf(2),1);
+  		}
+  		setProduct();
+  	});
+  	
+  	$("#product6").click(function(){
+  		if($(this).is(":checked") == true){
+  			$(".product6").show();
+  			product.push(6);
+  		}else{
+  			$(".product6").hide();
+  			product.splice(product.indexOf(6),1);
+  		}
+  		setProduct();
+  	});
+  	
+  	
+  	$(".product_num").change(function(){
+  		setProductNum($(this).attr("rel"));
+  	});
+  	
+  	$("#option1").click(function(){
+  		if($(this).is(":checked") == true) $(".option1").show();
+  		else{
+  			$(".option1").hide();
+  			$("#form-write input[name=saleprice]").val("");
+  			$("#form-write input[name=saleday]").val("");
+  			$("#form-write input[name=saledate]").val("");
+  			$("#form-write input[name=salememo]").val("");
+  			setPending();
+  			calc();
+  		}
+  	});
+  	
+  	$("#option2").click(function(){
+  		if($(this).is(":checked") == true) $(".option2").show();
+  		else{
+  			$(".option2").hide();
+  			$("#form-write input[name=indoc]").val("");
+  			$("#form-write input[name=indocday]").val("");
+  			$("#form-write input[name=indocdate]").val("");
+  			$("#form-write input[name=indocmemo]").val("");
+  			setPending();
+  		}
+  	});
+  	
+  	$("#option3").click(function(){
+  		if($(this).is(":checked") == true) $(".option3").show();
+  		else{
+  			$(".option3").hide();
+  			removeFile(1);
+  			removeFile(2);
+  			removeFile(3);
+  		}
+  	});
+  	
+  	$("#option4").click(function(){
+  		if($(this).is(":checked") == true) $(".option4").show();
+  		else{
+  			$(".option4").hide();
+  			$("#form-write input[name=plusprice]").val("");
+  			$("#form-write input[name=plusinfo]").val("");
+  		}
+  	});
+  	
+  	$("#form-write input[name=saledate], #form-write input[name=indocdate]").change(function(){
+  		setPending();
+  	});
+  	
+  	$("#form-write input[name=salememo], #form-write input[name=indocmemo]").keyup(function(){
+  		setPending();
+  	});
+  	
+  	$("#keepcalc input[name=keepplus").keyup(function(){
+  		var cdate = calcDate($("#keepcalc input[name=keepdate]").val(), $("#keepcalc input[name=keepplus]").val());
+  		$("#keepcalc input[name=keepresult]").val(cdate);
+  	});
+  	
+  	$("#form-write input[name=saleday]").keyup(function(){
+  		var cdate = calcDate($("#form-write input[name=reportdate]").val(), $("#form-write input[name=saleday]").val());
+  		$("#form-write input[name=saledate]").val(cdate);
+  		setPending();
+  	});
+  	$("#form-write input[name=saledate]").change(function(){
+  		$("#form-write input[name=saleday]").val("");
+  	});
+  	
+  	$("#form-write input[name=indocday]").keyup(function(){
+  		var cdate = calcDate($("#form-write input[name=reportdate]").val(), $("#form-write input[name=indocday]").val());
+  		$("#form-write input[name=indocdate]").val(cdate);
+  		setPending();
+  	});
+  	$("#form-write input[name=indocdate]").change(function(){
+  		$("#form-write input[name=indocday]").val("");
+  	});
+  	
+  	$(".calcprice").keyup(function(){
+  		calc();
+  	})
+  	.focusout(function(){
+  		calc();
+  	});
+
+  	var bannerOffset = $("#form-write-banner").offset();
+  	$(window).scroll(function(){
+  		var scr = $(window).scrollTop();
+  		var newPosition = scr + 80 + "px";
+  		if(scr > 90) $("#form-write-banner").stop().animate({"top" : newPosition}, 500);
+  		else $("#form-write-banner").stop().animate({"top" : bannerOffset.top}, 500);
+  	});
+  	
+  	$(".inputfile").each(function(){
+  		var $input = $( this ),
+  			$label	 = $input.next("label"),
+  			labelVal = $label.html();
+
+  		$input.on("change", function(e){
+  			var fileName = "";
+
+  			if(this.files && this.files.length > 1)
+  				fileName = (this.getAttribute("data-multiple-caption") || "").replace("[count]", this.files.length);
+  			else if(e.target.value)
+  				fileName = e.target.value.split("\\").pop();
+
+  			if(fileName){
+  				$label.find("span").html( fileName );
+  				$label.find("a.btn").show();
+  			}else{
+  				$label.html( labelVal );
+  				$label.find("a.btn").hide();
+  			}
+  		});
+
+  		$input
+  		.on("focus", function(){ $input.addClass("has-focus"); })
+  		.on("blur", function(){ $input.removeClass("has-focus"); });
+  	});
+  });
+
+  function setProduct()
+  {
+  	if(product.length > 0) $(".product0").hide();
+  	else $(".product0").show();
+  	calc();
+  }
+
+  function setProductNum(gubun)
+  {
+  	var num = $("#form-write select[name=p"+gubun+"_num]").val();
+  	$(".product"+gubun+"_plus").hide();
+  	if(num > 1){
+  		for(i=1;i<=num;i++) $(".product"+gubun+"_"+i).show();
+  	}
+  	calc();
+  }
+
+  function setPending()
+  {
+  	var pending = "";
+  	
+  	var saledate = $("#form-write input[name=saledate]").val();
+  	var salememo = $("#form-write input[name=salememo]").val();
+  	if(saledate){
+  		pending += '<li class="list-group-item bd-0 pd-x-0">';
+  		if(salememo) pending += '	<div class="pull-right"><i class="fa fa-envelope-o" data-toggle="tooltip" data-placement="left" title="'+salememo.replace(/\"/g,"&quot;")+'"></i></div>';
+  		pending += '	<p class="mg-b-0"><i class="fa fa-check tx-success mg-r-8"></i><strong class="tx-inverse tx-medium">할인예정</strong> <span class="text-muted mg-l-5">'+saledate+'</span></p>';
+  		pending += '</li>';
+  	}
+  	
+  	var indocdate = $("#form-write input[name=indocdate]").val();
+  	var indocmemo = $("#form-write input[name=indocmemo]").val();
+  	if(indocdate){
+  		pending += '<li class="list-group-item bd-0 pd-x-0">';
+  		if(indocmemo) pending += '	<div class="pull-right"><i class="fa fa-envelope-o" data-toggle="tooltip" data-placement="left" title="'+indocmemo.replace(/\"/g,"&quot;")+'"></i></div>';
+  		pending += '	<p class="mg-b-0"><i class="fa fa-check tx-success mg-r-8"></i><strong class="tx-inverse tx-medium">미비약속</strong> <span class="text-muted mg-l-5">'+indocdate+'</span></p>';
+  		pending += '</li>';
+  	}
+  	
+  	if(pending){
+  		$("#list-pending").html(pending);
+  		$("#form-write-pending1").hide();
+  		$("#form-write-pending2").show();
+  		$('[data-toggle="tooltip"]').tooltip();
+  	}else{
+  		$("#list-pending").html("");
+  		$("#form-write-pending1").show();
+  		$("#form-write-pending2").hide();
+  	}
+  }
+
+  function removeFile(n)
+  {
+  	var $input = $("#file"+n),
+  		$label	 = $input.next("label"),
+  		labelVal = $label.html();
+  	
+  	$input.val("");
+  	$label.find("span").html('파일 선택 '+n);
+  	$label.find("a.btn").hide();
+  }
+
+  function calc()
+  {
+  	var s_basicprice = 0;
+  	var s_giftprice = 0;
+  	if($("#form-write input[name=product1]").is(":checked") == true){
+  		var p_num = $("#form-write select[name=p1_num]").val();
+  		if(p_num >= 1){
+  			var p_basicprice = $("#form-write input[name=p1_1_basicprice]").val();
+  			if(p_basicprice) p_basicprice = parseInt(p_basicprice); else p_basicprice = 0;
+  			var p_giftprice = $("#form-write input[name=p1_1_giftprice]").val();
+  			if(p_giftprice) p_giftprice = parseInt(p_giftprice); else p_giftprice = 0;
+  			s_basicprice += p_basicprice;
+  			s_giftprice += p_giftprice;
+  		}
+  	}
+  	if($("#form-write input[name=product2]").is(":checked") == true){
+  		var p_num = $("#form-write select[name=p2_num]").val();
+  		if(p_num >= 1){
+  			var p_basicprice = $("#form-write input[name=p2_1_basicprice]").val();
+  			if(p_basicprice) p_basicprice = parseInt(p_basicprice); else p_basicprice = 0;
+  			var p_giftprice = $("#form-write input[name=p2_1_giftprice]").val();
+  			if(p_giftprice) p_giftprice = parseInt(p_giftprice); else p_giftprice = 0;
+  			s_basicprice += p_basicprice;
+  			s_giftprice += p_giftprice;
+  		}
+  		if(p_num >= 2){
+  			var p_basicprice = $("#form-write input[name=p2_2_basicprice]").val();
+  			if(p_basicprice) p_basicprice = parseInt(p_basicprice); else p_basicprice = 0;
+  			var p_giftprice = $("#form-write input[name=p2_2_giftprice]").val();
+  			if(p_giftprice) p_giftprice = parseInt(p_giftprice); else p_giftprice = 0;
+  			s_basicprice += p_basicprice;
+  			s_giftprice += p_giftprice;
+  		}
+  		if(p_num >= 3){
+  			var p_basicprice = $("#form-write input[name=p2_3_basicprice]").val();
+  			if(p_basicprice) p_basicprice = parseInt(p_basicprice); else p_basicprice = 0;
+  			var p_giftprice = $("#form-write input[name=p2_3_giftprice]").val();
+  			if(p_giftprice) p_giftprice = parseInt(p_giftprice); else p_giftprice = 0;
+  			s_basicprice += p_basicprice;
+  			s_giftprice += p_giftprice;
+  		}
+  	}
+  	if($("#form-write input[name=product3]").is(":checked") == true){
+  		var p_num = $("#form-write select[name=p3_num]").val();
+  		if(p_num >= 1){
+  			var p_basicprice = $("#form-write input[name=p3_1_basicprice]").val();
+  			if(p_basicprice) p_basicprice = parseInt(p_basicprice); else p_basicprice = 0;
+  			var p_giftprice = $("#form-write input[name=p3_1_giftprice]").val();
+  			if(p_giftprice) p_giftprice = parseInt(p_giftprice); else p_giftprice = 0;
+  			s_basicprice += p_basicprice;
+  			s_giftprice += p_giftprice;
+  		}
+  	}
+  	if($("#form-write input[name=product4]").is(":checked") == true){
+  		var p_num = $("#form-write select[name=p4_num]").val();
+  		if(p_num >= 1){
+  			var p_basicprice = $("#form-write input[name=p4_1_basicprice]").val();
+  			if(p_basicprice) p_basicprice = parseInt(p_basicprice); else p_basicprice = 0;
+  			var p_giftprice = $("#form-write input[name=p4_1_giftprice]").val();
+  			if(p_giftprice) p_giftprice = parseInt(p_giftprice); else p_giftprice = 0;
+  			s_basicprice += p_basicprice;
+  			s_giftprice += p_giftprice;
+  		}
+  	}
+  	if($("#form-write input[name=product5]").is(":checked") == true){
+  		var p_num = $("#form-write select[name=p5_num]").val();
+  		if(p_num >= 1){
+  			var p_basicprice = $("#form-write input[name=p5_1_basicprice]").val();
+  			if(p_basicprice) p_basicprice = parseInt(p_basicprice); else p_basicprice = 0;
+  			var p_giftprice = $("#form-write input[name=p5_1_giftprice]").val();
+  			if(p_giftprice) p_giftprice = parseInt(p_giftprice); else p_giftprice = 0;
+  			s_basicprice += p_basicprice;
+  			s_giftprice += p_giftprice;
+  		}
+  	}
+  	if($("#form-write input[name=product6]").is(":checked") == true){
+  		var p_num = $("#form-write select[name=p6_num]").val();
+  		if(p_num >= 1){
+  			var p_basicprice = $("#form-write input[name=p6_1_basicprice]").val();
+  			if(p_basicprice) p_basicprice = parseInt(p_basicprice); else p_basicprice = 0;
+  			var p_giftprice = $("#form-write input[name=p6_1_giftprice]").val();
+  			if(p_giftprice) p_giftprice = parseInt(p_giftprice); else p_giftprice = 0;
+  			s_basicprice += p_basicprice;
+  			s_giftprice += p_giftprice;
+  		}
+  	}
+  	if($("#form-write input[name=product7]").is(":checked") == true){
+  		var p_num = $("#form-write select[name=p7_num]").val();
+  		if(p_num >= 1){
+  			var p_basicprice = $("#form-write input[name=p7_1_basicprice]").val();
+  			if(p_basicprice) p_basicprice = parseInt(p_basicprice); else p_basicprice = 0;
+  			var p_giftprice = $("#form-write input[name=p7_1_giftprice]").val();
+  			if(p_giftprice) p_giftprice = parseInt(p_giftprice); else p_giftprice = 0;
+  			s_basicprice += p_basicprice;
+  			s_giftprice += p_giftprice;
+  		}
+  	}
+  	if($("#form-write input[name=product8]").is(":checked") == true){
+  		var p_num = $("#form-write select[name=p8_num]").val();
+  		if(p_num >= 1){
+  			var p_basicprice = $("#form-write input[name=p8_1_basicprice]").val();
+  			if(p_basicprice) p_basicprice = parseInt(p_basicprice); else p_basicprice = 0;
+  			var p_giftprice = $("#form-write input[name=p8_1_giftprice]").val();
+  			if(p_giftprice) p_giftprice = parseInt(p_giftprice); else p_giftprice = 0;
+  			s_basicprice += p_basicprice;
+  			s_giftprice += p_giftprice;
+  		}
+  	}
+  	if($("#form-write input[name=product9]").is(":checked") == true){
+  		var p_num = $("#form-write select[name=p9_num]").val();
+  		if(p_num >= 1){
+  			var p_basicprice = $("#form-write input[name=p9_1_basicprice]").val();
+  			if(p_basicprice) p_basicprice = parseInt(p_basicprice); else p_basicprice = 0;
+  			var p_giftprice = $("#form-write input[name=p9_1_giftprice]").val();
+  			if(p_giftprice) p_giftprice = parseInt(p_giftprice); else p_giftprice = 0;
+  			s_basicprice += p_basicprice;
+  			s_giftprice += p_giftprice;
+  		}
+  	}
+  	$("#form-write input[name=basicprice]").val(s_basicprice);
+  	$("#form-write input[name=giftprice]").val(s_giftprice);
+  	
+  	var sumprice = 0;
+  	var marginprice = 0;
+  	var realmargin = 0;
+  	
+  	var basicprice = $("#form-write input[name=basicprice]").val();
+  	if(basicprice) basicprice = parseInt(basicprice); else basicprice = 0;
+  	var profitprice = $("#form-write input[name=profitprice]").val();
+  	if(profitprice) profitprice = parseInt(profitprice); else profitprice = 0;
+  	var giftprice = $("#form-write input[name=giftprice]").val();
+  	if(giftprice) giftprice = parseInt(giftprice); else giftprice = 0;
+  	var saleprice = $("#form-write input[name=saleprice]").val();
+  	if(saleprice) saleprice = parseInt(saleprice); else saleprice = 0;
+  	var plusprice = $("#form-write input[name=plusprice]").val();
+  	if(plusprice && plusprice != "-") plusprice = parseInt(plusprice); else plusprice = 0;
+  	
+  	sumprice = basicprice + profitprice - giftprice;
+  	sumprice *= -1;
+  	
+  	marginprice = basicprice + profitprice - giftprice - saleprice + plusprice;
+  	
+  	realmargin = marginprice;
+  realmargin -= Math.round((sumprice - (sumprice/(1+10.00/100))) * -1);
+  	
+  	$("#form-write input[name=sumprice]").val(sumprice);
+  	$("#form-write input[name=marginprice]").val(marginprice);
+  	$("#form-write input[name=realmargin]").val(realmargin);
+  }
+
+  function writeHome()
+  {
+  	$("#form-write").ajaxSubmit({
+  		url: "/open/writeHome",
+  		type: "POST",
+  		dataType: "json",
+  		success: function(response){
+  			$("#loading").hide();
+  			if(response.msg) $.alert(response.msg);
+  			if(response.result == 1) $(location).attr("href","/open/home");
+  			if(response.result == 2) history.go(0);
+  		},
+  		beforeSerialize: function(){ $("#loading").show(); },
+  		error: function(){ $("#loading").hide(); }
+  	});
+  }
+
+  function emptyInput(n)
+  {
+  	$("#form-write input[name="+n+"]").val("");
+  }
+
+  function setPlanmon(a, b)
+  {
+  	var planmon = $("#form-write select[name=p"+a+"_"+b+"_planmon]").val();
+  	
+  	if(planmon == "ETC"){
+  		$("#form-write-p"+a+"_"+b+"_planmon1").removeClass("wd-100p");
+  		$("#form-write-p"+a+"_"+b+"_planmon1").addClass("wd-50p");
+  		$("#form-write-p"+a+"_"+b+"_planmon2").show();
+  		$("#form-write input[name=p"+a+"_"+b+"_planmon_etc]").select();
+  	}else{
+  		$("#form-write-p"+a+"_"+b+"_planmon1").removeClass("wd-50p");
+  		$("#form-write-p"+a+"_"+b+"_planmon1").addClass("wd-100p");
+  		$("#form-write-p"+a+"_"+b+"_planmon2").hide();
+  	}
+  }
 </script>
 
 <!-- SweetAlert2 -->
