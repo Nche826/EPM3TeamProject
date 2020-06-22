@@ -16,4 +16,13 @@ public class UnpaidService {
 	public List<Unpaid> unpaidList (){
 		return unpaidMapper.unpaidList();
 	}
+	
+	//처리업무선택
+	public Unpaid unpaidSelect (){
+		return unpaidMapper.unpaidSelect();
+	}
+	//처리업무등록
+	public Unpaid unpaidInsert(){
+		return unpaidMapper.unpaidInsert();
+	}
 }

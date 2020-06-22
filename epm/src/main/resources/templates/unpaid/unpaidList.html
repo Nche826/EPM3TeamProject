@@ -95,6 +95,7 @@
 			                      <th>고객명</th>
 			                      <th>연락처</th>
 			                      <th>매장</th>
+			                      <th>접수일</th>
 			                      <th>접수직원</th>
 			                      <th>처리일</th>
 			                      <th>처리직원</th>
@@ -108,14 +109,15 @@
 			                      <td th:text="${upl.unpaidStatus}">a</td>
 			                      <td th:text="${upl.unpaidExpDate}">a</td>
 			                      <td th:text="${upl.unpaidPart}">a</td>
-			                      <td th:text="${upl.unpaidDesc}">a</td>
+			                      <td th:text="${upl.unpaidDesc}">a</td>			                      
 			                      <td th:text="${upl.customerName}">a</td>
-			                      <td th:text="${upl.customerTel}">a</td>
-			                      <td th:text="${upl.storeName}">a</td>
-			                      <td th:text="${upl.memberName}">a</td>
+			                      <td th:text="${upl.customerTel}"> a </td>
+			                      <td th:text="${upl.unpaidRegStoreName}"> a </td> 
+			                      <td th:text="${upl.unpaidRegDate}">a</td>
+			                      <td th:text="${upl.unpaidRegMemberName}">a</td>
 			                      <td th:text="${upl.unpaidProDate}">a</td>
-			                      <td th:text="${upl.memberName}">a</td>
-			                      <td><i class="fas fa-envelope-square" data-toggle="tooltip" data-placement="left" title="메모.." ></i></td>
+			                      <td th:text="${upl.unpaidProMemberName}">a</td>
+			                      <td><i class="fas fa-envelope-square" data-toggle="tooltip" data-placement="left" th:title="${upl.unpaidMemo}" ></i></td>
 			                      <td><a href="#" data-toggle="modal" data-target="#modalUnpaidDetail" ><i class="fas fa-file-signature"></i></a></td>
 			                    </tr>
 			                   
@@ -149,7 +151,7 @@
 			            </div>
 			            <div class="modal-body">
 			              
-			              	<form action="#" method="post">
+			              	<form id="modalUnpaidInsertForm" action="/unpaidInsert" method="post">
 				              <!-- 모달 바디 내용 -->
 				              <div class="row">
 					              	<div class="col-3" style="text-align: right;">
@@ -160,10 +162,11 @@
 									<div class="col-1"></div>
 									
 					              	<div class="col-8">
+					              		<input type="text" name="unpaidStatus" value="접수" hidden="hidden">
 					              		<!-- 매장명 받아오기 -->
-					              		<p>EPM</p>
+					              		<p>EPM</p><input type="text" name="storeName" value="매장" hidden="hidden">
 					              		<!-- 접수직원 목록 받아오기 -->
-					              		<p>접수직원</p>
+					              		<p>접수직원</p><input type="text" name="memberName" value="접수직원" hidden="hidden">
 					              		<!-- 데이트픽커 -->
 					              		<input type="date" name="unpaid" style="width: 100%; margin: 5px;">
 					              	</div>
@@ -180,10 +183,10 @@
 					              	</div>  	
 					              	<div class="col-1"></div>
 									<div class="col-8">
-					              		<input type="text" class="form-control" name="name" style="margin: 5px;">
-					              		<input type="text" class="form-control" name="desc" style="margin: 5px;">
-					              		<input type="text" class="form-control" name="phone" style="margin: 5px;">
-					              		<textarea class="form-control" rows="3" name="memo" style="margin: 5px;"></textarea>
+					              		<input type="text" class="form-control" name="unpaidDesc" style="margin: 5px;">
+					              		<input type="text" class="form-control" name="customerName" style="margin: 5px;">
+					              		<input type="text" class="form-control" name="customerTel" style="margin: 5px;">
+					              		<textarea class="form-control" rows="3" name="unpaidMemo" style="margin: 5px;"></textarea>
 									</div>
 								</div>
 			              	</form>
@@ -439,18 +442,26 @@
 <th:block layout:fragment="customFooterScript">
 	<script type="text/javascript">
 	
-	
+			//미결정보등록처리
+		    $(function () {
+		   	 $('#modalUnpaidInsertSubmit').click(function(){
+		   		 $('#modalUnpaidInsertForm').submit()
+		   	 	});
+		   	 });
+			
 			//미결정보수정처리
 		    $(function () {
 		   	 $('#modalUnpaidDetailModifyDo').click(function(){
 		   		 $('#modalUnpaidDetailModifyForm').submit()
-		   	 })
+		   	 	});
+		   	 });
 	 
 			//미결완료처리
 		     $(function () {
 		    	 $('#modalUnpaidDetailOver').click(function(){
 		    		 $('#unpaidDetailOverForm').submit()
-		    	 })
+		    	 });
+	    	 });
 	    	 
 	    	 //datetimepicker format
 	         $('#datetimepicker1').datetimepicker({
@@ -485,8 +496,8 @@
 	        	 var currentDate = new Date();
 	        	 var yyyy = currentDate.getYear()+1900
 	        	 var mm = currentDate.getMonth()+1
-	        	 var dd1 = currentDate.getDate()
-	        	 var dd2 = currentDate.getDate()+7
+	        	 var dd1 = currentDate.getDate()-6
+	        	 var dd2 = currentDate.getDate()
 	        	 
 	        	 if(mm <10){
 	        		mm = '0'+mm
@@ -535,7 +546,6 @@
 	         $(function () {
 				  $('[data-toggle="tooltip"]').tooltip()
 				});
-	     });
 	 </script>
 </th:block>
 

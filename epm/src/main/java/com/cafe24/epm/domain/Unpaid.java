@@ -12,44 +12,13 @@ public class Unpaid {
 	private String unpaidMemo;
 	private String unpaidStatus;
 	private String unpaidProDate;
-	private String staffCode;
-	private String memberName;	
-	private String storeName;	
+	private String unpaidProStaffCode;
+	private String unpaidProMemberName;	
+	private String unpaidProStoreName;	
 	private String unpaidRegDate;
-	
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Unpaid [unpaidCode=");
-		builder.append(unpaidCode);
-		builder.append(", unpaidExpDate=");
-		builder.append(unpaidExpDate);
-		builder.append(", unpaidPart=");
-		builder.append(unpaidPart);
-		builder.append(", unpaidSubName=");
-		builder.append(unpaidSubName);
-		builder.append(", unpaidDesc=");
-		builder.append(unpaidDesc);
-		builder.append(", customerCode=");
-		builder.append(customerCode);
-		builder.append(", customerName=");
-		builder.append(customerName);
-		builder.append(", unpaidMemo=");
-		builder.append(unpaidMemo);
-		builder.append(", unpaidStatus=");
-		builder.append(unpaidStatus);
-		builder.append(", unpaidProDate=");
-		builder.append(unpaidProDate);
-		builder.append(", staffCode=");
-		builder.append(staffCode);
-		builder.append(", memberName=");
-		builder.append(memberName);
-		builder.append(", unpaidRegDate=");
-		builder.append(unpaidRegDate);
-		builder.append("]");
-		return builder.toString();
-	}
-	
+	private String unpaidRegStaffCode;
+	private String unpaidRegMemberName;
+	private String unpaidRegStoreName;
 	public String getUnpaidCode() {
 		return unpaidCode;
 	}
@@ -92,6 +61,12 @@ public class Unpaid {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
+	public String getCustomerTel() {
+		return customerTel;
+	}
+	public void setCustomerTel(String customerTel) {
+		this.customerTel = customerTel;
+	}
 	public String getUnpaidMemo() {
 		return unpaidMemo;
 	}
@@ -110,17 +85,23 @@ public class Unpaid {
 	public void setUnpaidProDate(String unpaidProDate) {
 		this.unpaidProDate = unpaidProDate;
 	}
-	public String getStaffCode() {
-		return staffCode;
+	public String getUnpaidProStaffCode() {
+		return unpaidProStaffCode;
 	}
-	public void setStaffCode(String staffCode) {
-		this.staffCode = staffCode;
+	public void setUnpaidProStaffCode(String unpaidProStaffCode) {
+		this.unpaidProStaffCode = unpaidProStaffCode;
 	}
-	public String getMemberName() {
-		return memberName;
+	public String getUnpaidProMemberName() {
+		return unpaidProMemberName;
 	}
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
+	public void setUnpaidProMemberName(String unpaidProMemberName) {
+		this.unpaidProMemberName = unpaidProMemberName;
+	}
+	public String getUnpaidProStoreName() {
+		return unpaidProStoreName;
+	}
+	public void setUnpaidProStoreName(String unpaidProStoreName) {
+		this.unpaidProStoreName = unpaidProStoreName;
 	}
 	public String getUnpaidRegDate() {
 		return unpaidRegDate;
@@ -128,4 +109,65 @@ public class Unpaid {
 	public void setUnpaidRegDate(String unpaidRegDate) {
 		this.unpaidRegDate = unpaidRegDate;
 	}
+	public String getUnpaidRegStaffCode() {
+		return unpaidRegStaffCode;
+	}
+	public void setUnpaidRegStaffCode(String unpaidRegStaffCode) {
+		this.unpaidRegStaffCode = unpaidRegStaffCode;
+	}
+	public String getUnpaidRegMemberName() {
+		return unpaidRegMemberName;
+	}
+	public void setUnpaidRegMemberName(String unpaidRegMemberName) {
+		this.unpaidRegMemberName = unpaidRegMemberName;
+	}
+	public String getUnpaidRegStoreName() {
+		return unpaidRegStoreName;
+	}
+	public void setUnpaidRegStoreName(String unpaidRegStoreName) {
+		this.unpaidRegStoreName = unpaidRegStoreName;
+	}
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Unpaid [unpaidCode=");
+		builder.append(unpaidCode);
+		builder.append(", unpaidExpDate=");
+		builder.append(unpaidExpDate);
+		builder.append(", unpaidPart=");
+		builder.append(unpaidPart);
+		builder.append(", unpaidSubName=");
+		builder.append(unpaidSubName);
+		builder.append(", unpaidDesc=");
+		builder.append(unpaidDesc);
+		builder.append(", customerCode=");
+		builder.append(customerCode);
+		builder.append(", customerName=");
+		builder.append(customerName);
+		builder.append(", customerTel=");
+		builder.append(customerTel);
+		builder.append(", unpaidMemo=");
+		builder.append(unpaidMemo);
+		builder.append(", unpaidStatus=");
+		builder.append(unpaidStatus);
+		builder.append(", unpaidProDate=");
+		builder.append(unpaidProDate);
+		builder.append(", unpaidProStaffCode=");
+		builder.append(unpaidProStaffCode);
+		builder.append(", unpaidProMemberName=");
+		builder.append(unpaidProMemberName);
+		builder.append(", unpaidProStoreName=");
+		builder.append(unpaidProStoreName);
+		builder.append(", unpaidRegDate=");
+		builder.append(unpaidRegDate);
+		builder.append(", unpaidRegStaffCode=");
+		builder.append(unpaidRegStaffCode);
+		builder.append(", unpaidRegMemberName=");
+		builder.append(unpaidRegMemberName);
+		builder.append(", unpaidRegStoreName=");
+		builder.append(unpaidRegStoreName);
+		builder.append("]");
+		return builder.toString();
+	}
+
 }
