@@ -50,74 +50,72 @@
             <div class="card-header">
               <h3 class="card-title">정보입력</h3>          
             </div>
-            
-            <div class="card-body" th:fragment="dInsert">
-            <form action ="/deviceInsert" method="post">
-	            <div class="row mg-t-20 mg-b-20">
+             
+            <div class="card-body">
+          
+	            <div th:fragment="dInsert">
 	             <div class="col-6" style="padding-right:10px">             	
 	              <div class="form-group">
 	                <label for="inputName">매장</label>
-	                <input type="text" id="inputName" class="form-control" th:value="${session.SID}">
+	                <input type="text" id="storeName" class="form-control" name="storeName">
 	              </div>
 	              <div class="form-group">
 	                <label for="inputStatus">입고직원</label>
-	                <select class="form-control custom-select" name="deviceStaff">                  
-	                  <option selected>직원1</option>
-	                  <option>직원2</option>
+	                <select class="form-control custom-select" name="deviceinStaff">                  
+	                  <option selected value="1">직원1</option>
+	                  <option value="2">직원2</option>
 	                  <option>직원3</option>                  
 	                </select>
 	              </div>
 	              <div class="form-group">
 	                <label for="inputName">입고방법</label>
-	                <form>
-					  <input type="radio" id="normal" name="insert">
+					  <input type="radio" id="deviceMethod1" name="deviceMethod">
 					  <label>일반입고</label>
-					  <input type="radio" id="barcode" name="insert">
+					  <input type="radio" id="deviceMethod2" name="deviceMethod">
 					  <label>바코드입고</label><br>				  
-					</form>
 	              </div>
 	              <div class="form-group">
 	                <label for="inputStatus">거래처</label>
-	                <select class="form-control custom-select">                  
+	                <select class="form-control custom-select" name="deviceinDealler">                  
 	                  <option selected>-선택-</option>
-	                  <option>거래처1</option>
-	                  <option>거래처2</option>
+	                  <option value="dealler_1">거래처1</option>
+	                  <option value="dealler2">거래처2</option>
 	                </select>
 	              </div>
 	              <div class="form-group">
 	                <label for="inputName">모델명</label>
-	                <input type="text" id="inputName" class="form-control" >
+	                <input type="hidden" name="deviceinDevice" value="code1">
+	                <input type="text" id="deviceModel" class="form-control" name="deviceModel" >
 	              </div>
 	              </div>
 	              
 	              <div class="col-6" style="padding-right:10px">              
 	              <div class="form-group">
 	                <label for="inputStatus">종류</label>
-	                <select class="form-control custom-select">                  
+	                <select class="form-control custom-select" name="deviceType">                  
 	                  <option selected>휴대폰</option>
 	                  <option>태블릿</option>             
 	                </select>
 	              </div>
 	              <div class="form-group">
 	                <label for="inputName">색상</label>
-	                <input type="text" id="inputColor" class="form-control" >
+	                <input type="text" id="deviceColor" class="form-control" name="deviceColor">
 	              </div>
 	              <div class="form-group">
 	                <label for="inputName">입고가</label>
-	                <input type="text" id="inputPrice" class="form-control" >            
+	                <input type="text" id="devicePrice" class="form-control" name="devicePrice">            
 	              </div>
 	              <div class="form-group">
 	                <label for="inputName">일련번호</label>
-	                <input type="text" id="inputSerial" class="form-control" >            
+	                <input type="text" id="deviceSerial" class="form-control" name="deviceinSerial" >            
 	              </div>
 	              <div class="form-group">
 	                <label for="inputName">비고</label>
-	                <input type="text" id="inputEtc" class="form-control" >            
+	                <input type="text" id="deviceMemo" class="form-control" name="deviceinMemo" > 
+	              </div> 	                          
 	              </div>
 	              </div>
-	              </div>
-	              
-              </form>
+	            
              </div>
             <!-- /.card-body -->
           </div>
