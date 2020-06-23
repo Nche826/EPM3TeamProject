@@ -2,69 +2,134 @@ package com.cafe24.epm.domain;
 
 public class Device {
 	
+	private String deviceinCode;
+	private String deviceinSerial;
+	private String deviceinDealler;
+	private String deviceinDevice;
+	private String deviceinStatus;
+	private String deviceinStatDate;
+	private String deviceinDate;
+	private String deviceinMemo;
+	private String deviceinStaff;
+	private String deviceinRegDate;
 	private String deviceCode;
-	private String deviceSerial;
-	private String deviceDealler;
-	private String deviceDevice;
-	private String deviceStatus;
-	private String deviceStatDate;
-	private String deviceDate;
-	private String deviceMemo;
-	private String deviceStaff;
+	private String deviceType;
+	private String deviceManuf;
+	private String deviceModel;
+	private String deviceName;
+	private String deviceColor;
+	private String devicePrice;
+	private String memberId;
 	private String deviceRegDate;
+	private String deviceTelecom;
+	private String storeName;
+	public String getDeviceinCode() {
+		return deviceinCode;
+	}
+	public void setDeviceinCode(String deviceinCode) {
+		this.deviceinCode = deviceinCode;
+	}
+	public String getDeviceinSerial() {
+		return deviceinSerial;
+	}
+	public void setDeviceinSerial(String deviceinSerial) {
+		this.deviceinSerial = deviceinSerial;
+	}
+	public String getDeviceinDealler() {
+		return deviceinDealler;
+	}
+	public void setDeviceinDealler(String deviceinDealler) {
+		this.deviceinDealler = deviceinDealler;
+	}
+	public String getDeviceinDevice() {
+		return deviceinDevice;
+	}
+	public void setDeviceinDevice(String deviceinDevice) {
+		this.deviceinDevice = deviceinDevice;
+	}
+	public String getDeviceinStatus() {
+		return deviceinStatus;
+	}
+	public void setDeviceinStatus(String deviceinStatus) {
+		this.deviceinStatus = deviceinStatus;
+	}
+	public String getDeviceinStatDate() {
+		return deviceinStatDate;
+	}
+	public void setDeviceinStatDate(String deviceinStatDate) {
+		this.deviceinStatDate = deviceinStatDate;
+	}
+	public String getDeviceinDate() {
+		return deviceinDate;
+	}
+	public void setDeviceinDate(String deviceinDate) {
+		this.deviceinDate = deviceinDate;
+	}
+	public String getDeviceinMemo() {
+		return deviceinMemo;
+	}
+	public void setDeviceinMemo(String deviceinMemo) {
+		this.deviceinMemo = deviceinMemo;
+	}
+	public String getDeviceinStaff() {
+		return deviceinStaff;
+	}
+	public void setDeviceinStaff(String deviceinStaff) {
+		this.deviceinStaff = deviceinStaff;
+	}
+	public String getDeviceinRegDate() {
+		return deviceinRegDate;
+	}
+	public void setDeviceinRegDate(String deviceinRegDate) {
+		this.deviceinRegDate = deviceinRegDate;
+	}
 	public String getDeviceCode() {
 		return deviceCode;
 	}
 	public void setDeviceCode(String deviceCode) {
 		this.deviceCode = deviceCode;
 	}
-	public String getDeviceSerial() {
-		return deviceSerial;
+	public String getDeviceType() {
+		return deviceType;
 	}
-	public void setDeviceSerial(String deviceSerial) {
-		this.deviceSerial = deviceSerial;
+	public void setDeviceType(String deviceType) {
+		this.deviceType = deviceType;
 	}
-	public String getDeviceDealler() {
-		return deviceDealler;
+	public String getDeviceManuf() {
+		return deviceManuf;
 	}
-	public void setDeviceDealler(String deviceDealler) {
-		this.deviceDealler = deviceDealler;
+	public void setDeviceManuf(String deviceManuf) {
+		this.deviceManuf = deviceManuf;
 	}
-	public String getDeviceDevice() {
-		return deviceDevice;
+	public String getDeviceModel() {
+		return deviceModel;
 	}
-	public void setDeviceDevice(String deviceDevice) {
-		this.deviceDevice = deviceDevice;
+	public void setDeviceModel(String deviceModel) {
+		this.deviceModel = deviceModel;
 	}
-	public String getDeviceStatus() {
-		return deviceStatus;
+	public String getDeviceName() {
+		return deviceName;
 	}
-	public void setDeviceStatus(String deviceStatus) {
-		this.deviceStatus = deviceStatus;
+	public void setDeviceName(String deviceName) {
+		this.deviceName = deviceName;
 	}
-	public String getDeviceStatDate() {
-		return deviceStatDate;
+	public String getDeviceColor() {
+		return deviceColor;
 	}
-	public void setDeviceStatDate(String deviceStatDate) {
-		this.deviceStatDate = deviceStatDate;
+	public void setDeviceColor(String deviceColor) {
+		this.deviceColor = deviceColor;
 	}
-	public String getDeviceDate() {
-		return deviceDate;
+	public String getDevicePrice() {
+		return devicePrice;
 	}
-	public void setDeviceDate(String deviceDate) {
-		this.deviceDate = deviceDate;
+	public void setDevicePrice(String devicePrice) {
+		this.devicePrice = devicePrice;
 	}
-	public String getDeviceMemo() {
-		return deviceMemo;
+	public String getMemberId() {
+		return memberId;
 	}
-	public void setDeviceMemo(String deviceMemo) {
-		this.deviceMemo = deviceMemo;
-	}
-	public String getDeviceStaff() {
-		return deviceStaff;
-	}
-	public void setDeviceStaff(String deviceStaff) {
-		this.deviceStaff = deviceStaff;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	public String getDeviceRegDate() {
 		return deviceRegDate;
@@ -72,12 +137,28 @@ public class Device {
 	public void setDeviceRegDate(String deviceRegDate) {
 		this.deviceRegDate = deviceRegDate;
 	}
+	public String getDeviceTelecom() {
+		return deviceTelecom;
+	}
+	public void setDeviceTelecom(String deviceTelecom) {
+		this.deviceTelecom = deviceTelecom;
+	}
+	public String getStoreName() {
+		return storeName;
+	}
+	public void setStoreName(String storeName) {
+		this.storeName = storeName;
+	}
 	@Override
 	public String toString() {
-		return "Device [deviceCode=" + deviceCode + ", deviceSerial=" + deviceSerial + ", deviceDealler="
-				+ deviceDealler + ", deviceDevice=" + deviceDevice + ", deviceStatus=" + deviceStatus
-				+ ", deviceStatDate=" + deviceStatDate + ", deviceDate=" + deviceDate + ", deviceMemo=" + deviceMemo
-				+ ", deviceStaff=" + deviceStaff + ", deviceRegDate=" + deviceRegDate + "]";
+		return "Device [deviceinCode=" + deviceinCode + ", deviceinSerial=" + deviceinSerial + ", deviceinDealler="
+				+ deviceinDealler + ", deviceinDevice=" + deviceinDevice + ", deviceinStatus=" + deviceinStatus
+				+ ", deviceinStatDate=" + deviceinStatDate + ", deviceinDate=" + deviceinDate + ", deviceinMemo="
+				+ deviceinMemo + ", deviceinStaff=" + deviceinStaff + ", deviceinRegDate=" + deviceinRegDate
+				+ ", deviceCode=" + deviceCode + ", deviceType=" + deviceType + ", deviceManuf=" + deviceManuf
+				+ ", deviceModel=" + deviceModel + ", deviceName=" + deviceName + ", deviceColor=" + deviceColor
+				+ ", devicePrice=" + devicePrice + ", memberId=" + memberId + ", deviceRegDate=" + deviceRegDate
+				+ ", deviceTelecom=" + deviceTelecom + ", storeName=" + storeName + "]";
 	}
 		
 	
