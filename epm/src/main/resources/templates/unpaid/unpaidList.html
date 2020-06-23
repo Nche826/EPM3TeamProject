@@ -54,15 +54,15 @@
 											<div class="form-inline">											                  
 												<select class="form-control" name="statusSearch" id="statusSearch" style="margin: 5px;">
 						                          <option value="">상태</option>
-						                          <option value="take">접수</option>
-						                          <option value="solve">해결</option>
-						                          <option value="cancle">취소</option>
+						                          <option value="접수">접수</option>
+						                          <option value="해결">해결</option>
+						                          <option value="취소">취소</option>
 						                        </select>
 												<select class="form-control" name="subjectSearch" id="subjectSearch" style="margin: 5px;">
 						                          <option value="">구분</option>
-						                          <option value="take">일반</option>
-						                          <option value="solve">모바일</option>
-						                          <option value="cancle">홈상품</option>
+						                          <option value="일반">일반</option>
+						                          <option value="모바일">모바일</option>
+						                          <option value="홈상품">홈상품</option>
 						                        </select>
 						                        
 						                     <!-- *******접수직원 load******* -->
@@ -158,17 +158,24 @@
 					              		<p>매장</p>
 					              		<p>접수직원</p>
 					              		<p>미결예정일</p>
+					              		<p>구분</p>
 									</div>
 									<div class="col-1"></div>
 									
 					              	<div class="col-8">
 					              		<input type="text" name="unpaidStatus" value="접수" hidden="hidden">
-					              		<!-- 매장명 받아오기 -->
-					              		<p>EPM</p><input type="text" name="storeName" value="매장" hidden="hidden">
-					              		<!-- 접수직원 목록 받아오기 -->
-					              		<p>접수직원</p><input type="text" name="memberName" value="접수직원" hidden="hidden">
+					              		<!-- 매장명 받아오기★★★ -->
+					              		<p>EPM</p><input type="text" name="unpaidRegStoreName" value="삼삼1호점" hidden="hidden">
+					              		<!-- 접수직원 목록 받아오기 ★★★ -->
+					              		<p>접수직원</p><input type="text" name="unpaidRegMemberName" value="김수지" hidden="hidden">
 					              		<!-- 데이트픽커 -->
 					              		<input type="date" name="unpaid" style="width: 100%; margin: 5px;">
+					              		<select class="form-control" name="unpaidPart" id="unpaidPart" style="margin: 5px;">
+						                          <option value="">구분</option>
+						                          <option value="일반">일반</option>
+						                          <option value="모바일">모바일</option>
+						                          <option value="홈상품">홈상품</option>
+						                        </select>
 					              	</div>
 								</div>
 									

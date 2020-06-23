@@ -10,6 +10,8 @@ import com.cafe24.epm.mapper.UnpaidMapper;
 
 @Service
 public class UnpaidService {
+	
+	
 	@Autowired private UnpaidMapper unpaidMapper;
 	
 	//처리 리스트
@@ -21,8 +23,11 @@ public class UnpaidService {
 	public Unpaid unpaidSelect (){
 		return unpaidMapper.unpaidSelect();
 	}
+	
 	//처리업무등록
-	public Unpaid unpaidInsert(){
-		return unpaidMapper.unpaidInsert();
+	public int unpaidInsert(Unpaid unpaid){
+		System.out.println("처리업무등록 : "+unpaid);
+		return unpaidMapper.unpaidInsert(unpaid);
 	}
+	 
 }

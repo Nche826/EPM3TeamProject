@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.cafe24.epm.domain.Unpaid;
 import com.cafe24.epm.service.UnpaidService;
@@ -16,9 +17,16 @@ public class UnpaidController {
 	
 	@GetMapping("/unpaidInsert")
 	public String unpaidInsert() {
-		unpaidService.unpaidInsert();
 		return "unpaid/unpaidInsert";
 	}
+	
+	
+	@PostMapping("/unpaidInsert") 
+	public String unpaidInsert(Unpaid unpaid) {
+		unpaidService.unpaidInsert(unpaid);
+	  return "redirect:/unpaidList";
+	  }
+	 
 	
 	@GetMapping("/unpaidList")
 	public String unpaidList(Model model) {
