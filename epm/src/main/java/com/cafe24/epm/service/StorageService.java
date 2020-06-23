@@ -1,6 +1,5 @@
 package com.cafe24.epm.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -16,13 +15,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Service
 public class StorageService {
-	
-	@Autowired private HttpServletRequest request;
-	
+		
 	@Value("${service.file.uploadurl}")
 	private String fileUploadPath;
 	

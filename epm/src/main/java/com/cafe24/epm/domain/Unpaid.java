@@ -19,6 +19,7 @@ public class Unpaid {
 	private String unpaidRegStaffCode;
 	private String unpaidRegMemberName;
 	private String unpaidRegStoreName;
+	
 	public String getUnpaidCode() {
 		return unpaidCode;
 	}

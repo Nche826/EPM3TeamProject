@@ -32,7 +32,6 @@ public class MemberService {
 	public int memberDelete (Member member) {
 		return memberMapper.memberDelete(member);
 	}
-	 
 	
 	//회원리스트
 	public List<Member> memberList () {

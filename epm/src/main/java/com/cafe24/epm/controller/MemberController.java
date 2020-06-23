@@ -25,22 +25,6 @@ public class MemberController {
 	@Autowired private MemberService memberService;
 	@Autowired private MemberMapper memberMapper;
 	@Autowired private StorageService storageService;
-
-	/* 로그인 로그아웃을 staffcontroller에서 처리해야함
-	 * @GetMapping("/logout") public String logout (HttpSession session) {
-	 * session.invalidate(); System.out.println("=====로그아웃=====");
-	 * return"redirect:/login"; }
-	 * 
-	 * @PostMapping("/login") public String login (Staff staff, HttpSession session,
-	 * RedirectAttributes redirectAttr) { System.out.println("staff : "+staff);
-	 * if(!"".equals(staff.getMemberId()) && !"".equals(staff.getMemberPw())){
-	 * Member result = memberService.memberSelect(staff.getMemberId()); if(result !=
-	 * null && staff.getMemberPw().equals(result.getMemberPw())) {
-	 * 
-	 * } } return ("login/login"); }
-	 * 
-	 * @GetMapping("/login") public String login () { return ("login/login"); }
-	 */
 	
 	@GetMapping("/memberInsert")
 	public String memberInsertView() {
