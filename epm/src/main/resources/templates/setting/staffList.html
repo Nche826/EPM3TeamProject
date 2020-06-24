@@ -155,55 +155,18 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr th:each =" s,i : ${staffList}">
                       <td><input type="checkbox" value="#"></td>
-                      <td>1</td>
-                      <td>솜솜치</td>
-                      <td>id001</td>
-                      <td>삼성1호점</td>
-                      <td>대표</td>
-                      <td>1054</td>
-                      <td>20200610</td>
-                      <td>20190607</td>
+                      <td th:text="${i.count}"></td>
+                      <td th:text="${s.member_name}"></td>
+                      <td th:text="${s.member_id}"></td>
+                      <td th:text="${s.store_name}"></td>
+                      <td th:text="${s.level_name}"></td>
+                      <td th:text="${s.count}"></td>
+                      <td th:text="${s.logout_date}"></td>
+                      <td th:text="${s.staff_reg_date}"></td>
                       <td><a th:href="@{/staffUpdate}"><i class="fas fa-edit"></i></a></td>
                     </tr>
-                    <tr>
-                      <td><input type="checkbox" value="#"></td>
-                      <td>1</td>
-                      <td>솜솜치</td>
-                      <td>id001</td>
-                      <td>삼성1호점</td>
-                      <td>점장</td>
-                      <td>1054</td>
-                      <td>20200610</td>
-                      <td>20190607</td>
-                      <td><a th:href="@{/staffUpdate}"><i class="fas fa-edit"></i></a></td>
-                    </tr>
-                    <tr>
-                      <td><input type="checkbox" value="#"></td>
-                      <td>1</td>
-                      <td>솜솜치</td>
-                      <td>id001</td>
-                      <td>삼성1호점</td>
-                      <td>직원</td>
-                      <td>1054</td>
-                      <td>20200610</td>
-                      <td>20190607</td>
-                      <td><a th:href="@{/staffUpdate}"><i class="fas fa-edit"></i></a></td>
-                    </tr>
-                    <tr>
-                      <td><input type="checkbox" value="#"></td>
-                      <td>1</td>
-                      <td>솜솜치</td>
-                      <td>id001</td>
-                      <td>삼성1호점</td>
-                      <td>직원</td>
-                      <td>1054</td>
-                      <td>20200610</td>
-                      <td>20190607</td>
-                      <td><a th:href="@{/staffUpdate}"><i class="fas fa-edit"></i></a></td>
-                    </tr>
-                    
                   </tbody>
                 </table>
          <!-- 페이징  -->
@@ -247,7 +210,7 @@
 <script src="plugins/select2/js/select2.full.min.js"></script>
 <script>
 
-/* $('#reservation').daterangepicker()
+ $('#reservation').daterangepicker()
 
 $(function () {
     //모달 내 셀렉트 박스 스타일 적용하기
@@ -314,7 +277,7 @@ $(function () {
       $(this).bootstrapSwitch('state', $(this).prop('checked'));
     });
 
-  }) */
+  }) 
 </script>
 </th:block>
 </html>

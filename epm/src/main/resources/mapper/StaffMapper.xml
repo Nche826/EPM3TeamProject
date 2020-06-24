@@ -14,8 +14,45 @@
    			<result property="staff_level" 	column="staff_level"/>
    			<result property="staff_reg_id" 	column="staff_reg_id"/>
    			<result property="staff_reg_date" 	column="staff_reg_date"/>
+   			<result property="member_name" 	column="member_name"/>
+   			<result property="member_id" 	column="member_id"/>
+   			<result property="count" 	column="count(lo.member_id)"/>
+   			<result property="level_name" 	column="level_name"/>
+   			<result property="logout_date" 	column="max(lo.logout_date)"/>
    	</resultMap>
    	
+   	<select id="staffList" parameterType="String" resultMap="StaffSelect">
+	   	SELECT 
+			 m.member_name 
+			,s.member_id 
+			,st.store_name 
+			,l.level_name 
+			,count(lo.member_id)
+			,max(lo.logout_date)
+			,staff_reg_date 
+		FROM 
+			tb_staff AS s
+			JOIN
+			tb_member AS m
+			ON
+			s.member_id = m.member_id
+			JOIN 
+			tb_store AS st
+			ON 
+			s.store_code = st.store_code
+			JOIN 
+			tb_level AS l
+			ON 
+			s.level_code = l.level_code
+			JOIN 
+			tb_login AS lo
+			ON 
+			s.member_id = lo.member_id
+			GROUP BY 
+			lo.member_id;
+   	
+   	
+   	</select>
    	
 	<insert id="addStaff" parameterType="staff">
 		<selectKey order="BEFORE" keyProperty="staff_code" resultType="String" >
@@ -27,20 +64,20 @@
 	    	from
 	    	  	tb_staff as s
 		</selectKey> 
-	INSERT INTO tb_staff
-		(staff_code
-		,member_id
-		,store_code
-		,level_code
-		,member_reg_id
-		,staff_reg_date)
-	VALUES 
-		(#{staff_code}
-		,#{staff_id}
-		,#{store_name}
-		,#{staff_level}
-		,#{staff_reg_id}
-		, NOW())
+		INSERT INTO tb_staff
+			(staff_code
+			,member_id
+			,store_code
+			,level_code
+			,member_reg_id
+			,staff_reg_date)
+		VALUES 
+			(#{staff_code}
+			,#{staff_id}
+			,#{store_name}
+			,#{staff_level}
+			,#{staff_reg_id}
+			, NOW())
 	</insert>
 
 

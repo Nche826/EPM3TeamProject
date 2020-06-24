@@ -39,13 +39,18 @@ public class StaffController {
 	}
 	
 	//직원 관리 리스트 화면
-	@GetMapping("/staffList")
-	public String staffList(Model model) {
-		System.out.println("======모달에 들어갈 셀렉트 박스 매장 리스트 가져오기 시작 =====");
-		List<Store> store_name = storeService.storeList();
-		System.out.println("매장 리스트 --->"+store_name);
-		System.out.println("===========================");
-		model.addAttribute("store", store_name);
-		return "setting/staffList";
-	}
+		@GetMapping("/staffList")
+		public String staffList(Model model,Staff staff) {
+			System.out.println("======모달에 들어갈 셀렉트 박스 매장 리스트 가져오기 시작 =====");
+			List<Store> store_name = storeService.storeList();
+			System.out.println("매장 리스트 --->"+store_name);
+			System.out.println("===========================");
+			model.addAttribute("store", store_name);
+			System.out.println("=========직원 리스트 화면 컨트롤러 시작========");
+			List<Staff> staffList = staffService.staffList();
+			System.out.println("직원 리스트 ----->"+staffList);
+			System.out.println("===========================");
+			model.addAttribute("staffList", staffList);
+			return "setting/staffList";
+		}
 }
