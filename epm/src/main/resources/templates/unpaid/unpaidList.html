@@ -104,7 +104,6 @@
 			                    </tr>
 			                  </thead>
 			                  <tbody>
-
 			                    <tr th:each="upl : ${unpaidList}">
 			                      <td th:text="${upl.unpaidStatus}">a</td>
 			                      <td th:text="${upl.unpaidExpDate}">a</td>
@@ -169,7 +168,7 @@
 					              		<!-- 접수직원 목록 받아오기 ★★★ -->
 					              		<p>접수직원</p><input type="text" name="unpaidRegMemberName" value="김수지" hidden="hidden">
 					              		<!-- 데이트픽커 -->
-					              		<input type="date" name="unpaid" style="width: 100%; margin: 5px;">
+					              		<input type="date" name="unpaidRegDate" style="width: 100%; margin: 5px;">
 					              		<select class="form-control" name="unpaidPart" id="unpaidPart" style="margin: 5px;">
 						                          <option value="">구분</option>
 						                          <option value="일반">일반</option>
@@ -238,37 +237,32 @@
 											<div>
 												<div class="row">
 													<div class="col-3">예정일</div>
-													<div class="col-8">2020-12-10</div>
+													<div class="col-8">값</div>
 												</div>
 												<hr>
 												<div class="row">
 													<div class="col-3">구분</div>
-													<div class="col-8">모바일</div>
-												</div>
-												<hr>
-												<div class="row">
-													<div class="col-3">기 요금제</div>
-													<div class="col-8">LTE 베이직</div>
+													<div class="col-8">값</div>
 												</div>
 												<hr>
 												<div class="row">
 													<div class="col-3">고객명</div>
-													<div class="col-8">류마당</div>
+													<div class="col-8">값</div>
 												</div>
 												<hr>
 												<div class="row">
 													<div class="col-3">연락처</div>
-													<div class="col-8">010-1234-5678</div>
+													<div class="col-8" >값</div>
 												</div>
 												<hr>
 												<div class="row">
 													<div class="col-3">비고</div>
-													<div class="col-8">비고</div>
+													<div class="col-8">값</div>
 												</div>
 												<hr>
 												<div class="row">
 													<div class="col-3">등록일</div>
-													<div class="col-8">2020-06-08</div>
+													<div class="col-8">값</div>
 												</div>
 											</div>
 						              </div>
@@ -289,22 +283,22 @@
 												<div>
 													<div class="row">
 														<div class="col-3">상태</div>
-														<div class="col-8">접수</div>
+														<div class="col-8">값</div>
 													</div>
 													<hr>
 													<div class="row">
 														<div class="col-3">처리일</div>
-														<div class="col-8">처리직원</div>
+														<div class="col-8">값</div>
 													</div>
 													<hr>
 													<div class="row">
 														<div class="col-3">매장</div>
-														<div class="col-8">삼삼본점</div>
+														<div class="col-8">값</div>
 													</div>
 													<hr>
 													<div class="row">
 														<div class="col-3">접수직원</div>
-														<div class="col-8">박총괄</div>
+														<div class="col-8">값</div>
 													</div>
 												</div>
 							              </div>
@@ -323,12 +317,12 @@
 												<div>
 													<div class="row">
 														<div class="col-3">개통일</div>
-														<div class="col-8">2020-06-08</div>
+														<div class="col-8">값</div>
 													</div>
 													<hr>
 													<div class="row">
 														<div class="col-3">거래처</div>
-														<div class="col-8">라온KT</div>
+														<div class="col-8">값</div>
 													</div>
 												</div>
 							              </div>
@@ -395,11 +389,6 @@
 													<div class="row">
 														<div class="col-3">구분</div>
 														<div class="col-8"><input type="text" name="status" value=""></div>
-													</div>
-													<hr>
-													<div class="row">
-														<div class="col-3">기 요금제</div>
-														<div class="col-8"><input type="text" name="fee" value=""></div>
 													</div>
 													<hr>
 													<div class="row">

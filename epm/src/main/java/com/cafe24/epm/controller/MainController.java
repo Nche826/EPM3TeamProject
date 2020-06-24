@@ -18,7 +18,8 @@ public class MainController {
 	
 	@GetMapping("/")
 	public String main ( ) {
-		return "main";
+		//return "main";
+		return "redirect:/index";
 	}
 		
 	@GetMapping("/index")
@@ -37,13 +38,15 @@ public class MainController {
 					Member result = memberService.memberSelect(member.getMemberId());
 					if(result != null && member.getMemberPw().equals(result.getMemberPw())) {
 							//2-1단계 : 일치하면 세션 등록
+						
+							//staff 완성되면 staff 에서 store,level 정보 가져오기
 							session.setAttribute("S_ID", result.getMemberId());
 							session.setAttribute("S_NAME", result.getMemberName());
-
+							
 							System.out.println("============로그인성공============");
 							System.out.println(session.getAttribute("S_ID")+"<< S_ID");
 							System.out.println(session.getAttribute("S_NAME")+"<< S_NAME");
-							System.out.println(session.getAttribute("S_LEVEL")+"<< S_LEVEL");
+
 							return "redirect:/";
 						}
 					}
