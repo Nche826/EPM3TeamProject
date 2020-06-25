@@ -9,6 +9,12 @@ import com.cafe24.epm.domain.Staff;
 @Mapper
 public interface StaffMapper {
 	
+	//직원 수정 처리
+	public int staffUpdate(Staff staff);
+	
+	//직원 수정 전단계, 아이디값 가져오기
+	public Staff getStaffSelect(String staff_id);
+	
 	//직원리스트
 	public List<Staff> staffList();
 	

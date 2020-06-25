@@ -11,7 +11,7 @@
    			<result property="staff_id" 	column="staff_id"/>
    			<result property="store_code" 	column="store_code"/>
    			<result property="store_name" 	column="store_name"/>
-   			<result property="staff_level" 	column="staff_level"/>
+   			<result property="staff_level" 	column="level_code"/>
    			<result property="staff_reg_id" 	column="staff_reg_id"/>
    			<result property="staff_reg_date" 	column="staff_reg_date"/>
    			<result property="member_name" 	column="member_name"/>
@@ -20,6 +20,46 @@
    			<result property="level_name" 	column="level_name"/>
    			<result property="logout_date" 	column="max(lo.logout_date)"/>
    	</resultMap>
+   	
+   	<update id="staffUpdate" parameterType="staff">
+   	
+   	UPDATE 
+   		tb_staff
+	SET 
+		level_code=#{staff_level}
+	WHERE 
+		member_id=#{member_id};
+   	
+   	</update>
+   	
+   	<select id="getStaffSelect" parameterType="String" resultMap="StaffSelect">
+	   	SELECT 
+			 s.member_id
+			,m.member_name
+			,st.store_name
+			,l.level_name
+			,s.store_code
+			,s.level_code
+		FROM 
+			tb_staff AS s
+		JOIN
+			tb_member AS m
+		ON
+			s.member_id = m.member_id
+		JOIN 
+			tb_store AS st
+		ON 
+			s.store_code = st.store_code
+		JOIN 
+			tb_level AS l
+		ON 
+			s.level_code = l.level_code	
+		WHERE 
+			s.member_id =#{staff_id};
+   	
+   	
+   	</select>
+   	
    	
    	<select id="staffList" parameterType="String" resultMap="StaffSelect">
 	   	SELECT 

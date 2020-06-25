@@ -64,31 +64,32 @@
               </div>
             </div>
             <div class="card-body">
-            <form action="/staffList" method="post">
-              <div class="form-group" style="margin-top: 3%;">
-                <label for="inputName">아이디 </label>
-                <input type="text" id="inputName" class="form-control" value="솜뭉치">
-              </div>
-              <div class="form-group">
-                <label for="inputDescription">이름</label>
-                 <input type="text" id="inputClientCompany" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="inputStatus">매장</label>
-                <input type="text" id="inputEstimatedBudget" class="form-control">
-              </div>
-              <div class="form-group">
-	                	<label for="inputDescription"><i style="color: red;">*</i>권한</label>
-			                  <select class="select2 select2-hidden-accessible" multiple="multiple" data-placeholder="권한을 선택해주세요" style="width: 100%;">
-			                    <option>대표</option>
-			                    <option>점장</option>
-			                    <option>직원</option>
-			                    <option>회원</option>
-	                  		</select>
-	             	</div>
-              <div class="form-group" style="margin-top: 10%;">
-              	<input type="reset" value="cancle" class="btn btn-default float-left">
-              	<input type="submit" value="Save Changes" class="btn btn-primary float-right">
+            <form action="/staffUpdate" method="post">
+            	<div th:each="staff : ${staffSelect}">
+	              <div class="form-group" style="margin-top: 3%;">
+	                <label for="inputName">아이디 </label>
+	                <input type="text" name="member_id" th:value="${staff.member_id}" class="form-control" readonly="readonly">
+	              </div>
+	              <div class="form-group">
+	                <label for="inputDescription">이름</label>
+	                 <input type="text" name="member_name" th:value="${staff.member_name}" class="form-control" readonly="readonly">
+	              </div>
+	              <div class="form-group">
+	                <label for="inputStatus">매장</label>
+	                <input type="text"  name="store_name" th:value="${staff.store_name}" class="form-control" readonly="readonly">
+	              </div>
+	              <div class="form-group">
+		                	<label for="inputDescription"><i style="color: red;">*</i>권한</label>
+				                  <select class="form-control custom-selec" name="staff_level" style="width: 100%;">
+				                    <option th:selected="${staff.level_name}=='대표'" value="2" >대표</option>
+				                    <option th:selected="${staff.level_name}=='점장'" value="3" >점장</option>
+				                    <option th:selected="${staff.level_name}=='직원'" value="4" >직원</option>
+		                  		</select>
+		             	</div>
+	              <div class="form-group" style="margin-top: 10%;">
+	              	<input type="reset" value="cancle" class="btn btn-default float-left">
+	              	<input type="submit" value="Save Changes" class="btn btn-primary float-right">
+	              </div>
               </div>
             </form>
             </div>
@@ -104,50 +105,8 @@
 	<!-- 컨텐트 랩퍼 끝 -->
 </th:block>
 <th:block layout:fragment="customFooterScript">
-<!-- Select2 -->
 <script src="plugins/select2/js/select2.full.min.js"></script>
 <script>
-$(function () {
-    //Initialize Select2 Elements
-    $('.select2').select2()
-
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-      theme: 'bootstrap4'
-    })
-
-
-    //Date range picker
-    $('#reservation').daterangepicker()
-    //Date range picker with time picker
-    $('#reservationtime').daterangepicker({
-      timePicker: true,
-      timePickerIncrement: 30,
-      locale: {
-        format: 'MM/DD/YYYY hh:mm A'
-      }
-    })
-    $('#timepicker').datetimepicker({
-      format: 'LT'
-    })
-    
-    //Bootstrap Duallistbox
-    $('.duallistbox').bootstrapDualListbox()
-
-    //Colorpicker
-    $('.my-colorpicker1').colorpicker()
-    //color picker with addon
-    $('.my-colorpicker2').colorpicker()
-
-    $('.my-colorpicker2').on('colorpickerChange', function(event) {
-      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-    });
-	
-    $("input[data-bootstrap-switch]").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    });
-
-  })
 </script>
 </th:block>
 </html>

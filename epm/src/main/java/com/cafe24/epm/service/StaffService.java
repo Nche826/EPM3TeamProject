@@ -13,6 +13,18 @@ public class StaffService {
 	
 	@Autowired private StaffMapper staffMapper;
 	
+	//직원 권한 수정 처리
+	public int staffUpdate(Staff staff) {
+	 Staff result = staffMapper.getStaffSelect(staff.getMember_id());
+	 System.out.println("result.toString()--->"+result.toString());
+	 return staffMapper.staffUpdate(staff);
+	}
+	
+	//직원수정 전 단계, 아이디값 가져오기
+	public Staff getStaffSelect(String staff_id) {
+		return staffMapper.getStaffSelect(staff_id);
+	}
+	
 	//직원리스트
 	public List<Staff> staffList(){
 		return staffMapper.staffList();
