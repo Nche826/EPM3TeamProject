@@ -55,19 +55,19 @@
 	              <form id="StaffInsertForm" action="/staffInsert" method="post" >
 	             	<div class="form-group">
 	                	<label for="inputDescription"><i style="color: red;">*</i>매장</label>
-			                  <select class="form-control custom-selec" name="store_name" style="width: 100%;">
-			                    <option selected disabled>매장을 선택해주세요</option>
+			                  <select class="form-control custom-selec" name="store_name" id="store_name" style="width: 100%;">
+			                    <option selected disabled value="None">매장을 선택해주세요</option>
 			                    <option  th:each="sel : ${store}" th:value="${sel.store_Code}" th:text="${sel.store_Name}"></option>
 	                  		  </select>
 	             	</div>
 	             	<div class="form-group">
 	                	<label for="inputDescription"><i style="color: red;">*</i>아이디</label>
-	                 	<input type="text" class="form-control" name="staff_id" placeholder="등록할 아이디를 입력해주세요">
+	                 	<input type="text" class="form-control" name="staff_id" id="staff_id" placeholder="등록할 아이디를 입력해주세요">
 	             	</div>
 	             	<div class="form-group">
                 		  <label for="inputDescription"><i style="color: red;">*</i>권한</label>
-		                  <select class="form-control custom-selec" name ="staff_level" style="width: 100%;">
-		                   	<option selected disabled>권한을 선택해주세요</option>
+		                  <select class="form-control custom-selec" name ="staff_level" id="staff_level" style="width: 100%;">
+		                   	<option selected disabled value="None" >권한을 선택해주세요</option>
 		                    <option value="2">대표</option>
 		                    <option value="3">점장</option>
 		                    <option value="4">직원</option>
@@ -75,11 +75,11 @@
 	             	</div>
 	             	<div class="form-group">
 	                	<label for="inputDescription"><i style="color: red;">*</i>등록자  아이디</label>
-	                 	<input type="text" name ="staff_reg_id" class="form-control" placeholder="등록자 본인의 아이디를 입력해주세요">
+	                 	<input type="text" name ="staff_reg_id" class="form-control" id="staff_reg_id" placeholder="등록자 본인의 아이디를 입력해주세요">
 	             	</div>
 	             	<div class="form-group">
 	             	<input type="reset" value="Clear" class="btn btn-default float-left">
-	             	<button type="submit" class="btn btn-info float-right">직원등록하기</button>
+	             	<button type="submit" id="staffGoBtn" class="btn btn-info float-right">직원등록하기</button>
 	             	</div>
 	              </form>
             	</div>
@@ -210,74 +210,38 @@
 <script src="plugins/select2/js/select2.full.min.js"></script>
 <script>
 
- $('#reservation').daterangepicker()
-
-$(function () {
-    //모달 내 셀렉트 박스 스타일 적용하기
-    $('.select2').select2()
+$('#reservation').daterangepicker();
+ 
+$(function(){
+	var store_name = $('#store_name').val();
+	var staff_id =$('#staff_id').val();
+	var staff_level =$('#staff_level').val();
+	var staff_reg_id = $('#staff_reg_id').val();
 	
-    $('.select2bs4').select2({
-      theme: 'bootstrap4'
-    })
-    
-    //Datemask dd/mm/yyyy
-    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-    //Datemask2 mm/dd/yyyy
-    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-    //Money Euro
-    $('[data-mask]').inputmask()
-
-    //Date range picker
-    $('#reservation').daterangepicker()
-    //Date range picker with time picker
-    $('#reservationtime').daterangepicker({
-      timePicker: true,
-      timePickerIncrement: 30,
-      locale: {
-        format: 'MM/DD/YYYY hh:mm A'
-      }
-    })
-    //Date range as a button
-    $('#daterange-btn').daterangepicker(
-      {
-        ranges   : {
-          'Today'       : [moment(), moment()],
-          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        },
-        startDate: moment().subtract(29, 'days'),
-        endDate  : moment()
-      },
-      function (start, end) {
-        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-      }
-    )
-
-    //Timepicker
-    $('#timepicker').datetimepicker({
-      format: 'LT'
-    })
-    
-    //Bootstrap Duallistbox
-    $('.duallistbox').bootstrapDualListbox()
-
-    //Colorpicker
-    $('.my-colorpicker1').colorpicker()
-    //color picker with addon
-    $('.my-colorpicker2').colorpicker()
-
-    $('.my-colorpicker2').on('colorpickerChange', function(event) {
-      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-    });
+	$('#staffGoBtn').click(function(){
+		if($('#store_name option:selected').val()=="None"){
+			alert("매장을 선택해주세요");
+			$('#store_name').focus();
+			return false;
+		}else if($('#staff_id').val()==''){
+			alert("직원 아이디를 입력 해주세요");
+			$('#staff_id').focus();
+			return false;
+		}else if($('#staff_level option:selected').val()=="None"){
+			alert("권한을 설정해주세요");
+			$('#staff_level').focus();
+			return false;
+		}else if($('#staff_reg_id').val()==''){
+			alert("등록자 아이디를 입력 해주세요");
+			$('#staff_reg_id').focus();
+			return false;
+		}
+		
+	});
 	
-    $("input[data-bootstrap-switch]").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    });
-
-  }) 
+	
+	
+});
 </script>
 </th:block>
 </html>
