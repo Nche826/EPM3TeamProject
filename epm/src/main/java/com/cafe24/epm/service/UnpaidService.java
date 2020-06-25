@@ -16,12 +16,16 @@ public class UnpaidService {
 	
 	//처리 리스트
 	public List<Unpaid> unpaidList (){
-		return unpaidMapper.unpaidList();
+		List<Unpaid> unpaid = unpaidMapper.unpaidList();
+		System.out.println(unpaid);
+		return unpaid;
 	}
 	
 	//처리업무선택
-	public Unpaid unpaidSelect (){
-		return unpaidMapper.unpaidSelect();
+	public Unpaid unpaidSelect (String unpaidCode){
+		Unpaid unpaid = unpaidMapper.unpaidSelect(unpaidCode);
+		System.out.println("처리업무선택 : "+unpaid);
+		return unpaid;
 	}
 	
 	//처리업무등록
@@ -29,5 +33,15 @@ public class UnpaidService {
 		System.out.println("처리업무등록 : "+unpaid);
 		return unpaidMapper.unpaidInsert(unpaid);
 	}
-	 
+	
+	//처리업무 완료처리
+	public int unpaidPro (String unpaidCode, String unpaidProMemberName, String unpaidProStoreName) {
+		System.out.println(unpaidCode+"/"+unpaidProMemberName+"/"+unpaidProStoreName);
+		return unpaidMapper.unpaidPro(unpaidCode, unpaidProMemberName, unpaidProStoreName);
+	}
+	
+	//처리업무수정
+	public int unpaidUpdate (Unpaid unpaid) {
+		return unpaidMapper.unpaidUpdate(unpaid);
+	}
 }

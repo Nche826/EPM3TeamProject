@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.epm.domain.Unpaid;
 import com.cafe24.epm.service.UnpaidService;
@@ -38,13 +39,26 @@ public class UnpaidController {
 		return "unpaid/unpaidList";
 	}
 	
+	@PostMapping(value = "/unpaidSelect", produces = "application/json")
+	@ResponseBody
+	public Unpaid unpaidSelect(String unpaidCode) {
+	  return unpaidService.unpaidSelect(unpaidCode);
+	  }
+	
 	@GetMapping("/unpaidTList")
 	public String unpaidTList() {
 		return "unpaid/unpaidTList";
 	}
 	
-	@GetMapping("/unpaidUpdate")
-	public String unpaidUpdate() {
-		return "unpaid/unpaidUpdate";
+	@PostMapping("/unpaidPro")
+	public String unpaidPro(String unpaidCode, String unpaidProMemberName, String unpaidProStoreName) {
+		unpaidService.unpaidPro(unpaidCode, unpaidProMemberName, unpaidProStoreName);
+		return "redirect:/unpaidList";
+	}
+	
+	@PostMapping("/unpaidUpdate")
+	public String unpaidUpdate(Unpaid unpaid) {
+		unpaidService.unpaidUpdate(unpaid);
+		return "redirect:/unpaidList";
 	}
 }

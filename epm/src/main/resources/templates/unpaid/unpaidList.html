@@ -105,7 +105,11 @@
 			                  </thead>
 			                  <tbody>
 			                    <tr th:each="upl : ${unpaidList}">
-			                      <td th:text="${upl.unpaidStatus}">a</td>
+			                      <td>
+				                      <span th:if="${upl.unpaidStatus} == '접수'" class="right badge bg-danger" th:text="${upl.unpaidStatus}" ></span>
+				                      <span th:if="${upl.unpaidStatus} == '해결'" class="badge bg-info" th:text="${upl.unpaidStatus}"></span>
+				                      <span th:if="${upl.unpaidStatus} == '취소'" class="badge bg-default" th:text="${upl.unpaidStatus}"></span>
+			                      </td>
 			                      <td th:text="${upl.unpaidExpDate}">a</td>
 			                      <td th:text="${upl.unpaidPart}">a</td>
 			                      <td th:text="${upl.unpaidDesc}">a</td>			                      
@@ -117,9 +121,8 @@
 			                      <td th:text="${upl.unpaidProDate}">a</td>
 			                      <td th:text="${upl.unpaidProMemberName}">a</td>
 			                      <td><i class="fas fa-envelope-square" data-toggle="tooltip" data-placement="left" th:title="${upl.unpaidMemo}" ></i></td>
-			                      <td><a href="#" data-toggle="modal" data-target="#modalUnpaidDetail" ><i class="fas fa-file-signature"></i></a></td>
+			                      <td><a href="#" data-toggle="modal" data-target="#modalUnpaidDetail" th:code="${upl.unpaidCode}" class="modalUnpaidDetailButton"><i class="fas fa-file-signature"></i></a></td>
 			                    </tr>
-			                   
 			                  </tbody>
 			                </table>
 			              </div>
@@ -221,9 +224,6 @@
 			            <div class="modal-body">
 			                <!-- 모달 바디 내용 -->
 				              <div class="row">
-				              		
-				              </div>
-				              <div class="row">
 					              
 					              <div class="col-md-6">
 						            <div class="card">
@@ -237,32 +237,32 @@
 											<div>
 												<div class="row">
 													<div class="col-3">예정일</div>
-													<div class="col-8">값</div>
+													<div class="col-8" id="aUnpaidExpDate"></div>
 												</div>
 												<hr>
 												<div class="row">
 													<div class="col-3">구분</div>
-													<div class="col-8">값</div>
+													<div class="col-8" id="aUnpaidPart"></div>
 												</div>
 												<hr>
 												<div class="row">
 													<div class="col-3">고객명</div>
-													<div class="col-8">값</div>
+													<div class="col-8" id="aCustomerName"></div>
 												</div>
 												<hr>
 												<div class="row">
 													<div class="col-3">연락처</div>
-													<div class="col-8" >값</div>
+													<div class="col-8" id="aCustomerTel"></div>
 												</div>
 												<hr>
 												<div class="row">
 													<div class="col-3">비고</div>
-													<div class="col-8">값</div>
+													<div class="col-8" id="aUnpaidMemo"></div>
 												</div>
 												<hr>
 												<div class="row">
 													<div class="col-3">등록일</div>
-													<div class="col-8">값</div>
+													<div class="col-8" id="aUnpaidRegDate"></div>
 												</div>
 											</div>
 						              </div>
@@ -283,22 +283,22 @@
 												<div>
 													<div class="row">
 														<div class="col-3">상태</div>
-														<div class="col-8">값</div>
+														<div class="col-8" id="aUnpaidStatus"></div>
 													</div>
 													<hr>
 													<div class="row">
 														<div class="col-3">처리일</div>
-														<div class="col-8">값</div>
+														<div class="col-8" id="aUnpaidProDate"></div>
 													</div>
 													<hr>
 													<div class="row">
 														<div class="col-3">매장</div>
-														<div class="col-8">값</div>
+														<div class="col-8" id="aUnpaidRegStoreName"></div>
 													</div>
 													<hr>
 													<div class="row">
 														<div class="col-3">접수직원</div>
-														<div class="col-8">값</div>
+														<div class="col-8" id="aUnpaidRegMemberName"></div>
 													</div>
 												</div>
 							              </div>
@@ -317,12 +317,12 @@
 												<div>
 													<div class="row">
 														<div class="col-3">개통일</div>
-														<div class="col-8">값</div>
+														<div class="col-8" id="aUnpaidOpenDate"></div>
 													</div>
 													<hr>
 													<div class="row">
 														<div class="col-3">거래처</div>
-														<div class="col-8">값</div>
+														<div class="col-8" id="aUnpaidDeallerName"></div>
 													</div>
 												</div>
 							              </div>
@@ -330,9 +330,7 @@
 							            </div>
 							            <!-- /.card -->
 							          </div>
-							          <form action="#" method="post" id="unpaidDetailOverForm"><input type="text" name="unpaidDetailOver" value="해결" hidden="hidden"></form>
-
-						          </div>
+   						          </div>
 						        </div>
 								
 									<hr>
@@ -340,10 +338,15 @@
 			            <div class="modal-footer justify-content-between">
 			              <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 			              <button type="button" class="btn btn-secondary" id="modalUnpaidDetailOver">미결 완료 처리</button>
-				              <div>
-					              <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#modalUnpaidModify" id="modalUnpaidDetailModify">수정</button>
-					              <button type="button" class="btn btn-default" id="modalUnpaidDetailDelete">삭제</button>
-				              </div>
+			              <form hidden="hidden" id="modalUnpaidDetailOverForm" action="/unpaidPro" method="post">
+			               	<input id="unpaidCode" name="unpaidCode" >
+			              	<input id="unpaidProMemberName" name="unpaidProMemberName">
+			              	<input id="unpaidProStoreName" name="unpaidProStoreName">
+			              </form>
+			              <div>
+				              <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#modalUnpaidModify" id="modalUnpaidDetailModify">수정</button>
+				              <button type="button" class="btn btn-default" id="modalUnpaidDetailDelete">삭제</button>
+			              </div>
 			            </div>
 			          </div>
 			          <!-- /.modal-content -->
@@ -380,15 +383,23 @@
 						              <!-- /.card-header -->
 						              <div class="card-body">
 											<div>
-												<form action="#" method="post" id="modalUnpaidDetailModifyForm">
+												<form action="/unpaidUpdate" method="post" id="modalUnpaidDetailModifyForm">
+													<input type="text" name="unpaidCode" hidden="hidden" value="">
 													<div class="row">
 														<div class="col-3">예정일</div>
-														<div class="col-8"><input type="date" name="reserveDate" value=""></div>
+														<div class="col-8"><input type="date" name="unpaidExpDate" value=""></div>
 													</div>
 													<hr>
 													<div class="row">
 														<div class="col-3">구분</div>
-														<div class="col-8"><input type="text" name="status" value=""></div>
+														<div class="col-8">
+															<select name="unpaidPart">
+																<option>구분</option>
+																<option value="일반">일반</option>
+																<option value="모바일">모바일</option>
+																<option value="홈상품">홈상품</option>
+															</select>
+														</div>
 													</div>
 													<hr>
 													<div class="row">
@@ -398,12 +409,12 @@
 													<hr>
 													<div class="row">
 														<div class="col-3">연락처</div>
-														<div class="col-8"><input type="text" name="phone" value=""></div>
+														<div class="col-8"><input type="text" name="customerTel" value=""></div>
 													</div>
 													<hr>
 													<div class="row">
 														<div class="col-3">비고</div>
-														<div class="col-8"><input type="text" name="memo" value=""></div>
+														<div class="col-8"><textarea name="unpaidMemo"></textarea></div>
 													</div>
 												</form>
 											</div>
@@ -427,8 +438,7 @@
 			        </div>
 			        <!-- /.modal-dialog -->
 			      </div>
-				
-				
+				</div>
 			</div>
 		</section>
 		<!-- 컨텐츠 영역 끝 -->
@@ -437,28 +447,95 @@
 </th:block>
 <th:block layout:fragment="customFooterScript">
 	<script type="text/javascript">
-	
-			//미결정보등록처리
-		    $(function () {
-		   	 $('#modalUnpaidInsertSubmit').click(function(){
-		   		 $('#modalUnpaidInsertForm').submit()
-		   	 	});
-		   	 });
+		$(function () {
+			//세션에서 값 받아오기
+			$('#unpaidProMemberName').val('송은채')
+			$('#unpaidProStoreName').val('삼삼3호점')
 			
+						
 			//미결정보수정처리
-		    $(function () {
 		   	 $('#modalUnpaidDetailModifyDo').click(function(){
 		   		 $('#modalUnpaidDetailModifyForm').submit()
 		   	 	});
-		   	 });
-	 
+			
+			
+			//미결정보수정화면에 값 가져오기
+		   	 $('#modalUnpaidDetailModify').click(function(){
+		   		 	$('#modalUnpaidDetailModifyForm').children('input[name=unpaidCode]').val($('#modalUnpaidDetailOverForm').children('#unpaidCode').val());
+		   			$('input[name="unpaidExpDate"]').val($('#aUnpaidExpDate').html());
+		   			$('select[name="unpaidPart"]').val($('#aUnpaidPart').html()).prop("selected", true);
+		   			$('input[name="customerName"]').val($('#aCustomerName').html());
+		   			$('input[name="customerTel"]').val($('#aCustomerTel').html());
+		   			$('textarea[name="unpaidMemo"]').html($('#aUnpaidMemo').html());
+	   	 	});
+			
+			
 			//미결완료처리
-		     $(function () {
-		    	 $('#modalUnpaidDetailOver').click(function(){
-		    		 $('#unpaidDetailOverForm').submit()
-		    	 });
+	    	 $('#modalUnpaidDetailOver').click(function(){
+	    		 $('#modalUnpaidDetailOverForm').submit()
 	    	 });
-	    	 
+			
+			//미결 상세보기 modal 열릴 때 값 받아오기, 미결완료버튼 조건처리
+			$('.modalUnpaidDetailButton').click(function(){
+				var unpaidCode = $(this).attr('code');
+				$('#unpaidCode').val(unpaidCode);
+				
+				//미결 상세보기 1개 select
+				var request1 = $.ajax({
+					url: "/unpaidSelect", //통신할 url
+					method: "POST", //통신할 메서드 타입
+					data: { "unpaidCode" : unpaidCode }, //전송할 데이타
+					dataType: "json"
+				});	 
+				
+				request1.done(function( data ) {
+					$('#aUnpaidExpDate').html(data.unpaidExpDate)
+					$('#aUnpaidPart').html(data.unpaidPart)
+					$('#aCustomerName').html(data.customerName)
+					$('#aCustomerTel').html(data.customerTel)
+					$('#aUnpaidMemo').html(data.unpaidMemo)
+					$('#aUnpaidRegDate').html(data.unpaidRegDate)
+					$('#aUnpaidStatus').html(data.unpaidStatus)
+					$('#aUnpaidProDate').html(data.unpaidProDate)
+					$('#aUnpaidRegStoreName').html(data.unpaidRegStoreName)
+					$('#aUnpaidRegMemberName').html(data.unpaidRegMemberName)
+					
+					if(data.unpaidStatus != '접수'){
+						$('#modalUnpaidDetailOver').hide();
+					}else{
+						$('#modalUnpaidDetailOver').show();
+					}					
+				});	 
+				
+				request1.fail(function( jqXHR, textStatus ) {
+				  alert( "Request failed: " + textStatus );
+				});	
+				
+				
+				// 고객이름,전화번호로 개통정보조회select > 개통업무 미완으로 처리불가
+				/* var request2 = $.ajax({
+					url: "/", //통신할 url
+					method: "POST", //통신할 메서드 타입
+					data: { unpaidCode : unpaidCode }, //전송할 데이타
+					dataType: "json"
+				});	 
+				
+				request2.done(function( data ) {
+					console.log(data.result)
+					$('').html('')
+				});	 
+				request2.fail(function( jqXHR, textStatus ) {
+				  alert( "Request failed: " + textStatus );
+				});		 */	
+
+			})
+	
+	
+			//미결정보등록처리
+		   	 $('#modalUnpaidInsertSubmit').click(function(){
+		   		 $('#modalUnpaidInsertForm').submit()
+		   	 	});
+
 	    	 //datetimepicker format
 	         $('#datetimepicker1').datetimepicker({
 	        	 format: 'YYYY-MM-DD'
@@ -539,9 +616,8 @@
 	         });
 	         
 	         //비고 tooltip
-	         $(function () {
 				  $('[data-toggle="tooltip"]').tooltip()
-				});
+	});
 	 </script>
 </th:block>
 
