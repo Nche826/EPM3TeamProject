@@ -22,19 +22,16 @@ public class UnpaidController {
 		return "unpaid/unpaidInsert";
 	}
 	
-	
 	@PostMapping("/unpaidInsert") 
 	public String unpaidInsert(Unpaid unpaid) {
 		unpaidService.unpaidInsert(unpaid);
 	  return "redirect:/unpaidList";
 	  }
 	 
-	
 	@GetMapping("/unpaidList")
 	public String unpaidList(Model model) {
 		System.out.println("=====UnpaidController unpaidList=====");
 		List<Unpaid> unpaidList = unpaidService.unpaidList();
-		System.out.println("unpaidList : "+unpaidList);
 		model.addAttribute("unpaidList",unpaidList);
 		return "unpaid/unpaidList";
 	}
@@ -59,6 +56,12 @@ public class UnpaidController {
 	@PostMapping("/unpaidUpdate")
 	public String unpaidUpdate(Unpaid unpaid) {
 		unpaidService.unpaidUpdate(unpaid);
+		return "redirect:/unpaidList";
+	}
+	
+	@PostMapping("/unpaidDelete")
+	public String unpaidDelete (String unpaidCode) {
+		unpaidService.unpaidDelete(unpaidCode);
 		return "redirect:/unpaidList";
 	}
 }

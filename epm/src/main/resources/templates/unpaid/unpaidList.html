@@ -159,29 +159,29 @@
 					              	<div class="col-3" style="text-align: right;">
 					              		<p>매장</p>
 					              		<p>접수직원</p>
-					              		<p>미결예정일</p>
+					              		<p>처리예정일</p>
 					              		<p>구분</p>
 									</div>
 									<div class="col-1"></div>
 									
 					              	<div class="col-8">
-					              		<input type="text" name="unpaidStatus" value="접수" hidden="hidden">
+					              		<input type="text" class="form-control" name="unpaidStatus" value="접수" hidden="hidden">
 					              		<!-- 매장명 받아오기★★★ -->
-					              		<p>EPM</p><input type="text" name="unpaidRegStoreName" value="삼삼1호점" hidden="hidden">
+					              		<input type="text" style="margin: 5px;" class="form-control" name="unpaidRegStoreName" value="삼삼1호점" readonly="readonly">
 					              		<!-- 접수직원 목록 받아오기 ★★★ -->
-					              		<p>접수직원</p><input type="text" name="unpaidRegMemberName" value="김수지" hidden="hidden">
+					              		<input type="text" style="margin: 5px;" class="form-control" name="unpaidRegMemberName" value="김수지" readonly="readonly">
 					              		<!-- 데이트픽커 -->
-					              		<input type="date" name="unpaidRegDate" style="width: 100%; margin: 5px;">
-					              		<select class="form-control" name="unpaidPart" id="unpaidPart" style="margin: 5px;">
-						                          <option value="">구분</option>
-						                          <option value="일반">일반</option>
-						                          <option value="모바일">모바일</option>
-						                          <option value="홈상품">홈상품</option>
-						                        </select>
+					              		<input type="date" class="form-control" name="unpaidExpDate" id="iUnpaidExpDate" style="width: 100%; margin: 5px;">
+					              		<select class="form-control" name="unpaidPart" id="iUnpaidPart" style="margin: 5px;">
+				                          <option value="">구분</option>
+				                          <option value="일반">일반</option>
+				                          <option value="모바일">모바일</option>
+				                          <option value="홈상품">홈상품</option>
+				                        </select>
 					              	</div>
 								</div>
 									
-									<hr>
+								<hr>
 									
 								<div class="row">
 									<div class="col-3" style="text-align: right;">
@@ -193,7 +193,7 @@
 					              	<div class="col-1"></div>
 									<div class="col-8">
 					              		<input type="text" class="form-control" name="unpaidDesc" style="margin: 5px;">
-					              		<input type="text" class="form-control" name="customerName" style="margin: 5px;">
+					              		<input type="text" class="form-control" name="customerName" id="iCustomerName" style="margin: 5px;">
 					              		<input type="text" class="form-control" name="customerTel" style="margin: 5px;">
 					              		<textarea class="form-control" rows="3" name="unpaidMemo" style="margin: 5px;"></textarea>
 									</div>
@@ -345,6 +345,9 @@
 			              </form>
 			              <div>
 				              <button type="button" class="btn btn-default"  data-toggle="modal" data-target="#modalUnpaidModify" id="modalUnpaidDetailModify">수정</button>
+				              <form hidden="hidden" id="modalUnpaidDetailDeleteForm" action="/unpaidDelete" method="post">
+				              	<input name="unpaidCode">
+				              </form>
 				              <button type="button" class="btn btn-default" id="modalUnpaidDetailDelete">삭제</button>
 			              </div>
 			            </div>
@@ -387,13 +390,13 @@
 													<input type="text" name="unpaidCode" hidden="hidden" value="">
 													<div class="row">
 														<div class="col-3">예정일</div>
-														<div class="col-8"><input type="date" name="unpaidExpDate" value=""></div>
+														<div class="col-8"><input type="date" name="unpaidExpDate" id="mUnpaidExpDate" value=""></div>
 													</div>
 													<hr>
 													<div class="row">
 														<div class="col-3">구분</div>
 														<div class="col-8">
-															<select name="unpaidPart">
+															<select name="unpaidPart" id="mUnpaidPart">
 																<option>구분</option>
 																<option value="일반">일반</option>
 																<option value="모바일">모바일</option>
@@ -404,7 +407,7 @@
 													<hr>
 													<div class="row">
 														<div class="col-3">고객명</div>
-														<div class="col-8"><input type="text" name="customerName" value=""></div>
+														<div class="col-8"><input type="text" name="customerName" id="mCustomerName" value=""></div>
 													</div>
 													<hr>
 													<div class="row">
@@ -453,8 +456,26 @@
 			$('#unpaidProStoreName').val('삼삼3호점')
 			
 						
+			//미결정보삭제처리
+		   	 $('#modalUnpaidDetailDelete').click(function(){
+		   		 $('#modalUnpaidDetailDeleteForm').submit()
+		   	 	});
+			
 			//미결정보수정처리
 		   	 $('#modalUnpaidDetailModifyDo').click(function(){
+		   		 //수정유효성검사
+		   		 if($('#mUnpaidExpDate').val() == null
+		   				 || $('#mUnpaidExpDate').val() == '' ){
+		   			 alert('처리 예정일을 입력해주세요.');
+		   			 return false;}
+		   		 if($('#mUnpaidPart').val() == null
+		   				 || $('#mUnpaidPart').val() == '' ){
+		   			 alert('처리 구분을 선택해주세요.');
+		   			 return false;}
+		   		 if($('#mCustomerName').val() == null
+		   				 || $('#mCustomerName').val() == '' ){
+		   			 alert('고객명을 입력해주세요.');
+		   			 return false;}
 		   		 $('#modalUnpaidDetailModifyForm').submit()
 		   	 	});
 			
@@ -478,7 +499,8 @@
 			//미결 상세보기 modal 열릴 때 값 받아오기, 미결완료버튼 조건처리
 			$('.modalUnpaidDetailButton').click(function(){
 				var unpaidCode = $(this).attr('code');
-				$('#unpaidCode').val(unpaidCode);
+				$('#modalUnpaidDetailOverForm').children('#unpaidCode').val(unpaidCode);
+				 $('#modalUnpaidDetailDeleteForm').children('input[name=unpaidCode]').val(unpaidCode)
 				
 				//미결 상세보기 1개 select
 				var request1 = $.ajax({
@@ -533,6 +555,21 @@
 	
 			//미결정보등록처리
 		   	 $('#modalUnpaidInsertSubmit').click(function(){
+		   		 //등록유효성검사
+		   		 if($('#iUnpaidExpDate').val() == null
+		   				 || $('#iUnpaidExpDate').val() == '' ){
+		   			 alert('처리 예정일을 입력해주세요.');
+		   			 return false;}
+		   		 if($('#iUnpaidPart').val() == null
+		   				 || $('#iUnpaidPart').val() == '' ){
+		   			 alert('처리 구분을 선택해주세요.');
+		   			 return false;}
+		   		 if($('#iCustomerName').val() == null
+		   				 || $('#iCustomerName').val() == '' ){
+		   			 alert('고객명을 입력해주세요.');
+		   			 return false;}
+		   		 
+		   		 //등록submit
 		   		 $('#modalUnpaidInsertForm').submit()
 		   	 	});
 

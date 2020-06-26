@@ -61,7 +61,6 @@
 				                          <option value="">상태</option>
 				                          <option value="take">등록</option>
 				                          <option value="solve">해결</option>
-				                          <option value="cancle">취소</option>
 				                          <option value="update">수정</option>
 				                          <option value="delete">삭제</option>
 				                        </select>
@@ -97,16 +96,16 @@
                   </thead>
                   <tbody>
                   
-                    <tr>
-                      <td>매장</td>
-                      <td>직원</td>
-                      <td>구분</td>
-                      <td>고객명</td>
-                      <td>연락처</td>
-                      <td>내용</td>
-                      <td>2020-06-10</td>
-                      <td><i class="fas fa-envelope-square" data-toggle="tooltip" data-placement="left" title="비고"></i></td>
-                      <td><i class="far fa-trash-alt"></i></td>
+                    <tr th:each="utl : ${unpaidtList}">
+                      <td th:text="${utl.unpaidtStoreName}">매장</td>
+                      <td th:text="${utl.unpaidtStaffName}">직원</td>
+                      <td th:text="${utl.unapidtPart}">구분</td>
+                      <td th:text="${utl.customerName}">고객명</td>
+                      <td th:text="${utl.customerTel}">연락처</td>
+                      <td th:text="${utl.unpaidtDesc}">내용</td>
+                      <td th:text="${utl.unpaidtDate}">2020-06-10 00:00:00</td>
+                      <td><i class="fas fa-envelope-square" data-toggle="tooltip" data-placement="left" th:title="${utl.unpaidtMemo}"></i></td>
+                      <td><i class="far fa-trash-alt" th:code="${utl.unpaidtCode}"></i></td>
                     </tr>
 
                   </tbody>

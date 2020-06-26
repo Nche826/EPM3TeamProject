@@ -23,6 +23,15 @@
 			<result property="unpaidRegMemberName" column="unpaid_reg_member_name"/>
 			<result property="unpaidRegStoreName" column="unpaid_Reg_Store_Name"/>
 		</resultMap>
+		<!-- 처리업무삭제 -->
+		<delete id="unpaidDelete" parameterType="String">
+			DELETE
+				FROM tb_unpaid
+				<where>
+					<if test="unpaidCode != null and unpaidCode !=''.toString()">unpaid_code=#{unpaidCode}</if>
+				</where>
+		</delete>
+		
 		
 		<!-- 처리업무수정 -->
 		<update id="unpaidUpdate" parameterType="String">
@@ -144,6 +153,8 @@
 				, unpaid_sub_name
 				, unpaid_desc
 				, customer_code
+				, customer_name
+				, customer_tel
 				, unpaid_memo
 				, unpaid_status
 				, unpaid_reg_date
@@ -155,6 +166,8 @@
 				, #{unpaidSubName}
 				, #{unpaidDesc}
 				, #{customerCode}
+				, #{customerName}
+				, #{customerTel}
 				, #{unpaidMemo}
 				, #{unpaidStatus}
 				, NOW()

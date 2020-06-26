@@ -22,5 +22,8 @@ public interface UnpaidMapper {
 
 	//처리업무수정
 	public int unpaidUpdate (Unpaid unpaid);
+	
+	//처리업무삭제
+	public int unpaidDelete (String unpaidCode);
 
 }

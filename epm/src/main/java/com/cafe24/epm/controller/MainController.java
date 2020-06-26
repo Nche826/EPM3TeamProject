@@ -47,12 +47,12 @@ public class MainController {
 							System.out.println(session.getAttribute("S_ID")+"<< S_ID");
 							System.out.println(session.getAttribute("S_NAME")+"<< S_NAME");
 
-							return "redirect:/";
+							return "redirect:/index";
 						}
 					}
 		System.out.println("============로그인실패============");
 		redirectAttr.addAttribute("message","등록된 정보가 없습니다.");
-		return "redirect:/index";
+		return "redirect:/login";
 	}
 	
 	//로그아웃처리
