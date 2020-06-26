@@ -29,7 +29,12 @@
 		<result property="deviceTelecom"			column="device_telecom"/>
 		
 		<result property="storeName"				column="store_name"/>
-
+		
+		<result property="infoDevicein"				column="dinfo_devicein"/>
+		<result property="infoMethod"				column="dinfo_method"/>
+		<result property="infoStore"				column="dinfo_store"/>		
+		<result property="infoMemo"					column="dinfo_memo"/>
+		<result property="infoRegDate"				column="dinfo_reg_date"/>
 	</resultMap>
 
 	<select id = "getDeviceSelect" parameterType="String" resultMap="DeviceinSelect">
@@ -61,12 +66,14 @@
 	 	ON i.staff_code = s.staff_code
 	JOIN tb_store AS a
 		ON s.store_code = a.store_code
-		
-	</select>
-	
+	JOIN tb_deviceinfo as info
+		on info.dinfo_devicein = i.devicein_code
+	</select>	
+
 	<insert id="deviceInsert" parameterType="Device">
-		insert
-			into tb_devicein
+	
+INSERT
+	into tb_devicein
 			(
 			devicein_code
 			,devicein_serial
@@ -82,17 +89,85 @@
 			values
 			(
 			'code3'
-			,#{deviceinSerial}
-			,#{deviceinDealler}
-			,#{deviceinDevice}
+			,1
+			,'dealler_1'
+			,'CODE1'
 			,'신규'
 			,now()
+			,now()
+			,1
+			,'staff_1'
+			,now()		
+			)		
+		</insert>
+		<insert id="deviceInfoInsert" parameterType="Device">	
+	INSERT		
+		into tb_deviceinfo
+			(
+			dinfo_code
+			,dinfo_devicein
+			,dinfo_method
+			,dinfo_store
+			,dinfo_memo
+			,dinfo_reg_date
+			)			
+			values
+			(
+			'code3'
+			,'code3' 
+			,1
+			,1
+			,1
+			,now()
+			)	
+	
+		</insert>
+		
+		<update id="deviceInfoUpdate" parameterType="Device">	
+	update		
+		tb_deviceinfo
+			(
+			dinfo_code
+			,dinfo_devicein
+			,dinfo_method
+			,dinfo_store
+			,dinfo_memo
+			,dinfo_reg_date
+			)			
+			values
+			(
+			'code3'
+			,'code3' 
+			,1
+			,1
+			,1
+			,now()
+			)		
+		</update>
+		
+		<update id="deviceUpdate" parameterType="Device">
+	
+update
+	tb_devicein
+			(
+			,devicein_serial
+			,dealler_code
+			,device_code
+			,devicein_date
+			,devicein_memo
+			,staff_code
+			,devicein_reg_date
+			)
+			values
+			(
+			,#{deviceinSerial}
+			,#{deviceinDealler}
+			,#{deviceinDevice}'
 			,now()
 			,#{deviceinMemo}
 			,#{deviceinStaff}
 			,now()		
-			);				
-		
-	</insert>
+			)		
+		</update>
 </mapper>
 	

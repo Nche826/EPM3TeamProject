@@ -23,4 +23,17 @@ public class DeviceService {
 	public int deviceInsert(Device device) {
 		return deviceMapper.deviceInsert(device);
 	}
+	
+	public int deviceInfoInsert(Device device) {
+		return deviceMapper.deviceInfoInsert(device);
+	}
+	
+	public int deviceInfoUpdate(Device device) {
+		return deviceMapper.deviceInfoUpdate(device);
+	}
+	
+	public int deviceUpdate(Device device) {
+		return deviceMapper.deviceUpdate(device);
+	}
+	
 }

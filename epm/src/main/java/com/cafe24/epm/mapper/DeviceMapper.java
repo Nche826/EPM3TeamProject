@@ -14,5 +14,13 @@ public interface DeviceMapper {
 		public Device deviceSelect(String deviceCode);
 
 		public int deviceInsert(Device device);		
+		
+		public int deviceInfoInsert(Device device);
+		
+		public int deviceInfoUpdate(Device device);
+		
+		public int deviceUpdate(Device device);
+		
+	
 }
 

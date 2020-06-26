@@ -12,6 +12,7 @@ public class Device {
 	private String deviceinMemo;
 	private String deviceinStaff;
 	private String deviceinRegDate;
+	
 	private String deviceCode;
 	private String deviceType;
 	private String deviceManuf;
@@ -22,7 +23,14 @@ public class Device {
 	private String memberId;
 	private String deviceRegDate;
 	private String deviceTelecom;
+	
 	private String storeName;
+	
+	private String infoDevicein;
+	private String infoMethod;
+	private String infoStore;
+	private String infoMemo;
+	private String infoRegDate;
 	public String getDeviceinCode() {
 		return deviceinCode;
 	}
@@ -149,6 +157,36 @@ public class Device {
 	public void setStoreName(String storeName) {
 		this.storeName = storeName;
 	}
+	public String getInfoDevicein() {
+		return infoDevicein;
+	}
+	public void setInfoDevicein(String infoDevicein) {
+		this.infoDevicein = infoDevicein;
+	}
+	public String getInfoMethod() {
+		return infoMethod;
+	}
+	public void setInfoMethod(String infoMethod) {
+		this.infoMethod = infoMethod;
+	}
+	public String getInfoStore() {
+		return infoStore;
+	}
+	public void setInfoStore(String infoStore) {
+		this.infoStore = infoStore;
+	}
+	public String getInfoMemo() {
+		return infoMemo;
+	}
+	public void setInfoMemo(String infoMemo) {
+		this.infoMemo = infoMemo;
+	}
+	public String getInfoRegDate() {
+		return infoRegDate;
+	}
+	public void setInfoRegDate(String infoRegDate) {
+		this.infoRegDate = infoRegDate;
+	}
 	@Override
 	public String toString() {
 		return "Device [deviceinCode=" + deviceinCode + ", deviceinSerial=" + deviceinSerial + ", deviceinDealler="
@@ -158,9 +196,11 @@ public class Device {
 				+ ", deviceCode=" + deviceCode + ", deviceType=" + deviceType + ", deviceManuf=" + deviceManuf
 				+ ", deviceModel=" + deviceModel + ", deviceName=" + deviceName + ", deviceColor=" + deviceColor
 				+ ", devicePrice=" + devicePrice + ", memberId=" + memberId + ", deviceRegDate=" + deviceRegDate
-				+ ", deviceTelecom=" + deviceTelecom + ", storeName=" + storeName + "]";
+				+ ", deviceTelecom=" + deviceTelecom + ", storeName=" + storeName + ", infoDevicein=" + infoDevicein
+				+ ", infoMethod=" + infoMethod + ", infoStore=" + infoStore + ", infoMemo=" + infoMemo
+				+ ", infoRegDate=" + infoRegDate + "]";
 	}
-		
+	
 	
 	
 }
