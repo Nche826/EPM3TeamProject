@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.epm.domain.Staff;
 import com.cafe24.epm.domain.Store;
@@ -20,6 +21,24 @@ public class StaffController {
 	@Autowired private StoreService storeService;
 	@Autowired private StaffService staffService;
 	
+	//직원 삭제 처리 
+	@PostMapping("/staffDelete")
+	@ResponseBody
+	public int staffDelete(Model model , @RequestParam(value="staffNames[]",required = false)String[] staffNames) {
+		System.out.println("staffNames--->"+staffNames);
+		System.out.println("=======직원 삭제 시작 ==========");
+		int nul =0;
+		int re = 0;
+		for(String staff_code : staffNames) {
+			System.out.println("사용자 삭제  :" +staff_code);
+			nul=staffService.staffSetDel(staff_code);
+			System.out.println("null 처리 여부 ==>"+nul);
+			re = staffService.staffDelete(staff_code);
+			System.out.println("삭제 여부 ==>"+re);
+		}
+		
+		return re;
+	}
 	
 	//직원 수정 처리
 	@PostMapping("/staffUpdate")

@@ -21,6 +21,20 @@
    			<result property="logout_date" 	column="max(lo.logout_date)"/>
    	</resultMap>
    	
+   	<update id="staffSetDel" parameterType="staff">
+	   	UPDATE tb_customer
+		SET
+			staff_code=NULL
+		where
+		   staff_code =#{staff_code}
+   	</update>
+   	
+   	
+   	
+   	<delete id="staffDelete" parameterType="String" statementType="PREPARED" >
+	 	DELETE FROM tb_staff WHERE staff_code=#{staff_code};
+   	</delete>
+   	
    	<update id="staffUpdate" parameterType="staff">
    	
    	UPDATE 
@@ -63,7 +77,8 @@
    	
    	<select id="staffList" parameterType="String" resultMap="StaffSelect">
 	   	SELECT 
-			 m.member_name 
+	   		 s.staff_code
+			,m.member_name 
 			,s.member_id 
 			,st.store_name 
 			,l.level_name 

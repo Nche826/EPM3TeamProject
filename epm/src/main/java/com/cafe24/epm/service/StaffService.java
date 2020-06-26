@@ -13,6 +13,16 @@ public class StaffService {
 	
 	@Autowired private StaffMapper staffMapper;
 	
+	
+	//직원 삭제 전 null처리 하기
+	public int staffSetDel(String staff_code) {
+		return staffMapper.staffSetDel(staff_code);
+	}
+	//직원 삭제 처리
+	public int staffDelete(String staff_code) {
+		return staffMapper.staffDelete(staff_code);
+	}
+	
 	//직원 권한 수정 처리
 	public int staffUpdate(Staff staff) {
 	 Staff result = staffMapper.getStaffSelect(staff.getMember_id());
