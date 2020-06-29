@@ -28,9 +28,9 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your EPM</p>
 
-      <form action="#" method="post" id="loginForm">
+      <form action="/login" method="post" id="loginForm">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id="memberId" placeholder="Id">
+          <input type="text" class="form-control" id="memberId" name="memberId" placeholder="Id">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" id="memberPw" placeholder="Password">
+          <input type="password" class="form-control" id="memberPw" name="memberPw" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -94,12 +94,26 @@
 			//로그인처리
 			$('#loginForm').submit();
 		});
+		
 		//로그인 실패시 alert ()
-		//uri에서 값 추출
+		
+		var message = null;
+		//uri에서 get방식으로 넘긴 값 추출
 		var uri = decodeURI(location.href);
-		var get = uri.substr(uri.indexOf('?')+1).substr(get.indexof('=')+1);
-		var message = get.substr(get.indexOf('=')+1);
-		if()
+		var get = uri.substr(uri.indexOf('?')+1);
+		if(uri != get){
+			message = get.substr(get.indexOf('=')+1);
+		};
+		//.을 제외한 특수문자 정규식
+		var regExp = /[\{\}\[\]\/?,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
+		if(regExp.test(message)){
+			//.을 제외한 특수문자를 공백으로 치환
+			message = message.replace(regExp,' ');
+		};
+		//추출한 값이 null이 아닐 경우 alert창 출력
+		if(message != null){
+				alert(message);
+		};
 	})
 	
 </script>

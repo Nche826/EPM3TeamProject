@@ -58,7 +58,7 @@
 											<option value="phone">연락처 (뒷4자리)</option>
 				                        </select>
 										<input type="text" class="form-control" name="searchV" placeholder="Enter ..." style="margin: 5px;">
-										<button type="submit" class="form-control btn btn-block btn-secondary" style="margin: 5px;">검색</button>
+										<button type="button" class="form-control btn btn-block btn-secondary" style="margin: 5px;">검색</button>
 									</div>
 								 </div>
 							</form>
@@ -90,7 +90,7 @@
                       <td th:text = "${ml.memberName}"></td>
                       <td th:text = "${ml.memberTel}"></td>
                       <td th:text = "${ml.memberRegDate}"></td>
-                      <td style="text-align: center;"><a th:href="@{/memberUpdateConfirm(member_id=${ml.memberId})}"><i class="fas fa-file-signature"></i></a></td>
+                      <td style="text-align: center;"><a th:href="@{/memberUpdate(member_id=${ml.memberId})}"><i class="fas fa-file-signature"></i></a></td>
                       <td style="text-align: center;"><a th:href="@{/memberDelete(member_id=${ml.memberId})}"><i class="far fa-trash-alt"></i></a></td>
                     </tr>
 
@@ -217,13 +217,7 @@
 
 
 	<script type="text/javascript">
-		/* get방식으로 받아온 키값 어떻게 alert창에 출력하는지??
-			var message = 
-			if(null != message && ""!=message){
-				alert(message); 
-			} */
-			
-			
+	$(function () {	
 	    	 //datetimepicker format
 	         $('#datetimepicker1').datetimepicker({
 	        	 format: 'YYYY-MM-DD'
@@ -307,6 +301,27 @@
 	         $(function () {
 				  $('[data-toggle="tooltip"]').tooltip()
 				});
+	         
+	 		//alert () 
+	 		var message = null;
+	 		//uri에서 get방식으로 넘긴 값 추출
+	 		var uri = decodeURI(location.href);
+	 		var get = uri.substr(uri.indexOf('?')+1);
+	 		if(uri != get){
+	 			message = get.substr(get.indexOf('=')+1);
+	 		};
+	 		//.을 제외한 특수문자 정규식
+	 		var regExp = /[\{\}\[\]\/?,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
+	 		if(regExp.test(message)){
+	 			//.을 제외한 특수문자를 공백으로 치환
+	 			message = message.replace(regExp,' ');
+	 		};
+	 		//추출한 값이 null이 아닐 경우 alert창 출력
+	 		if(message != null){
+	 				alert(message);
+	 		};
+
+ 	});
 	 </script>
 </th:block>
 </html>

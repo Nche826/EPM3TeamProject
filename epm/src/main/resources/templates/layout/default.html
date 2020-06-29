@@ -29,18 +29,43 @@
 		  $.widget.bridge('uibutton', $.ui.button)
 		</script>
 		
-		<!-- 공통 Script 모바일 메뉴닫기 -->
-  		<script type="text/javascript">
+		<!-- 공통 Script -->
+		<script type="text/javascript">
 			$(document).ready(
 	  			$(function(){
+				<!-- 모바일 메뉴닫기 -->
 					$( "#sidebar-overlay" ).on('click', function(){
-					$(".hamburger").trigger('click');
+						$(".hamburger").trigger('click');
 					});
-				})
+	  			
+	  			<!-- 프로필 이미지 받아오기 -->
+					$('#profileButton').click(function(){
+						var memberId = $('#loginId').html();
+						var request = $.ajax({
+							url: "/memberSelect", //통신할 url
+							method: "POST", //통신할 메서드 타입
+							data: { "memberId" : memberId }, //전송할 데이타
+							dataType: "json"
+						});	 
+						
+						request.done(function( data ) {
+							if(data.file != null && data.file !=''){
+								var file = data.file
+								var html = '<img src="/fileupload/';
+								html += file
+								html += '" width="100px" height="100px" class="img-circle elevation-2">'
+								$('#profile').html(html)
+							}
+						});	 
+						
+						request.fail(function( jqXHR, textStatus ) {
+						  alert( "Request failed: " + textStatus );
+						});	
+					});	
+	  			})
 			)
 		</script>
-		
-		
+
 		<!-- Bootstrap 4 -->
 		<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 		<!-- ChartJS -->

@@ -26,5 +26,7 @@ public interface StaffMapper {
 	
 	//매장등록처리
 	public int addStaff(Staff staff);
-
+	
+	//로그인용 직원 조회
+	public List<Staff> staffSelectLogin(String staff_id);
 }

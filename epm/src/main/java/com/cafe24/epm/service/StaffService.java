@@ -45,5 +45,10 @@ public class StaffService {
 		System.out.println("=====staff 등록 서비스 시작=====");
 		return staffMapper.addStaff(staff);
 	}
+	
+	//로그인용 직원 조회
+	public List<Staff> staffSelectLogin(String staff_id) {
+		return staffMapper.staffSelectLogin(staff_id);
+	}
 
 }

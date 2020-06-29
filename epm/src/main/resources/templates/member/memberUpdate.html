@@ -36,9 +36,9 @@
 					    <div class="card-body register-card-body">
 					      <p class="login-box-msg">Manage account</p>
 					
-					      <form action="/memberInsert" method="post">
+					      <form action="/memberInsert" method="post" enctype="multipart/form-data">
 					        <div class="input-group mb-3">
-					          <input type="text" class="form-control" placeholder="ID">
+					          <input type="text" class="form-control" placeholder="ID" readonly="readonly" th:value="${member.memberId}">
 					          <div class="input-group-append">
 					            <div class="input-group-text">
 					              <span class="fas fa-user"></span>
@@ -46,7 +46,7 @@
 					          </div>
 					        </div>
 					        <div class="input-group mb-3">
-					          <input type="text" class="form-control" placeholder="Name">
+					          <input type="text" class="form-control" placeholder="Name" th:value="${member.memberName}">
 					          <div class="input-group-append">
 					            <div class="input-group-text">
 					              <span class="fas fa-user"></span>
@@ -54,7 +54,7 @@
 					          </div>
 					        </div>
 					        <div class="input-group mb-3">
-					          <input type="password" class="form-control" placeholder="Password">
+					          <input type="password" class="form-control" placeholder="Password" th:value="${member.memberPw}">
 					          <div class="input-group-append">
 					            <div class="input-group-text">
 					              <span class="fas fa-lock"></span>
@@ -62,7 +62,15 @@
 					          </div>
 					        </div>
 					        <div class="input-group mb-3">
-					          <input type="text" class="form-control" placeholder="Phone">
+					          <input type="password" class="form-control" placeholder="Retype Password" name="memberPw" th:value="${member.memberPw}">
+					          <div class="input-group-append">
+					            <div class="input-group-text">
+					              <span class="fas fa-lock"></span>
+					            </div>
+					          </div>
+					        </div>
+					        <div class="input-group mb-3">
+					          <input type="text" class="form-control" placeholder="Phone" name="memberTel" th:value="${member.memberTel}">
 					          <div class="input-group-append">
 					            <div class="input-group-text">
 
@@ -72,7 +80,7 @@
 					        <div class="form-group">
 					           <div class="input-group">
 					             <div class="custom-file">
-					               <input type="file" class="custom-file-input" id="inputFile">
+					               <input type="file" class="custom-file-input" id="file" name="file">
 					               <label class="custom-file-label" for="inputFile">Choose file</label>
 					             </div>
 					             <div class="input-group-append">
