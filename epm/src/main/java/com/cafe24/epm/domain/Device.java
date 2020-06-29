@@ -26,11 +26,26 @@ public class Device {
 	
 	private String storeName;
 	
+	private String infoCode;
 	private String infoDevicein;
 	private String infoMethod;
 	private String infoStore;
 	private String infoMemo;
 	private String infoRegDate;
+	
+	private String updateStore;
+	private String updateStaff;
+	private String updateDate;
+	private String updateMethod;
+	private String updateDealler;
+	private String updateModel;
+	private String updateType;
+	private String updateColor;
+	private String updatePrice;
+	private String updateSerial;
+	private String updateMemo;
+	private String updateinCode;
+	
 	public String getDeviceinCode() {
 		return deviceinCode;
 	}
@@ -157,6 +172,12 @@ public class Device {
 	public void setStoreName(String storeName) {
 		this.storeName = storeName;
 	}
+	public String getInfoCode() {
+		return infoCode;
+	}
+	public void setInfoCode(String infoCode) {
+		this.infoCode = infoCode;
+	}
 	public String getInfoDevicein() {
 		return infoDevicein;
 	}
@@ -187,6 +208,78 @@ public class Device {
 	public void setInfoRegDate(String infoRegDate) {
 		this.infoRegDate = infoRegDate;
 	}
+	public String getUpdateStore() {
+		return updateStore;
+	}
+	public void setUpdateStore(String updateStore) {
+		this.updateStore = updateStore;
+	}
+	public String getUpdateStaff() {
+		return updateStaff;
+	}
+	public void setUpdateStaff(String updateStaff) {
+		this.updateStaff = updateStaff;
+	}
+	public String getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
+	}
+	public String getUpdateMethod() {
+		return updateMethod;
+	}
+	public void setUpdateMethod(String updateMethod) {
+		this.updateMethod = updateMethod;
+	}
+	public String getUpdateDealler() {
+		return updateDealler;
+	}
+	public void setUpdateDealler(String updateDealler) {
+		this.updateDealler = updateDealler;
+	}
+	public String getUpdateModel() {
+		return updateModel;
+	}
+	public void setUpdateModel(String updateModel) {
+		this.updateModel = updateModel;
+	}
+	public String getUpdateType() {
+		return updateType;
+	}
+	public void setUpdateType(String updateType) {
+		this.updateType = updateType;
+	}
+	public String getUpdateColor() {
+		return updateColor;
+	}
+	public void setUpdateColor(String updateColor) {
+		this.updateColor = updateColor;
+	}
+	public String getUpdatePrice() {
+		return updatePrice;
+	}
+	public void setUpdatePrice(String updatePrice) {
+		this.updatePrice = updatePrice;
+	}
+	public String getUpdateSerial() {
+		return updateSerial;
+	}
+	public void setUpdateSerial(String updateSerial) {
+		this.updateSerial = updateSerial;
+	}
+	public String getUpdateMemo() {
+		return updateMemo;
+	}
+	public void setUpdateMemo(String updateMemo) {
+		this.updateMemo = updateMemo;
+	}
+	public String getUpdateinCode() {
+		return updateinCode;
+	}
+	public void setUpdateinCode(String updateinCode) {
+		this.updateinCode = updateinCode;
+	}
 	@Override
 	public String toString() {
 		return "Device [deviceinCode=" + deviceinCode + ", deviceinSerial=" + deviceinSerial + ", deviceinDealler="
@@ -196,11 +289,13 @@ public class Device {
 				+ ", deviceCode=" + deviceCode + ", deviceType=" + deviceType + ", deviceManuf=" + deviceManuf
 				+ ", deviceModel=" + deviceModel + ", deviceName=" + deviceName + ", deviceColor=" + deviceColor
 				+ ", devicePrice=" + devicePrice + ", memberId=" + memberId + ", deviceRegDate=" + deviceRegDate
-				+ ", deviceTelecom=" + deviceTelecom + ", storeName=" + storeName + ", infoDevicein=" + infoDevicein
-				+ ", infoMethod=" + infoMethod + ", infoStore=" + infoStore + ", infoMemo=" + infoMemo
-				+ ", infoRegDate=" + infoRegDate + "]";
+				+ ", deviceTelecom=" + deviceTelecom + ", storeName=" + storeName + ", infoCode=" + infoCode
+				+ ", infoDevicein=" + infoDevicein + ", infoMethod=" + infoMethod + ", infoStore=" + infoStore
+				+ ", infoMemo=" + infoMemo + ", infoRegDate=" + infoRegDate + ", updateStore=" + updateStore
+				+ ", updateStaff=" + updateStaff + ", updateDate=" + updateDate + ", updateMethod=" + updateMethod
+				+ ", updateDealler=" + updateDealler + ", updateModel=" + updateModel + ", updateType=" + updateType
+				+ ", updateColor=" + updateColor + ", updatePrice=" + updatePrice + ", updateSerial=" + updateSerial
+				+ ", updateMemo=" + updateMemo + ", updateinCode=" + updateinCode + "]";
 	}
-	
-	
-	
+
 }

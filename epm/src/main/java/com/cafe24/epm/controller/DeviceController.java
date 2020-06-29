@@ -37,19 +37,13 @@ public class DeviceController {
 	@PostMapping("/deviceUpdate")
 	public String deviceUpdate(Device device) {
 		System.out.println(device.toString());
-		int insert = deviceService.deviceUpdate(device);
-		System.out.println("성공여부: "+insert);
+		int update = deviceService.deviceUpdate(device);
+		int infoupdate = deviceService.deviceInfoUpdate(device);
+		System.out.println("성공여부: "+update);
+		System.out.println("성공여부: "+infoupdate);
 		return "redirect:/deviceList";
 	}
-	
-	@PostMapping("/deviceInfoUpdate")
-	public String deviceInfoUpdate(Device device) {
-		System.out.println(device.toString());
-		int insert = deviceService.deviceInfoUpdate(device);
-		System.out.println("성공여부: "+insert);
-		return "redirect:/deviceList";
-	}
-	
+		
 	@GetMapping("/deviceUpdate")
 	public String deviceUpdate() {
 		

@@ -37,71 +37,70 @@
             </div>
             <div class="card-body" >
             
-            <div th:fragment="dUpdate">
-             <div class="row mg-t-20 mg-b-20" align="left">
+            
+             <div class="row mg-t-20 mg-b-20" align="left" th:fragment="dUpdate">
              <div class="col-6" style="padding-right:10px">     
               <div class="form-group">
                 <label for="inputName">매장</label>
-                <input type="text" class="form-control" name="infoStore" th:value="${d.infoStore}">
+                <input type="text" class="form-control" name="updateStore" >
               </div>
               <div class="form-group">
                 <label for="inputStatus">입고직원</label>
-                <select class="form-control custom-select" name="deviceinStaff" th:value="${d.deviceinStaff}">                  
-                  <option >직원1</option>
-                  <option>직원2</option>
-                  <option>직원3</option>
+                <select class="form-control custom-select" name="updateStaff" >                  
+                  <option value="staff_1">직원1</option>
+                  <option value="staff_2">직원2</option>
                 </select>
               </div>
                <div class="form-group">
                 <label for="inputName">입고일</label>
-                <input type="date"  class="form-control" th:value="${d.deviceinDate}" readonly>
+                <input type="date"  class="form-control" name="updateDate"th:value="${d.deviceinDate}" readonly>
               </div>  
               <div class="form-group">
                 <label for="inputName">입고방법</label>            
-				  <input checked type="radio"  name="infoMethod">
+				  <input type="radio"  name="updateMethod"  checked>
 				  <label>일반입고</label>
-				  <input type="radio" name="infoMethod">
+				  <input type="radio" name="updateMethod">
 				  <label>바코드입고</label>
 				  </div>
               <div class="form-group">
                 <label for="inputStatus" >거래처</label>
-                <select class="form-control custom-select" name="deviceinDealler" th:value="${d.deviceinDealler}">                  
-                  <option selected>-선택-</option>
-                  <option>거래처1</option>
-                  <option>거래처2</option>
+                <select class="form-control custom-select" name="updateDealler" >                  
+                  <option>-선택-</option>
+                  <option value="dealler_1" selected>거래처1</option>
+                  <option value="dealler_2">거래처2</option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="inputName">모델명</label>
-                <input type="text"  class="form-control" name="deviceModel" th:value="${d.deviceModel}" >
+                <input type="text"  class="form-control" name="updateModel"  >
               </div>
               </div>
              <div class="col-6" style="padding-right:10px">     
               <div class="form-group">
                 <label for="inputStatus">종류</label>
-                <select class="form-control custom-select" name="deviceType" th:value="${d.deviceType}">                  
-                  <option selected>휴대폰</option>
-                  <option>태블릿</option>             
+                <select class="form-control custom-select" name="updateType" >                  
+                  <option value="type1" selected>휴대폰</option>
+                  <option value="type2">태블릿</option>             
                 </select>
               </div>
               <div class="form-group">
                 <label for="inputName">색상</label>
-                <input type="text"  class="form-control" name="deviceColor" th:value="${d.deviceColor}">
+                <input type="text"  class="form-control" name="updateColor" >
               </div>
               <div class="form-group">
                 <label for="inputName">입고가</label>
-                <input type="text"  class="form-control" name="devicePrice" th:value="${d.devicePrice}">            
+                <input type="text"  class="form-control" name="updatePrice" >            
               </div>
               <div class="form-group">
                 <label for="inputName">일련번호</label>
-                <input type="text"  class="form-control" name="deviceSerial" th:value="${d.deviceinSerial}">            
+                <input type="text"  class="form-control" name="updateSerial" >            
               </div>
               <div class="form-group">
                 <label for="inputName">비고</label>
-                <input type="text"  class="form-control" name="deviceinMemo" th:value="${d.deviceinMemo}">            
+                <input type="text"  class="form-control" name="updateMemo" >            
               </div>
               </div>
-             </div>
+            
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
