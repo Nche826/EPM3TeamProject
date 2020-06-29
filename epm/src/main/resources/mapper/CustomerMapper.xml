@@ -5,14 +5,152 @@
     
     <mapper namespace="com.cafe24.epm.mapper.CustomerMapper">
     
-    <select id="CustomerList" parameterType="String">
-    SELECT customer_code
-		,customer_name
-		,customer_tel
-		,customer_birth
-		,staff_code
-		,customer_reg_date
-	FROM tb_customer
+    <resultMap type="Customer" id="CustomerSelect">
+    		<result property="customer_code" column="customer_code"/>
+    		<result property="customer_name" column="customer_name"/>
+    		<result property="customer_tel" column="customer_tel"/>
+    		<result property="customer_birth" column="customer_birth"/>
+    		<result property="staff_code" column="staff_code"/>
+    		<result property="customer_reg_date" column="customer_reg_date"/>
+    		<result property="devopen_customer" column="count(d.devopen_customer)"/>
+    		<result property="homeopen_customer" column="count(h.homeopen_customer)"/>
+    		<result property="member_name" column="member_name"/>
+    		<result property="member_id" column="member_id"/>
+    		<result property="store_name" column="store_name"/>
+    		<result property="store_addr" column="store_addr"/>
+    		<result property="store_tel" column="store_tel"/>
+    </resultMap>
+    
+    
+    <update id="customerUpdate" parameterType="customer">
+    <selectKey order="BEFORE" keyProperty="staff_code" resultType="String">
+		SELECT
+			s.staff_code
+		FROM 
+			tb_staff AS s
+		WHERE 
+			s.member_id =#{member_id}
+	</selectKey> 
+	    UPDATE 
+	    	tb_customer
+		SET
+			 customer_name=#{customer_name}
+			,customer_tel=#{customer_tel}
+			,customer_birth=#{customer_birth}
+			,staff_code=#{staff_code}
+		WHERE customer_code=#{customer_code};
+    
+    
+    </update>
+    
+    <select id="getStaffSelect" parameterType="String" resultMap="CustomerSelect">
+    SELECT 
+		 m.member_name
+		,m.member_id
+		,st.store_name
+		,st.store_addr
+		,st.store_tel
+	FROM tb_staff AS s
+		JOIN 
+		tb_member AS m
+		ON 
+		s.member_id = m.member_id
+		JOIN 
+		tb_store AS st
+		ON 
+		st.store_code = s.store_code
+	WHERE 
+		s.staff_code =#{staff_code};
+    
+    
+    
+    </select>
+    <select id="getCustomerSelect" parameterType="String" resultMap="CustomerSelect">
+    SELECT 
+		c.customer_code
+		,c.customer_name 
+		,c.customer_tel 
+		,c.customer_birth 
+		,m.member_name
+		,m.member_id
+		,s.staff_code
+		,st.store_name
+		,customer_reg_date 
+		,count(d.devopen_customer) 
+		,count(h.homeopen_customer) 
+	FROM 
+		tb_customer AS c
+	JOIN 
+		tb_staff AS s
+		ON 
+			c.staff_code=s.staff_code
+	JOIN 
+		tb_member AS m
+		ON 
+			s.member_id=m.member_id
+	join
+		tb_store AS st
+		ON 
+			s.store_code=st.store_code
+	LEFT OUTER JOIN 
+		tb_devopen AS d
+		ON 
+			d.staff_code=c.staff_code
+		AND 
+			d.devopen_customer=c.customer_name
+	LEFT OUTER JOIN 
+		tb_homeopen AS h
+		ON 
+			h.staff_code = c.staff_code
+		AND 
+			h.homeopen_customer=c.customer_name
+		WHERE 
+			c.customer_code =#{customer_code};
+    
+    </select>
+    
+    <select id="CustomerList" parameterType="String" resultMap="CustomerSelect">
+   
+	SELECT 
+		customer_code
+		,customer_name 
+		,customer_tel 
+		,customer_birth 
+		,count(d.devopen_customer) 
+		,count(h.homeopen_customer) 
+		,m.member_name
+		,m.member_id
+		,st.store_name 
+		,customer_reg_date 
+		,s.staff_code
+	FROM 
+		tb_customer AS c
+		JOIN 
+			tb_staff AS s
+			ON 
+				c.staff_code=s.staff_code
+		JOIN 
+			tb_member AS m
+			ON 
+				s.member_id=m.member_id
+		join
+			tb_store AS st
+			ON 
+				s.store_code=st.store_code
+		LEFT JOIN 
+			tb_devopen AS d
+			ON 
+				d.staff_code=c.staff_code
+			AND 
+				d.devopen_customer=c.customer_name
+		LEFT JOIN 
+			tb_homeopen AS h
+			ON 
+				h.staff_code = c.staff_code
+			AND 
+				h.homeopen_customer=c.customer_name
+		GROUP BY 
+			customer_code;
     
     
     </select>

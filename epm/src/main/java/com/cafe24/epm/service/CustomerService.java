@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cafe24.epm.domain.Customer;
+import com.cafe24.epm.domain.Staff;
 import com.cafe24.epm.mapper.CustomerMapper;
 
 @Service
@@ -14,6 +15,23 @@ import com.cafe24.epm.mapper.CustomerMapper;
 public class CustomerService {
 
 	@Autowired private CustomerMapper customerMapper;
+	
+	//고객수정처리
+	public int customerUpdate(Customer customer) {
+	 Customer result = customerMapper.getCustomerSelect(customer.getCustomer_code());
+	 System.out.println("result toString()---->"+result);
+		return customerMapper.customerUpdate(customer);
+	}
+	
+	//고객수정화면 가져오기
+	public Customer getCustomerSelect(String customer_code) {
+		return customerMapper.getCustomerSelect(customer_code);
+	}
+	
+	//고객 담당 직원 정보 가져오기
+	public Customer getStaffSelect(String staff_code) {
+		return customerMapper.getStaffSelect(staff_code);
+	}
 	
 	//고객등록
 	public int addCustomer(Customer customer) {
