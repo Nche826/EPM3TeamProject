@@ -35,73 +35,72 @@
 
            
             </div>
-            <div class="card-body" th:fragment="dUpdate">
-             <div class="row mg-t-20 mg-b-20" align="left">
+            <div class="card-body" >
+            
+            
+             <div class="row mg-t-20 mg-b-20" align="left" th:fragment="dUpdate">
              <div class="col-6" style="padding-right:10px">     
               <div class="form-group">
                 <label for="inputName">매장</label>
-                <input type="text" class="form-control" value="epm 본점">
+                <input type="text" class="form-control" name="updateStore" >
               </div>
               <div class="form-group">
                 <label for="inputStatus">입고직원</label>
-                <select class="form-control custom-select">                  
-                  <option selected>직원1</option>
-                  <option>직원2</option>
-                  <option>직원3</option>
+                <select class="form-control custom-select" name="updateStaff" >                  
+                  <option value="staff_1">직원1</option>
+                  <option value="staff_2">직원2</option>
                 </select>
               </div>
                <div class="form-group">
                 <label for="inputName">입고일</label>
-                <input type="date"  class="form-control" >
+                <input type="date"  class="form-control" name="updateDate"th:value="${d.deviceinDate}" readonly>
               </div>  
               <div class="form-group">
-                <label for="inputName">입고방법</label>
-                <form>
-				  <input type="radio"  name="insert">
+                <label for="inputName">입고방법</label>            
+				  <input type="radio"  name="updateMethod"  checked>
 				  <label>일반입고</label>
-				  <input type="radio" name="insert">
-				  <label>바코드입고</label><br>				  
-				</form>
-              </div>
+				  <input type="radio" name="updateMethod">
+				  <label>바코드입고</label>
+				  </div>
               <div class="form-group">
-                <label for="inputStatus">거래처</label>
-                <select class="form-control custom-select">                  
-                  <option selected>-선택-</option>
-                  <option>거래처1</option>
-                  <option>거래처2</option>
+                <label for="inputStatus" >거래처</label>
+                <select class="form-control custom-select" name="updateDealler" >                  
+                  <option>-선택-</option>
+                  <option value="dealler_1" selected>거래처1</option>
+                  <option value="dealler_2">거래처2</option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="inputName">모델명</label>
-                <input type="text"  class="form-control" >
+                <input type="text"  class="form-control" name="updateModel"  >
               </div>
               </div>
              <div class="col-6" style="padding-right:10px">     
               <div class="form-group">
                 <label for="inputStatus">종류</label>
-                <select class="form-control custom-select">                  
-                  <option selected>휴대폰</option>
-                  <option>태블릿</option>             
+                <select class="form-control custom-select" name="updateType" >                  
+                  <option value="type1" selected>휴대폰</option>
+                  <option value="type2">태블릿</option>             
                 </select>
               </div>
               <div class="form-group">
                 <label for="inputName">색상</label>
-                <input type="text"  class="form-control" >
+                <input type="text"  class="form-control" name="updateColor" >
               </div>
               <div class="form-group">
                 <label for="inputName">입고가</label>
-                <input type="text"  class="form-control" >            
+                <input type="text"  class="form-control" name="updatePrice" >            
               </div>
               <div class="form-group">
                 <label for="inputName">일련번호</label>
-                <input type="text"  class="form-control" >            
+                <input type="text"  class="form-control" name="updateSerial" >            
               </div>
               <div class="form-group">
                 <label for="inputName">비고</label>
-                <input type="text"  class="form-control" >            
+                <input type="text"  class="form-control" name="updateMemo" >            
               </div>
               </div>
-             </div>
+            
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
@@ -110,6 +109,7 @@
           <a href="#" class="btn btn-secondary">Cancel</a>
           <input type="submit" value="Save Changes" class="btn btn-success">
         </div>
+      </div>
       </div>
       </div>
         </div>

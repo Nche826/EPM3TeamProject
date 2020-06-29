@@ -29,7 +29,27 @@
 		<result property="deviceTelecom"			column="device_telecom"/>
 		
 		<result property="storeName"				column="store_name"/>
-
+		
+		<result property="infoCode"					column="dinfo_code"/>
+		<result property="infoDevicein"				column="dinfo_devicein"/>
+		<result property="infoMethod"				column="dinfo_method"/>
+		<result property="infoStore"				column="dinfo_store"/>		
+		<result property="infoMemo"					column="dinfo_memo"/>
+		<result property="infoRegDate"				column="dinfo_reg_date"/>	
+		
+		<result property="updateStore"				column="dinfo_store"/>	
+		<result property="updateStaff"				column="staff_code"/>	
+		<result property="updateDate"				column="devicein_date"/>	
+		<result property="updateMethod"				column="dinfo_method"/>	
+		<result property="updateDealler"			column="dealler_code"/>	
+		<result property="updateModel"				column="device_model"/>	
+		<result property="updateType"				column="device_type"/>	
+		<result property="updateColor"				column="device_color"/>	
+		<result property="updatePrice"				column="device_price"/>	
+		<result property="updateSerial"				column="devicein_serial"/>	
+		<result property="updateMemo"				column="devicein_memo"/>	
+		<result property="updateinCode"				column="devicein_code"/>	
+		
 	</resultMap>
 
 	<select id = "getDeviceSelect" parameterType="String" resultMap="DeviceinSelect">
@@ -61,13 +81,31 @@
 	 	ON i.staff_code = s.staff_code
 	JOIN tb_store AS a
 		ON s.store_code = a.store_code
-		
-	</select>
-	
+	JOIN tb_deviceinfo as info
+		on info.dinfo_devicein = i.devicein_code
+	</select>	
+
 	<insert id="deviceInsert" parameterType="Device">
-		insert
-			into tb_devicein
-			(
+	<selectKey keyProperty="deviceinCode,deviceCode" resultType="hashmap" order="BEFORE">
+ 			SELECT 
+ 				CONCAT('code', MAX(CAST(SUBSTRING(dIn.devicein_code,5) AS DECIMAL)+1)) AS deviceinCode
+ 				,d.device_code as deviceCode
+ 				
+ 			FROM 
+ 				tb_devicein as dIn
+ 				,(SELECT
+							device_code
+					FROM
+							tb_device 
+					where
+							device_model=#{deviceModel}
+							and device_type=#{deviceType}
+							and device_color=#{deviceColor}
+							and device_price=#{devicePrice}) as d			
+ 	</selectKey>
+INSERT
+	into tb_devicein
+			(		
 			devicein_code
 			,devicein_serial
 			,dealler_code
@@ -81,18 +119,96 @@
 			)
 			values
 			(
-			'code3'
+			#{deviceinCode}
 			,#{deviceinSerial}
-			,#{deviceinDealler}
-			,#{deviceinDevice}
+			,#{deviceinDealler}			
+			,#{deviceCode}			
 			,'신규'
 			,now()
 			,now()
 			,#{deviceinMemo}
 			,#{deviceinStaff}
 			,now()		
-			);				
+			)		
+		</insert>
+		<insert id="deviceInfoInsert" parameterType="Device">	
+		<selectKey keyProperty="infoCode" resultType="String" order="BEFORE">
+ 			SELECT 
+ 				CONCAT('code', MAX(CAST(SUBSTRING(dinfo_code,5) AS DECIMAL)+1)) AS dinfo_code
+			FROM tb_deviceinfo
+ 		</selectKey>
+	INSERT		
+		into tb_deviceinfo
+			(
+			dinfo_code
+			,dinfo_devicein
+			,dinfo_method
+			,dinfo_store
+			,dinfo_memo
+			,dinfo_reg_date
+			)			
+			values
+			(
+			#{infoCode}
+			,#{deviceinCode}
+			,#{infoMethod}
+			,#{infoStore}
+			,#{deviceinMemo}			
+			,now()
+			)	
+	
+		</insert>
 		
-	</insert>
+		<update id="deviceUpdate" parameterType="Device">
+	<selectKey keyProperty="deviceCode" resultType="hashmap" order="BEFORE">
+				SELECT
+						device_code as deviceCode
+				FROM
+						tb_device 
+				where
+						device_model=#{updateModel}
+						and device_type=#{updateType}
+						and device_color=#{updateColor}
+						and device_price=#{updatePrice}
+ 	</selectKey>
+	update
+		tb_devicein
+	
+	set
+		devicein_serial = #{updateSerial}
+		,dealler_code = #{updateDealler}
+		,device_code = #{deviceCode}
+		,devicein_date = NOW()
+		,devicein_memo = #{updateMemo}
+		,staff_code = #{updateStaff}
+		,devicein_reg_date = NOW()
+	
+	WHERE 
+		devicein_serial = #{updateSerial}
+	
+	
+		</update>
+		
+		<update id="deviceInfoUpdate" parameterType="Device">	
+		<selectKey keyProperty="deviceinCode" resultType="hashmap" order="BEFORE">
+			SELECT
+				devicein_code as deviceinCode
+			FROM
+				tb_devicein
+			where
+				devicein_serial = #{updateSerial}
+						
+ 	</selectKey>
+	update		
+		tb_deviceinfo
+	set
+		dinfo_devicein = #{deviceinCode}
+		,dinfo_method = #{updateMethod}
+		,dinfo_store = #{updateStore}
+		,dinfo_memo = #{updateMemo}
+		,dinfo_reg_date = NOW()
+	where
+		dinfo_devicein = #{deviceinCode}
+		</update>
 </mapper>
 	

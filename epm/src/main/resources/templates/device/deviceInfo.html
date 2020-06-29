@@ -37,7 +37,7 @@
 		<div class="col-6" style="padding-right:10px">
 			<div class="rounded table-responsive">
 				<table class="table mg-b-0">
-					
+					<thead>
 						<tr>
 							<th colspan="2">
 								<span class="tx-14">기본정보</span>
@@ -47,31 +47,32 @@
 					<tbody>
 						<tr>
 							<th class="tx-right">일련번호</th>
-							<td>111111</td>
+							<td th:text="${d.deviceinSerial}"></td>
+							
 						</tr>
 						<tr>
 							<th class="tx-right">거래처</th>
-							<td>금풍대리점(SK)</td>
+							<td th:text="${d.deviceinDealler}"></td>
 						</tr>
 						<tr>
 							<th class="tx-right">통신사</th>
-							<td>SK텔레콤</td>
+							<td th:text="${d.deviceTelecom}"></td>
 						</tr>
 						<tr>
 							<th class="tx-right">모델명</th>
-							<td>SM-G986N <span class="tx-10 tx-gray-500 mg-l-5"></span></td>
+							<td th:text="${d.deviceModel}"><span class="tx-10 tx-gray-500 mg-l-5"></span></td>
 						</tr>
 						<tr>
 							<th class="tx-right">종류</th>
-							<td>휴대폰</td>
+							<td th:text="${d.deviceType}"></td>
 						</tr>
 						<tr>
 							<th class="tx-right">색상</th>
-							<td></td>
+							<td th:text="${d.deviceColor}"></td>
 						</tr>
 						<tr>
 							<th class="tx-right">입고가</th>
-							<td>1,353,000</td>
+							<td th:text="${d.devicePrice}"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -90,33 +91,33 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<tr >
 							<th class="tx-right">상태</th>
-							<td> 신규</td>
+							<td th:text="${d.deviceinStatus}"></td>
 						</tr>
 						<tr>
 							<th class="tx-right">매장</th>
-							<td>폰클데모 본점</td>
+							<td th:text="${d.infoStore}"></td>
 						</tr>
 						<tr>
 							<th class="tx-right">입고직원</th>
-							<td>김대표</td>
+							<td th:text="${d.deviceinStaff}"></td>
 						</tr>
 						<tr>
 							<th class="tx-right">입고일</th>
-							<td>2020-06-12</td>
+							<td th:text="${d.deviceinDate}"></td>
 						</tr>
 						<tr>
 							<th class="tx-right">입고방법</th>
-							<td>일반입고</td>
+							<td th:text="${d.infoMethod}"></td>
 						</tr>
 						<tr>
 							<th class="tx-right">비고</th>
-							<td></td>
+							<td th:text="${d.infoMemo}"></td>
 						</tr>
 						<tr>
 							<th class="tx-right">등록일</th>
-							<td>2020년 06월 12일 16시 58분</td>
+							<td th:text="${d.infoRegDate}"></td>
 						</tr>
 					</tbody>
 				</table>
