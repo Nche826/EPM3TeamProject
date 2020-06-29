@@ -16,6 +16,11 @@ public class CustomerService {
 
 	@Autowired private CustomerMapper customerMapper;
 	
+	//고객삭제처리
+	public int customerDelete(String customerCodes) {
+		return customerMapper.customerDelete(customerCodes);
+	}
+	
 	//고객수정처리
 	public int customerUpdate(Customer customer) {
 	 Customer result = customerMapper.getCustomerSelect(customer.getCustomer_code());

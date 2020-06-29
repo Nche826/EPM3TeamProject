@@ -151,7 +151,7 @@
                   </thead>
                   <tbody>
                     <tr th:each="c,i : ${customerList}">
-                      <td><input type="checkbox" name="customer_code" th:value="${c.customer_code}" ></td>
+                      <td><input type="checkbox" name="customerCodes" th:value="${c.customer_code}" ></td>
                       <td th:text="${i.count}"></td>
                       <td th:text="${c.customer_name}"></td>
                       <td th:text="${c.customer_tel}"></td>
@@ -194,8 +194,31 @@
 			
 			
 		<div class= "btn"style="width: 100px;">
-          	<button type="button" class="btn btn-block btn-secondary btn-sm" onclick="location.href='#'">삭제</button>
+          	<button type="button" id="custDelBtn" class="btn btn-block btn-secondary btn-sm" data-toggle="modal" data-target="#modal-sm" >삭제</button>
 		</div>
+			<div class="modal fade" id="modal-sm">
+		        <div class="modal-dialog modal-sm">
+		          <div class="modal-content bg-danger">
+		            <div class="modal-header">
+		              <h4 class="modal-title">안내</h4>
+		              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                <span aria-hidden="true">&times;</span>
+		              </button>
+		            </div>
+		            <div class="modal-body">
+		              <p>선택한 고객을 삭제 하시겠습니까?</p>
+		              <p style="font-size: small;">(주의)!삭제된 자료는 복구되지 않습니다.</p>
+		            </div>
+		            <div class="modal-footer justify-content-between">
+		              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+		              <button type="button" class="btn btn-outline-light deleteCheckValue">삭제하기</button>
+		            </div>
+		          </div>
+		          <!-- /.modal-content -->
+		        </div>
+		        <!-- /.modal-dialog -->
+    		 </div>
+    		 <!-- /.modal -->
 		</div>	<!-- /row -->
       </div><!-- /.container-fluid -->
     </section>
@@ -206,8 +229,40 @@
 <script>
   
   $('#reservation').daterangepicker();
+  $('.select2').select2()
   $(function(){
-	$('.select2').select2()
+	
+	$('input:checkbox[name="customerCodes"]').click(function(){
+		console.log($(this).val());
+	})
+	$('.deleteCheckValue').click(function(){
+		
+		var chkArr = [];
+		$('input:checkbox[name="customerCodes"]:checked').each(function(){
+			chkArr.push($(this).val());
+		})
+		console.log(chkArr);
+		
+		$.ajax({
+			url: '/customerDelete'	 
+			,type:'post'
+			,dataType:'json'
+			,data:{ 'customerCodes' : chkArr }
+		 
+	 	})
+		.done(function(data) {
+			if(data ==1){
+			alert("삭제되었습니다.");
+			window.location.href = "/customerList";
+				
+			}
+		})
+		.fail(function( jqXHR, textStatus ) {
+			  alert( "삭제 처리가 실패되었습니다." );
+			 
+		}) 
+	});
+	
   });  
 	
 </script>

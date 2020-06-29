@@ -21,6 +21,13 @@
     		<result property="store_tel" column="store_tel"/>
     </resultMap>
     
+    <delete id="customerDelete" parameterType="String" statementType="PREPARED">
+    DELETE 
+    FROM 
+    	tb_customer 
+    WHERE 
+    	customer_code=#{customer_code};
+    </delete>
     
     <update id="customerUpdate" parameterType="customer">
     <selectKey order="BEFORE" keyProperty="staff_code" resultType="String">

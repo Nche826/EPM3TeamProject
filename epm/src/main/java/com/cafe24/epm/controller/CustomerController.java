@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.epm.domain.Customer;
 import com.cafe24.epm.domain.Staff;
@@ -23,7 +24,20 @@ public class CustomerController {
 	
 	
 	
-	
+	//고객삭제처리
+	@PostMapping("/customerDelete")
+	@ResponseBody
+	public int customerDelete(Model model , @RequestParam(value="customerCodes[]",required = false)String[] customerCodes) {
+		System.out.println("customerCodes"+customerCodes);
+		System.out.println("=============고객 삭제 시작=============");
+		int re =0;
+		for(String customer_code : customerCodes) {
+			System.out.println("고객 삭제 :"+customer_code);
+			re=customerService.customerDelete(customer_code);
+			System.out.println("삭제여부--->"+re);
+		}
+		return re;
+	}
 	
 	//고객등록하기
 	@PostMapping("/addCustomer")
@@ -33,7 +47,7 @@ public class CustomerController {
 		int i = customerService.addCustomer(customer);
 		System.out.println("실행결과 실행되면 1이 떠야되!!-->"+i);
 		
-		return "customer/customerList";
+		return "redirect:/customerList";
 		
 	}
 	

@@ -11,6 +11,8 @@ import com.cafe24.epm.domain.Staff;
 public interface CustomerMapper {
 	
 	
+	//고객삭제처리
+	public int customerDelete(String customerCodes);
 	
 	//고객 수정 처리
 	public int customerUpdate(Customer customer);
