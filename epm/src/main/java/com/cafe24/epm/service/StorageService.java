@@ -1,6 +1,8 @@
 package com.cafe24.epm.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,9 @@ public class StorageService {
 		
 	@Value("${service.file.uploadurl}")
 	private String fileUploadPath;
+	
+	@Autowired
+	private ApplicationContext context;
 	
 	/**
 	 * 파일 업로드
@@ -42,8 +47,9 @@ public class StorageService {
 	 * 파일 다운로드 
 	 * @param filename
 	 * @return
+	 * @throws IOException 
 	 */
-	public Resource loadAsResource(String filename) {
+	public Resource loadAsResource(String filename) throws IOException {
 		try {
 			Path file = getPath().resolve(filename);
 			Resource resource = new UrlResource(file.toUri());
@@ -70,9 +76,10 @@ public class StorageService {
 	/**
 	 * 패스 객체 반환
 	 * @return
+	 * @throws IOException 
 	 */
-	private Path getPath() {
-		return Paths.get(fileUploadPath);
+	private Path getPath() throws IOException {
+		return Paths.get(context.getResource("classpath:/static/fileupload").getURI());
 	}
 
 }
