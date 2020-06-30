@@ -183,12 +183,11 @@
               </form>
               <!-- /.검색 From  -->
               <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
+                <table class="table table-hover text-nowrap" style="font-size:small;">
                   <thead>
                     <tr>
                       <th></th>
                       <th>no</th>
-                      <th>수납일</th>
                       <th>수납자명</th>
                       <th>연락처</th>
                       <th>구분</th>
@@ -198,71 +197,26 @@
                       <th>매장</th>
                       <th>직원</th>
                       <th>비고</th>
+                      <th>수납 등록 일자</th>
                       <th>상세</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr th:each=" l,i : ${ledgerList}">
                       <td><input type="checkbox" value="#"></td>
-                      <td>1</td>
-                      <td>20200610</td>
-                      <td>김뭉치</td>
-                      <td>010-1234-1111</td>
-                      <td>현금 수납</td>
-                      <td>300,000</td>
-                      <td>완료</td>
-                      <td>하이앤드인터네셔널</td>
-                      <td>삼성1호점</td>
-                      <td>김수지</td>
-                      <td>비고다.비고오오.</td>
+                      <td th:text="${i.count}">1</td>
+                      <td th:text="${l.receive_customer}"></td>
+                      <td th:text="${l.receive_custel}"></td>
+                      <td th:text="${l.receive_type}"></td>
+                      <td th:text="${l.receive_price}"></td>
+                      <td th:text="${l.receive_remit_type}"></td>
+                      <td th:text="${l.dealler_name}"></td>
+                      <td th:text="${l.store_name}"></td>
+                      <td th:text="${l.member_name}"></td>
+                      <td th:text="${l.receive_memo}"></td>
+                      <td th:text="${l.receive_reg_date}"></td>
                       <td><a th:href="@{/ledgerUpdate}"><i class="fas fa-edit"></i></a></td>
                     </tr>
-                    <tr>
-                      <td><input type="checkbox" value="#"></td>
-                      <td>1</td>
-                      <td>20200610</td>
-                      <td>김뭉치</td>
-                      <td>010-1234-1111</td>
-                      <td>현금 수납</td>
-                      <td>300,000</td>
-                      <td>완료</td>
-                      <td>하이앤드인터네셔널</td>
-                      <td>삼성1호점</td>
-                      <td>김수지</td>
-                      <td>비고다.비고오오.</td>
-                      <td><a th:href="@{/ledgerUpdate}"><i class="fas fa-edit"></i></a></td>
-                    </tr>
-                    <tr>
-                       <td><input type="checkbox" value="#"></td>
-                      <td>1</td>
-                      <td>20200610</td>
-                      <td>김뭉치</td>
-                      <td>010-1234-1111</td>
-                      <td>현금 수납</td>
-                      <td>300,000</td>
-                      <td>완료</td>
-                      <td>하이앤드인터네셔널</td>
-                      <td>삼성1호점</td>
-                      <td>김수지</td>
-                      <td>비고다.비고오오.</td>
-                      <td><a th:href="@{/ledgerUpdate}"><i class="fas fa-edit"></i></a></td>
-                    </tr>
-                    <tr>
-                      <td><input type="checkbox" value="#"></td>
-                      <td>1</td>
-                      <td>20200610</td>
-                      <td>김뭉치</td>
-                      <td>010-1234-1111</td>
-                      <td>현금 수납</td>
-                      <td>300,000</td>
-                      <td>완료</td>
-                      <td>하이앤드인터네셔널</td>
-                      <td>삼성1호점</td>
-                      <td>김수지</td>
-                      <td>비고다.비고오오.</td>
-                      <td><a th:href="@{/ledgerUpdate}"><i class="fas fa-edit"></i></a></td>
-                    </tr>
-                    
                   </tbody>
                 </table>
          <!-- 페이징  -->

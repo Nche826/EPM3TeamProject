@@ -15,7 +15,9 @@ public class Ledger {
 	private String store_code;  //매장 코드
 	private String staff_code;   //직원 코드
 	private String receive_reg_date; //수납등록날짜
-	
+	private String dealler_name; //거래처명
+	private String store_name; //매장명
+	private String member_name;  //직원이름
 	
 	public String getReceive_code() {
 		return receive_code;
@@ -101,7 +103,24 @@ public class Ledger {
 	public void setReceive_reg_date(String receive_reg_date) {
 		this.receive_reg_date = receive_reg_date;
 	}
-	
+	public String getDealler_name() {
+		return dealler_name;
+	}
+	public void setDealler_name(String dealler_name) {
+		this.dealler_name = dealler_name;
+	}
+	public String getStore_name() {
+		return store_name;
+	}
+	public void setStore_name(String store_name) {
+		this.store_name = store_name;
+	}
+	public String getMember_name() {
+		return member_name;
+	}
+	public void setMember_name(String member_name) {
+		this.member_name = member_name;
+	}
 	@Override
 	public String toString() {
 		return "Ledger [receive_code=" + receive_code + ", receive_type=" + receive_type + ", receive_customer="
@@ -109,8 +128,11 @@ public class Ledger {
 				+ ", receive_card=" + receive_card + ", dealler_code=" + dealler_code + ", receive_remit_date="
 				+ receive_remit_date + ", receive_remit_price=" + receive_remit_price + ", receive_remit_type="
 				+ receive_remit_type + ", receive_memo=" + receive_memo + ", store_code=" + store_code + ", staff_code="
-				+ staff_code + ", receive_reg_date=" + receive_reg_date + "]";
+				+ staff_code + ", receive_reg_date=" + receive_reg_date + ", dealler_name=" + dealler_name
+				+ ", store_name=" + store_name + ", member_name=" + member_name + "]";
 	}
+	
+	
 	
 
 }

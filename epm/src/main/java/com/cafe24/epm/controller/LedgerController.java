@@ -70,6 +70,10 @@ public class LedgerController {
 		List<Dealler> dealler_name = deallerService.deallerList();
 		System.out.println("거래처 리스트 --->"+dealler_name);
 		model.addAttribute("dealler", dealler_name);
+		System.out.println("========수납 장부 리스트 시이~~작!!=========");
+		List<Ledger> ledgerList = ledgerService.ledgerList();
+		System.out.println("수납 장부 리스트---->"+ledgerList);
+		model.addAttribute("ledgerList", ledgerList);
 		return "ledger/ledgerList";
 	}
 
