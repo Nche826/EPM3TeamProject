@@ -16,26 +16,11 @@
 	    <!-- store dropdown -->
 		<ul class="navbar-nav">
 			<li class="nav-item">
-				<div class="btn-group">
-					<button type="button" class="btn btn-default">매장선택</button>
-					<button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
-						<span class="sr-only">Toggle Dropdown</span>
-						<div th:each="SSTAFF : ${session.SSTAFF}" class="dropdown-menu" role="menu" style="">
-							<a class="dropdown-item" href="#" th:text="${SSTAFF.store_name}">매장선택</a>
-						</div>
-                    </button>
-				</div>
+					<select name="storeName">
+						<option th:each="SSTAFF : ${session.SSTAFF}" th:value="${SSTAFF.store_code}" th:text="${SSTAFF.store_name}"></option>
+					</select>
 			</li>
 		</ul>
-<!-- 	      <li class="nav-item dropdown">
-	        <a class="nav-link bg-dark rounded dropdown-toggle" href="#" id="navbarVersionDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	             	매장선택
-	        </a>
-	        <div th:each="SSTAFF : ${session.SSTAFF}" class="dropdown-menu py-0" aria-labelledby="navbarVersionDropdown">
-	          <a class="dropdown-item bg-dark disabled" href="/index" role="button" th:text="${SSTAFF.store_name}"></a>
-	        </div>
-	      </li>
-	    </ul> -->
 	
 	    <!-- Right navbar links -->
 	    <ul class="navbar-nav ml-auto">
