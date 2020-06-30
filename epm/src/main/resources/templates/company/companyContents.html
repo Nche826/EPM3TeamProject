@@ -34,24 +34,28 @@
 				<div class="row">
 				
 				<!-- 게시물 영역 -->
-					<div class="col-md-10" style="margin: 0 auto;">
+					<div th:each="bd : ${companyBoardContentSelect}" class="col-md-10" style="margin: 0 auto;">
 						<div class="card card-secondary">
 			              <div class="card-header">
-			                <h3 class="card-title">게시물 제목</h3>
+			                <h3 class="card-title" th:text="${bd.companyTitle}">게시물 제목</h3>
 			              </div>
 			              <!-- /.card-header -->
-							<div class="card-body">
-						         	<div class="row">
-							         	<div class="col-6" style="text-align: left">
-					                  		<small>글쓴이</small>
-					                  	</div>
-					                  	<div class="col-6" style="text-align: right">
-					                  		<small><i class="fas fa-file-download"></i> 첨부파일</small>
-					                  	</div>
+							<div  class="card-body">
+					         	<div class="row">
+				                  	<div class="offset-6 col-6" style="text-align: right">
+				                  		<small th:text="${bd.companyDate}"></small>
 				                  	</div>
-				                  	<div><hr></div>
-
-			                  <p class="card-text">내용</p>
+			                  	</div>
+			                  	<div class="row">
+			                  		<div class="col-6" style="text-align: left">
+				                  		<small th:text="${bd.staffName}">글쓴이</small>
+				                  	</div>
+			                  		<div class="col-6" style="text-align: right">
+				                  		<small><i class="fas fa-file-download"></i> <a th:href="@{fileupload/{file}(file=${bd.companyFile})}" th:text="${bd.companyFile}"> 첨부파일</a></small>
+				                  	</div>
+			                  	</div>
+								<hr>
+								<p class="card-text" th:text="${bd.companyDesc}">내용</p>
 			                </div>
 			                <!-- /.card-body -->
 			
@@ -60,14 +64,17 @@
 			                  		<a href="/companyListContents"><button type="button" class="btn btn-sm btn-secondary">목록</button></a>
 			                   </div>
 			                   <div style="float: right">
-				                  <button type="button" class="btn btn-sm btn-secondary">수정</button>
-				                  <button type="button" class="btn btn-sm btn-secondary">삭제</button>
+				                  <a th:href="@{/companyUpdateContents(company_code=${bd.companyCode})}"><button type="button" class="btn btn-sm btn-secondary" >수정</button></a>
+				                  <a th:href="@{/companyDeleteContents(company_code=${bd.companyCode})}"><button type="button" class="btn btn-sm btn-secondary">삭제</button></a>
 			                  </div>
 			                </div>
-			              </form>
 			            </div>
+			            <div>
+						<small th:text="'댓글 수 '+${bd.commentCount}"></small>
+						</div>
 					</div>
 					<!-- 게시물 영역 끝 -->
+					
 				</div>
 				
 				<!-- 댓글 영역 -->
@@ -84,7 +91,9 @@
 
 	<script type="text/javascript">
 		$(document).ready( function() {
-			$("#reply").load("/companyComment");	
+			var uri = decodeURI(location.href);
+			uri = uri.substr(uri.indexOf('?'));
+			$("#reply").load("/companyComment"+uri);	
 		});
 	</script>
 	

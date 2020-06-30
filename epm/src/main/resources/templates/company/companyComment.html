@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,24 +18,19 @@
  
 <body>
 	<div class="container-fluid">
-		<div class="row">
+		<div class="row">  
 			<div class="col-md-10" style="margin: 0 auto;">
-					<div>
-						<small>덧글 수 1</small>
-					</div>
 					<!-- 댓글내용 -->
-					<div class="card card-secondary card-outline">
+					<div class="card card-secondary card-outline" th:each=" cl : ${companyBoardCommentList}">
 		              <div class="card-body">
 		               	
-	               		<small>글쓴이</small>
+	               		<small th:text="${cl.staffName}">글쓴이</small>
 						<hr>	               		
 		
-		                <p class="card-text">
-		                  	댓글내용
-		                </p>
+		                <p class="card-text" th:text="${cl.companyCDesc}">댓글내용</p>
 						<div style="float: right">
-			                  <button type="button" class="btn btn-sm btn-secondary">수정</button>
-			                  <button type="button" class="btn btn-sm btn-secondary">삭제</button>
+			                  <a th:href="@{/companyUpdateComment(company_c_code=${cl.companyCCode})}"><button type="button" class="btn btn-sm btn-secondary">수정</button></a>
+			                  <a th:href="@{/companyDeleteComment(company_c_code=${cl.companyCCode})}"><button type="button" class="btn btn-sm btn-secondary">삭제</button></a>
 		                  </div>
 		              </div>
 		            </div>

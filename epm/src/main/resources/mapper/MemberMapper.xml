@@ -63,6 +63,20 @@
 			FROM tb_member
 			ORDER BY member_reg_date
 		</select>
+		
+		<!-- 로그인기록 -->
+		<insert id="loginInsert" parameterType="Member">
+			INSERT INTO tb_login
+				(login_code
+				, member_id
+				, login_date
+				, logout_date)
+				VALUES (
+				#{loginCode}
+				, #{memberId}
+				, NOW()
+				, NOW())
+		</insert>
 
 	</mapper>
 	    

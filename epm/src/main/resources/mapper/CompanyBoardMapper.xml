@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.cafe24.epm.mapper.CompanyBoardMapper">
+		
+		<resultMap type="CompanyBoardContent" id="companyContentSelect">
+			<result property="companyCode" column="company_code"/>
+			<result property="staffCode" column="staff_code"/>
+			<result property="staffName" column="staff_name"/>
+			<result property="companyCount" column="company_count"/>
+			<result property="companyTitle" column="company_title"/>
+			<result property="companyDesc" column="company_desc"/>
+			<result property="companyFile" column="company_file"/>
+			<result property="companyDate" column="company_date"/>
+			<result property="commentCount" column="comment_count"/>
+			<result property="storeName" column="store_name"/>
+		</resultMap>
+		
+		<resultMap type="CompanyBoardComment" id="companyCommentSelect">
+			<result property="companyCCode" column="company_c_code"/>
+			<result property="companyCode" column="company_code"/>
+			<result property="staffCode" column="staff_code"/>
+			<result property="staffName" column="staff_name"/>
+			<result property="companyCDesc" column="company_c_desc"/>
+			<result property="companyCDate" column="company_c_date"/>
+		</resultMap>
+
+		<!-- 게시물 선택 -->
+		<select id="companyBoardSelect" parameterType="CompanyBoardContent" resultMap="companyContentSelect">
+			SELECT
+				b.company_code AS 'company_code'
+				, b.staff_code AS 'staff_code'
+				, m.member_name AS 'staff_name'
+				, b.company_count AS 'company_count'
+				, b.company_title AS 'company_title'
+				, b.company_desc AS 'company_desc'
+				, b.company_file AS 'company_file'
+				, b.company_date AS 'company_date'
+				, COUNT(c.company_c_code) AS 'comment_count'
+				, st.store_name AS 'store_name'
+				FROM
+					tb_company AS b
+					join
+					tb_staff AS sf
+					on
+					b.staff_code = sf.staff_code
+					join
+					tb_member AS m
+					on
+					sf.member_id = m.member_id
+					JOIN
+					tb_company_c AS c
+					on
+					b.company_code = c.company_code
+					join
+					tb_store AS st
+					on
+					sf.store_code = st.store_code
+			
+				WHERE b.company_code = #{companyCode}
+				
+			GROUP BY b.company_code
+		</select>
+		
+		<!-- 댓글 리스트  -->
+		<select id="companyCommentList" parameterType="CompanyBoardComment" resultMap="companyCommentSelect">
+		SELECT 
+			c.company_c_code	AS 'company_c_code'
+			, c.company_code AS 'company_code'
+			, c.staff_code AS 'staff_code'
+			, m.member_name AS 'staff_name'
+			, c.company_c_desc AS 'company_c_desc' 
+			, c.company_c_date AS 'company_c_date'
+			
+			FROM
+			tb_company_c AS c
+			join
+			tb_company AS b
+			on
+			c.company_code = b.company_code
+			join
+			tb_staff AS sf
+			on
+			c.staff_code = sf.staff_code
+			join
+			tb_member AS m
+			on
+			sf.member_id = m.member_id
+			
+			WHERE
+			c.company_code = #{companyCode}
+		</select>
+		
+		<!-- 게시물 리스트 -->
+		<select id="companyBoardList" parameterType="CompanyBoardContent" resultMap="companyContentSelect">
+			SELECT
+				b.company_code AS 'company_code'
+				, b.staff_code AS 'staff_code'
+				, m.member_name AS 'staff_name'
+				, b.company_count AS 'company_count'
+				, b.company_title AS 'company_title'
+				, b.company_desc AS 'company_desc'
+				, b.company_file AS 'company_file'
+				, b.company_date AS 'company_date'
+				, COUNT(c.company_c_code) AS 'comment_count'
+				, st.store_name AS 'store_name'
+				FROM
+					tb_company AS b
+					join
+					tb_staff AS sf
+					on
+					b.staff_code = sf.staff_code
+					join
+					tb_member AS m
+					on
+					sf.member_id = m.member_id
+					JOIN
+					tb_company_c AS c
+					on
+					b.company_code = c.company_code
+					join
+					tb_store AS st
+					on
+					sf.store_code = st.store_code
+			
+			GROUP BY b.company_code
+		</select>
+		
+	</mapper>

@@ -4,7 +4,7 @@
 	layout:decorate="~{layout/default}">
 
 <th:block layout:fragment="customTitle">
-	<title>EPM | MemberList</title>
+	<title>EPM | Board List</title>
 </th:block>
 
 <th:block layout:fragment="customContents">
@@ -65,13 +65,13 @@
                   </thead>
                   <tbody>
                   
-                    <tr>
-                      <td>1</td>
-                      <td><a href="/companyContents">사내게시판 글 (덧글수)</a> </td>
-                      <td>삼삼본점</td>
-                      <td>직원이름</td>
-                      <td>3</td>
-                      <td>2020-06-08</td>
+                    <tr th:each="bl : ${companyBoardContentList}">
+                      <td th:text="${blStat.count}">1</td>
+                      <td><a th:href="@{/companyContents(company_code=${bl.companyCode})}" th:text="${bl.companyTitle}+' ('+${bl.commentCount}+')'">사내게시판 글 (덧글수)</a> </td>
+                      <td th:text="${bl.storeName}">삼삼본점</td>
+                      <td th:text="${bl.staffName}">직원이름</td>
+                      <td th:text="${bl.companyCount}">3</td>
+                      <td th:text="${bl.companyDate}">2020-06-08</td>
                     </tr>
 
                   </tbody>

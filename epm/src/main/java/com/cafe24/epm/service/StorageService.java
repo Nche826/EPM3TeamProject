@@ -81,5 +81,4 @@ public class StorageService {
 	private Path getPath() throws IOException {
 		return Paths.get(context.getResource("classpath:/static/fileupload").getURI());
 	}
-
 }

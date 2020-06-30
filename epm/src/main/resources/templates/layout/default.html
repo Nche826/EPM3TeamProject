@@ -37,31 +37,48 @@
 					$( "#sidebar-overlay" ).on('click', function(){
 						$(".hamburger").trigger('click');
 					});
-	  			
+	  			<!-- 모바일 메뉴닫기 끝 -->
 	  			<!-- 프로필 이미지 받아오기 -->
 					$('#profileButton').click(function(){
+						
 						var memberId = $('#loginId').html();
-						var request = $.ajax({
-							url: "/memberSelect", //통신할 url
-							method: "POST", //통신할 메서드 타입
-							data: { "memberId" : memberId }, //전송할 데이타
-							dataType: "json"
-						});	 
 						
-						request.done(function( data ) {
-							if(data.file != null && data.file !=''){
-								var file = data.file
-								var html = '<img src="/fileupload/';
-								html += file
-								html += '" width="100px" height="100px" class="img-circle elevation-2">'
-								$('#profile').html(html)
-							}
-						});	 
+						if(memberId != null && memberId !=''){
+							
+							var request = $.ajax({
+								url: "/memberSelect", //통신할 url
+								method: "POST", //통신할 메서드 타입
+								data: { "memberId" : memberId }, //전송할 데이타
+								dataType: "json"
+							});	 
 						
-						request.fail(function( jqXHR, textStatus ) {
-						  alert( "Request failed: " + textStatus );
-						});	
+							request.done(function( data ) {
+								if(data.file != null && data.file !=''){
+									var file = data.file
+									var html = '<img src="/fileupload/';
+									html += file
+									html += '" width="100px" height="100px" class="img-circle elevation-2">'
+									$('#profile').html(html)
+								}
+							});	 
+						
+							request.fail(function( jqXHR, textStatus ) {
+							  alert( "Request failed: " + textStatus );
+							});	
+						}
 					});	
+	  			<!-- 프로필 이미지 받아오기 끝 -->
+	  			<!-- 매장선택값 세션에 저장하기 -->
+	  				$('#storeSelect').change(function(){
+	  					var storeSelect = $('#storeSelect').val();
+	  					console.log(storeSelect);
+	  					sessionStorage.setItem('storeSelect',storeSelect);
+	  				});
+	  			<!-- 매장선택값 세션에 저장하기 끝 -->
+	  			<!-- 매장선택값 세션에서 불러오기 -->
+	  				$('#storeSelect').val(sessionStorage.getItem('storeSelect')).prop('selected',true);
+	  			<!-- 매장선택값 세션에서 불러오기 끝 -->
+
 	  			})
 			)
 		</script>
