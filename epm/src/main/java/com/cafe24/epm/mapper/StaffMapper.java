@@ -9,6 +9,9 @@ import com.cafe24.epm.domain.Staff;
 @Mapper
 public interface StaffMapper {
 	
+	//매장 선택시 직원 출력
+	public List<Staff> storeInStaff(String store_code);
+	
 	//직원 삭제 전 null 처리
 	public int staffSetDel(String staff_code);
 	

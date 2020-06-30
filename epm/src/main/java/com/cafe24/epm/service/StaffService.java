@@ -13,6 +13,10 @@ public class StaffService {
 	
 	@Autowired private StaffMapper staffMapper;
 	
+	//매장 선택시 회원 출력하기
+	public List<Staff> storeInStaff(String store_code){
+		return staffMapper.storeInStaff(store_code);
+	}
 	
 	//직원 삭제 전 null처리 하기
 	public int staffSetDel(String staff_code) {

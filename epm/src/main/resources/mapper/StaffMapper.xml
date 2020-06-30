@@ -21,6 +21,19 @@
    			<result property="logout_date" 	column="max(lo.logout_date)"/>
    	</resultMap>
    	
+   	<select id="storeInStaff" parameterType="String" resultMap="StaffSelect">
+	   	SELECT
+			member_id
+		   ,staff_code
+		FROM 
+			tb_staff 
+		WHERE 
+		   store_code=#{store_code}
+		GROUP BY
+			member_id;
+   	</select>
+   	
+   	
    	<update id="staffSetDel" parameterType="staff">
 	   	UPDATE tb_customer
 		SET

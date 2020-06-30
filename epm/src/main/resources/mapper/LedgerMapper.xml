@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.epm.mapper.LedgerMapper">
+
+	<resultMap type="Ledger" id="LedgerSelect">
+		<result property="receive_code" column="receive_code"></result>
+		<result property="receive_type" column="receive_type"></result>
+		<result property="receive_customer" column="receive_customer"></result>
+		<result property="receive_custel" column="receive_custel"></result>
+		<result property="receive_price" column="receive_price"></result>
+		<result property="receive_card" column="receive_card"></result>
+		<result property="dealler_code" column="dealler_code"></result>
+		<result property="receive_remit_date" column="receive_remit_date"></result>
+		<result property="receive_remit_price" column="receive_remit_price"></result>
+		<result property="receive_remit_type" column="receive_remit_type"></result>
+		<result property="receive_memo" column="receive_memo"></result>
+		<result property="store_code" column="store_code"></result>
+		<result property="staff_code" column="staff_code"></result>
+		<result property="receive_reg_date" column="receive_reg_date"></result>
+	</resultMap>
+
+	<insert id="addLedger" parameterType="ledger">
+		<selectKey order="BEFORE" keyProperty="receive_code" resultType="String" >
+	    	select
+		    	(case COUNT(*)
+		 			when 0 then 'receive_1'
+			    	else concat('receive_',Max(cast(SUBSTR(receive_code,9) AS DECIMAL))+1)
+			    	end) as receive_code
+	    	from
+	    	  	tb_receive as r
+		</selectKey> 
+			INSERT INTO 
+				tb_receive(
+				 receive_code
+				,receive_type
+				,receive_customer
+				,receive_custel
+				,receive_price
+				,receive_card
+				,dealler_code
+				,receive_remit_date
+				,receive_remit_price
+				,receive_remit_type
+				,receive_memo
+				,store_code
+				,staff_code
+				,receive_reg_date)
+			VALUES (
+				 #{receive_code}
+				,#{receive_type}
+				,#{receive_customer}
+				,#{receive_custel}
+				,#{receive_price}
+				,#{receive_card}
+				,#{dealler_code}
+				,#{receive_remit_date}
+				,#{receive_remit_price}
+				,#{receive_remit_type}
+				,#{receive_memo}
+				,#{store_code}
+				,#{staff_code}
+				, NOW())
+	</insert>
+</mapper>

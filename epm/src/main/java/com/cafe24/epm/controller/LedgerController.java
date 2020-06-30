@@ -1,11 +1,40 @@
 package com.cafe24.epm.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.cafe24.epm.domain.Dealler;
+import com.cafe24.epm.domain.Ledger;
+import com.cafe24.epm.domain.Staff;
+import com.cafe24.epm.domain.Store;
+import com.cafe24.epm.service.DeallerService;
+import com.cafe24.epm.service.LedgerService;
+import com.cafe24.epm.service.StaffService;
+import com.cafe24.epm.service.StoreService;
 
 @Controller //김수지담당
 public class LedgerController { 
 	
+	@Autowired private StoreService storeService;
+	@Autowired private StaffService staffService;
+	@Autowired private DeallerService deallerService;
+	@Autowired private LedgerService ledgerService;
+	
+	//수납 장부 등록 처리
+	@PostMapping("/ledgerInsert")
+	public String ledgerInsert(Ledger ledger) {
+		System.out.println("======수납 장부 등록 시작 ==========");
+		System.out.println(ledger.toString());
+		int i = ledgerService.addLedger(ledger);
+		System.out.println("직원 등록 처리 성공시 1 --->"+i);
+		return "redirect:/ledgerList";
+	}
 	
 	
 	//수납 장부 등록 화면
@@ -19,10 +48,28 @@ public class LedgerController {
 	public String ledgerUpdate() {
 		return "ledger/ledgerUpdate";
 	}
+	//수납장부 리스트 화면 
+	@PostMapping("/ledgerList")
+	@ResponseBody
+	public List<Staff> ledgerList(String store_code) {
+		System.out.println("====매장 클릭시 직원 셀렉트 처리=====");
+		List<Staff> staff_name = staffService.storeInStaff(store_code);
+		System.out.println("직원 목록--->"+staff_name);
+		return staff_name;
+	}
 	
 	//수납 장부 리스트 화면
 	@GetMapping("/ledgerList")
-	public String ledgerList() {
+	public String ledgerList(Model model, Ledger ledger) {
+		System.out.println("=========모달 내 매장 정보 불러오기==========");
+		List<Store> store_name = storeService.storeList();
+		System.out.println("매장 리스트 --->"+store_name);
+		model.addAttribute("store", store_name);
+		System.out.println("===========================");
+		System.out.println("=========모달 내 거래처 정보 불러오기=========");
+		List<Dealler> dealler_name = deallerService.deallerList();
+		System.out.println("거래처 리스트 --->"+dealler_name);
+		model.addAttribute("dealler", dealler_name);
 		return "ledger/ledgerList";
 	}
 
