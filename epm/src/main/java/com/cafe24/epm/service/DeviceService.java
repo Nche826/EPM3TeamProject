@@ -36,4 +36,12 @@ public class DeviceService {
 		return deviceMapper.deviceUpdate(device);
 	}
 	
+	public int deviceDelete(Device device) {
+		return deviceMapper.deviceDelete(device);
+	}
+	
+	public int deviceInfoDelete(Device device) {
+		return deviceMapper.deviceInfoDelete(device);
+	}
+	
 }

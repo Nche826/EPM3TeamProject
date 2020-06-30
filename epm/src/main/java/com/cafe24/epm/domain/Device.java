@@ -46,6 +46,16 @@ public class Device {
 	private String updateMemo;
 	private String updateinCode;
 	
+	private String deleteCode;
+	
+	
+	
+	public String getDeleteCode() {
+		return deleteCode;
+	}
+	public void setDeleteCode(String deleteCode) {
+		this.deleteCode = deleteCode;
+	}
 	public String getDeviceinCode() {
 		return deviceinCode;
 	}
@@ -295,7 +305,8 @@ public class Device {
 				+ ", updateStaff=" + updateStaff + ", updateDate=" + updateDate + ", updateMethod=" + updateMethod
 				+ ", updateDealler=" + updateDealler + ", updateModel=" + updateModel + ", updateType=" + updateType
 				+ ", updateColor=" + updateColor + ", updatePrice=" + updatePrice + ", updateSerial=" + updateSerial
-				+ ", updateMemo=" + updateMemo + ", updateinCode=" + updateinCode + "]";
+				+ ", updateMemo=" + updateMemo + ", updateinCode=" + updateinCode + ", deleteCode=" + deleteCode + "]";
 	}
+	
 
 }

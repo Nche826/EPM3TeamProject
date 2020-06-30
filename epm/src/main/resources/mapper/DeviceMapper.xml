@@ -132,9 +132,9 @@ INSERT
 			)		
 		</insert>
 		<insert id="deviceInfoInsert" parameterType="Device">	
-		<selectKey keyProperty="infoCode" resultType="String" order="BEFORE">
+		<selectKey keyProperty="infoCode" resultType="hashmap" order="BEFORE">
  			SELECT 
- 				CONCAT('code', MAX(CAST(SUBSTRING(dinfo_code,5) AS DECIMAL)+1)) AS dinfo_code
+ 				CONCAT('code', MAX(CAST(SUBSTRING(dinfo_code,5) AS DECIMAL)+1)) AS infoCode
 			FROM tb_deviceinfo
  		</selectKey>
 	INSERT		
@@ -160,31 +160,31 @@ INSERT
 		</insert>
 		
 		<update id="deviceUpdate" parameterType="Device">
-	<selectKey keyProperty="deviceCode" resultType="hashmap" order="BEFORE">
-				SELECT
-						device_code as deviceCode
-				FROM
-						tb_device 
-				where
-						device_model=#{updateModel}
-						and device_type=#{updateType}
-						and device_color=#{updateColor}
-						and device_price=#{updatePrice}
- 	</selectKey>
-	update
-		tb_devicein
-	
-	set
-		devicein_serial = #{updateSerial}
-		,dealler_code = #{updateDealler}
-		,device_code = #{deviceCode}
-		,devicein_date = NOW()
-		,devicein_memo = #{updateMemo}
-		,staff_code = #{updateStaff}
-		,devicein_reg_date = NOW()
-	
-	WHERE 
-		devicein_serial = #{updateSerial}
+		<selectKey keyProperty="deviceCode" resultType="hashmap" order="BEFORE">
+			SELECT
+					device_code as deviceCode
+			FROM
+					tb_device 
+			where
+					device_model=#{updateModel}
+					and device_type=#{updateType}
+					and device_color=#{updateColor}
+					and device_price=#{updatePrice}
+ 		</selectKey>
+			update
+				tb_devicein
+			
+			set
+				devicein_serial = #{updateSerial}
+				,dealler_code = #{updateDealler}
+				,device_code = #{deviceCode}
+				,devicein_date = NOW()
+				,devicein_memo = #{updateMemo}
+				,staff_code = #{updateStaff}
+				,devicein_reg_date = NOW()
+			
+			WHERE 
+				devicein_serial = #{updateSerial}
 	
 	
 		</update>
@@ -198,17 +198,30 @@ INSERT
 			where
 				devicein_serial = #{updateSerial}
 						
- 	</selectKey>
-	update		
-		tb_deviceinfo
-	set
-		dinfo_devicein = #{deviceinCode}
-		,dinfo_method = #{updateMethod}
-		,dinfo_store = #{updateStore}
-		,dinfo_memo = #{updateMemo}
-		,dinfo_reg_date = NOW()
-	where
-		dinfo_devicein = #{deviceinCode}
+		</selectKey>
+			update		
+				tb_deviceinfo
+			set
+				dinfo_devicein = #{deviceinCode}
+				,dinfo_method = #{updateMethod}
+				,dinfo_store = #{updateStore}
+				,dinfo_memo = #{updateMemo}
+				,dinfo_reg_date = NOW()
+			where
+				dinfo_devicein = #{deviceinCode}
 		</update>
+		
+		<delete id="deviceInfoDelete" parameterType="device">
+			Delete 
+			From tb_deviceinfo
+			Where dinfo_devicein = #{deleteCode}
+		</delete>
+			
+		<delete id="deviceDelete" parameterType="device">			
+			Delete 
+			From tb_devicein
+			Where devicein_code = #{deleteCode}				
+		</delete>
+		
 </mapper>
 	

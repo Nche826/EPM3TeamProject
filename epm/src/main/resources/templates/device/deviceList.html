@@ -164,28 +164,32 @@
                     <th>색상</th>
                     <th>입고가</th>
                     <th>매장</th>
-                    <th>직원</th>
+                    <th>직원</th>                    
+                    <th>입고방법</th>
                     <th>비고</th>
+                    <th>등록일</th>
                     <th>관리</th>    
                       
                 </tr>
                   </thead>
                   <tbody > 
-                                   
+                                  
                  <tr th:each="d : ${deviceList}" >                 
-					<td th:text="${d.deviceinStatus}"></td>	
+					<td	th:text="${d.deviceinStatus}"></td>	
 					<td th:text="${d.deviceinDate}"></td>	
 					<td th:text="${d.deviceinDealler}"></td>	
 					<td th:text="${d.deviceTelecom}"></td>
 					<td th:text="${d.deviceType}"></td>
 					<td th:text="${d.deviceinSerial}"></td>			            
 		            <td th:text="${d.deviceModel}"></td>
-		            <td th:text="${d.deviceColor}"></td>
+		            <td	th:text="${d.deviceColor}"></td>
 		            <td th:text="${d.devicePrice}"></td>
 		            <td th:text="${d.storeName}"></td>		         		              
 		            <td th:text="${d.deviceinStaff}"></td>	
+		            <td th:text="${d.infoMethod}"></td>	
 					<td th:text="${d.deviceinMemo}"></td>
-	                <td>
+					<td th:text="${d.deviceinRegDate}"></td>									
+					<td>
 	                    <button type="button" class="btn btn-info btn-sm pd-x-5 pd-y-0" id="infobtn" data-toggle="modal" data-target="#modal-Info"><i class="icon ion-ios-browsers"></i></button>
 	       					                                       
                     
@@ -206,7 +210,7 @@
             <div class="modal-body">
                             
               <div th:include="device/deviceInfo :: dInfo"></div>
-              
+ 
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
@@ -234,7 +238,7 @@
               
             </div>
             <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
               <input type="submit" class="btn btn-primary" value="확인">              
             </div>
             </form>
@@ -253,13 +257,16 @@
                 <span aria-hidden="true">×</span>
               </button>
             </div>
-            <div class="modal-body">            
+            <form action ="/deviceDelete" method="post">            
+            <div class="modal-body">       
+            	<input type="text" name="deleteCode" th:value="${d.deviceinCode}"> 
             	  삭제하시겠습니까?
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-              <button type="button" class="btn btn-primary">확인</button>
+              <input type="submit" class="btn btn-primary" value="확인">
             </div>
+            </form>
           </div>
           <!-- /.modal-content -->
         </div>
@@ -327,11 +334,50 @@
          {'bSortable': false, 'aTargets':[0,2,3,4,5,6,7,9,10,11,12]}
       ]
       });    
-    
-    $('#infobtn').click(function(){
-    	var infoSerial = $('#serialinfo').html();
-    	$('#serial').html(infoSerial);
-    });
+     $(document).on('click','#infobtn',function(){
+    	 var str = ""
+ 			var tdArr = new Array();	// 배열 선언
+ 			var infobtn = $(this);
+ 			// checkBtn.parent() : checkBtn의 부모는 <td>이다.
+ 			// checkBtn.parent().parent() : <td>의 부모이므로 <tr>이다.
+ 			var tr = infobtn.parent().parent();
+ 			var td = tr.children();
+ 			
+ 			console.log("클릭한 Row의 모든 데이터 : "+tr.text());
+ 			
+ 			var infostatus = td.eq(0).text();
+ 			var infodate = td.eq(1).text();
+ 			var infodealler = td.eq(2).text();
+ 			var infotelecom = td.eq(3).text(); 
+ 			var infotype = td.eq(4).text(); 
+ 			var infoserial = td.eq(5).text(); 
+ 			var infomodel = td.eq(6).text(); 
+ 			var infocolor = td.eq(7).text(); 
+ 			var infoprice = td.eq(8).text(); 
+ 			var infostore = td.eq(9).text(); 
+ 			var infostaff = td.eq(10).text(); 
+ 			var infomemo = td.eq(12).text();  			
+ 			var inforegdate = td.eq(13).text();
+ 			var infomethod = td.eq(11).text();
+ 			
+ 			$('#infoserial').text(infoserial);
+ 			$('#infodealler').text(infodealler);
+ 			$('#infotelecom').text(infotelecom);
+ 			$('#infomodel').text(infomodel);
+ 			$('#infotype').text(infotype);
+ 			$('#infocolor').text(infocolor);
+ 			$('#infoprice').text(infoprice);
+ 			$('#infostatus').text(infostatus);
+ 			$('#infostore').text(infostore);
+ 			$('#infostaff').text(infostaff);
+ 			$('#infodate').text(infodate);
+ 			$('#infomethod').text(infomethod);
+ 			$('#infomemo').text(infomemo);
+ 			$('#inforegdate').text(inforegdate);
+ 	
+ 			
+     });
+    	
   });  
   
 </script>

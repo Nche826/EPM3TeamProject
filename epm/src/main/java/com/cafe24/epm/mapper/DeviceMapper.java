@@ -21,6 +21,8 @@ public interface DeviceMapper {
 		
 		public int deviceUpdate(Device device);
 		
-	
+		public int deviceDelete(Device device);
+		
+		public int deviceInfoDelete(Device device);
 }
 

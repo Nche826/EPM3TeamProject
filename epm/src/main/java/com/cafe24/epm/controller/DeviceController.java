@@ -43,6 +43,16 @@ public class DeviceController {
 		System.out.println("성공여부: "+infoupdate);
 		return "redirect:/deviceList";
 	}
+	
+	@PostMapping("/deviceDelete")
+	public String deviceDelete(Device device) {
+		System.out.println(device.toString());
+		int infodelete = deviceService.deviceInfoDelete(device);
+		int delete = deviceService.deviceDelete(device);		
+		System.out.println("성공여부: "+delete);
+		System.out.println("성공여부: "+infodelete);
+		return "redirect:/deviceList";
+	}
 		
 	@GetMapping("/deviceUpdate")
 	public String deviceUpdate() {
