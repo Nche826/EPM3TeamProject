@@ -84,7 +84,7 @@
                   <tbody>
                   
                     <tr th:each = "ml : ${memberList}">
-                      <td th:if="${ml.file} != null and ${ml.file} != ''" style="text-align: center;"><img th:src="@{/fileupload/{file}(file=${ml.file})}" width="30px" height="30px" class="img-circle elevation-0"></td>
+                      <td th:if="${ml.file} != null and ${ml.file} != ''" style="text-align: center;"><img th:src="@{fileupload/{file}(file=${ml.file})}" width="30px" height="30px" class="img-circle elevation-0"></td>
                       <td th:unless="${ml.file} != null and ${ml.file} != ''" style="text-align: center;"><i class="far fa-user-circle"></i></td>
                       <td th:text = "${ml.memberId}"></td>
                       <td th:text = "${ml.memberName}"></td>

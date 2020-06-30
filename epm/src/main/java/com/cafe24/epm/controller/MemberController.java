@@ -12,10 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cafe24.epm.domain.Member;
+import com.cafe24.epm.domain.Staff;
 import com.cafe24.epm.mapper.MemberMapper;
 import com.cafe24.epm.service.MemberService;
 import com.cafe24.epm.service.StorageService;
@@ -93,7 +95,10 @@ public class MemberController {
 	}
 	
 	@GetMapping("/memberUpdate")
-	public String memberUpdate() {
+	public String memberUpdate( @RequestParam(name = "member_id", required = false) String memberId, Model model) {
+		System.out.println("memberId>>" + memberId);
+		Member member = memberService.memberSelect(memberId);
+		model.addAttribute("member", member);
 		return"member/memberUpdate";
 	}
 	
@@ -101,7 +106,7 @@ public class MemberController {
 	@PostMapping("/memberUpdateConfirm")
 	public String memberUpdateConfirm(Member member,  HttpSession session, RedirectAttributes redirectAttr) {
 		//1단계 : 로그인한 아이디와  memberId가 일치하는지 조회
-		Member result = memberMapper.memberSelect((String)session.getAttribute("S_ID"));
+		Member result = memberMapper.memberSelect((String)session.getAttribute("SID"));
 		System.out.println("로그인한 아이디와  memberId가 일치하는지 조회 : "+result);
 		//2단계 : 조회된 정보의 pw와 입력된 pw 일치 여부
 		if(!"".equals(member.getMemberPw())){
@@ -119,9 +124,13 @@ public class MemberController {
 	@GetMapping("/memberUpdateConfirm")
 	public String memberUpdateConfirmView(HttpSession session, RedirectAttributes redirectAttr) {
 		//세션에 등록된 권한이 관리자, 대표일 경우 비밀번호 확인 없이 수정화면으로 이동.
-		if("관리자".equals((String)session.getAttribute("S_LEVEL")) || "대표".equals((String)session.getAttribute("S_LEVEL"))) {
-			return "member/memberUpdate"; 
-		}
+		System.out.println(session.getAttribute("SSTAFF")+"<< SSTAFF");
+		List<Staff> staff = (List<Staff>) session.getAttribute("SSTAFF");
+		for(int i = 0; i < staff.size() ;i++ ) {
+			if("관리자".equals(staff.get(i).getLevel_name()) || "대표".equals(staff.get(i).getLevel_name()) ) {
+				return "member/memberUpdate"; 
+			}
+		  }
 		//세션에 등록된 권한이 관리자, 대표가 아닐 경우 리스트로 돌아가 메세지 출력 
 		System.out.println("=====수정화면이동실패 : 권한 없음=====");
 		redirectAttr.addAttribute("message","권한이 없습니다.");
@@ -137,4 +146,9 @@ public class MemberController {
 		return"member/memberList";
 	}
 	
+	@PostMapping(value = "/memberSelect", produces = "application/json")
+	@ResponseBody
+	public Member memberSelect(String memberId) {
+		return memberService.memberSelect(memberId);
+	}
 }
