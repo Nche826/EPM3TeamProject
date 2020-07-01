@@ -23,7 +23,46 @@
 		<result property="store_name" column="store_name"></result>
 		<result property="member_name" column="member_name"></result>
 	</resultMap>
-	
+	<select id="getLedgerSelect" parameterType="String" resultMap="LedgerSelect">
+	SELECT 
+		r.receive_code
+		,r.receive_type 
+		,r.receive_customer 
+		,r.receive_custel 
+		,r.receive_price 
+		,r.receive_card 
+		,r.dealler_code 
+		,r.receive_remit_date 
+		,r.receive_remit_price 
+		,r.receive_remit_type 
+		,r.receive_memo 
+		,r.store_code 
+		,r.staff_code 
+		,r.receive_reg_date 
+		,d.dealler_name 
+		,s.store_name 
+		,m.member_name 
+	FROM 
+		tb_receive AS r
+		JOIN
+		 	tb_dealler AS d
+		ON 
+		r.dealler_code = d.dealler_code
+		JOIN 
+			tb_store AS s
+		ON 
+		s.store_code = r.store_code
+		JOIN 
+			tb_staff AS st
+		ON 
+		st.staff_code=r.staff_code
+		JOIN 
+			tb_member AS m
+		ON 
+		st.member_id = m.member_id
+		WHERE 
+		r.receive_code = #{receive_code};
+	</select>
 	<select id="ledgerList" parameterType="String" resultMap="LedgerSelect">
 	SELECT 
 		r.receive_code

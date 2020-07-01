@@ -215,7 +215,7 @@
                       <td th:text="${l.member_name}"></td>
                       <td th:text="${l.receive_memo}"></td>
                       <td th:text="${l.receive_reg_date}"></td>
-                      <td><a th:href="@{/ledgerUpdate}"><i class="fas fa-edit"></i></a></td>
+                      <td><a th:href="@{/ledgerUpdate(receive_code=${l.receive_code})}"><i class="fas fa-edit"></i></a></td>
                     </tr>
                   </tbody>
                 </table>

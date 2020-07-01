@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.epm.domain.Dealler;
@@ -26,6 +27,21 @@ public class LedgerController {
 	@Autowired private DeallerService deallerService;
 	@Autowired private LedgerService ledgerService;
 	
+	
+	
+	//수납 장부 수정 화면 : 코드값 가져오기
+	@GetMapping("/ledgerUpdate")
+	public String ledgerUpdate(Model model,@RequestParam(name="receive_code",required = false) String receive_code) {
+		System.out.println("receive_code --->"+receive_code);
+		System.out.println("========수납장부 수정 페이지 시작======");
+		Ledger ledgerSelect = ledgerService.getLedgerSelect(receive_code);
+		model.addAttribute("ledgerSelect", ledgerSelect);
+		System.out.println("===============================");
+		return "ledger/ledgerUpdate";
+	}
+	
+	
+	
 	//수납 장부 등록 처리
 	@PostMapping("/ledgerInsert")
 	public String ledgerInsert(Ledger ledger) {
@@ -43,11 +59,6 @@ public class LedgerController {
 		return "ledger/ledgerInsert";
 	}
 
-	//수납 장부 수정 화면
-	@GetMapping("/ledgerUpdate")
-	public String ledgerUpdate() {
-		return "ledger/ledgerUpdate";
-	}
 	//수납장부 리스트 화면 
 	@PostMapping("/ledgerList")
 	@ResponseBody

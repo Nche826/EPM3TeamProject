@@ -21,7 +21,7 @@ public interface StaffMapper {
 	//직원 수정 처리
 	public int staffUpdate(Staff staff);
 	
-	//직원 수정 전단계, 아이디값 가져오기
+	//직원 수정 전단계, 코드값 가져오기
 	public Staff getStaffSelect(String staff_code);
 	
 	//직원리스트

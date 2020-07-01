@@ -13,6 +13,11 @@ public class LedgerService {
 	
 	@Autowired private LedgerMapper ledgerMapper;
 	
+	//수납장부 수정 전단계, 코드값 가져오기
+	public Ledger getLedgerSelect(String receive_code) {
+		return ledgerMapper.getLedgerSelect(receive_code);
+	}
+	
 	//수납 장부 리스트
 	public List<Ledger> ledgerList(){
 		return ledgerMapper.ledgerList();
