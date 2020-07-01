@@ -15,4 +15,8 @@ public interface CompanyBoardMapper {
 	public CompanyBoardContent companyBoardSelect(String companyCode);
 	//댓글 목록
 	public List<CompanyBoardComment> companyCommentList(String companyCode);
+	//게시물 등록
+	public int companyBoardInsert(CompanyBoardContent companyBoardContent);
+	//게시물 조회수 업데이트
+	public int companyBoardCountUpadate(String companyCode);
 }

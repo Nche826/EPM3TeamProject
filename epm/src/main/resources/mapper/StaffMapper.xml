@@ -149,22 +149,24 @@
 	</insert>
 
 
-	   	<select id="staffSelectLogin" parameterType="String" resultMap="StaffSelect">
-	      	SELECT 
-			st.store_name 
+   	<select id="staffSelectLogin" parameterType="String" resultMap="StaffSelect">
+      	SELECT 
+	      	s.staff_code
+			,st.store_name 
 			,l.level_name  
-		FROM 
-			tb_staff AS s
-			JOIN 
-			tb_store AS st
-			ON 
-			s.store_code = st.store_code
-			JOIN 
-			tb_level AS l
-			ON 
-			s.level_code = l.level_code
-	   	where
-	   		s.member_id = #{member_Id}
+			,s.store_code
+			FROM 
+				tb_staff AS s
+				JOIN 
+				tb_store AS st
+				ON 
+				s.store_code = st.store_code
+				JOIN 
+				tb_level AS l
+				ON 
+				s.level_code = l.level_code
+		   	where
+		   		s.member_id = #{member_Id}
    	
    	</select>
 </mapper>

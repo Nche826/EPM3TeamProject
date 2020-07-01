@@ -25,7 +25,46 @@
 			<result property="companyCDesc" column="company_c_desc"/>
 			<result property="companyCDate" column="company_c_date"/>
 		</resultMap>
-
+		
+		<!-- 게시물 등록 -->
+		<insert id="companyBoardInsert" parameterType="CompanyBoardContent">
+			<selectKey order="BEFORE" keyProperty="companyCode" resultType="String">
+				SELECT
+					(case COUNT(*)
+					when 0 then 'company_1'
+					else CONCAT('company_',max(cast(substring(company_code,9) as decimal))+1)
+					END)
+				FROM 
+					tb_company
+			</selectKey>
+			
+			INSERT INTO tb_company
+				(company_code
+				, staff_code
+				, company_count
+				, company_title
+				, company_desc
+				, company_file
+				, company_date)
+			VALUES 
+				(#{companyCode}
+				, #{staffCode}
+				, 0
+				, #{companyTitle}
+				, #{companyDesc}
+				, #{companyFile}
+				, NOW())
+		</insert>
+		
+		<!-- 게시물 선택 시 조회수 업데이트-->
+		<update id="companyBoardCountUpadate" parameterType="CompanyBoardContent">
+				UPDATE tb_company
+					SET
+						company_count= (SELECT company_count +1)
+					WHERE 
+						company_code = #{companyCode}
+		</update>
+		
 		<!-- 게시물 선택 -->
 		<select id="companyBoardSelect" parameterType="CompanyBoardContent" resultMap="companyContentSelect">
 			SELECT
@@ -49,7 +88,7 @@
 					tb_member AS m
 					on
 					sf.member_id = m.member_id
-					JOIN
+					LEFT OUTER JOIN
 					tb_company_c AS c
 					on
 					b.company_code = c.company_code
@@ -115,7 +154,7 @@
 					tb_member AS m
 					on
 					sf.member_id = m.member_id
-					JOIN
+					LEFT OUTER JOIN
 					tb_company_c AS c
 					on
 					b.company_code = c.company_code

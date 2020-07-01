@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cafe24.epm.domain.CompanyBoardComment;
 import com.cafe24.epm.domain.CompanyBoardContent;
@@ -40,6 +42,7 @@ public class CompanyBoardController {
 	public String companyContents (@RequestParam(name = "company_code", required = false) String companyCode, Model model) {
 		System.out.println("companyCode>>>" + companyCode);
 		CompanyBoardContent companyBoardContentSelect = companyBoardService.companyBoardSelect(companyCode);
+		companyBoardService.companyBoardCountUpadate(companyCode);
 		model.addAttribute("companyBoardContentSelect",companyBoardContentSelect);
 		return "company/companyContents";
 	}
@@ -59,6 +62,19 @@ public class CompanyBoardController {
 	@GetMapping("/companyInsertContents")
 	public String companyInsertContents () {
 		return "company/companyInsertContents";
+	}
+	
+	//게시물 등록
+	@PostMapping("/companyInsertContents")
+	public String companyInsertContents (CompanyBoardContent companyBoardContent, @RequestParam(value = "file") MultipartFile file) throws IOException {
+		System.out.println("=======파일업로드=======");
+		storageService.store(file);
+		System.out.println(file+"::::::file");
+		System.out.println("=======게시물등록=======");
+		companyBoardContent.setCompanyFile(file.getOriginalFilename());
+		System.out.println(file.getOriginalFilename()+"::::::file.getOriginalFilename()");
+		companyBoardService.companyBoardInsert(companyBoardContent);
+		return "redirect:/companyListContents";
 	}
 	
 	//게시물 수정 화면

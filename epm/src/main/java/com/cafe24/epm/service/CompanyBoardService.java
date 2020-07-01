@@ -26,4 +26,10 @@ public class CompanyBoardService {
 	public List<CompanyBoardComment> companyCommentList (String companyCode){
 		return companyBoardMapper.companyCommentList(companyCode);
 	}
+	public int companyBoardInsert(CompanyBoardContent companyBoardContent) {
+		return companyBoardMapper.companyBoardInsert(companyBoardContent);
+	}
+	public int companyBoardCountUpadate(String companyCode) {
+		return companyBoardMapper.companyBoardCountUpadate(companyCode);
+	}
 }

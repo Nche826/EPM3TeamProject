@@ -44,6 +44,7 @@
 				                <h3 class="dropdown-item-title" id="loginName" th:text="${session.SNAME}"></h3>
 				                <div th:each="SSTAFF : ${session.SSTAFF}">
 			                		<p class="text-sm" th:text="${SSTAFF.store_name}+'/'+${SSTAFF.level_name}"></p>
+			                		<input hidden="hidden" type="text" th:value="${SSTAFF.staff_code}" class="LoginStaffCode">
 			                	</div>
 			                </div>
 

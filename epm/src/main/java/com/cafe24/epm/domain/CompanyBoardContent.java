@@ -11,7 +11,6 @@ public class CompanyBoardContent {
 	private String companyDate;
 	private String commentCount;
 	private String storeName;
-	
 	public String getCompanyCode() {
 		return companyCode;
 	}
@@ -72,7 +71,6 @@ public class CompanyBoardContent {
 	public void setStoreName(String storeName) {
 		this.storeName = storeName;
 	}
-	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -99,6 +97,5 @@ public class CompanyBoardContent {
 		builder.append("]");
 		return builder.toString();
 	}
-	
 
 }
