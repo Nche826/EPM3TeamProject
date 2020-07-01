@@ -50,18 +50,19 @@
    	
    	<update id="staffUpdate" parameterType="staff">
    	
-   	UPDATE 
+  	UPDATE 
    		tb_staff
 	SET 
 		level_code=#{staff_level}
 	WHERE 
-		member_id=#{member_id};
+		staff_code=#{staff_code};
    	
    	</update>
    	
    	<select id="getStaffSelect" parameterType="String" resultMap="StaffSelect">
 	   	SELECT 
 			 s.member_id
+			,s.staff_code
 			,m.member_name
 			,st.store_name
 			,l.level_name
@@ -82,7 +83,7 @@
 		ON 
 			s.level_code = l.level_code	
 		WHERE 
-			s.member_id =#{staff_id};
+			s.staff_code =#{staff_code};
    	
    	
    	</select>
@@ -115,10 +116,9 @@
 			JOIN 
 			tb_login AS lo
 			ON 
-			s.member_id = lo.member_id
+			lo.member_id = s.member_id
 			GROUP BY 
-			lo.member_id;
-   	
+			s.staff_code;   	
    	
    	</select>
    	

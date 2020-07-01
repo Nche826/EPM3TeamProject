@@ -22,7 +22,7 @@ public interface StaffMapper {
 	public int staffUpdate(Staff staff);
 	
 	//직원 수정 전단계, 아이디값 가져오기
-	public Staff getStaffSelect(String staff_id);
+	public Staff getStaffSelect(String staff_code);
 	
 	//직원리스트
 	public List<Staff> staffList();

@@ -53,10 +53,10 @@ public class StaffController {
 	
 	//직원 수정 화면 가져오기
 	@GetMapping("/staffUpdate")
-	public String staffUpdate(Model model,@RequestParam(name="staff_id",required = false) String staff_id) {
-		System.out.println("staff_id--->"+staff_id);
+	public String staffUpdate(Model model,@RequestParam(name="staff_code",required = false) String staff_code) {
+		System.out.println("staff_code--->"+staff_code);
 		System.out.println("=======수정페이지 시작========");
-		Staff staffSelect = staffService.getStaffSelect(staff_id);
+		Staff staffSelect = staffService.getStaffSelect(staff_code);
 		System.out.println("staffSelect-->"+staffSelect);
 		System.out.println("==========================");
 		model.addAttribute("staffSelect", staffSelect);
