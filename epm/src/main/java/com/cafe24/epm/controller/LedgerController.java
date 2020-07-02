@@ -27,7 +27,14 @@ public class LedgerController {
 	@Autowired private DeallerService deallerService;
 	@Autowired private LedgerService ledgerService;
 	
-	
+	//수납 장부 수정 처리
+	@PostMapping("/ledgerUpdate")
+	public String ledgerUpdate(Ledger ledger) {
+		System.out.println("========수납 장부 수정 시작========");
+		System.out.println("업데이트 할 내용 ledger -->"+ ledger.toString());
+		ledgerService.ledgerUpdate(ledger);
+		return "redirect:/ledgerList";
+	}
 	
 	//수납 장부 수정 화면 : 코드값 가져오기
 	@GetMapping("/ledgerUpdate")
@@ -35,6 +42,7 @@ public class LedgerController {
 		System.out.println("receive_code --->"+receive_code);
 		System.out.println("========수납장부 수정 페이지 시작======");
 		Ledger ledgerSelect = ledgerService.getLedgerSelect(receive_code);
+		System.out.println("ledgerSelect-->"+ledgerSelect);
 		model.addAttribute("ledgerSelect", ledgerSelect);
 		System.out.println("===============================");
 		return "ledger/ledgerUpdate";

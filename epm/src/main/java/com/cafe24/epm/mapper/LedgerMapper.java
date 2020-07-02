@@ -10,7 +10,8 @@ import com.cafe24.epm.domain.Ledger;
 public interface LedgerMapper {
 	
 	
-	
+	//수정처리
+	public int ledgerUpdate(Ledger ledger);
 	
 	//수납장부 수정 전단계, 코드값 가져오기
 	public Ledger getLedgerSelect(String receive_code);

@@ -57,21 +57,23 @@
             <form id="ledgerInsertForm" action="/ledgerUpdate" method="post" >
 	             	<div class="form-group">
 	                	<label for="inputDescription"><i style="color: red;">*</i>매장명</label>
-	                 	<input type="text" name="store_code" class="form-control"  th:value="${l.store_name}" readonly="readonly">
+	                 	<input type="text" name="store_name" class="form-control"  th:value="${l.store_name}" readonly="readonly">
+	                 	<input type="hidden" name="receive_code" class="form-control"  th:value="${l.receive_code}">
 	             	</div>
 	             	<div class="form-group">
 	                	<label for="inputDescription"><i style="color: red;">*</i>수납직원</label>
-	                 	<input type="text" name="staff_code" class="form-control"  th:value="${l.member_name}" readonly="readonly">
+	                 	<input type="text" name="member_name" class="form-control"  th:value="${l.member_name}" readonly="readonly">
+	                 	<input type="hidden" name="staff_code" class="form-control"  th:value="${l.staff_code}" readonly="readonly">
 	             	</div>
 	             	<hr>
 	             	<div class="form-group">
 	                	<label for="inputDescription"><i style="color: red;">*</i>구분</label>
 	                	<div class="form-check">
-	                 	<input type="checkbox" name="customerName" class="form-check-input" th:checked="${l.receive_type}=='현금수납'" value="현금수납">
+	                 	<input type="checkbox" name="receive_type"  class="form-check-input" th:checked="${l.receive_type}=='현금수납'" th:value="${l.receive_type}">
 	                 	<label class="form-check-label" style="margin-right: 6mm;">고객현금수납</label>
-	                 	<input type="checkbox" name="customerName" class="form-check-input" th:checked="${l.receive_type}=='카드수납'" value="카드수납">
+	                 	<input type="checkbox" name="receive_type" class="form-check-input" th:checked="${l.receive_type}=='카드수납'" th:value="${l.receive_type}">
 	                 	<label class="form-check-label" style="margin-right: 6mm;">고객카드수납</label>
-	                 	<input type="checkbox" name="customerName" class="form-check-input" th:checked="${l.receive_type}=='매장 대납'" value="매장 대납">
+	                 	<input type="checkbox" name="receive_type"  class="form-check-input" th:checked="${l.receive_type}=='매장 대납'" th:value="${l.receive_type}">
 	                 	<label class="form-check-label" style="margin-right: 6mm;">매장 대납</label>
 	                 	</div>
 	             	</div>
@@ -97,7 +99,8 @@
 	             	</div>
 	             	<div class="form-group">
 	                	<label for="inputDescription"><i style="color: red;">*</i>거래처</label>
-	                 	<input type="text" name="dealler_code" th:value="${l.dealler_name}" class="form-control" readonly="readonly">
+	                 	<input type="text" name="dealler_name" th:value="${l.dealler_name}" class="form-control" readonly="readonly">
+	                 	<input type="hidden" name="dealler_code" th:value="${l.dealler_code}" class="form-control" >
 	             	</div>
 	             	<div class="form-group">
 	             		<label for="inputDescription"><i style="color: red;">*</i>송금일/송금액</label>
@@ -124,7 +127,7 @@
 	             	</Div>
 	             	<div class="form-group">
 	             	<input type="reset" value="Clear" class="btn btn-default float-left">
-	             	<button type="submit" id="CusBtn" class="btn btn-primary float-right">수납장부수정</button>
+	             	<button type="submit" id="ledgerUpBtn" class="btn btn-primary float-right">수납장부수정</button>
 	             	</div>
 	           </form>
             </div>
@@ -144,7 +147,7 @@
               </div>
             </div>
             <div class="card-body">
-            <form id="storeInfo" method="get">
+            <form id="ledgerInfo" method="get">
 	            <table class="table">
 	            <thead>
 	              <tr>
@@ -161,7 +164,7 @@
 		          <td th:text="${l.receive_customer}"></td>
 		          <td th:text="${l.receive_price}"></td>
 		          <td th:text="${l.dealler_name}"></td>
-		          <td th:text="${l.receive_reg_date}"></td>
+		          <td th:text="${l.receive_remit_date}"></td>
 		          <td th:text="${l.receive_remit_price}"></td>
 		          <td th:text="${l.receive_remit_type}"></td>
 		          </tr>   
@@ -224,5 +227,27 @@
 	<!-- 컨텐트 랩퍼 끝 -->
 </th:block>
 <th:block layout:fragment="customFooterScript">
+<script src="/plugins/select2/js/select2.full.min.js"></script>
+<script>
+	//체크박스 하나만 선택하기 
+	var reType = $("input:checkbox[name=receive_type]");
+	$(reType).click(function() {
+		  $(reType).attr("checked", false); //체크박스 전체 false
+		  $(this).attr("checked", true);  //하나만 트루 
+		  $('input:checkbox[name=receive_type]').not(this).prop("checked", false);
+		  console.log($(reType).is(':checked'));
+		}); 
+	var reReType = $("input:checkbox[name=receive_remit_type]");
+	$(reReType).click(function() {
+		  $(reReType).attr("checked", false); //체크박스 전체 false
+		  $(this).attr("checked", true);  //하나만 트루 
+		  $('input:checkbox[name=receive_remit_type]').not(this).prop("checked", false);
+		  console.log($(reReType).is(':checked'));
+		}); 
+	
+	
+
+
+</script>
 </th:block>
 </html>
