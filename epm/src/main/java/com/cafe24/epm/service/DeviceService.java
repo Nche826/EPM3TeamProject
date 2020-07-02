@@ -19,6 +19,10 @@ public class DeviceService {
 	public List<Device>	deviceList(){
 		return deviceMapper.deviceList();
 	}
+	
+	public List<Device>	searchList(){
+		return deviceMapper.searchList();
+	}
 
 	public int deviceInsert(Device device) {
 		return deviceMapper.deviceInsert(device);
@@ -34,6 +38,14 @@ public class DeviceService {
 	
 	public int deviceUpdate(Device device) {
 		return deviceMapper.deviceUpdate(device);
+	}
+	
+	public int deviceDelete(Device device) {
+		return deviceMapper.deviceDelete(device);
+	}
+	
+	public int deviceInfoDelete(Device device) {
+		return deviceMapper.deviceInfoDelete(device);
 	}
 	
 }

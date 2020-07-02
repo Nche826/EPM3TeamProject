@@ -57,7 +57,7 @@
 	             <div class="col-6" style="padding-right:10px">             	
 	              <div class="form-group">
 	                <label for="inputName">매장</label>
-	                <input type="text" id="storeName" class="form-control" name="infoStore">
+	                <input type="text" id="storeName" class="form-control" name="infoStore" value="store1">
 	              </div>
 	              <div class="form-group">
 	                <label for="inputStatus">입고직원</label>
@@ -69,7 +69,7 @@
 	              </div>
 	              <div class="form-group">
 	                <label for="inputName">입고방법</label>
-					  <input type="radio" id="deviceMethod1" name="infoMethod" value="method1">
+					  <input checked type="radio" id="deviceMethod1" name="infoMethod" value="method1">
 					  <label>일반입고</label>
 					  <input type="radio" id="deviceMethod2" name="infoMethod" value="method2">
 					  <label>바코드입고</label><br>				  
@@ -77,15 +77,15 @@
 	              <div class="form-group">
 	                <label for="inputStatus">거래처</label>
 	                <select class="form-control custom-select" name="deviceinDealler">                  
-	                  <option selected>-선택-</option>
-	                  <option value="dealler_1">거래처1</option>
+	                  <option>-선택-</option>
+	                  <option selected value="dealler_1">거래처1</option>
 	                  <option value="dealler_2">거래처2</option>
 	                </select>
 	              </div>
 	              <div class="form-group">
 	                <label for="inputName">모델명</label>
-	                <input type="hidden" name="deviceinDevice" value="code1">
-	                <input type="text" id="deviceModel" class="form-control" name="deviceModel" >
+	                
+	                <input type="text" id="deviceModel" class="form-control" name="deviceModel" value="model1" >
 	              </div>
 	              </div>
 	              
@@ -99,19 +99,19 @@
 	              </div>
 	              <div class="form-group">
 	                <label for="inputName">색상</label>
-	                <input type="text" id="deviceColor" class="form-control" name="deviceColor">
+	                <input type="text" id="deviceColor" class="form-control" name="deviceColor" value="color1">
 	              </div>
 	              <div class="form-group">
 	                <label for="inputName">입고가</label>
-	                <input type="text" id="devicePrice" class="form-control" name="devicePrice">            
+	                <input type="text" id="devicePrice" class="form-control" name="devicePrice" value="1000000">            
 	              </div>
 	              <div class="form-group">
 	                <label for="inputName">일련번호</label>
-	                <input type="text" id="deviceSerial" class="form-control" name="deviceinSerial" >            
+	                <input type="text" id="deviceSerial" class="form-control" name="deviceinSerial" value="serial1" >            
 	              </div>
 	              <div class="form-group">
 	                <label for="inputName">비고</label>
-	                <input type="text" id="deviceMemo" class="form-control" name="deviceinMemo" > 
+	                <input type="text" id="deviceMemo" class="form-control" name="deviceinMemo" value="memo1"> 
 	              </div> 	                          
 	              </div>
 	              </div>

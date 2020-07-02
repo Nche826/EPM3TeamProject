@@ -24,6 +24,13 @@ public class DeviceController {
 		return "device/deviceList";
 	}
 	
+	@PostMapping("/searchList")
+	public String searchList(Model model) {
+		List<Device> searchList = deviceService.searchList();
+		model.addAttribute("searchList", searchList);
+		return "device/deviceList";
+	}
+	
 	@PostMapping("/deviceInsert")
 	public String deviceInsert(Device device) {
 		System.out.println(device.toString());
@@ -41,6 +48,16 @@ public class DeviceController {
 		int infoupdate = deviceService.deviceInfoUpdate(device);
 		System.out.println("성공여부: "+update);
 		System.out.println("성공여부: "+infoupdate);
+		return "redirect:/deviceList";
+	}
+	
+	@PostMapping("/deviceDelete")
+	public String deviceDelete(Device device) {
+		System.out.println(device.toString());
+		int infodelete = deviceService.deviceInfoDelete(device);
+		int delete = deviceService.deviceDelete(device);		
+		System.out.println("성공여부: "+delete);
+		System.out.println("성공여부: "+infodelete);
 		return "redirect:/deviceList";
 	}
 		
