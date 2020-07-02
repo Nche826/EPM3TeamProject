@@ -55,7 +55,14 @@ public class Device {
 	private String searchStaff;
 	private String searchSerial;
 	
+	private String deleteSerial;
 	
+	public String getDeleteSerial() {
+		return deleteSerial;
+	}
+	public void setDeleteSerial(String deleteSerial) {
+		this.deleteSerial = deleteSerial;
+	}
 	public String getSearchDateStart() {
 		return searchDateStart;
 	}
@@ -350,8 +357,10 @@ public class Device {
 				+ ", updateMemo=" + updateMemo + ", updateinCode=" + updateinCode + ", deleteCode=" + deleteCode
 				+ ", searchDateStart=" + searchDateStart + ", searchDateEnd=" + searchDateEnd + ", searchStatus="
 				+ searchStatus + ", searchDealler=" + searchDealler + ", searchStaff=" + searchStaff + ", searchSerial="
-				+ searchSerial + "]";
+				+ searchSerial + ", deleteSerial=" + deleteSerial + "]";
 	}
+	
+	
 	
 
 }

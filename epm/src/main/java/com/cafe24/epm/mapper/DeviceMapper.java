@@ -11,6 +11,8 @@ public interface DeviceMapper {
 
 		public List<Device> deviceList();
 		
+		public List<Device> searchList();
+		
 		public Device deviceSelect(String deviceCode);
 
 		public int deviceInsert(Device device);		

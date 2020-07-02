@@ -56,6 +56,10 @@
 		<result property="searchDealler" 			column="dealler_code"/>
 		<result property="searchStaff" 				column="staff_code"/>
 		<result property="searchSerial" 			column="devicein_serial"/>
+		
+		<result property="deleteSerial"				column="devicein_serial"/>
+		
+		
 	</resultMap>
 
 <!-- 	<select id = "getDeviceSelect" parameterType="String" resultMap="DeviceinSelect">
@@ -90,9 +94,22 @@
 		ON s.store_code = a.store_code
 	JOIN tb_deviceinfo as info
 		on info.dinfo_devicein = i.devicein_code
+<!-- 	<where>
+			<choose>
+			    <when test="#{searchStatus} == null">		
+			     	i.devicein_status = i.devicein_status
+			    </when>		
+			    <otherwise>
+	      			AND i.devicein_status = #{searchStatus}
+	      		
+		   		</otherwise>
+		   	</choose>	
+	    </where> -->		
+	</select>
+
+	
 	
 		
-	</select>	
 
 	<insert id="deviceInsert" parameterType="Device">
 	<selectKey keyProperty="deviceinCode,deviceCode" resultType="hashmap" order="BEFORE">
@@ -168,6 +185,28 @@ INSERT
 	
 		</insert>
 		
+		<update id="deviceInfoUpdate" parameterType="Device">	
+		<selectKey keyProperty="deviceinCode" resultType="hashmap" order="BEFORE">
+			SELECT
+				devicein_code as deviceinCode
+			FROM
+				tb_devicein
+			where
+				devicein_serial = #{updateSerial}
+						
+		</selectKey>
+			update		
+				tb_deviceinfo
+			set
+				dinfo_devicein = #{deviceinCode}
+				,dinfo_method = #{updateMethod}
+				,dinfo_store = #{updateStore}
+				,dinfo_memo = #{updateMemo}
+				,dinfo_reg_date = NOW()
+			where
+				dinfo_devicein = #{deviceinCode}
+		</update>
+		
 		<update id="deviceUpdate" parameterType="Device">
 		<selectKey keyProperty="deviceCode" resultType="hashmap" order="BEFORE">
 			SELECT
@@ -198,38 +237,34 @@ INSERT
 	
 		</update>
 		
-		<update id="deviceInfoUpdate" parameterType="Device">	
-		<selectKey keyProperty="deviceinCode" resultType="hashmap" order="BEFORE">
-			SELECT
-				devicein_code as deviceinCode
-			FROM
-				tb_devicein
-			where
-				devicein_serial = #{updateSerial}
-						
-		</selectKey>
-			update		
-				tb_deviceinfo
-			set
-				dinfo_devicein = #{deviceinCode}
-				,dinfo_method = #{updateMethod}
-				,dinfo_store = #{updateStore}
-				,dinfo_memo = #{updateMemo}
-				,dinfo_reg_date = NOW()
-			where
-				dinfo_devicein = #{deviceinCode}
-		</update>
-		
-		<delete id="deviceInfoDelete" parameterType="device">
-			Delete 
-			From tb_deviceinfo
-			Where dinfo_devicein = #{deleteCode}
-		</delete>
+					
 			
-		<delete id="deviceDelete" parameterType="device">			
-			Delete 
-			From tb_devicein
-			Where devicein_code = #{deleteCode}				
+		<delete id="deviceInfoDelete" parameterType="Device">
+		<!-- 
+		~ is specified twice, both as a target for 'DELETE' and as a separate source for data ~
+		서브쿼리에서 조회한 테이블과 동일한 테이블의 값을 변경하려고 할 때 발생한다.
+		해당 서브쿼리에 ALIAS를 부여한 뒤 SELECT문 으로 한번 더 감싸면 해결된다. 
+		-->
+
+			Delete From tb_deviceinfo
+			where dinfo_devicein = (SELECT *
+									FROM (SELECT
+														dinfo_devicein
+													from
+														tb_deviceinfo as i
+													join
+														tb_devicein as d
+													on
+														i.dinfo_devicein = d.devicein_code
+													where
+														devicein_serial = 'serial1') AS dcode)
+		</delete>							
+		
+	
+			
+		<delete id="deviceDelete" parameterType="Device">			
+			Delete From tb_devicein
+			where devicein_serial = #{deleteSerial}				
 		</delete>
 		
 </mapper>

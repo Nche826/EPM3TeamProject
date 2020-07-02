@@ -91,9 +91,10 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+              
                 <table id="example2" class="table table-bordered table-striped">
                   <thead>
-                  <form action ="/deviceList" method="post">
+                  <form action ="/searchList" method="get|post">
                   <div class="form-inline">
                   <div class="pull-left mg-b-10 mg-r-10 input-group input-group-sm wd-250">
 					<input type="text" id="searchDateStart" name="searchDateStart" class="form-control form-control-sm fc-datepicker hasDatepicker" maxlength="10" placeholder="YYYY-MM-DD"> 
@@ -113,10 +114,10 @@
 						</div>	
 					<div class="form-inline">
 					                  
-							<select id="searchStatus" name="searchStatus" class="form-control" style="margin: 5px;">
+							<select id="searchStatus" name="searchStatus" class="form-control" style="margin: 5px;" >
 	                          <option>보유</option>
-	                          <option value="status1">신규</option>
-	                          <option value="status2">교품</option>
+	                          <option value="신규">신규</option>
+	                          <option value="교품">교품</option>
 	                          <option value="status3">철회</option>
 	                          <option value="">----</option>
 	                          <option value="status4">개통</option>
@@ -201,8 +202,8 @@
             <div class="modal-header">
               <h4 class="modal-title col-sm-6">단말기 정보</h4>
               <div class="col-sm-6" >
-					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" data-toggle="modal" data-target="#modal-Update"><i class="fa fa-wrench"></i></button> 					
-					<button class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" data-toggle="modal" data-target="#modal-Delete"><i class="fa fa-trash"></i></button>
+					<button id="updatebtn" class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" data-toggle="modal" data-target="#modal-Update"><i class="fa fa-wrench"></i></button> 					
+					<button id="deletebtn" class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" data-toggle="modal" data-target="#modal-Delete"><i class="fa fa-trash"></i></button>
 					</div> 
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
@@ -260,7 +261,7 @@
             </div>
             <form action ="/deviceDelete" method="post">            
             <div class="modal-body">       
-            	<input type="text" name="deleteCode" th:value="${d.deviceinCode}"> 
+            	<input type="hidden" name="deleteSerial" id="deleteserial"> 
             	  삭제하시겠습니까?
             </div>
             <div class="modal-footer justify-content-between">
@@ -374,11 +375,35 @@
  			$('#infodate').text(infodate);
  			$('#infomethod').text(infomethod);
  			$('#infomemo').text(infomemo);
- 			$('#inforegdate').text(inforegdate);
- 	
+ 			$('#inforegdate').text(inforegdate); 		
  			
-     });
-    	
+    
+     
+   
+    	 
+    	 var userial = $('#infoserial').text();
+    	 var udate = $('#infodate').text();
+    	 
+    	 console.log(userial +"<<userial");
+    	 console.log(udate + "<<udate");
+    	 
+    	 $('#updateserial').val(userial);
+    	 $('#updatedate').val(udate);
+    	 
+    	 console.log($('#updateserial').val() + "<<#updateserial");
+    	 console.log($('#updatedate').val() + "<<#updatedate");
+  
+     
+
+    	 
+    	 var dserial = $('#infoserial').text();
+    	 
+    	 console.log(dserial + "<<dserial");
+    	 
+    	 $('#deleteserial').val(dserial);
+    	 
+    	 console.log($('#deleteserial').val() + "<<#deleteserial");
+    	});
   });  
   
 </script>
