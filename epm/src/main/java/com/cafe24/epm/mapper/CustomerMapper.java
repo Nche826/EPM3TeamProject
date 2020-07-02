@@ -26,6 +26,9 @@ public interface CustomerMapper {
 	//고객등록
 	public int addCustomer(Customer customer);
 	
+	//고객 등록시 직원 아이디 셀렉트 박스에 정보 값 불러오기
+	public List<Customer> getStaffName();
+	
 	//고객리스트
 	public List<Customer> CustomerList();
 

@@ -21,6 +21,16 @@
     		<result property="store_tel" column="store_tel"/>
     </resultMap>
     
+    <select id="getStaffName" parameterType="String" resultMap="CustomerSelect">
+    SELECT 
+    	member_id
+       ,staff_code
+	FROM 
+		tb_staff
+	GROUP BY 
+		member_id;
+    </select>
+    
     <delete id="customerDelete" parameterType="String" statementType="PREPARED">
     DELETE 
     FROM 

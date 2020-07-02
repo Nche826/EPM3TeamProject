@@ -89,7 +89,7 @@ public class CustomerController {
 	@GetMapping("/customerList")
 	public String customerList(Model model,Customer customer ) {
 		System.out.println("======모달 내 셀렉트박스 직원아이디 목록 가져오기=====");
-		List<Staff> staff_id = staffService.staffList();
+		List<Customer> staff_id = customerService.getStaffName();
 		System.out.println("직원 리스트 --->"+ staff_id);
 		model.addAttribute("staff", staff_id);
 		System.out.println("=====================================");

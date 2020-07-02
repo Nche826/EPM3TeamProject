@@ -44,6 +44,11 @@ public class CustomerService {
 		return customerMapper.addCustomer(customer);
 	}
 	
+	//고객 등록시 직원 아이디 셀렉트 박스에 정보 값 불러오기
+	public List<Customer> getStaffName() {
+		return customerMapper.getStaffName();
+	}
+	
 	//고객리스트
 	public List<Customer> CustomerList(){
 		return customerMapper.CustomerList();
