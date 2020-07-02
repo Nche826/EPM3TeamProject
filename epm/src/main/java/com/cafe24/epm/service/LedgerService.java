@@ -13,6 +13,11 @@ public class LedgerService {
 	
 	@Autowired private LedgerMapper ledgerMapper;
 	
+	//수납장부 삭제처리
+	public int ledgerDelete(String receive_code) {
+		return ledgerMapper.ledgerDelete(receive_code);
+	}
+	
 	//수납장부 수정처리
 	public int ledgerUpdate(Ledger ledger) {
 		Ledger result = ledgerMapper.getLedgerSelect(ledger.getReceive_code());

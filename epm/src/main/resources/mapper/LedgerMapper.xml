@@ -23,6 +23,14 @@
 		<result property="store_name" column="store_name"></result>
 		<result property="member_name" column="member_name"></result>
 	</resultMap>
+	
+	<delete id="ledgerDelete" parameterType="String" statementType="PREPARED">
+	DELETE 
+	FROM 
+		tb_receive 
+	WHERE 
+		receive_code=#{receive_code};
+	</delete>
 	<update id="ledgerUpdate" parameterType="ledger">
 		UPDATE 
 			tb_receive

@@ -9,6 +9,8 @@ import com.cafe24.epm.domain.Ledger;
 @Mapper
 public interface LedgerMapper {
 	
+	//삭제처리
+	public int ledgerDelete(String receive_code);
 	
 	//수정처리
 	public int ledgerUpdate(Ledger ledger);

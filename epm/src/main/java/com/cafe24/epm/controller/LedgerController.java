@@ -27,6 +27,25 @@ public class LedgerController {
 	@Autowired private DeallerService deallerService;
 	@Autowired private LedgerService ledgerService;
 	
+	
+	
+	//수납 장부 삭제 처리
+	@PostMapping("/ledgerDelete")
+	@ResponseBody
+	public int ledgerDelete(Model model, @RequestParam(value ="ledgerNames[]",required = false)String[] ledgerNames) {
+		System.out.println("ledgerNames--->"+ledgerNames);
+		System.out.println("==========수납 장부 삭제 시작===========");
+		int re =0;
+		for(String receive_code : ledgerNames){
+			System.out.println("수납 내역 삭제 :"+ receive_code);
+			re=ledgerService.ledgerDelete(receive_code);
+			System.out.println("삭제 여부 ===>"+re);
+		};
+		
+		return re;
+	}
+	
+	
 	//수납 장부 수정 처리
 	@PostMapping("/ledgerUpdate")
 	public String ledgerUpdate(Ledger ledger) {
