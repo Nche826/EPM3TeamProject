@@ -203,7 +203,7 @@
                   </thead>
                   <tbody>
                     <tr th:each=" l,i : ${ledgerList}">
-                      <td><input type="checkbox" value="#"></td>
+                      <td><input type="checkbox" name="ledgerNames" id="ledgerNames" th:value="${l.receive_code}"></td>
                       <td th:text="${i.count}">1</td>
                       <td th:text="${l.receive_customer}"></td>
                       <td th:text="${l.receive_custel}"></td>
@@ -260,6 +260,8 @@
    /* 날짜 스크립트 */
    //Date range picker
     $('#reservation').daterangepicker();
+   
+   //매장 선택시 매장 내 해당 직원 리스트 셀렉트박스 출력 처리 
 	var result = false;
     $('#store_code').click(function(){
     	var chkArr =$(this).val();
@@ -297,7 +299,7 @@
     	
     });
     
-  //체크박스 하나만 선택하기 
+  //장부 등록시 체크박스 하나만 선택하기 
 	var reType = $("input:checkbox[name=receive_type]");
 	$(reType).click(function() {
 		  $(reType).attr("checked", false); //체크박스 전체 false
@@ -313,7 +315,11 @@
 		  console.log($(reReType).is(':checked'));
 		}); 
 	
-    
+   //리스트 내 체크 선택시 value값 배열로 넘기고 삭제 처리  
+   
+   	$('input:checkbox[name="ledgerNames"]').click(function(){
+   		console.log($(this).val());
+   	});
 	
 </script>
 </th:block>

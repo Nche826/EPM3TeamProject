@@ -118,7 +118,8 @@
 			ON 
 			lo.member_id = s.member_id
 			GROUP BY 
-			s.staff_code;   	
+			s.staff_code
+			ORDER BY 8 DESC;   	
    	
    	</select>
    	

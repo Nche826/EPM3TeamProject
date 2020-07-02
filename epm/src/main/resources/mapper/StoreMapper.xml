@@ -44,7 +44,7 @@
 			,store_tel
 			,member_id
 			,store_reg_date
-		FROM tb_store
+		FROM tb_store~
 		where
 		 store_name =#{store_Name};
 	</select>
@@ -63,8 +63,7 @@
 		on
 		s.member_id = m.member_id
 		ORDER by
-		m.member_name
-		,m.member_tel;
+		7 DESC;
 	</select>
 
 	

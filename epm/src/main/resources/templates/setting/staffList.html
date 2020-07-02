@@ -235,7 +235,7 @@
 
 $('#reservation').daterangepicker();
 
-
+//직원 등록시 유효성 체크 
 $(function(){
 	var store_name = $('#store_name').val();
 	var staff_id =$('#staff_id').val();
@@ -264,6 +264,7 @@ $(function(){
 });
 
 
+//직원 삭제시 체크박스 값 배열로 담아서 모달에 정보 전달 에이작스 처리 
 	
 	$('input:checkbox[name="staffNames"]').click(function(){
 		console.log($(this).val());

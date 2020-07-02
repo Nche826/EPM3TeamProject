@@ -157,7 +157,8 @@
 			AND 
 				h.homeopen_customer=c.customer_name
 		GROUP BY 
-			customer_code;
+			customer_code
+		ORDER BY 10 DESC;
     
     
     </select>

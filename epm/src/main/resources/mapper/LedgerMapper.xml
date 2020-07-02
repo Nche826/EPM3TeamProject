@@ -116,7 +116,8 @@
 			JOIN 
 				tb_member AS m
 			ON 
-			st.member_id = m.member_id;
+			st.member_id = m.member_id
+			ORDER BY 14 DESC;
 	</select>
 
 	<insert id="addLedger" parameterType="ledger">
