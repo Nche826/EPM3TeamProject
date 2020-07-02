@@ -93,11 +93,12 @@
               <div class="card-body">
                 <table id="example2" class="table table-bordered table-striped">
                   <thead>
+                  <form action ="/deviceList" method="post">
                   <div class="form-inline">
                   <div class="pull-left mg-b-10 mg-r-10 input-group input-group-sm wd-250">
-					<input type="text" name="sdate" class="form-control form-control-sm fc-datepicker hasDatepicker" maxlength="10" placeholder="YYYY-MM-DD" id="dp1592198183298">
+					<input type="text" id="searchDateStart" name="searchDateStart" class="form-control form-control-sm fc-datepicker hasDatepicker" maxlength="10" placeholder="YYYY-MM-DD"> 
 					-
-					<input type="text" name="edate" class="form-control form-control-sm fc-datepicker hasDatepicker" maxlength="10" placeholder="YYYY-MM-DD" id="dp1592198183299">
+					<input type="text" id="searchDateEnd" name="searchDateEnd" class="form-control form-control-sm fc-datepicker hasDatepicker" maxlength="10" placeholder="YYYY-MM-DD">
 				  </div> 
 				  
 				  <div class="pull-left mg-b-10 mg-r-10" style="margin: 5px;">
@@ -112,36 +113,35 @@
 						</div>	
 					<div class="form-inline">
 					                  
-							<select class="form-control" style="margin: 5px;">
-	                          <option value="">보유</option>
-	                          <option value="">신규</option>
-	                          <option value="">교품</option>
-	                          <option value="">철회</option>
+							<select id="searchStatus" name="searchStatus" class="form-control" style="margin: 5px;">
+	                          <option>보유</option>
+	                          <option value="status1">신규</option>
+	                          <option value="status2">교품</option>
+	                          <option value="status3">철회</option>
 	                          <option value="">----</option>
-	                          <option value="">개통</option>
-	                          <option value="">판매</option>
-	                          <option value="">반품</option>
+	                          <option value="status4">개통</option>
+	                          <option value="status5">판매</option>
+	                          <option value="status6">반품</option>
 	                       
 	                        </select>
-							<select class="form-control" style="margin: 5px;">
-	                          <option value="">거래처</option>
-	                          <option value="">거래처1</option>
-	                          <option value="">거래처2</option>
-	                          <option value="">거래처3</option>
+							<select id="searchDealler" name="searchDealler" class="form-control" style="margin: 5px;">
+	                          <option>거래처</option>
+	                          <option value="dealler_1">거래처1</option>
+	                          <option value="dealler_2">거래처2</option>
 	                        </select>	                        
-							<select class="form-control" style="margin: 5px;">
-	                          <option value="">직원</option>
-	                          <option value="">직원1</option>
-	                          <option value="">직원2</option>
-	                          <option value="">직원3</option>
-	                          <option value="">직원4</option>
+							<select id="searchStaff" name="searchStaff" class="form-control" style="margin: 5px;">
+	                          <option>직원</option>
+	                          <option value="staff_1">직원1</option>
+	                          <option value="staff_2">직원2</option>
+	                        
 	                        </select>
 
 							<div id="example1_filter" class="dataTables_filter">
-								<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example1">
+								<input id="searchSerial" name="searchSerial" type="search" class="form-control form-control-sm" placeholder="일련번호" aria-controls="example1">
 							</div>
 						
 							<button type="submit" class="form-control btn btn-block btn-secondary" style="margin: 5px;">검색</button>	
+							</form>
 							
 							<div class="dataTables_length" id="example1_length" style="margin: 10px;">							
 									<select name="example1_length" aria-controls="example1" class="custom-select custom-select-sm form-control form-control-sm" style="align: bottom;">
@@ -152,6 +152,7 @@
 									</select>											
 							</div>
 							</div>
+							
 					
                  <tr>
                     <th>상태</th>

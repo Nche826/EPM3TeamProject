@@ -48,8 +48,50 @@ public class Device {
 	
 	private String deleteCode;
 	
+	private String searchDateStart;
+	private String searchDateEnd;
+	private String searchStatus;
+	private String searchDealler;
+	private String searchStaff;
+	private String searchSerial;
 	
 	
+	public String getSearchDateStart() {
+		return searchDateStart;
+	}
+	public void setSearchDateStart(String searchDateStart) {
+		this.searchDateStart = searchDateStart;
+	}
+	public String getSearchDateEnd() {
+		return searchDateEnd;
+	}
+	public void setSearchDateEnd(String searchDateEnd) {
+		this.searchDateEnd = searchDateEnd;
+	}
+	public String getSearchStatus() {
+		return searchStatus;
+	}
+	public void setSearchStatus(String searchStatus) {
+		this.searchStatus = searchStatus;
+	}
+	public String getSearchDealler() {
+		return searchDealler;
+	}
+	public void setSearchDealler(String searchDealler) {
+		this.searchDealler = searchDealler;
+	}
+	public String getSearchStaff() {
+		return searchStaff;
+	}
+	public void setSearchStaff(String searchStaff) {
+		this.searchStaff = searchStaff;
+	}
+	public String getSearchSerial() {
+		return searchSerial;
+	}
+	public void setSearchSerial(String searchSerial) {
+		this.searchSerial = searchSerial;
+	}
 	public String getDeleteCode() {
 		return deleteCode;
 	}
@@ -305,7 +347,10 @@ public class Device {
 				+ ", updateStaff=" + updateStaff + ", updateDate=" + updateDate + ", updateMethod=" + updateMethod
 				+ ", updateDealler=" + updateDealler + ", updateModel=" + updateModel + ", updateType=" + updateType
 				+ ", updateColor=" + updateColor + ", updatePrice=" + updatePrice + ", updateSerial=" + updateSerial
-				+ ", updateMemo=" + updateMemo + ", updateinCode=" + updateinCode + ", deleteCode=" + deleteCode + "]";
+				+ ", updateMemo=" + updateMemo + ", updateinCode=" + updateinCode + ", deleteCode=" + deleteCode
+				+ ", searchDateStart=" + searchDateStart + ", searchDateEnd=" + searchDateEnd + ", searchStatus="
+				+ searchStatus + ", searchDealler=" + searchDealler + ", searchStaff=" + searchStaff + ", searchSerial="
+				+ searchSerial + "]";
 	}
 	
 
