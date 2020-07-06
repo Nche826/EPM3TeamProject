@@ -42,7 +42,11 @@ public class CompanyBoardController {
 	public String companyContents (@RequestParam(name = "company_code", required = false) String companyCode, Model model) {
 		System.out.println("companyCode>>>" + companyCode);
 		CompanyBoardContent companyBoardContentSelect = companyBoardService.companyBoardSelect(companyCode);
+		List<CompanyBoardComment> companyBoardCommentList = companyBoardService.companyCommentList(companyCode);
+		//조회수 업데이트
 		companyBoardService.companyBoardCountUpadate(companyCode);
+		
+		model.addAttribute("companyBoardCommentList",companyBoardCommentList);
 		model.addAttribute("companyBoardContentSelect",companyBoardContentSelect);
 		return "company/companyContents";
 	}
@@ -79,14 +83,40 @@ public class CompanyBoardController {
 	
 	//게시물 수정 화면
 	@GetMapping("/companyUpdateContents")
-	public String companyUpdateContents () {
+	public String companyUpdateContents (@RequestParam(name = "company_code", required = false) String companyCode, Model model) {
+		CompanyBoardContent companyBoardContentSelect = companyBoardService.companyBoardSelect(companyCode);
+		model.addAttribute("companyBoardContentSelect",companyBoardContentSelect);
 		return "company/companyUpdateContents";
+	}
+	
+	//게시물 수정 처리
+	@PostMapping("/companyUpdateContents")
+	public String companyUpdateContents (CompanyBoardContent companyBoardContent
+										, @RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
+		System.out.println("=======파일업로드=======");
+		storageService.store(file);
+		System.out.println(file+"::::::file");
+		System.out.println("=======게시물등록=======");
+		System.out.println(file.getOriginalFilename()+"::::::file.getOriginalFilename()");
+		companyBoardContent.setCompanyFile(file.getOriginalFilename());
+		System.out.println(companyBoardContent+"<<< CompanyBoardContent");
+		companyBoardService.companyBoardUpadate(companyBoardContent);
+		String companyCode = companyBoardContent.getCompanyCode();
+		return "redirect:/companyContents?company_code="+companyCode;
 	}
 	
 	//게시물 삭제
 	@GetMapping("/companyDeleteContents")
 	public String companyDeleteContents () {
 		return "redirect:/companyListContents";
+	}
+	
+	//댓글 등록
+	@PostMapping("/companyInsertComment")
+	public String companyInsertComment (CompanyBoardComment companyBoardComment) {
+		companyBoardService.companyCommentInsert(companyBoardComment);
+		String companyCode = companyBoardComment.getCompanyCode();
+		return "redirect:/companyContents?company_code="+companyCode;
 	}
 	
 	//댓글 목록
@@ -101,6 +131,15 @@ public class CompanyBoardController {
 	@GetMapping("/companyUpdateComment")
 	public String companyUpdateComment () {
 		return "company/companyContents";
+	}
+	
+	//댓글 수정
+	@PostMapping(value = "/companyCommentUpdate", produces = "application/json")
+	@ResponseBody
+	public CompanyBoardComment companyUpdateComment (CompanyBoardComment companyBoardComment) {
+		companyBoardService.companyCommentUpdate(companyBoardComment);
+		System.out.println("companyBoardComment : "+companyBoardComment);
+		return companyBoardService.companyCommentSelect(companyBoardComment);
 	}
 	
 	//댓글 삭제

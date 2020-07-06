@@ -78,7 +78,47 @@
 				</div>
 				
 				<!-- 댓글 영역 -->
-				<div id="reply"> </div>
+				<div id="reply">
+					<div class="row">  
+						<div class="col-md-10" style="margin: 0 auto;">
+								<!-- 댓글내용 -->
+								<div class="card card-secondary card-outline" th:each=" cl : ${companyBoardCommentList}">
+					              <div class="card-body">
+					              	<div class="row">
+					               		<div class="col-6" style="text-align: left">
+					                  		<small th:text="${cl.staffName}">글쓴이</small>
+					                  	</div>
+						               	<div class="col-6" style="text-align: right">
+					                  		<small th:text="${cl.companyCDate}"></small>
+					                  	</div>
+				                  	</div>
+									<hr>	               		
+									<div th:id="${cl.companyCCode}">
+						                <p class="card-text" th:text="${cl.companyCDesc}" >댓글내용</p>
+										<div style="float: right" class="replyButtons">
+							                  <button type="button" class="btn btn-sm btn-secondary replyModifyButton" th:data-id="${cl.companyCCode}">수정</button>
+							                  <a th:href="@{/companyDeleteComment(company_c_code=${cl.companyCCode})}"><button type="button" class="btn btn-sm btn-secondary">삭제</button></a>
+						                </div>
+					                </div>
+					              </div>
+					            </div>
+							
+					            
+					            <!-- 댓글입력창 -->
+					            <form action="/companyInsertComment" method="post" id="replyForm">
+				                  <div class="input-group">
+				                  	<input type="text" hidden="hidden" readonly="readonly" id="companyCode" name="companyCode">
+				                  	<input type="text" hidden="hidden" readonly="readonly" id="staffCode" name="staffCode">
+				                    <input type="text" placeholder="Type Message ..." class="form-control" name="companyCDesc">
+				                    <span class="input-group-append">
+				                      <button type="button" class="btn btn-secondary" id="replyButton">Send</button>
+				                    </span>
+				                  </div>
+				                </form>
+					            
+						</div>
+					</div>
+				</div>
 				<!-- 댓글 영역 끝 -->
 				
 			</div>
@@ -91,10 +131,105 @@
 
 	<script type="text/javascript">
 		$(document).ready( function() {
-			var uri = decodeURI(location.href);
+			
+			/* var uri = decodeURI(location.href);
 			uri = uri.substr(uri.indexOf('?'));
-			$("#reply").load("/companyComment"+uri);	
+			$("#reply").load("/companyComment"+uri); */
+			
+			
+			/* 댓글등록,유효성검사 */
+			var cCode = decodeURI(location.href);
+			cCode = cCode.substr(cCode.indexOf('=')+1);
+			$('#companyCode').val(cCode);
+			
+			var sCode = $('#LoginStaffCode').val();
+			$('#staffCode').val(sCode);
+			
+			$('#replyButton').click(function(){
+				if( $('input[name=companyCDesc]').val() == null || $('input[name=companyCDesc]').val() == '' ){
+					alert('내용을 입력하세요.');
+					return false;
+				}
+				$('#replyForm').submit()
+			});
+			
 		});
+		
+		/* 댓글수정 */
+		
+		var originDesc = '';
+		var buttonParent ='';
+		
+		$(document).on('click','.replyModifyButton',function(){
+			var companyCDesc = $(this).parent().prev().html();
+			var companyCCode = $(this).data('id');
+			
+			//수정 전 태그
+			originDesc = $(this).parent().parent().html();
+			replyButtons = $(this).parents('.replyButtons').html();
+			
+			//수정 화면
+		    var html = '<div style="margin-bottom: 16px;">'
+		    html += '<form action="#" method="post" id="replyModifyForm">';
+		    html += '<input hidden="hidden" type="text" name="companyCCode" value='+companyCCode+'>'
+		    html += '<textarea class="form-control" rows="5" placeholder="Comment"  name="commentDesc" value="'+companyCDesc+'">';
+		    html += companyCDesc;
+		    html += '</textarea>'
+		    html += '</form>'
+		    html += '</div>'
+		    html += '<div style="float: right" class="modifyButtons">'
+		    html += '<button type="button" class="replyModifyConfirmButton btn btn-sm btn-secondary">수정</button> '
+		    html += '<button type="button" class="replyModifyCancleButton btn btn-sm btn-secondary">취소</button>'
+		    html += '</div>'
+		    
+		    $(this).parent().parent().html(html);
+			
+		});
+		
+		//수정확인
+		$(document).on('click','.replyModifyConfirmButton',function(){
+			console.log('수정확인');
+			var companyCDesc = $(this).parent().prev().children('form').children('textarea[name="commentDesc"]').val()
+			var companyCCode = $(this).parent().prev().children('form').children('input[name="companyCCode"]').val();
+			
+			//유효성검사
+			if(companyCDesc == null || companyCDesc == ''){
+				alert('댓글을 입력해주세요.');
+				return false;
+			}
+			
+			//수정처리
+			var request = $.ajax({
+				url: "/companyCommentUpdate", //통신할 url
+				method: "POST", //통신할 메서드 타입
+				data: { "companyCDesc" : companyCDesc
+						,"companyCCode" : companyCCode}, //전송할 데이타
+				dataType: "json",
+				async: false
+			});	 
+			
+			
+			var html ='';
+			
+			request.done(function( data ) {
+
+				html = '<p class="card-text">'+data.companyCDesc+'</p>';
+				html += '<div style="float: right" class="replyButtons">'
+				html += replyButtons;
+				html += '</div>'
+				
+			});	
+			
+			$(this).parent().parent().html(html);
+			
+		});
+		
+		//수정취소
+		$(document).on('click','.replyModifyCancleButton',function(){
+			console.log('수정취소');
+			 $(this).parent().parent().html(originDesc);
+		});
+				
 	</script>
 	
 </th:block>
