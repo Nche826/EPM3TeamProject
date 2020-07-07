@@ -25,9 +25,12 @@ public class DeviceController {
 	}
 	
 	@PostMapping("/searchList")
-	public String searchList(Model model) {
-		List<Device> searchList = deviceService.searchList();
-		model.addAttribute("searchList", searchList);
+	public String searchList(Model model, Device device) {
+		System.out.println(device.toString());
+		List<Device> searchList = deviceService.searchList(device);
+		System.out.println(searchList.toString()+"<------result");
+		
+		model.addAttribute("deviceList", searchList);
 		return "device/deviceList";
 	}
 	

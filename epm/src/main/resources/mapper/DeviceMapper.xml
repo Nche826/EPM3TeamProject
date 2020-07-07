@@ -94,23 +94,102 @@
 		ON s.store_code = a.store_code
 	JOIN tb_deviceinfo as info
 		on info.dinfo_devicein = i.devicein_code
-<!-- 	<where>
-			<choose>
-			    <when test="#{searchStatus} == null">		
-			     	i.devicein_status = i.devicein_status
-			    </when>		
-			    <otherwise>
-	      			AND i.devicein_status = #{searchStatus}
-	      		
-		   		</otherwise>
-		   	</choose>	
-	    </where> -->		
 	</select>
-
+	
+	<select id = "searchList" parameterType="Device" resultMap="DeviceinSelect">
+	SELECT
+	*
+	FROM
+		tb_devicein AS i
+	join tb_device  AS d
+		on 	i.device_code = d.device_code
+	JOIN tb_staff AS s
+	 	ON i.staff_code = s.staff_code
+	JOIN tb_store AS a
+		ON s.store_code = a.store_code
+	JOIN tb_deviceinfo as info
+		on info.dinfo_devicein = i.devicein_code
+	<where>
+			<choose>
+				<!-- 5개 항목 일치시 -->
+				 <when test="searchStatus != ''.toString() and searchDealler != ''.toString()
+				 and searchStaff !=''.toString() and searchSerial !=''.toString()
+				 and searchDateStart !=''.toString() and searchDateEnd !=''.toString()">	
+				    <if test = "searchStatus != ''.toString()">
+				    	and i.devicein_status = #{searchStatus}
+				    </if>	
+				    <if test="searchDealler != ''.toString()">
+			   			and i.dealler_code = #{searchDealler}	
+			   		</if>
+			   		<if test="searchStaff != ''.toString()">
+			   			and i.staff_code = #{searchStaff}
+			   		</if>
+			   		<if test="searchSerial != ''.toString()">
+			   			and i.devicein_serial = #{searchSerial}
+			   		</if>
+			   		<if test="searchDateStart != ''.toString()">
+			   			and i.devicein_date >= #{searchDateStart}
+			   		</if>
+			   		<if test="searchDateEnd != ''.toString()">
+			   			and #{searchDateEnd} >= i.devicein_date
+			   		</if>
+			    </when>	
+			    <!-- 상태 조건 -->
+			    <when test="searchStatus != ''.toString() and searchDealler == ''.toString()
+				 and searchStaff ==''.toString() and searchSerial ==''.toString()
+				 and searchDateStart ==''.toString() and searchDateEnd ==''.toString()">	
+				    <if test = "searchStatus != ''.toString()">
+				    	and i.devicein_status = #{searchStatus}
+				    </if>					   
+			    </when>	
+			    <!-- 거래처 조건 -->
+			    <when test="searchStatus == ''.toString() and searchDealler != ''.toString()
+				 and searchStaff ==''.toString() and searchSerial ==''.toString()
+				 and searchDateStart ==''.toString() and searchDateEnd ==''.toString()">	
+				    <if test = "searchDealler != ''.toString()">
+				    	and i.dealler_code = #{searchDealler}
+				    </if>					   
+			    </when>
+			    <!-- 직원 조건 -->
+			    <when test="searchStatus == ''.toString() and searchDealler == ''.toString()
+				 and searchStaff !=''.toString() and searchSerial ==''.toString()
+				 and searchDateStart ==''.toString() and searchDateEnd ==''.toString()">	
+				    <if test = "searchStaff != ''.toString()">
+				    	and i.staff_code = #{searchStaff}
+				    </if>					   
+			    </when>
+			    <!-- 일련번호 조건 -->
+			    <when test="searchStatus == ''.toString() and searchDealler == ''.toString()
+				 and searchStaff ==''.toString() and searchSerial !=''.toString()
+				 and searchDateStart ==''.toString() and searchDateEnd ==''.toString()">	
+				    <if test = "searchSerial != ''.toString()">
+				    	and i.devicein_serial = #{searchSerial}
+				    </if>					   
+			    </when>
+			    <!-- 입고일 조건 -->
+			    <when test="searchStatus == ''.toString() and searchDealler == ''.toString()
+				 and searchStaff ==''.toString() and searchSerial ==''.toString()
+				 and searchDateStart !=''.toString() and searchDateEnd !=''.toString()">	
+				    <if test = "searchDateStart != ''.toString()">
+				    	and i.devicein_date >= #{searchDateStart}
+				    </if>
+					<if test = "searchDateEnd != ''.toString()">
+				    	and #{searchDateEnd} >= i.devicein_date
+				    </if>				   
+			    </when>
+			   
+				   			    
+			 
+			    <otherwise>
+	      			
+		   		</otherwise>
+		   		
+		   	</choose>	
+	    </where> 
+	</select>
 	
 	
 		
-
 	<insert id="deviceInsert" parameterType="Device">
 	<selectKey keyProperty="deviceinCode,deviceCode" resultType="hashmap" order="BEFORE">
  			SELECT 

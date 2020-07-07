@@ -20,8 +20,8 @@ public class DeviceService {
 		return deviceMapper.deviceList();
 	}
 	
-	public List<Device>	searchList(){
-		return deviceMapper.searchList();
+	public List<Device>	searchList(Device device){
+		return deviceMapper.searchList(device);
 	}
 
 	public int deviceInsert(Device device) {
