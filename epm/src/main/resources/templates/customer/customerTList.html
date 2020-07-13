@@ -57,105 +57,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr th:each="c : ${customerTList}">
                   <td><input type="checkbox" ></td>
-                  <td>삼성1호점</td>
-                  <td>김수지</td>
-                  <td>고객등록</td>
-                  <td>솜뭉치</td>
-                  <td>010-0232-1234</td>
-                  <td>개통고객[솜뭉치]님을 등록하였습니다.</td>
-                  <td>2020-06-10</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" ></td>
-                  <td>삼성2호점</td>
-                  <td>김수지</td>
-                  <td>고객등록</td>
-                  <td>솜뭉치</td>
-                  <td>010-0232-1234</td>
-                  <td>개통고객[솜뭉치]님을 등록하였습니다.</td>
-                  <td>2020-06-10</td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>삼성3호점</td>
-                  <td>김수지</td>
-                  <td>고객등록</td>
-                  <td>솜뭉치</td>
-                  <td>010-0232-1234</td>
-                  <td>개통고객[솜뭉치]님을 등록하였습니다.</td>
-                  <td>2020-06-10</td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>삼성4호점</td>
-                  <td>김수지</td>
-                  <td>고객등록</td>
-                  <td>솜망치</td>
-                  <td>010-0232-0000</td>
-                  <td>개통고객[솜망치]님을 등록하였습니다.</td>
-                  <td>2020-06-11</td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>삼성1호점</td>
-                  <td>김수지</td>
-                  <td>고객등록</td>
-                  <td>솜뭉탱이</td>
-                  <td>010-0232-1234</td>
-                  <td>개통고객[솜뭉탱이]님을 등록하였습니다.</td>
-                  <td>2020-06-12</td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>삼성1호점</td>
-                  <td>김수지</td>
-                  <td>고객등록</td>
-                  <td>솜뭉치</td>
-                  <td>010-0232-1234</td>
-                  <td>개통고객[솜뭉치]님을 등록하였습니다.</td>
-                  <td>2020-06-10</td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>삼성1호점</td>
-                  <td>김수지</td>
-                  <td>고객등록</td>
-                  <td>솜뭉치</td>
-                  <td>010-0232-1234</td>
-                  <td>개통고객[솜뭉치]님을 등록하였습니다.</td>
-                  <td>2020-06-10</td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>삼성1호점</td>
-                  <td>김수지</td>
-                  <td>고객등록</td>
-                  <td>솜뭉치</td>
-                  <td>010-0232-1234</td>
-                  <td>개통고객[솜뭉치]님을 등록하였습니다.</td>
-                  <td>2020-06-10</td>
-                </tr>
-               <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>삼성1호점</td>
-                  <td>김수지</td>
-                  <td>고객등록</td>
-                  <td>솜뭉치</td>
-                  <td>010-0232-1234</td>
-                  <td>개통고객[솜뭉치]님을 등록하였습니다.</td>
-                  <td>2020-06-10</td>
-                </tr>
-                 <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>삼성1호점</td>
-                  <td>김수지</td>
-                  <td>고객등록</td>
-                  <td>솜뭉치</td>
-                  <td>010-0232-1234</td>
-                  <td>개통고객[솜뭉치]님을 등록하였습니다.</td>
-                  <td>2020-06-10</td>
+                  <td th:text="${c.store_name}"></td>
+                  <td th:text="${c.staff_name}"></td>
+                  <td th:text="${c.customert_status}"></td>
+                  <td th:text="${c.customert_name}"></td>
+                  <td th:text="${c.customert_tel}"></td>
+                  <td th:text="|개통고객[${c.customert_name}]님을 ${c.customert_status}하였습니다.|"></td>
+                  <td th:text="${c.customert_reg_date}"></td>
                 </tr>
                 </tbody>
                 <tfoot>

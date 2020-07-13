@@ -5,12 +5,14 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.cafe24.epm.domain.Customer;
+import com.cafe24.epm.domain.CustomerT;
 import com.cafe24.epm.domain.Staff;
 
 @Mapper
 public interface CustomerMapper {
 	
-	
+	//고객 이력 화면 가져오기
+	public List<CustomerT> CustomerTList();
 	//고객삭제처리
 	public int customerDelete(String customerCodes);
 	

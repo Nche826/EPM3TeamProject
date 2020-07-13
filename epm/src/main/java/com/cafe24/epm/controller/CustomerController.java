@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.epm.domain.Customer;
+import com.cafe24.epm.domain.CustomerT;
 import com.cafe24.epm.domain.Staff;
 import com.cafe24.epm.service.CustomerService;
 import com.cafe24.epm.service.StaffService;
@@ -22,7 +23,15 @@ public class CustomerController {
 	@Autowired private StaffService staffService;
 	
 	
-	
+	//고객이력화면 가져오기
+	@GetMapping("/customerTList")
+	public String customerTList(Model model,CustomerT customerT ) {
+		System.out.println("========고객 이력 화면 시작 =========");
+		List<CustomerT> customerTList = customerService.CustomerTList();
+		model.addAttribute("customerTList", customerTList);
+		System.out.println("이력 리스트 --->"+customerTList);
+		return"customer/customerTList";
+	}
 	
 	//고객삭제처리
 	@PostMapping("/customerDelete")
@@ -31,7 +40,7 @@ public class CustomerController {
 		System.out.println("customerCodes"+customerCodes);
 		System.out.println("=============고객 삭제 시작=============");
 		int re =0;
-		for(String customer_code : customerCodes) {
+		for(String customer_code : customerCodes) { 
 			System.out.println("고객 삭제 :"+customer_code);
 			re=customerService.customerDelete(customer_code);
 			System.out.println("삭제여부--->"+re);
@@ -52,11 +61,6 @@ public class CustomerController {
 	}
 	
 	
-	//고객이력화면 가져오기
-	@GetMapping("/customerTList")
-	public String customerTList() {
-		return"customer/customerTList";
-	}
 	
 	//고객 수정 처리
 	@PostMapping("/customerUpdate")

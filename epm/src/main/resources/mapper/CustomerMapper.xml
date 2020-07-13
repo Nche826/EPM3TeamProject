@@ -21,6 +21,46 @@
     		<result property="store_tel" column="store_tel"/>
     </resultMap>
     
+    <resultMap type="CustomerT" id="CustomerTSelect">
+    		<result property="customert_code" column="customert_code"/>
+    		<result property="customert_status" column="customert_status"/>
+    		<result property="customert_name" column="customert_name"/>
+    		<result property="customert_tel" column="customert_tel"/>
+    		<result property="staff_code" column="staff_code"/>
+    		<result property="customert_reg_date" column="customert_reg_date"/>
+    		<result property="staff_name" column="member_name"/>
+    		<result property="store_name" column="store_name"/>
+    </resultMap>
+    
+    <select id="CustomerTList" parameterType="String" resultMap="CustomerTSelect">
+	    SELECT 
+			ct.customert_code
+			,ct.customert_status
+			,ct.customert_name
+			,ct.customert_tel
+			,ct.staff_code
+			,st.store_name
+			,ct.customert_reg_date
+			,m.member_name
+	
+		FROM 
+			tb_customert AS ct
+		JOIN 
+			tb_staff AS s
+		ON 
+			s.staff_code =ct.staff_code
+		JOIN 
+			tb_store AS st 
+		ON 
+			st.store_code = s.store_code
+		JOIN 
+			tb_member AS m
+		ON 
+			m.member_id = s.member_id
+	    ORDER BY 
+		ct.customert_reg_date DESC;
+    </select>
+    
     <select id="getStaffName" parameterType="String" resultMap="CustomerSelect">
     SELECT 
     	member_id
