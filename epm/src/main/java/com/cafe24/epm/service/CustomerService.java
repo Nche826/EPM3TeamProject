@@ -17,6 +17,12 @@ public class CustomerService {
 
 	@Autowired private CustomerMapper customerMapper;
 	
+	//고객 이력 삭제 처리
+	public int customerTDelete(String customertCodes) {
+		return customerMapper.customerTDelete(customertCodes);
+	}
+	
+	
 	//고객이력화면처리
 	public List<CustomerT> CustomerTList(){
 		return customerMapper.CustomerTList();

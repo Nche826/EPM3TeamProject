@@ -33,6 +33,22 @@ public class CustomerController {
 		return"customer/customerTList";
 	}
 	
+	//고객이력삭제처리
+	@PostMapping("/customerTDelete")
+	@ResponseBody
+	public int customerTDelete(Model model, @RequestParam(value="customertCodes[]",required = false)String[] customertCodes) {
+		System.out.println("customertCodes"+customertCodes);
+		System.out.println("=========고객 이력 삭제 시작===========");
+		int re = 0;
+		for(String customert_code : customertCodes) {
+			System.out.println("이력 삭제 :"+customert_code);
+			re=customerService.customerTDelete(customert_code);
+			System.out.println("삭제여부 --->"+re);
+			
+		}
+		return re;
+	}
+	
 	//고객삭제처리
 	@PostMapping("/customerDelete")
 	@ResponseBody

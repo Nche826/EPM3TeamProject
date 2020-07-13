@@ -58,7 +58,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="c : ${customerTList}">
-                  <td><input type="checkbox" ></td>
+                  <td><input type="checkbox" name="customertCodes" th:value="${c.customert_code}"></td>
                   <td th:text="${c.store_name}"></td>
                   <td th:text="${c.staff_name}"></td>
                   <td th:text="${c.customert_status}"></td>
@@ -70,7 +70,7 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                 <th><button type="submit" class="btn btn-danger btn-sm">삭제</button></th>
+                 <th><button type="submit" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-sm">삭제</button></th>
                   <th>매장</th>
                   <th>직원</th>
                   <th>구분</th>
@@ -81,6 +81,29 @@
                 </tr>
                 </tfoot>
               </table>
+	              <div class="modal fade" id="modal-sm">
+			        <div class="modal-dialog modal-sm">
+			          <div class="modal-content bg-danger">
+			            <div class="modal-header">
+			              <h4 class="modal-title">안내</h4>
+			              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			                <span aria-hidden="true">&times;</span>
+			              </button>
+			            </div>
+			            <div class="modal-body">
+			              <p>선택한 이력을 삭제 하시겠습니까?</p>
+			              <p style="font-size: small;">(주의)!삭제된 자료는 복구되지 않습니다.</p>
+			            </div>
+			            <div class="modal-footer justify-content-between">
+			              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+			              <button type="button" class="btn btn-outline-light deleteCheckValue">삭제하기</button>
+			            </div>
+			          </div>
+			          <!-- /.modal-content -->
+			        </div>
+			        <!-- /.modal-dialog -->
+	    		 </div>
+	    		 <!-- /.modal -->
             </div>
             <!-- /.card-body -->
           </div>
@@ -116,6 +139,39 @@
       "autoWidth": false,
       "responsive": true,
     });
+    
+    //체크시 코드값 받아오기.
+    $('input:checkbox[name="customertCodes"]').click(function(){
+		console.log($(this).val());
+	})
+	//체크 후 삭제시 에이작스 통해 값 넘겨주고 받아오기
+	$('.deleteCheckValue').click(function(){
+		
+		var chkArr = [];
+		$('input:checkbox[name="customertCodes"]:checked').each(function(){
+			chkArr.push($(this).val());
+		})
+		console.log(chkArr);
+		
+		$.ajax({
+			url: '/customerTDelete'	 
+			,type:'post'
+			,dataType:'json'
+			,data:{ 'customertCodes' : chkArr }
+		 
+	 	})
+		.done(function(data) {
+			if(data ==1){
+			alert("삭제되었습니다.");
+			window.location.href = "/customerTList";
+				
+			}
+		})
+		.fail(function( jqXHR, textStatus ) {
+			  alert( "삭제 처리가 실패되었습니다." );
+			 
+		}) 
+  	})
   });
 </script>
 </th:block>

@@ -32,6 +32,14 @@
     		<result property="store_name" column="store_name"/>
     </resultMap>
     
+    <delete id="customerTDelete" parameterType="String" statementType="PREPARED">
+    DELETE 
+    FROM 
+    	tb_customert 
+    WHERE 
+    	customert_code=#{customert_code};
+    </delete>
+    
     <select id="CustomerTList" parameterType="String" resultMap="CustomerTSelect">
 	    SELECT 
 			ct.customert_code
