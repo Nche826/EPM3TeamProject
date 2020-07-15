@@ -24,6 +24,15 @@
 		<result property="member_name" column="member_name"></result>
 	</resultMap>
 	
+	<update id="ledgerEnd" parameterType="String">
+	UPDATE tb_receive
+	SET
+		receive_remit_type='완료'
+	WHERE 
+		receive_code =#{receive_code};
+	</update>
+	
+	
 	<delete id="ledgerDelete" parameterType="String" statementType="PREPARED">
 	DELETE 
 	FROM 

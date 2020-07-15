@@ -27,7 +27,20 @@ public class LedgerController {
 	@Autowired private DeallerService deallerService;
 	@Autowired private LedgerService ledgerService;
 	
-	
+	//수납 완료 처리
+	@PostMapping("/ledgerEnd")
+	@ResponseBody
+	public int ledgerEnd(Model model, @RequestParam(value ="ledgerNames[]",required = false)String[] ledgerNames) {
+		System.out.println("ledgerNames--->"+ledgerNames);
+		System.out.println("==========수납상태 완료 처리 시작===========");
+		int re =0;
+		for(String receive_code : ledgerNames){
+			System.out.println("송금 완료 처리할 코드 :"+ receive_code);
+			re=ledgerService.ledgerEnd(receive_code);
+			System.out.println("완료 여부 ===>"+re);
+		}
+		return re;
+	}
 	
 	//수납 장부 삭제 처리
 	@PostMapping("/ledgerDelete")
