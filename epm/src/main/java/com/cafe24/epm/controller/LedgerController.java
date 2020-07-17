@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.epm.domain.Dealler;
 import com.cafe24.epm.domain.Ledger;
+import com.cafe24.epm.domain.LedgerT;
 import com.cafe24.epm.domain.Staff;
 import com.cafe24.epm.domain.Store;
 import com.cafe24.epm.service.DeallerService;
@@ -26,6 +27,7 @@ public class LedgerController {
 	@Autowired private StaffService staffService;
 	@Autowired private DeallerService deallerService;
 	@Autowired private LedgerService ledgerService;
+	
 	
 	//수납 완료 처리
 	@PostMapping("/ledgerEnd")
@@ -130,7 +132,10 @@ public class LedgerController {
 
 	//수납 장부 이력 화면
 	@GetMapping("/ledgerTList")
-	public String ledgerTList() {
+	public String ledgerTList(Model model, LedgerT ledgerT ) {
+		System.out.println("장부 이력 조회 시작");
+		List<LedgerT> ledgerList = ledgerService.ledgerTList();
+		model.addAttribute("ledgerList", ledgerList);
 		return "ledger/ledgerTList";
 	}
 }

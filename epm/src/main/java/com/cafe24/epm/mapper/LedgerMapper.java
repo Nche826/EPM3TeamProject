@@ -5,9 +5,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.cafe24.epm.domain.Ledger;
+import com.cafe24.epm.domain.LedgerT;
 
 @Mapper
 public interface LedgerMapper {
+	
+	//수납 이력 리스트 조회
+	public List<LedgerT> ledgerTList();
 	
 	//수납 상태 완료 처리
 	public int ledgerEnd(String receive_code);

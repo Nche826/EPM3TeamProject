@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cafe24.epm.domain.Ledger;
+import com.cafe24.epm.domain.LedgerT;
 import com.cafe24.epm.mapper.LedgerMapper;
 
 @Service
@@ -13,6 +14,10 @@ public class LedgerService {
 	
 	@Autowired private LedgerMapper ledgerMapper;
 	
+	//수납 이력 리스트 처리
+	public List<LedgerT> ledgerTList(){
+		return ledgerMapper.ledgerTList();
+	};
 	//수납상태 완료 처리
 	public int ledgerEnd(String receive_code) {
 		return ledgerMapper.ledgerEnd(receive_code);
