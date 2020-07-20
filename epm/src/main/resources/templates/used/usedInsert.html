@@ -5,7 +5,7 @@
 
 
 <th:block layout:fragment="customCss">
-
+	<title th:text="${title}"></title>
 </th:block>
 
 
@@ -20,9 +20,12 @@
 
 
 <th:block layout:fragment="customContents">
+
 	 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
+    
+    
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -51,76 +54,66 @@
            
            
             </div>
-            <div class="card-body" th:fragment="uInsert">
+            <div class="card-body">
+            <div th:fragment="uInsert">
             <div class="row mg-t-20 mg-b-20">
              <div class="col-6" style="padding-right:10px">      
+              
               <div class="form-group">
-                <label for="inputName">매장</label>
-                <input type="text" id="inputName" class="form-control" value="epm 본점">
-              </div>
+	                <label for="inputStatus">입고직원</label>
+	                <select class="form-control custom-select" name="usedinStaff">                  
+	                  <option selected value="staff_1">직원1</option>
+	                  <option value="staff_2">직원2</option>	                                
+	                </select>
+	              </div>
+             <div class="form-group">
+	                <label for="inputName">모델명</label>	                
+	                <input type="text" id="deviceModel" class="form-control" name="deviceModel" value="model1" >
+	              </div>
               <div class="form-group">
-                <label for="inputStatus">입고직원</label>
-                <select class="form-control custom-select">                  
-                  <option selected>직원1</option>
-                  <option>직원2</option>
-                  <option>직원3</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="inputName">입고일</label>
-                <input type="date" id="inputName" class="form-control" >
-              </div>             
-              <div class="form-group">
-                <label for="inputName">모델명</label>
-                <input type="text" id="inputName" class="form-control" >
-              </div>
-              <div class="form-group">
-                <label for="inputStatus">종류</label>
-                <select class="form-control custom-select">                  
-                  <option selected>휴대폰</option>
-                  <option>태블릿</option>             
+	                <label for="inputStatus">종류</label>
+	                <select class="form-control custom-select" name="deviceType">                  
+	                  <option selected value="type1">휴대폰</option>
+	                  <option value="type2">태블릿</option>             
+	                </select>
+	              </div>
+	              <div class="form-group">
+                <label for="inputStatus">통신망</label>
+                <select class="form-control custom-select" name="usedinTelecom">                  
+                  <option selected>전체</option>
+                  <option value="SKT">SKT</option>
+                  <option value="KT">KT</option>
+                  <option value="LG U+">LG U+</option>
                 </select>
               </div>
               </div>
               <div class="col-6" style="padding-right:10px"> 
-               <div class="form-group">
-                <label for="inputStatus">통신망</label>
-                <select class="form-control custom-select">                  
-                  <option selected>전체</option>
-                  <option>SKT</option>
-                  <option>KT</option>
-                  <option>LGT</option>
-                </select>
-              </div>
+               
               <div class="form-group">
-                <label for="inputName">색상</label>
-                <input type="text" id="inputName" class="form-control" >
-              </div>
-              <div class="form-group">
-                <label for="inputName">입고가</label>
-                <input type="text" id="inputName" class="form-control" >            
-              </div>
-              <div class="form-group">
-                <label for="inputName">일련번호</label>
-                <input type="text" id="inputName" class="form-control" >            
-              </div>
-              <div class="form-group">
-                <label for="inputName">비고</label>
-                <input type="text" id="inputName" class="form-control" >            
-              </div>
+	                <label for="inputName">색상</label>
+	                <input type="text" id="deviceColor" class="form-control" name="deviceColor" value="color1">
+	              </div>
+	              <div class="form-group">
+	                <label for="inputName">입고가</label>
+	                <input type="text" id="devicePrice" class="form-control" name="usedinPrice" value="1000000">            
+	              </div>
+	              <div class="form-group">
+	                <label for="inputName">일련번호</label>
+	                <input type="text" id="deviceSerial" class="form-control" name="usedinSerial" value="serial1" >            
+	              </div>
+	              <div class="form-group">
+	                <label for="inputName">비고</label>
+	                <input type="text" id="deviceMemo" class="form-control" name="usedinMemo" value="memo1"> 
+	              </div> 	                          
+	              </div>
               </div>
              </div>
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-                <div class="row">
-        <div class="col-12">
-          <a href="#" class="btn btn-secondary">Cancel</a>
-          <input type="submit" value="Save Changes" class="btn btn-success">
+
         </div>
-      </div>
         </div>
-        
       </div>
 
     </section>

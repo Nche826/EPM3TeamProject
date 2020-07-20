@@ -336,7 +336,7 @@ INSERT
 													on
 														i.dinfo_devicein = d.devicein_code
 													where
-														devicein_serial = 'serial1') AS dcode)
+														devicein_serial = #{deleteSerial}) as dcode)
 		</delete>							
 		
 	

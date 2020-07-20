@@ -22,22 +22,7 @@
 <th:block layout:fragment="customContents">
 	 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>중고 수정</h1>
-          </div>
-	        <div class="col-sm-6">
-	   			<ol class="breadcrumb float-sm-right">
-				　	<a href="/usedList"  class="btn btn-info btn-sm pd-x-5 pd-y-0"><i class="far fa-file-alt" ></i> 중고 목록</a>							
-				</ol>
-			</div>     
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
-
+  
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -49,65 +34,61 @@
 
            
             </div>
-            <div class="card-body" th:fragment="uUpdate">
-            <div class="row mg-t-20 mg-b-20" align="left">
+            <div class="card-body">
+            <div class="row mg-t-20 mg-b-20" th:fragment="uUpdate">
              <div class="col-6" style="padding-right:10px">     
-              <div class="form-group">
-                <label for="inputName">매장</label>
-                <input type="text" id="inputName" class="form-control" value="epm 본점">
-              </div>
+              
               <div class="form-group">
                 <label for="inputStatus">입고직원</label>
-                <select class="form-control custom-select">                  
-                  <option selected>직원1</option>
-                  <option>직원2</option>
-                  <option>직원3</option>
+                <select class="form-control custom-select" name="uupdateStaff" >                  
+                  <option value="staff_1">직원1</option>
+                  <option selected value="staff_2">직원2</option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="inputName">입고일</label>
-                <input type="date" id="inputName" class="form-control" >
+                <input type="date"  class="form-control" name="uupdateDate" id="updatedate" readonly>
               </div>             
               <div class="form-group">
                 <label for="inputName">모델명</label>
-                <input type="text" id="inputName" class="form-control" >
+                <input type="text"  class="form-control" name="uupdateModel" value="model2" >
               </div>
               <div class="form-group">
                 <label for="inputStatus">종류</label>
-                <select class="form-control custom-select">                  
-                  <option selected>휴대폰</option>
-                  <option>태블릿</option>             
+                <select class="form-control custom-select" name="uupdateType" >                  
+                  <option value="type1">휴대폰</option>
+                  <option value="type2" selected>태블릿</option>             
                 </select>
               </div>
               </div>
              <div class="col-6" style="padding-right:10px">     
                <div class="form-group">
                 <label for="inputStatus">통신망</label>
-                <select class="form-control custom-select">                  
+                <select class="form-control custom-select" name="uupdateTelecom">                  
                   <option selected>전체</option>
-                  <option>SKT</option>
-                  <option>KT</option>
-                  <option>LGT</option>
+                  <option value="SKT">SKT</option>
+                  <option value="KT">KT</option>
+                  <option value="LG U+">LG U+</option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="inputName">색상</label>
-                <input type="text" id="inputName" class="form-control" >
+                <input type="text"  class="form-control" name="uupdateColor" value="color2" >
               </div>
               <div class="form-group">
                 <label for="inputName">입고가</label>
-                <input type="text" id="inputName" class="form-control" >            
+                <input type="text"  class="form-control" name="uupdatePrice" value="100000">            
               </div>
               <div class="form-group">
                 <label for="inputName">일련번호</label>
-                <input type="text" id="inputName" class="form-control" >            
+                <input type="text"  class="form-control" name="uupdateSerial" id="updateserial" readonly>            
               </div>
               <div class="form-group">
                 <label for="inputName">비고</label>
-                <input type="text" id="inputName" class="form-control" >            
+                <input type="text"  class="form-control" name="uupdateMemo" value="memo2">            
               </div>
               </div>
-             </div>
+             
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
@@ -120,7 +101,8 @@
         </div>
         
       </div>
-
+	</div>
+	</div>
     </section>
     <!-- /.content -->
   </div>
