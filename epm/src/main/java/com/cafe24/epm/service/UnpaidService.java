@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cafe24.epm.domain.Unpaid;
+import com.cafe24.epm.domain.UnpaidT;
 import com.cafe24.epm.mapper.UnpaidMapper;
 
 @Service
@@ -42,5 +43,9 @@ public class UnpaidService {
 	//처리업무삭제
 	public int unpaidDelete (String unpaidCode) {
 		return unpaidMapper.unpaidDelete(unpaidCode);
+	}
+
+	public List<UnpaidT> unpaidTList() {
+		return unpaidMapper.unpaidTList();
 	}
 }

@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class CompanyBoardContent {
 	private String companyCode;
+	private String memberId;
 	private String staffCode;
 	private String staffName;
 	private String companyCount;
@@ -19,6 +20,12 @@ public class CompanyBoardContent {
 	}
 	public void setCompanyCode(String companyCode) {
 		this.companyCode = companyCode;
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	public String getStaffCode() {
 		return staffCode;
@@ -85,6 +92,8 @@ public class CompanyBoardContent {
 		StringBuilder builder = new StringBuilder();
 		builder.append("CompanyBoardContent [companyCode=");
 		builder.append(companyCode);
+		builder.append(", memberId=");
+		builder.append(memberId);
 		builder.append(", staffCode=");
 		builder.append(staffCode);
 		builder.append(", staffName=");
@@ -108,7 +117,4 @@ public class CompanyBoardContent {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
-
 }

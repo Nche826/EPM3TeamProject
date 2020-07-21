@@ -23,6 +23,49 @@
 			<result property="unpaidRegMemberName" column="unpaid_reg_member_name"/>
 			<result property="unpaidRegStoreName" column="unpaid_Reg_Store_Name"/>
 		</resultMap>
+		
+		<resultMap type="UnpaidT" id="unpaidTselect">
+			<result property="unpaidtCode" column="unpaidt_code"></result>
+			<result property="unpaidtRegStaffCode" column="unpaidt_reg_staff_code"></result>
+			<result property="storeName" column="store_name"></result>
+			<result property="staffName" column="staff_name"></result>
+			<result property="unpaidtPart" column="unpaidt_part"></result>
+			<result property="customerName" column="customer_name"></result>
+			<result property="customerTel" column="customer_tel"></result>
+			<result property="unpaidtDesc" column="unpaidt_desc"></result>
+			<result property="unpaidtRegDate" column="unpaidt_reg_date"></result>
+			<result property="unpaidtMemo" column="unpaidt_memo"></result>
+		</resultMap>
+		
+		<!-- 처리업무 이력 리스트 -->
+		<select id="unpaidTList" parameterType="UnpaidT" resultMap="unpaidTselect" >
+			SELECT
+				u.unpaidt_code AS 'unpaidt_code'
+				, u.unpaidt_reg_staff_code AS 'unpaidt_reg_staff_code'
+				, sr.store_name AS 'store_name'
+				, m.member_name AS 'staff_name'
+				, u.unpaidt_part AS 'unpaidt_part'
+				, u.customer_name AS 'customer_name'
+				, u.customer_tel AS 'customer_tel'
+				, u.unpaidt_desc AS 'unpaidt_desc'
+				, u.unpaidt_reg_date AS 'unpaidt_reg_date'
+				, u.unpaidt_memo AS 'unpaidt_memo'
+			FROM
+				tb_unpaidt AS u
+				join
+				tb_staff AS s
+				on
+				u.unpaidt_reg_staff_code = s.staff_code
+				join
+				tb_member AS m
+				on
+				s.member_id = m.member_id
+				join
+				tb_store AS sr
+				on
+				s.store_code = sr.store_code
+		</select>
+		
 		<!-- 처리업무삭제 -->
 		<delete id="unpaidDelete" parameterType="String">
 			DELETE

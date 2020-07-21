@@ -3,11 +3,18 @@ package com.cafe24.epm.domain;
 public class CompanyBoardComment {
 	private String companyCCode;
 	private String companyCode;
+	private String memberId;
 	private String staffCode;
 	private String staffName;
 	private String companyCDesc;
 	private String companyCDate;
 	
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 	public String getCompanyCCode() {
 		return companyCCode;
 	}
@@ -44,7 +51,6 @@ public class CompanyBoardComment {
 	public void setCompanyCDate(String companyCDate) {
 		this.companyCDate = companyCDate;
 	}
-	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -52,6 +58,8 @@ public class CompanyBoardComment {
 		builder.append(companyCCode);
 		builder.append(", companyCode=");
 		builder.append(companyCode);
+		builder.append(", memberId=");
+		builder.append(memberId);
 		builder.append(", staffCode=");
 		builder.append(staffCode);
 		builder.append(", staffName=");
@@ -63,5 +71,6 @@ public class CompanyBoardComment {
 		builder.append("]");
 		return builder.toString();
 	}
+	
 	
 }

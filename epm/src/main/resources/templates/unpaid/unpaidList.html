@@ -452,9 +452,10 @@
 	<script type="text/javascript">
 		$(function () {
 			//세션에서 로그인 Id값 받아오기
-			$('#unpaidProMemberName').val('#loginId')
+			var loginName = $('#loginName').html()
+			$('#modalUnpaidDetailOverForm').children('#unpaidProMemberName').val(loginName);
 			//선택한 매장 값 받아오기
-			$('#unpaidProStoreName').val('삼삼3호점')
+			$('#modalUnpaidDetailOverForm').children('#unpaidProStoreName').val(sessionStorage.getItem('storeSelect'));
 			
 						
 			//미결정보삭제처리
@@ -494,14 +495,14 @@
 			
 			//미결완료처리
 	    	 $('#modalUnpaidDetailOver').click(function(){
-	    		 $('#modalUnpaidDetailOverForm').submit()
+	    		$('#modalUnpaidDetailOverForm').submit();
 	    	 });
 			
 			//미결 상세보기 modal 열릴 때 값 받아오기, 미결완료버튼 조건처리
 			$('.modalUnpaidDetailButton').click(function(){
 				var unpaidCode = $(this).attr('code');
 				$('#modalUnpaidDetailOverForm').children('#unpaidCode').val(unpaidCode);
-				 $('#modalUnpaidDetailDeleteForm').children('input[name=unpaidCode]').val(unpaidCode)
+				$('#modalUnpaidDetailDeleteForm').children('input[name=unpaidCode]').val(unpaidCode);
 				
 				//미결 상세보기 1개 select
 				var request1 = $.ajax({

@@ -64,8 +64,8 @@
 			                  		<a href="/companyListContents"><button type="button" class="btn btn-sm btn-secondary">목록</button></a>
 			                   </div>
 			                   <div style="float: right">
-				                  <a th:href="@{/companyUpdateContents(company_code=${bd.companyCode})}"><button type="button" class="btn btn-sm btn-secondary" >수정</button></a>
-				                  <a th:href="@{/companyDeleteContents(company_code=${bd.companyCode})}"><button type="button" class="btn btn-sm btn-secondary">삭제</button></a>
+				                  <a th:if="${bd.memberId == session.SID}" th:href="@{/companyUpdateContents(company_code=${bd.companyCode})}"><button type="button" class="btn btn-sm btn-secondary" >수정</button></a>
+				                  <a th:if="${bd.memberId == session.SID}" th:href="@{/companyDeleteContents(company_code=${bd.companyCode})}"><button type="button" class="btn btn-sm btn-secondary">삭제</button></a>
 			                  </div>
 			                </div>
 			            </div>
@@ -96,8 +96,8 @@
 									<div th:id="${cl.companyCCode}">
 						                <p class="card-text" th:text="${cl.companyCDesc}" >댓글내용</p>
 										<div style="float: right" class="replyButtons">
-							                  <button type="button" class="btn btn-sm btn-secondary replyModifyButton" th:data-id="${cl.companyCCode}">수정</button>
-							                  <a th:href="@{/companyDeleteComment(company_c_code=${cl.companyCCode})}"><button type="button" class="btn btn-sm btn-secondary">삭제</button></a>
+							                  <button th:if="${cl.memberId == session.SID}" type="button" class="btn btn-sm btn-secondary replyModifyButton" th:data-id="${cl.companyCCode}">수정</button>
+							                  <a th:if="${cl.memberId == session.SID}" th:href="@{/companyDeleteComment(company_c_code=${cl.companyCCode})}"><button type="button" class="btn btn-sm btn-secondary">삭제</button></a>
 						                </div>
 					                </div>
 					              </div>
@@ -142,7 +142,7 @@
 			cCode = cCode.substr(cCode.indexOf('=')+1);
 			$('#companyCode').val(cCode);
 			
-			var sCode = $('#LoginStaffCode').val();
+			var sCode = $('.loginStaffCode').val();
 			$('#staffCode').val(sCode);
 			
 			$('#replyButton').click(function(){
