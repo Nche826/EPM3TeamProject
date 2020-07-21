@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cafe24.epm.domain.Customer;
+import com.cafe24.epm.domain.CustomerT;
 import com.cafe24.epm.domain.Staff;
 import com.cafe24.epm.mapper.CustomerMapper;
 
@@ -15,6 +16,17 @@ import com.cafe24.epm.mapper.CustomerMapper;
 public class CustomerService {
 
 	@Autowired private CustomerMapper customerMapper;
+	
+	//고객 이력 삭제 처리
+	public int customerTDelete(String customertCodes) {
+		return customerMapper.customerTDelete(customertCodes);
+	}
+	
+	
+	//고객이력화면처리
+	public List<CustomerT> CustomerTList(){
+		return customerMapper.CustomerTList();
+	}
 	
 	//고객삭제처리
 	public int customerDelete(String customerCodes) {

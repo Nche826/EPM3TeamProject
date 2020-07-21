@@ -55,85 +55,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr th:each = " l : ${ledgerList}">
                   <td><input type="checkbox" ></td>
-                  <td>삼성1호점</td>
-                  <td>김수지</td>
-                  <td>수납장부 송금완료</td>
-                  <td>수납장부 [고객수납/솜뭉치] 송금완료하였습니다.</td>
-                  <td>2020-06-10</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" ></td>
-                  <td>삼성1호점</td>
-                  <td>김수지</td>
-                  <td>수납장부 송금완료</td>
-                  <td>수납장부 [고객수납/솜뭉치] 송금완료하였습니다.</td>
-                  <td>2020-06-10</td>
-                </tr>
-                <tr>
-                <td><input type="checkbox" ></td>
-                  <td>삼성1호점</td>
-                  <td>김수지</td>
-                  <td>수납장부 송금완료</td>
-                  <td>수납장부 [고객수납/솜뭉치] 송금완료하였습니다.</td>
-                  <td>2020-06-10</td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>삼성1호점</td>
-                  <td>김수지</td>
-                  <td>수납장부 송금완료</td>
-                  <td>수납장부 [고객수납/솜뭉치] 송금완료하였습니다.</td>
-                  <td>2020-06-10</td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>삼성1호점</td>
-                  <td>김수지</td>
-                  <td>수납장부 송금완료</td>
-                  <td>수납장부 [고객수납/솜뭉치] 송금완료하였습니다.</td>
-                  <td>2020-06-10</td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>삼성1호점</td>
-                  <td>김수지</td>
-                  <td>수납장부 송금완료</td>
-                  <td>수납장부 [고객수납/솜뭉치] 송금완료하였습니다.</td>
-                  <td>2020-06-10</td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>삼성1호점</td>
-                  <td>김수지</td>
-                  <td>수납장부 송금완료</td>
-                  <td>수납장부 [고객수납/솜뭉치] 송금완료하였습니다.</td>
-                  <td>2020-06-10</td>
-                </tr>
-                <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>삼성1호점</td>
-                  <td>김수지</td>
-                  <td>수납장부 송금완료</td>
-                  <td>수납장부 [고객수납/솜뭉치] 송금완료하였습니다.</td>
-                  <td>2020-06-10</td>
-                </tr>
-               <tr>
-                 <td><input type="checkbox" ></td>
-                  <td>삼성1호점</td>
-                  <td>김수지</td>
-                  <td>수납장부 송금완료</td>
-                  <td>수납장부 [고객수납/솜뭉치] 송금완료하였습니다.</td>
-                  <td>2020-06-10</td>
-                </tr>
-                 <tr>
-                <td><input type="checkbox" ></td>
-                  <td>삼성1호점</td>
-                  <td>김수지</td>
-                  <td>수납장부 송금완료</td>
-                  <td>수납장부 [고객수납/솜뭉치] 송금완료하였습니다.</td>
-                  <td>2020-06-10</td>
+                  <td th:text="${l.store_name}"></td>
+                  <td th:text="${l.member_name}"></td>
+                  <td th:text="${l.ledger_status}"></td>
+                  <td th:text="|수납장부 [${l.ledger_type}/${l.ledger_name}] ${l.ledger_status}하였습니다.|"></td>
+                  <td th:text="${l.ledger_reg_date}"></td>
                 </tr>
                 </tbody>
                 <tfoot>

@@ -204,12 +204,13 @@
                   <tbody>
                     <tr th:each=" l,i : ${ledgerList}">
                       <td><input type="checkbox" name="ledgerNames" id="ledgerNames" th:value="${l.receive_code}"></td>
-                      <td th:text="${i.count}">1</td>
+                      <td th:text="${i.count}"></td>
                       <td th:text="${l.receive_customer}"></td>
                       <td th:text="${l.receive_custel}"></td>
                       <td th:text="${l.receive_type}"></td>
                       <td th:text="${l.receive_price}"></td>
-                      <td th:text="${l.receive_remit_type}"></td>
+                      <td th:text="${l.receive_remit_type}" th:if="${l.receive_remit_type}=='처리중'" style="color: red;"></td>
+                      <td th:text="${l.receive_remit_type}" th:if="${l.receive_remit_type}=='완료'" style="color:blue;"></td>
                       <td th:text="${l.dealler_name}"></td>
                       <td th:text="${l.store_name}"></td>
                       <td th:text="${l.member_name}"></td>
@@ -247,9 +248,35 @@
         </div>
 			
 			
+		<div class= "btn"style="width: 130px;">
+          	<button type="button" id="ledgerDelBtn" class="btn btn-block btn-danger btn-sm" data-toggle="modal" data-target="#ledgerEnd">송금완료처리</button>
+		</div>
 		<div class= "btn"style="width: 100px;">
           	<button type="button" id="ledgerDelBtn" class="btn btn-block btn-secondary btn-sm" data-toggle="modal" data-target="#modal-sm">삭제</button>
 		</div>
+			<div class="modal fade" id="ledgerEnd">
+		        <div class="modal-dialog modal-sm">
+		          <div class="modal-content bg-danger">
+		            <div class="modal-header">
+		              <h4 class="modal-title">안내</h4>
+		              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                <span aria-hidden="true">&times;</span>
+		              </button>
+		            </div>
+		            <div class="modal-body">
+		              <p>송금 처리 완료 하시겠습니까?</p>
+		              <p style="font-size: small;">(주의)!장부 처리가 완료로 변경됩니다.</p>
+		            </div>
+		            <div class="modal-footer justify-content-between">
+		              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+		              <button type="button" class="btn btn-outline-light ledgerCheckValue">완료하기</button>
+		            </div>
+		          </div>
+		          <!-- /.modal-content -->
+		        </div>
+		        <!-- /.modal-dialog -->
+    		 </div>
+    		 <!-- /.modal 송금완료처리 모달창 끝 -->
 			<div class="modal fade" id="modal-sm">
 		        <div class="modal-dialog modal-sm">
 		          <div class="modal-content bg-secondary">
@@ -272,7 +299,7 @@
 		        </div>
 		        <!-- /.modal-dialog -->
     		 </div>
-    		 <!-- /.modal -->
+    		 <!-- /.modal 2 삭제버튼 끝 -->
 		</div>	<!-- /row -->
       </div><!-- /.container-fluid -->
     </section>
@@ -283,6 +310,7 @@
    /* 날짜 스크립트 */
    //Date range picker
     $('#reservation').daterangepicker();
+   
    
    //매장 선택시 매장 내 해당 직원 리스트 셀렉트박스 출력 처리 
 	var result = false;
@@ -338,11 +366,15 @@
 		  console.log($(reReType).is(':checked'));
 		}); 
 	
-   //리스트 내 체크 선택시 value값 배열로 넘기고 삭제 처리  
+   
+   
+	
+	
    
    	$('input:checkbox[name="ledgerNames"]').click(function(){
    		console.log($(this).val());
    	});
+	//리스트 내 체크 선택시 value값 배열로 넘기고 삭제 처리  
    	$('.deleteCheckValue').click(function(){
 		var chkArr = [];
 		$('input:checkbox[name="ledgerNames"]:checked').each(function(){
@@ -371,6 +403,36 @@
 		}); 
 	});
    
+	//리스트 체크시 송금처리완료 처리하기
+	$('.ledgerCheckValue').click(function(){
+		var chkList = [];
+		$('input:checkbox[name="ledgerNames"]:checked').each(function(){
+			chkList.push($(this).val());
+		})
+		console.log(chkList);
+		
+		$.ajax({
+			url: '/ledgerEnd'	 
+			,type:'post'
+			,dataType:'json'
+			,data:{ 'ledgerNames' : chkList }
+		 
+	 	})
+		.done(function(data) {
+			if(data ==1){
+			alert("변경되었습니다.");
+			window.location.href = "/ledgerList";
+				
+			}
+		})
+			 
+		.fail(function( jqXHR, textStatus ) {
+			  alert( "변경 처리가 실패되었습니다." );
+			 
+		}); 
+	});
+	
+	
    //금액 숫자 입력시 자동으로 컴마,입력 하게 하기
    //콤마찍기
 	function comma(str) {

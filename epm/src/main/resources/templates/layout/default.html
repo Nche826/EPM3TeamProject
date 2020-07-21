@@ -28,16 +28,27 @@
 		<script>
 		  $.widget.bridge('uibutton', $.ui.button)
 		</script>
+		<script type="text/javascript" th:inline="javascript">
+			/*<![CDATA[*/
+			var sessionList = /*[[ ${session.SSTAFF} ]]*/;	
+			/*]]*/
+			
+		</script>
 		
 		<!-- 공통 Script -->
 		<script type="text/javascript">
 			$(document).ready(
 	  			$(function(){
+	  				/* 세션값 확인 log 시작 */
+					console.log(decodeURI(location.href));			
+					console.log(JSON.stringify(sessionList));
+					/* 세션값 확인 log 끝 */
 				<!-- 모바일 메뉴닫기 -->
 					$( "#sidebar-overlay" ).on('click', function(){
 						$(".hamburger").trigger('click');
 					});
 	  			<!-- 모바일 메뉴닫기 끝 -->
+	  			
 	  			<!-- 프로필 이미지 받아오기 -->
 					$('#profileButton').click(function(){
 						
@@ -68,6 +79,7 @@
 						}
 					});	
 	  			<!-- 프로필 이미지 받아오기 끝 -->
+	  			
 	  			<!-- 매장선택값 세션에 저장하기 -->
 	  				$('#storeSelect').change(function(){
 	  					var storeSelect = $('#storeSelect').val();
@@ -75,6 +87,7 @@
 	  					sessionStorage.setItem('storeSelect',storeSelect);
 	  				});
 	  			<!-- 매장선택값 세션에 저장하기 끝 -->
+	  			
 	  			<!-- 매장선택값 세션에서 불러오기 -->
 	  				$('#storeSelect').val(sessionStorage.getItem('storeSelect')).prop('selected',true);
 	  			<!-- 매장선택값 세션에서 불러오기 끝 -->

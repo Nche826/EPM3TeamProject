@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.epm.domain.Dealler;
 import com.cafe24.epm.domain.Ledger;
+import com.cafe24.epm.domain.LedgerT;
 import com.cafe24.epm.domain.Staff;
 import com.cafe24.epm.domain.Store;
 import com.cafe24.epm.service.DeallerService;
@@ -28,6 +29,20 @@ public class LedgerController {
 	@Autowired private LedgerService ledgerService;
 	
 	
+	//수납 완료 처리
+	@PostMapping("/ledgerEnd")
+	@ResponseBody
+	public int ledgerEnd(Model model, @RequestParam(value ="ledgerNames[]",required = false)String[] ledgerNames) {
+		System.out.println("ledgerNames--->"+ledgerNames);
+		System.out.println("==========수납상태 완료 처리 시작===========");
+		int re =0;
+		for(String receive_code : ledgerNames){
+			System.out.println("송금 완료 처리할 코드 :"+ receive_code);
+			re=ledgerService.ledgerEnd(receive_code);
+			System.out.println("완료 여부 ===>"+re);
+		}
+		return re;
+	}
 	
 	//수납 장부 삭제 처리
 	@PostMapping("/ledgerDelete")
@@ -117,7 +132,10 @@ public class LedgerController {
 
 	//수납 장부 이력 화면
 	@GetMapping("/ledgerTList")
-	public String ledgerTList() {
+	public String ledgerTList(Model model, LedgerT ledgerT ) {
+		System.out.println("장부 이력 조회 시작");
+		List<LedgerT> ledgerList = ledgerService.ledgerTList();
+		model.addAttribute("ledgerList", ledgerList);
 		return "ledger/ledgerTList";
 	}
 }
