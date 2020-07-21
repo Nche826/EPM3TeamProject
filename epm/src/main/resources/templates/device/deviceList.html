@@ -38,8 +38,8 @@
           <div class="col-sm-6">
             <h1>단말기 관리</h1>
           </div>
-          <div class="col-sm-6 breadcrumb float-sm-right">
-   			<ol class="breadcrumb float-sm-right">	   				　	
+          <div class="col-sm-6" align="right">
+   			<ol class="breadcrumb float-sm-right" >	   				　	
 				<button type="button" class="btn btn-info btn-sm pd-x-5 pd-y-0" data-toggle="modal" data-target="#modal-lg"> 단말기 입고 </button>			
 			</ol>
 		</div>   
@@ -56,12 +56,8 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">단말기 입고</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            
+              <h4 class="modal-title">단말기 입고</h4>              
+            </div>            
 			 <form action ="/deviceInsert" method="post">
             <div class="modal-body">
                             
@@ -90,48 +86,58 @@
                 <h3 class="card-title">휴대폰/태블릿 등의단말기를 관리하실 수 있습니다</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
-              
+           <form action ="/searchList" method="post">              
+              <div class="card-body">              
                 <table id="example2" class="table table-bordered table-striped">
                   <thead>
-                  <form action ="/searchList" method="get|post">
-                  <div class="form-inline">
-                  <div class="pull-left mg-b-10 mg-r-10 input-group input-group-sm wd-250">
-					<input type="text" id="searchDateStart" name="searchDateStart" class="form-control form-control-sm fc-datepicker hasDatepicker" maxlength="10" placeholder="YYYY-MM-DD"> 
+                  <div class="form-inline">                      
+                  <div class="mg-b-10 mg-r-10 input-group input-group-sm wd-250">
+					<input type="text" id="searchDateStart" name="searchDateStart" class="form-control" maxlength="10" placeholder="YYYY-MM-DD" > 
 					-
-					<input type="text" id="searchDateEnd" name="searchDateEnd" class="form-control form-control-sm fc-datepicker hasDatepicker" maxlength="10" placeholder="YYYY-MM-DD">
-				  </div> 
-				  
-				  <div class="pull-left mg-b-10 mg-r-10" style="margin: 5px;">
-					<input type="button" class="btn btn-secondary btn-sm" onclick="inputDateDay(0)" value="오늘">
-					<input type="button" class="btn btn-secondary btn-sm" onclick="inputDateDay(-7)" value="1주일">
-					<input type="button" class="btn btn-secondary btn-sm" onclick="inputDateMon(0)" value="당월">
-					<input type="button" class="btn btn-secondary btn-sm" onclick="inputDateMon(-1)" value="전월">
-					<input type="button" class="btn btn-secondary btn-sm" onclick="inputDateMon(-2)" value="전전월">
-					<input type="button" class="btn btn-secondary btn-sm" onclick="inputDateClean()" value="X">
-				</div>			  
+					<input type="text" id="searchDateEnd" name="searchDateEnd" class="form-control" maxlength="10" placeholder="YYYY-MM-DD" >
+				  </div>	
+				  <div class="mg-b-10 mg-r-10">
+					<div class='srch_area'>
+					<div class="form-inline">
+					  <span>
+					    <input type="button" id="r_today" name="today" class="btn btn-secondary btn-sm" value="오늘" style="margin: 5px;">
+					    <label for="r1" ></label>
+					  </span>
+					  <span>
+					    <input type="button" id="r_week" name="week" class="btn btn-secondary btn-sm" value="1주일" style="margin: 5px;">
+					    <label for="r2"></label>
+					  </span>
+					  <span>
+					    <input type="button" id="r_month" name="month" class="btn btn-secondary btn-sm" value="1개월" style="margin: 5px;">
+					    <label for="r3"></label>
+					  </span>
+					</div>
+					</div>	
+				</div>	
+					  
 				           
 						</div>	
+						
 					<div class="form-inline">
-					                  
+					         
 							<select id="searchStatus" name="searchStatus" class="form-control" style="margin: 5px;" >
-	                          <option>보유</option>
-	                          <option value="신규">신규</option>
-	                          <option value="교품">교품</option>
-	                          <option value="status3">철회</option>
-	                          <option value="">----</option>
-	                          <option value="status4">개통</option>
-	                          <option value="status5">판매</option>
-	                          <option value="status6">반품</option>
+	                          <option value="" >보유</option>
+	                          <option id="searchStatus" value="신규">신규</option>
+	                          <option id="searchStatus" value="교품">교품</option>
+	                          <option id="searchStatus" value="status3">철회</option>
+	                          <option id="searchStatus" value="">----</option>
+	                          <option id="searchStatus" value="status4">개통</option>
+	                          <option id="searchStatus" value="status5">판매</option>
+	                          <option id="searchStatus" value="status6">반품</option>
 	                       
 	                        </select>
 							<select id="searchDealler" name="searchDealler" class="form-control" style="margin: 5px;">
-	                          <option>거래처</option>
+	                          <option value="">거래처</option>
 	                          <option value="dealler_1">거래처1</option>
 	                          <option value="dealler_2">거래처2</option>
 	                        </select>	                        
 							<select id="searchStaff" name="searchStaff" class="form-control" style="margin: 5px;">
-	                          <option>직원</option>
+	                          <option value="">직원</option>
 	                          <option value="staff_1">직원1</option>
 	                          <option value="staff_2">직원2</option>
 	                        
@@ -141,17 +147,11 @@
 								<input id="searchSerial" name="searchSerial" type="search" class="form-control form-control-sm" placeholder="일련번호" aria-controls="example1">
 							</div>
 						
-							<button type="submit" class="form-control btn btn-block btn-secondary" style="margin: 5px;">검색</button>	
-							</form>
+							<button type="submit" id="testbtn" class="form-control btn btn-block btn-secondary" style="margin: 5px;">검색</button>	
+			
 							
-							<div class="dataTables_length" id="example1_length" style="margin: 10px;">							
-									<select name="example1_length" aria-controls="example1" class="custom-select custom-select-sm form-control form-control-sm" style="align: bottom;">
-										<option value="10">목록 10개씩 보기</option>
-										<option value="25">목록 25개씩 보기</option>
-										<option value="50">목록 50개씩 보기</option>
-										<option value="100">목록 100개씩 보기</option>
-									</select>											
-							</div>
+																		
+					
 							</div>
 							
 					
@@ -174,9 +174,10 @@
                       
                 </tr>
                   </thead>
-                  <tbody > 
+                 
+                  <tbody> 
                                   
-                 <tr th:each="d : ${deviceList}" >                 
+                 <tr th:each="d : ${deviceList}" style="align:center">                 
 					<td	th:text="${d.deviceinStatus}"></td>	
 					<td th:text="${d.deviceinDate}"></td>	
 					<td th:text="${d.deviceinDealler}"></td>	
@@ -191,7 +192,7 @@
 		            <td th:text="${d.infoMethod}"></td>	
 					<td th:text="${d.deviceinMemo}"></td>
 					<td th:text="${d.deviceinRegDate}"></td>									
-					<td>
+					<td align="center">
 	                    <button type="button" class="btn btn-info btn-sm pd-x-5 pd-y-0" id="infobtn" data-toggle="modal" data-target="#modal-Info"><i class="icon ion-ios-browsers"></i></button>
 	       					                                       
                     
@@ -201,13 +202,11 @@
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title col-sm-6">단말기 정보</h4>
-              <div class="col-sm-6" >
-					<button id="updatebtn" class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" data-toggle="modal" data-target="#modal-Update"><i class="fa fa-wrench"></i></button> 					
-					<button id="deletebtn" class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" data-toggle="modal" data-target="#modal-Delete"><i class="fa fa-trash"></i></button>
+              <div class="col-sm-6" align="right" >
+					<button type="button" id="updatebtn" class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" data-toggle="modal" data-target="#modal-Update"><i class="fa fa-wrench"></i></button> 					
+					<button type="button" id="deletebtn" class="btn btn-info btn-sm pd-x-5 pd-y-0" style="margin:5px" data-toggle="modal" data-target="#modal-Delete"><i class="fa fa-trash"></i></button>
 					</div> 
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
+              
             </div>
             <div class="modal-body">
                             
@@ -224,14 +223,19 @@
         <!-- /.modal-dialog -->
       </div> 
                     <!-- /.modal -->
-      <div class="modal fade" id="modal-Update" style="display: none;" aria-hidden="true">
+         
+                    </td>                   
+                  </tr>  
+                 </tbody>
+                </table>
+              </div>
+              </form>
+              <div class="modal fade" id="modal-Update" style="display: none;" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title col-sm-6">단말기 정보 수정</h4>              
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
+              
             </div>
             <form action ="/deviceUpdate" method="post">
             <div class="modal-body">            
@@ -273,14 +277,7 @@
           <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
-      </div>    
-                    
-                    </td>                   
-                  </tr>  
-                   
-                 </tbody>
-                </table>
-              </div>
+      </div> 
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -310,8 +307,6 @@
 <script src="/plugins/toastr/toastr.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/dist/js/demo.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="/dist/js/demo.js"></script>
 <!-- page script -->
 <script>
   $(function () {
@@ -320,12 +315,12 @@
       "autoWidth": false,
       "aaSorting":[],
       "aoColumnDefs":[
-         {'bSortable': false, 'aTargets':[0,2,3,4,5,6,7,9,10,11,12]}
+         {'bSortable': false, 'aTargets':[0,2,3,4,5,6,7,9,10,11,12,14]}
       ]
     });
     $('#example2').DataTable({
       "paging": true,
-      "lengthChange": false,
+      "lengthChange": true,
       "searching": false,
       "ordering": true,
       "info": true,
@@ -333,7 +328,7 @@
       "responsive": true,
       "aaSorting":[],
       "aoColumnDefs":[
-         {'bSortable': false, 'aTargets':[0,2,3,4,5,6,7,9,10,11,12]}
+         {'bSortable': false, 'aTargets':[0,2,3,4,5,6,7,9,10,11,12,14]}
       ]
       });    
      $(document).on('click','#infobtn',function(){
@@ -404,6 +399,50 @@
     	 
     	 console.log($('#deleteserial').val() + "<<#deleteserial");
     	});
+     
+     $('#testbtn').click(function(){
+    	 var sstatus = $('#searchStatus').val()
+    	 console.log(sstatus);
+     })
+
+     /* 날짜 객체 받아서 문자열로 리턴하는 함수 */
+     function getDateStr(myDate){
+     	return (myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getDate())
+     }
+
+     /* 오늘 날짜를 문자열로 반환 */
+     function today() {
+       var d = new Date()
+       return getDateStr(d)
+     }
+
+     /* 오늘로부터 1주일전 날짜 반환 */
+     function lastWeek() {
+       var d = new Date()
+       var dayOfMonth = d.getDate()
+       d.setDate(dayOfMonth - 7)
+       return getDateStr(d)
+     }
+
+     /* 오늘로부터 1개월전 날짜 반환 */
+     function lastMonth() {
+       var d = new Date()
+       var monthOfYear = d.getMonth()
+       d.setMonth(monthOfYear - 1)
+       return getDateStr(d)
+     }
+     $(".srch_area :button").click(function(){
+       var rname = $(this).attr("name")
+       $("#searchDateEnd").val(today())
+     	if( rname == "today"){
+         $("#searchDateStart").val(today())
+       }else if(rname == "week") {
+       	$("#searchDateStart").val(lastWeek())
+       }else{
+       	$("#searchDateStart").val(lastMonth())
+       }
+     })  
+
   });  
   
 </script>
