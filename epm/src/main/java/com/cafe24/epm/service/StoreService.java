@@ -25,6 +25,11 @@ public class StoreService {
 		return storeMapper.getStoreSelect(store_Name);
 	}
 	
+	//매장수정전단계_매장등록인원확인
+	public List<Store> getstaffSelect(String store_Name) {
+		return storeMapper.getstaffSelect(store_Name);
+	}
+	
 	//수정처리
 	public int storeUpdate(Store store) {
 		Store result = storeMapper.getStoreSelect(store.getStore_Name());

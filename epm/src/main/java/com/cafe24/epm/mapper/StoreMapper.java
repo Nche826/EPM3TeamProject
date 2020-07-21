@@ -18,6 +18,9 @@ public interface StoreMapper {
 	//매장수정전단계
 	public Store getStoreSelect(String store_Name);
 	
+	//매장수정전단계_매장등록인원확인
+	public List<Store> getstaffSelect(String store_Name);
+	
 	//매장등록
 	public int addStore(Store store);
 	

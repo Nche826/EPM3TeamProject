@@ -15,6 +15,9 @@
    			<result property="store_Reg_date" 	column="store_reg_date"/>
    			<result property="member_name" 	column="member_name"/>
    			<result property="member_tel" 	column="member_tel"/>
+   			<result property="staff_code" 	column="staff_code"/>
+   			<result property="level_name" 	column="level_name"/>
+   			<result property="level_code" 	column="level_code"/>
    		</resultMap>
 	
 	
@@ -35,7 +38,38 @@
 	
 	
 	</update>	
-		
+	
+	<select id="getstaffSelect" parameterType="String" resultMap="StoreSelect">
+		SELECT 
+			s.staff_code
+			,s.member_id
+			,m.member_name
+			,m.member_tel
+			,s.store_code
+			,st.store_name
+			,l.level_name
+			,s.level_code
+		FROM 
+			tb_staff AS s
+		JOIN 
+			tb_member AS m
+		ON 
+			m.member_id = s.member_id
+		JOIN 
+			tb_store AS st
+		ON 
+			st.store_code = s.store_code
+		JOIN 
+			tb_level AS l
+		ON 
+			l.level_code = s.level_code
+		WHERE 
+			s.store_code=#{store_Code}
+		ORDER BY 
+			l.level_code ASC;
+	
+	</select>	
+	
 	<select id="getStoreSelect" parameterType="String" resultMap="StoreSelect">
 		SELECT 
 			store_code
@@ -44,9 +78,9 @@
 			,store_tel
 			,member_id
 			,store_reg_date
-		FROM tb_store~
+		FROM tb_store
 		where
-		 store_name =#{store_Name};
+		 store_code =#{store_Code};
 	</select>
 
 	<select id="storeList" parameterType="String" resultMap="StoreSelect" >
