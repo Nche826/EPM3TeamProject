@@ -6,6 +6,7 @@
 		
 		<resultMap type="CompanyBoardContent" id="companyContentSelect">
 			<result property="companyCode" column="company_code"/>
+			<result property="memberId" column="member_id"/>
 			<result property="staffCode" column="staff_code"/>
 			<result property="staffName" column="staff_name"/>
 			<result property="companyCount" column="company_count"/>
@@ -20,6 +21,7 @@
 		<resultMap type="CompanyBoardComment" id="companyCommentSelect">
 			<result property="companyCCode" column="company_c_code"/>
 			<result property="companyCode" column="company_code"/>
+			<result property="memberId" column="member_id"/>
 			<result property="staffCode" column="staff_code"/>
 			<result property="staffName" column="staff_name"/>
 			<result property="companyCDesc" column="company_c_desc"/>
@@ -30,6 +32,7 @@
 		<select id="companyCommentSelect" parameterType="CompanyBoardComment" resultMap="companyCommentSelect">
 			SELECT 
 			c.company_c_code	AS 'company_c_code'
+			, m.member_id as 'member_id'
 			, c.company_code AS 'company_code'
 			, c.staff_code AS 'staff_code'
 			, m.member_name AS 'staff_name'
@@ -94,6 +97,7 @@
 		SELECT 
 			c.company_c_code	AS 'company_c_code'
 			, c.company_code AS 'company_code'
+			, m.member_id as 'member_id'
 			, c.staff_code AS 'staff_code'
 			, m.member_name AS 'staff_name'
 			, c.company_c_desc AS 'company_c_desc' 
@@ -116,6 +120,8 @@
 			
 			WHERE
 			c.company_code = #{companyCode}
+			
+			ORDER BY c.company_c_date
 		</select>
 		
 		<!-- 게시물 삭제 -->
@@ -184,6 +190,7 @@
 		<select id="companyBoardSelect" parameterType="CompanyBoardContent" resultMap="companyContentSelect">
 			SELECT
 				b.company_code AS 'company_code'
+				, m.member_id as 'member_id'
 				, b.staff_code AS 'staff_code'
 				, m.member_name AS 'staff_name'
 				, b.company_count AS 'company_count'
@@ -222,6 +229,7 @@
 			SELECT
 				b.company_code AS 'company_code'
 				, b.staff_code AS 'staff_code'
+				, m.member_id AS 'member_id'
 				, m.member_name AS 'staff_name'
 				, b.company_count AS 'company_count'
 				, b.company_title AS 'company_title'

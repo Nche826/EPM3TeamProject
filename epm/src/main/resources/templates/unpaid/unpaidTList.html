@@ -96,14 +96,14 @@
                   </thead>
                   <tbody>
                   
-                    <tr th:each="utl : ${unpaidtList}">
-                      <td th:text="${utl.unpaidtStoreName}">매장</td>
-                      <td th:text="${utl.unpaidtStaffName}">직원</td>
-                      <td th:text="${utl.unapidtPart}">구분</td>
+                    <tr th:each="utl : ${unpaidTList}">
+                      <td th:text="${utl.storeName}">매장</td>
+                      <td th:text="${utl.staffName}">직원</td>
+                      <td th:text="${utl.unpaidtPart}">구분</td>
                       <td th:text="${utl.customerName}">고객명</td>
                       <td th:text="${utl.customerTel}">연락처</td>
                       <td th:text="${utl.unpaidtDesc}">내용</td>
-                      <td th:text="${utl.unpaidtDate}">2020-06-10 00:00:00</td>
+                      <td th:text="${utl.unpaidtRegDate}">2020-06-10 00:00:00</td>
                       <td><i class="fas fa-envelope-square" data-toggle="tooltip" data-placement="left" th:title="${utl.unpaidtMemo}"></i></td>
                       <td><i class="far fa-trash-alt" th:code="${utl.unpaidtCode}"></i></td>
                     </tr>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.epm.domain.Unpaid;
+import com.cafe24.epm.domain.UnpaidT;
 import com.cafe24.epm.service.UnpaidService;
 
 @Controller
@@ -42,7 +43,9 @@ public class UnpaidController {
 	  }
 	
 	@GetMapping("/unpaidTList")
-	public String unpaidTList() {
+	public String unpaidTList(Model model) {
+		List<UnpaidT> unpaidTList = unpaidService.unpaidTList();
+		model.addAttribute("unpaidTList",unpaidTList);
 		return "unpaid/unpaidTList";
 	}
 	

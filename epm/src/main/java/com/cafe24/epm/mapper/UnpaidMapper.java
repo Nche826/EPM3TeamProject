@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.cafe24.epm.domain.Unpaid;
+import com.cafe24.epm.domain.UnpaidT;
 
 @Mapper
 public interface UnpaidMapper {
@@ -25,5 +26,8 @@ public interface UnpaidMapper {
 	
 	//처리업무삭제
 	public int unpaidDelete (String unpaidCode);
+	
+	//처리업무 이력 리스트
+	public List<UnpaidT> unpaidTList();
 
 }
