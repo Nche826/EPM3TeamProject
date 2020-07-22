@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cafe24.epm.domain.Customer;
 import com.cafe24.epm.domain.Ledger;
 import com.cafe24.epm.domain.LedgerT;
 import com.cafe24.epm.mapper.LedgerMapper;
@@ -13,6 +14,13 @@ import com.cafe24.epm.mapper.LedgerMapper;
 public class LedgerService {
 	
 	@Autowired private LedgerMapper ledgerMapper;
+	
+	
+	//검색처리
+	public List<Ledger> ledgerSch(String dateSch1,String dateSch2 ,String selectSch
+									,String table_search){
+		return ledgerMapper.ledgerSch(dateSch1, dateSch2, selectSch, table_search);
+	}; 
 	
 	//수납 이력 리스트 처리
 	public List<LedgerT> ledgerTList(){

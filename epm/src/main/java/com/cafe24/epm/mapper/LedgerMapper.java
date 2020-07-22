@@ -4,11 +4,17 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.cafe24.epm.domain.Customer;
 import com.cafe24.epm.domain.Ledger;
 import com.cafe24.epm.domain.LedgerT;
 
 @Mapper
 public interface LedgerMapper {
+	
+	
+	//검색처리
+	public List<Ledger> ledgerSch(String dateSch1,String dateSch2,String selectSch
+										 ,String table_search);
 	
 	//수납 이력 리스트 조회
 	public List<LedgerT> ledgerTList();

@@ -102,32 +102,35 @@
             <div class="card">
               <div class="card-header" style="padding: 3%;">
           <!-- 검색 Form  -->
-            <form class="form-inline" id="customerShc" action="#" method="post">
+            <form class="form-inline" action="/staffSch" method="get">
               <!-- 날짜검색1 --> 
-               <div class="form-group col-3">
+               <P style="font-weight:bolder;">Date Search </P>
+               <div class="form-group col-4">
                   <div class="input-group">
+                   <input type="date" class="form-control form-control-sm" name="dateSch1" id="dateSch1">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
-                        <i class="far fa-calendar-alt"></i>
+                        <i class="fas fa-minus"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control form-control-sm" id="reservation">
+                    <input type="date" class="form-control form-control-sm" name="dateSch2" id="dateSch2">
                   </div>
                   <!-- /.input group -->
                 </div>
          
 	          <!-- 셀렉트박스 검색창 -->
-              <div class="form-group col-2">
-                <select name="gubun" class="form-control form-control-sm">
+              <P style="font-weight:bolder; margin-right: 1%;">User </P>
+              <div class="form-group">
+                <select name="selectSch" class="form-control form-control-sm">
 					<option value="">정보선택</option>
-					<option value="opens">직원명</option>
-					<option value="homes">아이디</option>
-					<option value="bookings">매장명</option>
-					<option value="bookings">권한</option>
+					<option value="staffName">직원명</option>
+					<option value="staffId">아이디</option>
+					<option value="storeName">매장명</option>
+					<option value="levelName">권한</option>
 				</select>
 			 </div>
 	    	<!-- 검색창 -->
-	            <div class="form-group offset-4">
+	            <div class="form-group offset-3">
                     <input type="text" name="table_search" class="form-control" placeholder="Search">
 
                     <div class="input-group-append">

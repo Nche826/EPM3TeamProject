@@ -229,7 +229,7 @@
 			    <if test="selectSch =='staffName'">
 			        AND m.member_name like #{table_search}
 			    </if>
-  		</where>
+  		   </where>
   			GROUP BY 
 				customer_code
 			ORDER BY customer_reg_date DESC;

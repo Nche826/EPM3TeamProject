@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cafe24.epm.domain.Customer;
 import com.cafe24.epm.domain.Dealler;
 import com.cafe24.epm.domain.Ledger;
 import com.cafe24.epm.domain.LedgerT;
@@ -28,6 +29,29 @@ public class LedgerController {
 	@Autowired private DeallerService deallerService;
 	@Autowired private LedgerService ledgerService;
 	
+	//검색 조건 처리
+	@GetMapping("/ledgerSch")
+	public String ledgerSch(Model model,@RequestParam(name="dateSch1",required = false)String dateSch1
+									   ,@RequestParam(name="dateSch2",required = false)String dateSch2
+									   ,@RequestParam(name="selectSch",required = false)String selectSch
+									   ,@RequestParam(name="table_search",required = false)String table_search) {
+		System.out.println("=======검색 처리 시작 ========");
+		System.out.println("검색 날짜 :"+dateSch1+dateSch2);
+		System.out.println("검색 조건 : "+selectSch);
+		System.out.println("검색어 : "+table_search);
+		List<Ledger> ledgerList = ledgerService.ledgerSch(dateSch1, dateSch2, selectSch, table_search);
+		model.addAttribute("ledgerList", ledgerList);
+		System.out.println("=========모달 내 매장 정보 불러오기==========");
+		List<Store> store_name = storeService.storeList();
+		System.out.println("매장 리스트 --->"+store_name);
+		model.addAttribute("store", store_name);
+		System.out.println("===========================");
+		System.out.println("=========모달 내 거래처 정보 불러오기=========");
+		List<Dealler> dealler_name = deallerService.deallerList();
+		System.out.println("거래처 리스트 --->"+dealler_name);
+		model.addAttribute("dealler", dealler_name);
+		return "ledger/ledgerList";
+	}
 	
 	//수납 완료 처리
 	@PostMapping("/ledgerEnd")

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cafe24.epm.domain.Ledger;
 import com.cafe24.epm.domain.Staff;
 import com.cafe24.epm.mapper.StaffMapper;
 
@@ -12,6 +13,12 @@ import com.cafe24.epm.mapper.StaffMapper;
 public class StaffService {
 	
 	@Autowired private StaffMapper staffMapper;
+	
+	//검색처리
+	public List<Staff> staffSch(String dateSch1,String dateSch2 ,String selectSch
+									,String table_search){
+		return staffMapper.staffSch(dateSch1, dateSch2, selectSch, table_search);
+	}; 
 	
 	//매장 선택시 회원 출력하기
 	public List<Staff> storeInStaff(String store_code){
