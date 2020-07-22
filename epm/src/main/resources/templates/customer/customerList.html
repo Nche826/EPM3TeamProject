@@ -87,17 +87,18 @@
             <div class="card">
               <div class="card-header" style="padding: 3%;">
           <!-- 검색 Form  -->
-            <form class="form-inline" id="customerShc" action="#" method="post">
+            <form class="form-inline" action="/customerSch" method="get">
               <!-- 날짜검색1 --> 
-                 <P style="font-weight:bolder;">Date Search </P>
-               <div class="form-group col-3">
+               <P style="font-weight:bolder;">Date Search </P>
+               <div class="form-group col-4">
                   <div class="input-group">
+                   <input type="date" class="form-control form-control-sm" name="dateSch1" id="dateSch1">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
-                        <i class="far fa-calendar-alt"></i>
+                        <i class="fas fa-minus"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control form-control-sm" id="reservation">
+                    <input type="date" class="form-control form-control-sm" name="dateSch2" id="dateSch2">
                   </div>
                   <!-- /.input group -->
                 </div>
@@ -105,23 +106,16 @@
 	          <!-- 셀렉트박스 검색창 -->
 	          <P style="font-weight:bolder; margin-right: 1%;">User </P>
               <div class="form-group ">
-                <select name="gubun" class="form-control form-control-sm">
-					<option value="">고객정보</option>
-					<option value="opens">고객명</option>
-					<option value="homes">핸드폰뒷자리</option>
-					<option value="bookings">생년월일</option>
+                <select name="selectSch" class="form-control form-control-sm">
+					<option  value="">검색정보</option>
+					<option  value="customerName">고객명</option>
+					<option  value="customerPhone">핸드폰뒷자리</option>
+					<option  value="customerBirth">생년월일</option>
+					<option  value="staffName">직원명</option>
 				</select>
 			 </div>
-			 <div class="form-group col-3">
-	                <select name="staff" class="form-control form-control-sm select-sm">
-					<option value="">고객 등록 직원</option>
-					<option value="">1</option>
-					<option value="">2</option>
-					<option value="">3</option>
-					</select>
-			 </div>
 	    <!-- 검색창 -->
-	            <div class="form-group offset-1">
+	            <div class="form-group offset-3">
                     <input type="text" name="table_search" class="form-control" placeholder="Search">
 
                     <div class="input-group-append">
@@ -151,6 +145,19 @@
                   </thead>
                   <tbody>
                     <tr th:each="c,i : ${customerList}">
+                      <td><input type="checkbox" name="customerCodes" th:value="${c.customer_code}" ></td>
+                      <td th:text="${i.count}"></td>
+                      <td th:text="${c.customer_name}"></td>
+                      <td th:text="${c.customer_tel}"></td>
+                      <td th:text="${c.customer_birth}"></td>
+                      <td th:text="${c.devopen_customer}"></td>
+                      <td th:text="${c.homeopen_customer}"></td>
+                      <td th:text="${c.member_name}"></td>
+                      <td th:text="${c.store_name}"></td>
+                      <td th:text="${c.customer_reg_date}"></td>
+                      <td><a th:href="@{/customerUpdate(customer_code=${c.customer_code},staff_code=${c.staff_code})}"><i class="fas fa-edit"></i></a></td>
+                    </tr>
+                    <tr th:each="c,i : ${schList}">
                       <td><input type="checkbox" name="customerCodes" th:value="${c.customer_code}" ></td>
                       <td th:text="${i.count}"></td>
                       <td th:text="${c.customer_name}"></td>
@@ -228,8 +235,7 @@
 <script src="/plugins/select2/js/select2.full.min.js"></script>
 <script>
   
-  $('#reservation').daterangepicker();
-  $('.select2').select2()
+  $('.select2').select2();
   $(function(){
 	
 	$('input:checkbox[name="customerCodes"]').click(function(){

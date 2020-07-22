@@ -105,6 +105,26 @@ public class CustomerController {
 		return "customer/customerUpdate";
 	}
 	
+	//검색 결과 리스트 가져오기
+	@GetMapping("/customerSch")
+	public String customerSch(Model model,@RequestParam(name="dateSch1",required = false) String dateSch1
+										 ,@RequestParam(name="dateSch2",required = false) String dateSch2
+										 ,@RequestParam(name="selectSch",required = false) String selectSch
+										 ,@RequestParam(name="table_search",required = false) String table_search) {
+		System.out.println("=======검색 처리 시작 ========");
+		System.out.println("검색 날짜 :"+dateSch1+dateSch2);
+		System.out.println("검색 조건 : "+selectSch);
+		System.out.println("검색어 : "+table_search);
+		List<Customer> schList = customerService.customerSch(dateSch1, dateSch2,selectSch, table_search);
+		model.addAttribute("schList", schList);
+		System.out.println("======모달 내 셀렉트박스 직원아이디 목록 가져오기=====");
+		List<Customer> staff_id = customerService.getStaffName();
+		System.out.println("직원 리스트 --->"+ staff_id);
+		model.addAttribute("staff", staff_id);
+		System.out.println("=====================================");
+		return "customer/customerList";
+	}
+	
 	//고객리스트 화면 가져오기
 	@GetMapping("/customerList")
 	public String customerList(Model model,Customer customer ) {

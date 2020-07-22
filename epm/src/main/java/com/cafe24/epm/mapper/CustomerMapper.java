@@ -16,6 +16,10 @@ public interface CustomerMapper {
 	
 	//고객 이력 화면 가져오기
 	public List<CustomerT> CustomerTList();
+	
+	//검색처리
+	public List<Customer> customerSch(String dateSch1,String dateSch2,String selectSch
+									 ,String table_search);
 	//고객삭제처리
 	public int customerDelete(String customerCodes);
 	

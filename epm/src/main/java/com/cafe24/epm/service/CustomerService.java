@@ -28,6 +28,12 @@ public class CustomerService {
 		return customerMapper.CustomerTList();
 	}
 	
+	//검색처리
+	public List<Customer> customerSch(String dateSch1,String dateSch2 ,String selectSch
+									,String table_search){
+		return customerMapper.customerSch(dateSch1,dateSch2,selectSch, table_search);
+	}; 
+	
 	//고객삭제처리
 	public int customerDelete(String customerCodes) {
 		return customerMapper.customerDelete(customerCodes);
