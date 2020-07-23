@@ -44,8 +44,12 @@ public class UnpaidService {
 	public int unpaidDelete (String unpaidCode) {
 		return unpaidMapper.unpaidDelete(unpaidCode);
 	}
-
+	//처리업무 이력 리스트
 	public List<UnpaidT> unpaidTList() {
 		return unpaidMapper.unpaidTList();
+	}
+	//처리업무 이력 삭제
+	public int unpaidTDelete(String unpaidtCode) {
+		return unpaidMapper.unpaidTDelete(unpaidtCode);
 	}
 }

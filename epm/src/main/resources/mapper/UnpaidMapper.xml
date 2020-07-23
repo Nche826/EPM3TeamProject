@@ -37,6 +37,16 @@
 			<result property="unpaidtMemo" column="unpaidt_memo"></result>
 		</resultMap>
 		
+		<!-- 처리업무 이력 삭제 -->
+		<delete id="unpaidTDelete" parameterType="String">
+			DELETE
+				FROM 
+					tb_unpaidt
+				<where>
+					<if test="unpaidtCode != null and unpaidtCode != ''.toString() ">unpaidt_code = #{unpaidtCode}</if>
+				</where>
+		</delete>
+		
 		<!-- 처리업무 이력 리스트 -->
 		<select id="unpaidTList" parameterType="UnpaidT" resultMap="unpaidTselect" >
 			SELECT

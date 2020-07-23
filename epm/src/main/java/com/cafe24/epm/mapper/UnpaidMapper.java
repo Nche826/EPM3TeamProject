@@ -29,5 +29,8 @@ public interface UnpaidMapper {
 	
 	//처리업무 이력 리스트
 	public List<UnpaidT> unpaidTList();
+	
+	//처리업무 이력 삭제
+	public int unpaidTDelete(String unpaidtCode);
 
 }

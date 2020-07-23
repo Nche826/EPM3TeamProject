@@ -34,13 +34,21 @@ public class CompanyBoardService {
 	public int companyBoardUpadate(CompanyBoardContent companyBoardContent) {
 		return companyBoardMapper.companyBoardUpadate(companyBoardContent);
 	}
+	//게시물 삭제
+	public int companyBoardDelete(String companyCode) {
+		return companyBoardMapper.companyBoardDelete(companyCode);		
+	}
 	//댓글 목록
 	public List<CompanyBoardComment> companyCommentList (String companyCode){
 		return companyBoardMapper.companyCommentList(companyCode);
 	}
-	//댓글 선택
-	public CompanyBoardComment companyCommentSelect (CompanyBoardComment companyBoardComment){
+	//댓글코드로 댓글 선택 
+	public CompanyBoardComment companyCommentSelectByCCode (CompanyBoardComment companyBoardComment){
 		return companyBoardMapper.companyCommentSelect(companyBoardComment);
+	}
+	//글 코드로 댓글 선택
+	public List<CompanyBoardComment> companyCommentSelectByCode(String companyCode) {
+		return companyBoardMapper.companyCommentSelectByCode(companyCode);
 	}
 	//댓글 등록
 	public int companyCommentInsert(CompanyBoardComment companyBoardComment) {
@@ -49,5 +57,9 @@ public class CompanyBoardService {
 	//댓글 수정
 	public int companyCommentUpdate(CompanyBoardComment companyBoardComment) {
 		return companyBoardMapper.companyCommentUpdate(companyBoardComment);
+	}
+	//댓글 삭제
+	public int companyCommentDelete(String companyCCode) {
+		return companyBoardMapper.companyCommentDelete(companyCCode);
 	}
 }

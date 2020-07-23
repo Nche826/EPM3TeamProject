@@ -28,8 +28,38 @@
 			<result property="companyCDate" column="company_c_date"/>
 		</resultMap>
 		
-		<!-- 댓글 선택 (한개) -->
-		<select id="companyCommentSelect" parameterType="CompanyBoardComment" resultMap="companyCommentSelect">
+		<!-- 글코드로 댓글 선택 -->
+		<select id="companyCommentSelectByCode" parameterType="String" resultMap="companyCommentSelect">
+			SELECT 
+			c.company_c_code	AS 'company_c_code'
+			, m.member_id as 'member_id'
+			, c.company_code AS 'company_code'
+			, c.staff_code AS 'staff_code'
+			, m.member_name AS 'staff_name'
+			, c.company_c_desc AS 'company_c_desc' 
+			, c.company_c_date AS 'company_c_date'
+			
+			FROM
+			tb_company_c AS c
+			join
+			tb_company AS b
+			on
+			c.company_code = b.company_code
+			join
+			tb_staff AS sf
+			on
+			c.staff_code = sf.staff_code
+			join
+			tb_member AS m
+			on
+			sf.member_id = m.member_id
+			
+			WHERE
+			c.company_code = #{companyCode}
+		</select>
+		
+		<!-- 댓글코드로 댓글 선택 -->
+		<select id="companyCommentSelectByCCode" parameterType="CompanyBoardComment" resultMap="companyCommentSelect">
 			SELECT 
 			c.company_c_code	AS 'company_c_code'
 			, m.member_id as 'member_id'
@@ -57,6 +87,16 @@
 			WHERE
 			c.company_c_code = #{companyCCode}
 		</select>
+		
+		<!-- 댓글 삭제 -->
+		<delete id="companyCommentDelete" parameterType="String">
+			DELETE 
+				FROM
+					tb_company_c
+				<where> 
+					<if test="companyCCode != null and companyCCode != ''.toString()">company_c_code=#{companyCCode}</if>
+				</where>
+		</delete>
 		
 		<!-- 댓글 수정 -->
 		<update id="companyCommentUpdate" parameterType="CompanyBoardComment">
@@ -124,12 +164,17 @@
 			ORDER BY c.company_c_date
 		</select>
 		
+		<!-- 게시물 검색 -->
+		<!-- ☆★☆★☆★ -->
+		
 		<!-- 게시물 삭제 -->
-		<!-- ☆☆☆☆☆★★★★★ -->
-		<!-- ☆☆☆☆☆★★★★★ -->
-		<!-- ☆☆☆☆☆★★★★★ -->
-		<!-- ☆☆☆☆☆★★★★★ -->
-
+		<delete id="companyBoardDelete"  parameterType="String">
+			DELETE 
+				FROM tb_company
+				<where>
+					<if test="companyCode != null and companyCode != ''.toString()">company_code = #{companyCode}</if>
+				</where>		
+		</delete>
 		<!-- 게시물 수정 -->
 		<update id="companyBoardUpadate"  parameterType="CompanyBoardContent">
 			UPDATE tb_company
@@ -185,6 +230,21 @@
 					WHERE 
 						company_code = #{companyCode}
 		</update>
+		<!--  <update id="companyBoardCountUpadate" parameterType="com.cafe24.epm.domain.CompanyBoardContent">
+			<selectKey keyColumn="company_count" keyProperty="companyCount" resultType="string">
+				SELECT 
+					CONVERT(c.company_count+1,CHAR) AS company_count
+				from
+					tb_company AS c
+				where
+					c.company_code = #{companyCode}
+			</selectKey>
+			UPDATE tb_company
+				SET
+					company_count= #{companyCount}
+				WHERE 
+					company_code = #{companyCode}
+		</update>  -->
 		
 		<!-- 게시물 선택 -->
 		<select id="companyBoardSelect" parameterType="CompanyBoardContent" resultMap="companyContentSelect">

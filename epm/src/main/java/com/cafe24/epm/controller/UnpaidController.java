@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.epm.domain.Unpaid;
@@ -41,14 +42,7 @@ public class UnpaidController {
 	public Unpaid unpaidSelect(String unpaidCode) {
 	  return unpaidService.unpaidSelect(unpaidCode);
 	  }
-	
-	@GetMapping("/unpaidTList")
-	public String unpaidTList(Model model) {
-		List<UnpaidT> unpaidTList = unpaidService.unpaidTList();
-		model.addAttribute("unpaidTList",unpaidTList);
-		return "unpaid/unpaidTList";
-	}
-	
+
 	@PostMapping("/unpaidPro")
 	public String unpaidPro(String unpaidCode, String unpaidProMemberName, String unpaidProStoreName) {
 		unpaidService.unpaidPro(unpaidCode, unpaidProMemberName, unpaidProStoreName);
@@ -65,5 +59,18 @@ public class UnpaidController {
 	public String unpaidDelete (String unpaidCode) {
 		unpaidService.unpaidDelete(unpaidCode);
 		return "redirect:/unpaidList";
+	}
+	
+	@GetMapping("/unpaidTList")
+	public String unpaidTList(Model model) {
+		List<UnpaidT> unpaidTList = unpaidService.unpaidTList();
+		model.addAttribute("unpaidTList",unpaidTList);
+		return "unpaid/unpaidTList";
+	}
+	
+	@GetMapping("/unpaidTDelete")
+	public String unpaidTDelete(@RequestParam (name = "unpaidt_code", required = false) String unpaidtCode) {
+		unpaidService.unpaidTDelete(unpaidtCode);
+		return "redirect:/unpaidTList";		
 	}
 }

@@ -107,7 +107,14 @@ public class CompanyBoardController {
 	
 	//게시물 삭제
 	@GetMapping("/companyDeleteContents")
-	public String companyDeleteContents () {
+	public String companyDeleteContents (@RequestParam ( name = "company_code", required = false) String companyCode) {
+		//삭제할 게시물의 댓글 삭제
+		List<CompanyBoardComment> commentList = companyBoardService.companyCommentSelectByCode(companyCode);
+		for ( int i = 0; i < commentList.size(); i++ ) {
+			companyBoardService.companyCommentDelete(commentList.get(i).getCompanyCCode());
+		}
+		//게시물 삭제
+		companyBoardService.companyBoardDelete(companyCode);
 		return "redirect:/companyListContents";
 	}
 	
@@ -139,12 +146,17 @@ public class CompanyBoardController {
 	public CompanyBoardComment companyUpdateComment (CompanyBoardComment companyBoardComment) {
 		companyBoardService.companyCommentUpdate(companyBoardComment);
 		System.out.println("companyBoardComment : "+companyBoardComment);
-		return companyBoardService.companyCommentSelect(companyBoardComment);
+		return companyBoardService.companyCommentSelectByCCode(companyBoardComment);
 	}
 	
 	//댓글 삭제
 	@GetMapping("/companyDeleteComment")
-	public String companyDeleteComment () {
-		return "company/companyContents";
+	public String companyDeleteComment (@RequestParam(name= "company_c_code", required = false) String companyCCode) {
+		CompanyBoardComment companyBoardComment = new CompanyBoardComment();
+		companyBoardComment.setCompanyCCode(companyCCode);
+		companyBoardComment = companyBoardService.companyCommentSelectByCCode(companyBoardComment);
+		String companyCode = companyBoardComment.getCompanyCode();;
+		companyBoardService.companyCommentDelete(companyCCode);
+		return "redirect:/companyContents?company_code="+companyCode;
 	}
 }

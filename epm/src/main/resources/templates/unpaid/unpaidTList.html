@@ -105,7 +105,7 @@
                       <td th:text="${utl.unpaidtDesc}">내용</td>
                       <td th:text="${utl.unpaidtRegDate}">2020-06-10 00:00:00</td>
                       <td><i class="fas fa-envelope-square" data-toggle="tooltip" data-placement="left" th:title="${utl.unpaidtMemo}"></i></td>
-                      <td><i class="far fa-trash-alt" th:code="${utl.unpaidtCode}"></i></td>
+                      <td><a th:href="@{/unpaidTDelete(unpaidt_code=${utl.unpaidtCode})}"><i class="far fa-trash-alt"></i></a></td>
                     </tr>
 
                   </tbody>
