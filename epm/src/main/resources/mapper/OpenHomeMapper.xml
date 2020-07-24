@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe24.epm.mapper.OpenHomeMapper">
+
+	
+	<resultMap type="OpenHome" id="OpenHomeinSelect">
+		<result property="openHomeCode" 			column="homeopen_code"/>
+		<result property="openHomeQDate"			column="homeopen_request_date"/>
+		<result property="openHomeDealler"			column="dealler_code"/>
+		<result property="openHomeCustomer"			column="homeopen_customer"/>
+		<result property="openHomePhone"			column="homeopen_phone"/>
+		<result property="openHomeName"				column="homeopen_name"/>
+		<result property="openHomeStatus"			column="homeopen_status"/>
+		<result property="openHomeMemo"				column="homeopen_memo"/>
+		<result property="openHomeDate"				column="homeopen_date"/>		
+		<result property="openHomeType"				column="homeopen_type"/>
+		<result property="openHomeRStaff"			column="staff_reg_code"/>
+		<result property="openHomeRDate"			column="homeopen_reg_date"/>
+		<result property="openHomePrice"			column="homeopen_price"/>
+		<result property="openHomeMargin"			column="homeopen_margin"/>
+		
+		<result property="interCode"				column="interpro_code"/>
+		<result property="interTelecom"				column="interpro_telecom"/>
+		<result property="interName"				column="interpro_name"/>
+		<result property="interMonths"				column="interpro_months"/>
+		<result property="interPrice"				column="interpro_price"/>
+		<result property="interMember"				column="member_id"/>
+		<result property="interRDate"				column="interpro_reg_date"/>
+
+		<result property="interOpenCode"			column="interopen_code"/>
+		<result property="interOpenInter"			column="interpro_code"/>
+		<result property="interOpenHome"			column="homeopen_code"/>
+		<result property="interOpenStaff"			column="staff_code"/>
+		<result property="interOpenRDate"			column="interopen_reg_date"/>
+	
+		<result property="iotCode"					column="iotpro_code"/>
+		<result property="iotTelecom"				column="iotpro_telecom"/>
+		<result property="iotName"					column="iotpro_name"/>
+		<result property="iotMonths"				column="iotpro_months"/>
+		<result property="iotPrice"					column="iotpro_price"/>
+		<result property="iotMember"				column="member_id"/>
+		<result property="iotRDate"					column="iotpro_reg_date"/>
+			
+		<result property="iotOpenCode"				column="iotopen_code"/>
+		<result property="iotOpenIot"				column="iotpro_code"/>
+		<result property="iotOpenHome"				column="homeopen_code"/>
+		<result property="iotOpenStaff"				column="staff_code"/>
+		<result property="iotOpenRDate"				column="iotopen_reg_date"/>
+		
+		<result property="tvCode"					column="tvpro_code"/>
+		<result property="tvTelecom"				column="tvpro_telecom"/>
+		<result property="tvName"					column="tvpro_name"/>
+		<result property="tvMonths"					column="tvpro_months"/>
+		<result property="tvPrice"					column="tvpro_price"/>
+		<result property="tvMember"					column="member_id"/>
+		<result property="tvRDate"					column="tvpro_reg_date"/>
+		
+		<result property="tvOpenCode"				column="tvopen_code"/>
+		<result property="tvOpenTv"					column="tvpro_code"/>
+		<result property="tvOpenHome"				column="homeopen_code"/>
+		<result property="tvOpenStaff"				column="staff_code"/>
+		<result property="tvOpenRDate"				column="tvopen_reg_date"/>
+		
+		<result property="openHomeTCode"			column="homeopent_code"/>
+		<result property="openHomeTStaff"			column="staff_code"/>
+		<result property="openHomeTStatus"			column="homeopent_status"/>
+		<result property="openHomeTDealler"			column="dealler_code"/>
+		<result property="openHomeTHome"			column="homeopen_code"/>
+		<result property="openHomeTMemo"			column="homeopent_memo"/>
+		<result property="openHomeTRStaff"			column="staff_reg_code"/>
+		<result property="openHomeTRDate"			column="homeopent_reg_date"/>
+		
+		<result property="combCode"					column="comb_code"/>		
+		<result property="combCount"				column="comb_count"/>		
+		<result property="combDiscount"				column="comb_discount"/>		
+		<result property="combMember"				column="member_id"/>		
+		<result property="combRDate"				column="comb_reg_date"/>		
+		
+		<result property="storeName"				column="store_name"/>		
+				
+		<result property="searchDateStart" 			column="homeopen_date"/>
+		<result property="searchDateEnd"			column="homeopen_date"/>
+		<result property="searchStatus" 			column="homeopen_status"/>
+		<result property="searchType" 				column="homeopen_type"/>
+		<result property="searchStaff" 				column="staff_code"/>
+		<result property="searchPhone" 				column="homeopen_phone"/>
+		
+		<result property="deletePhone"				column="homeopen_phone"/>
+	
+		
+		
+	</resultMap>
+
+ 	
+	<select id = "openHomeList" parameterType="String" resultMap="OpenHomeinSelect">
+	SELECT
+	*
+	FROM
+		tb_homeopen AS i
+	JOIN tb_staff AS s
+	 	ON i.staff_code = s.staff_code
+	JOIN tb_store AS a
+		ON s.store_code = a.store_code
+	</select>
+	
+	<select id = "openHomesearchList" parameterType="OpenHome" resultMap="OpenHomeinSelect">
+	SELECT
+	*
+	FROM
+		tb_homeopen AS i
+	JOIN tb_staff AS s
+	 	ON i.staff_code = s.staff_code
+	JOIN tb_store AS a
+		ON s.store_code = a.store_code
+	<where>
+			<choose>
+				<!-- 5개 항목 일치시 -->
+				 <when test="searchStatus != ''.toString() and searchType !=''.toString()
+				 and searchStaff !=''.toString() and searchPhone !=''.toString()
+				 and searchDateStart !=''.toString() and searchDateEnd !=''.toString()">	
+				    <if test = "searchStatus != ''.toString()">
+				    	and i.homeopen_status = #{searchStatus}
+				    </if>
+				    <if test = "searchType != ''.toString()">
+				    	and i.homeopen_type = #{searchType}
+				    </if>	
+				    <if test="searchStaff != ''.toString()">
+			   			and i.staff_code = #{searchStaff}
+			   		</if>
+			   		<if test="searchPhone != ''.toString()">
+			   			and i.homeopen_phone = #{searchPhone}
+			   		</if>
+			   		<if test="searchDateStart != ''.toString()">
+			   			and i.homeopen_date >= #{searchDateStart}
+			   		</if>
+			   		<if test="searchDateEnd != ''.toString()">
+			   			and #{searchDateEnd} >= i.homeopen_date
+			   		</if>
+			    </when>	
+			    <!-- 상태 조건 -->
+			    <when test="searchStatus != ''.toString() and searchType ==''.toString()
+				 and searchStaff ==''.toString() and searchPhone ==''.toString()
+				 and searchDateStart ==''.toString() and searchDateEnd ==''.toString()">	
+				    <if test = "searchStatus != ''.toString()">
+				    	and i.homeopen_status = #{searchStatus}
+				    </if>					   
+			    </when>	
+			    <!-- 직원 조건 -->
+			    <when test="searchStatus == ''.toString() and searchType ==''.toString()
+				 and searchStaff !=''.toString() and searchPhone ==''.toString()
+				 and searchDateStart ==''.toString() and searchDateEnd ==''.toString()">	
+				    <if test = "searchStaff != ''.toString()">
+				    	and i.staff_code = #{searchStaff}
+				    </if>					   
+			    </when>
+			    <!-- 고객번호 조건 -->
+			    <when test="searchStatus == ''.toString() and searchType ==''.toString()
+				 and searchStaff ==''.toString() and searchPhone !=''.toString()
+				 and searchDateStart ==''.toString() and searchDateEnd ==''.toString()">	
+				    <if test = "searchSerial != ''.toString()">
+				    	and i.homeopen_phone = #{searchPhone}
+				    </if>					   
+			    </when>
+			     <!-- 구분 조건 -->
+			    <when test="searchStatus == ''.toString() and searchType !=''.toString()
+				 and searchStaff ==''.toString() and searchPhone ==''.toString()
+				 and searchDateStart ==''.toString() and searchDateEnd ==''.toString()">	
+				    <if test = "searchSerial != ''.toString()">
+				    	and i.homeopen_type = #{searchType}
+				    </if>					   
+			    </when>
+			    <!-- 입고일 조건 -->
+			    <when test="searchStatus == ''.toString() and searchType ==''.toString()
+				 and searchStaff ==''.toString() and searchPhone ==''.toString()
+				 and searchDateStart !=''.toString() and searchDateEnd !=''.toString()">	
+				    <if test = "searchDateStart != ''.toString()">
+				    	and i.homeopen_date >= #{searchDateStart}
+				    </if>
+					<if test = "searchDateEnd != ''.toString()">
+				    	and #{searchDateEnd} >= i.homeopen_date
+				    </if>				   
+			    </when>
+			   
+				   			    
+			 
+			    <otherwise>
+	      			
+		   		</otherwise>
+		   		
+		   	</choose>	
+	    </where> 
+	</select>
+	
+	
+		
+	<insert id="openHomeInsert" parameterType="OpenHome">
+	<selectKey keyProperty="openHomeCode,openHomeName" resultType="hashmap" order="BEFORE">
+ 			SELECT 
+ 				CONCAT('code', MAX(CAST(SUBSTRING(o.homeopen_code,5) AS DECIMAL)+1)) AS openHomeCode
+ 				,n.homeopen_name as openHomeName
+ 			FROM 
+ 				tb_homeopen as o
+ 				,(select
+ 					
+ 				)
+ 	</selectKey>
+	INSERT
+	into tb_homeopen
+			(		
+			homeopen_code
+			,homeopen_request_date*	
+			,dealler_code*
+			,homeopen_customer*
+			,homeopen_phone*
+			,homeopen_name*
+			,homeopen_status*
+			,homeopen_memo*
+			,homeopen_date*
+			,staff_code*
+			,homeopen_type*
+			,staff_reg_date
+			,homeopen_reg_date
+			,homeopen_price
+			,homeopen_margin
+			)
+			values
+			(
+			#{openHomeCode}
+			,now()						
+			,#{openHomeDealler}						
+			,#{openHomeCustomer}						
+			,#{openHomePhone}
+			,#{openHomeName}
+			,#{openHomeStatus}
+			,#{openHomeMemo}		
+			,now()			
+			,#{openHomeStaff}	
+			,#{openHomeType}	
+			,now()
+			,#{openHomePrice}	
+			,#{openHomeMargin}	
+			)		
+		</insert>	
+		
+		
+		<update id="usedUpdate" parameterType="Used">
+		<selectKey keyProperty="deviceCode" resultType="hashmap" order="BEFORE">
+			SELECT
+					device_code as deviceCode
+			FROM
+					tb_device 
+			where
+					device_model=#{updateModel}
+					and device_type=#{updateType}
+					and device_color=#{updateColor}
+ 		</selectKey>
+	update
+				tb_usedin
+			
+			set
+				usedin_serial = #{updateSerial}
+				,device_code = #{deviceCode}
+				,usedin_date = NOW()
+				,usedin_memo = #{updateMemo}
+				,staff_code = #{updateStaff}				
+				,usedin_telecom = #{updateTelecom}
+				,usedin_price = #{updatePrice}
+				,usedin_reg_date = now()
+			
+			WHERE 
+				usedin_serial = #{updateSerial}
+	
+	
+		</update>			
+						
+		
+	
+			
+		<delete id="usedDelete" parameterType="Used">			
+			Delete From tb_usedin
+			where usedin_serial = #{deleteSerial}				
+		</delete>
+		
+</mapper>
+	

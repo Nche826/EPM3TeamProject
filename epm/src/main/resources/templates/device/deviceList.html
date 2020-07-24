@@ -39,9 +39,9 @@
             <h1>단말기 관리</h1>
           </div>
           <div class="col-sm-6" align="right">
-   			<ol class="breadcrumb float-sm-right" >	   				　	
+   			<div class="breadcrumb float-sm-right" >	   				　	
 				<button type="button" class="btn btn-info btn-sm pd-x-5 pd-y-0" data-toggle="modal" data-target="#modal-lg"> 단말기 입고 </button>			
-			</ol>
+			</div>
 		</div>   
         </div>
       </div><!-- /.container-fluid -->
@@ -230,7 +230,7 @@
                 </table>
               </div>
               </form>
-              <div class="modal fade" id="modal-Update" style="display: none;" aria-hidden="true">
+       <div class="modal fade" id="modal-Update" style="display: none;" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
@@ -259,9 +259,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title col-sm-6">안내</h4>              
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
+              
             </div>
             <form action ="/deviceDelete" method="post">            
             <div class="modal-body">       

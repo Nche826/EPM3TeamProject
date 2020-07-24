@@ -54,24 +54,7 @@
 		
 	</resultMap>
 
-<!-- 	<select id = "getDeviceSelect" parameterType="String" resultMap="DeviceinSelect">
-	SELECT
-		devicein_code
-		,devicein_serial
-		,dealler_code
-		,device_code
-		,devicein_status
-		,devicein_stat_date
-		,devicein_date
-		,devicein_memo
-		,staff_code
-		,devicein_reg_date
-	FROM
-		tb_devicein		
-	WHERE
-		devicein_serial = #{deviceinSerial}
-	</select>
- -->	
+
  	
 	<select id = "usedList" parameterType="String" resultMap="UsedinSelect">
 	SELECT
