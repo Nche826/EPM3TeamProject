@@ -88,14 +88,6 @@
     </delete>
     
     <update id="customerUpdate" parameterType="customer">
-    <selectKey order="BEFORE" keyProperty="staff_code" resultType="String">
-		SELECT
-			s.staff_code
-		FROM 
-			tb_staff AS s
-		WHERE 
-			s.member_id =#{member_id}
-	</selectKey> 
 	    UPDATE 
 	    	tb_customer
 		SET
