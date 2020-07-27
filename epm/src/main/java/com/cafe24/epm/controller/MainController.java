@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cafe24.epm.domain.Login;
 import com.cafe24.epm.domain.Member;
 import com.cafe24.epm.domain.Staff;
 import com.cafe24.epm.service.MemberService;
@@ -23,6 +24,11 @@ public class MainController {
 	@Autowired private StaffService staffService;
 	
 	@GetMapping("/")
+	public String home() {
+		return "login/login";
+	}
+	
+	@GetMapping("/main")
 	public String main ( ) {
 		return "main";
 		//return "redirect:/index";
@@ -57,6 +63,8 @@ public class MainController {
 							System.out.println(session.getAttribute("SNAME")+"<< SNAME");
 							System.out.println(session.getAttribute("SSTAFF")+"<< SSTAFF");
 							
+							memberService.memberlogin(member.getMemberId());
+							
 							return "redirect:/index";
 						}
 					}
@@ -68,6 +76,7 @@ public class MainController {
 	//로그아웃처리
 	@GetMapping("/logout")
 	public String logout (HttpSession session) {
+		memberService.memberlogout((String) session.getAttribute("SID"));
 		session.invalidate();
 		System.out.println("============로그아웃============");
 		return"redirect:/login";

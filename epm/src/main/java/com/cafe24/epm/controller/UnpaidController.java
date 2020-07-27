@@ -10,13 +10,47 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cafe24.epm.domain.Staff;
 import com.cafe24.epm.domain.Unpaid;
 import com.cafe24.epm.domain.UnpaidT;
+import com.cafe24.epm.service.StaffService;
 import com.cafe24.epm.service.UnpaidService;
 
 @Controller
 public class UnpaidController {
 	@Autowired UnpaidService unpaidService;
+	@Autowired StaffService staffService;
+	
+	@GetMapping("/unpaidTSearch")
+	public String unpaidTSearch(Model model, @RequestParam(name="searchD1", required = false) String searchD1
+			, @RequestParam(name="searchD2", required = false) String searchD2
+			, @RequestParam(name="statusSearch", required = false) String statusSearch
+			, @RequestParam(name="subjectSearch", required = false) String subjectSearch
+			, @RequestParam(name="staffSearch", required = false) String staffSearch
+			, @RequestParam(name="searchK", required = false) String searchK
+			, @RequestParam(name="searchV", required = false) String searchV) {
+		System.out.println("searchD1,searchD2,statusSearch,subjectSearch,staffSearch,searchK,searchV:"+searchD1+searchD2+statusSearch+subjectSearch+staffSearch+searchK+searchV);
+		List<Unpaid> unpaidTList = unpaidService.unpaidTSearch(searchD1,searchD2,statusSearch,subjectSearch,staffSearch,searchK,searchV);
+		model.addAttribute("unpaidTList",unpaidTList);
+		List<Staff> staffList = staffService.staffList();
+		model.addAttribute("staffList",staffList);
+		return "unpaid/unpaidTList";
+	}
+	
+	@GetMapping("/unpaidSearch")
+	public String unpaidSearch(Model model, @RequestParam(name="searchD1", required = false) String searchD1
+										  , @RequestParam(name="searchD2", required = false) String searchD2
+										  , @RequestParam(name="statusSearch", required = false) String statusSearch
+										  , @RequestParam(name="subjectSearch", required = false) String subjectSearch
+										  , @RequestParam(name="staffSearch", required = false) String staffSearch
+										  , @RequestParam(name="searchK", required = false) String searchK
+										  , @RequestParam(name="searchV", required = false) String searchV) {
+		List<Unpaid> unpaidList = unpaidService.unpaidSearch(searchD1,searchD2,statusSearch,subjectSearch,staffSearch,searchK,searchV);
+		model.addAttribute("unpaidList",unpaidList);
+		List<Staff> staffList = staffService.staffList();
+		model.addAttribute("staffList",staffList);
+		return "unpaid/unpaidList";
+	}
 	
 	@GetMapping("/unpaidInsert")
 	public String unpaidInsert() {
@@ -34,6 +68,8 @@ public class UnpaidController {
 		System.out.println("=====UnpaidController unpaidList=====");
 		List<Unpaid> unpaidList = unpaidService.unpaidList();
 		model.addAttribute("unpaidList",unpaidList);
+		List<Staff> staffList = staffService.staffList();
+		model.addAttribute("staffList",staffList);
 		return "unpaid/unpaidList";
 	}
 	
@@ -65,6 +101,8 @@ public class UnpaidController {
 	public String unpaidTList(Model model) {
 		List<UnpaidT> unpaidTList = unpaidService.unpaidTList();
 		model.addAttribute("unpaidTList",unpaidTList);
+		List<Staff> staffList = staffService.staffList();
+		model.addAttribute("staffList",staffList);
 		return "unpaid/unpaidTList";
 	}
 	

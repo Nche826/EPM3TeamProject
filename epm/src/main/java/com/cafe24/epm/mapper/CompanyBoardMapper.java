@@ -33,6 +33,8 @@ public interface CompanyBoardMapper {
 	public int companyCommentUpdate(CompanyBoardComment companyBoardComment);
 	//댓글 삭제
 	public int companyCommentDelete(String companyCCode);
+	//게시판 검색
+	public List<CompanyBoardContent> companyBoardSearch(String searchD1, String searchD2, String searchK, String searchV);
 
 
 }

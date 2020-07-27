@@ -25,7 +25,17 @@ import com.cafe24.epm.service.StorageService;
 public class MemberController {
 	@Autowired private MemberService memberService;
 	@Autowired private MemberMapper memberMapper;
-	@Autowired private StorageService storageService;
+	
+	@GetMapping("/memberSearch")
+	public String memberSearch(Model model, @RequestParam(name = "searchD1",required = false) String searchD1
+										  , @RequestParam(name = "searchD2",required = false) String searchD2
+										  , @RequestParam(name = "searchK",required = false) String searchK
+										  , @RequestParam(name = "searchV",required = false) String searchV) {
+		System.out.println("searchD1,searchD2,searchK,searchV : "+searchD1+searchD2+searchK+searchV);
+		List<Member> memberList = memberService.memberSearch(searchD1,searchD2,searchK,searchV);		
+		model.addAttribute("memberList",memberList);
+		return "member/memberList";
+	}
 	
 	@GetMapping("/memberInsert")
 	public String memberInsertView() {
@@ -33,11 +43,8 @@ public class MemberController {
 	}
 	
 	@PostMapping("/memberInsert")
-	public String memberInsert(Member member, @RequestParam(value = "file") MultipartFile file) throws IOException {
-		System.out.println("=======파일업로드=======");
-		storageService.store(file);
+	public String memberInsert(Member member) throws IOException {
 		System.out.println("=======회원가입=======");
-		member.setMemberFile(file.getOriginalFilename());
 		System.out.println("member : " + member);
 		memberService.memberInsert(member);
 		return "redirect:/memberList";
@@ -121,13 +128,14 @@ public class MemberController {
 	}
 	
 	@GetMapping("/memberUpdateConfirm")
-	public String memberUpdateConfirmView(HttpSession session, RedirectAttributes redirectAttr) {
+	public String memberUpdateConfirmView(HttpSession session, RedirectAttributes redirectAttr, @RequestParam(name="member_id", required = false)String member_id) {
 		//세션에 등록된 권한이 관리자, 대표일 경우 비밀번호 확인 없이 수정화면으로 이동.
 		System.out.println(session.getAttribute("SSTAFF")+"<< SSTAFF");
 		List<Staff> staff = (List<Staff>) session.getAttribute("SSTAFF");
+		System.out.println(member_id+"member_id:::::::::::::::::::::::");
 		for(int i = 0; i < staff.size() ;i++ ) {
 			if("관리자".equals(staff.get(i).getLevel_name()) || "대표".equals(staff.get(i).getLevel_name()) ) {
-				return "member/memberUpdate"; 
+				return "redirect:/memberUpdate?member_id="+member_id; 
 			}
 		  }
 		//세션에 등록된 권한이 관리자, 대표가 아닐 경우 리스트로 돌아가 메세지 출력 

@@ -27,6 +27,17 @@ public class CompanyBoardController {
 	@Autowired private CompanyBoardService companyBoardService;
 	@Autowired private StorageService storageService;
 	
+	//게시물 검색
+	@GetMapping("/companyBoardSearch")
+	public String companyBoardSearch (Model model, @RequestParam(name = "searchD1",required = false) String searchD1
+												 , @RequestParam(name = "searchD2",required = false) String searchD2
+												 , @RequestParam(name = "searchK",required = false) String searchK
+												 , @RequestParam(name = "searchV",required = false) String searchV) {
+		System.out.println("searchD1,searchD2,searchK,searchV : " + searchD1+searchD2+searchK+searchV);
+		List<CompanyBoardContent> companyBoardList = companyBoardService.companyBoardSearch(searchD1,searchD2,searchK,searchV);
+		model.addAttribute("companyBoardContentList",companyBoardList);		
+		return "company/companyListContents";
+	}
 	
 	//게시물 리스트
 	@GetMapping("/companyListContents")

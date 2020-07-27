@@ -59,7 +59,7 @@
 			                        <label class="custom-file-label" for="file">Choose file</label>
 			                      </div>
 			                      <div class="input-group-append">
-			                        <span class="input-group-text" id="">Upload</span>
+			                        <span class="input-group-text">Upload</span>
 			                      </div>
 			                    </div>
 			                  </div>
@@ -82,7 +82,7 @@
 <th:block layout:fragment="customFooterScript">
 	<script>
 		$(function(){
-			var staffCode = $('.LoginStaffCode').val();
+			var staffCode = $('.loginStaffCode').val();
 			$('input[name="staffCode"]').val(staffCode);
 			
 			$('#writeButton').click(function(){

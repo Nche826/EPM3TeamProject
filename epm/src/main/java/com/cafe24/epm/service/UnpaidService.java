@@ -52,4 +52,13 @@ public class UnpaidService {
 	public int unpaidTDelete(String unpaidtCode) {
 		return unpaidMapper.unpaidTDelete(unpaidtCode);
 	}
+	//처리업무 검색
+	public List<Unpaid> unpaidSearch(String searchD1, String searchD2, String statusSearch, String subjectSearch, String staffSearch, String searchK, String searchV) {
+		return unpaidMapper.unpaidSearch(searchD1,searchD2,statusSearch,subjectSearch,staffSearch,searchK,searchV);
+	}
+	//처리업무 이력 검색
+	public List<Unpaid> unpaidTSearch(String searchD1, String searchD2, String statusSearch, String subjectSearch,
+			String staffSearch, String searchK, String searchV) {
+		return unpaidMapper.unpaidTSearch(searchD1,searchD2,statusSearch,subjectSearch,staffSearch,searchK,searchV);
+	}
 }

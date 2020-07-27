@@ -36,9 +36,6 @@
 	            <!-- 프로필 스타트 -->
 	            <div class="media">
 	              <div class="media-body">
-			            	<div class="offset-3 col-6" style="text-align: center; margin: 20px auto">
-			              		<div id="profile"><i class="far fa-user-circle"></i></div>			              		
-			              	</div>
 			              	<div style="text-align: center;">
 			              		<p th:text="${session.SID}" id="loginId"></p>
 				                <h3 class="dropdown-item-title" id="loginName" th:text="${session.SNAME}"></h3>
@@ -55,7 +52,7 @@
 	            <!-- 프로필 엔드 --> 
 
 	          <div class="dropdown-divider"></div>
-	          <a href="#" class="dropdown-item dropdown-footer">수정하기</a>
+	          <a th:href="@{/memberUpdate(member_id=${session.SID})}" class="dropdown-item dropdown-footer">수정하기</a>
 	          <div class="dropdown-divider"></div>
 	          <a href="/logout" class="dropdown-item dropdown-footer">로그아웃</a>
 	          

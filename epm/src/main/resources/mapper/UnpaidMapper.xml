@@ -37,6 +37,62 @@
 			<result property="unpaidtMemo" column="unpaidt_memo"></result>
 		</resultMap>
 		
+		
+		<!-- 처리업무 이력 검색 -->
+		<select id="unpaidTSearch" parameterType="String" resultMap="unpaidTselect">
+			SELECT
+				u.unpaidt_code AS 'unpaidt_code'
+				, u.unpaidt_reg_staff_code AS 'unpaidt_reg_staff_code'
+				, sr.store_name AS 'store_name'
+				, m.member_name AS 'staff_name'
+				, u.unpaidt_part AS 'unpaidt_part'
+				, u.customer_name AS 'customer_name'
+				, u.customer_tel AS 'customer_tel'
+				, u.unpaidt_desc AS 'unpaidt_desc'
+				, u.unpaidt_reg_date AS 'unpaidt_reg_date'
+				, u.unpaidt_memo AS 'unpaidt_memo'
+			FROM
+				tb_unpaidt AS u
+				join
+				tb_staff AS s
+				on
+				u.unpaidt_reg_staff_code = s.staff_code
+				join
+				tb_member AS m
+				on
+				s.member_id = m.member_id
+				join
+				tb_store AS sr
+				on
+				s.store_code = sr.store_code
+				
+			<where>
+				<if test="searchD1 != null and searchD1 != ''.toString() and searchD2 != null and searchD2 != ''.toString">
+					(u.unpaidt_reg_date between #{searchD1} and DATE_ADD(#{searchD2}, INTERVAL 1 day))
+				</if>
+				<if test="statusSearch != null and statusSearch != ''.toString()">
+					and u.unpaidt_part like #{statusSearch}
+				</if>
+				<if test="staffSearch != null and staffSearch != ''.toString()">
+					and m1.member_name LIKE '%${staffSearch}%'
+				</if>
+				<if test="searchV != null and searchV != ''.toString() and searchK == 'phone'">
+					and u.customer_tel LIKE '%${searchV}'
+				</if>
+				<if test="searchV != null and searchV != ''.toString() and searchK == 'customer'">
+					and u.customer_name LIKE #{searchV}
+				</if>
+				<if test="searchV != null and searchV != ''.toString() and searchK == 'contents'">
+					and u.unpaid_desc LIKE '%${searchV}%'
+				</if>
+				<if test="searchV != null and searchV != ''.toString() and searchK == 'memo'">
+					and u.unpaidtz_memo LIKE '%${searchV}%'
+				</if>
+			</where>
+				
+				order by u.unpaidt_reg_date desc
+		</select>
+		
 		<!-- 처리업무 이력 삭제 -->
 		<delete id="unpaidTDelete" parameterType="String">
 			DELETE
@@ -74,6 +130,98 @@
 				tb_store AS sr
 				on
 				s.store_code = sr.store_code
+				
+			order by u.unpaidt_reg_date desc
+		</select>
+		
+		<!-- 처리업무 검색  -->
+		<select id="unpaidSearch" parameterType="String" resultMap="unpaidSelect">
+			SELECT
+					u.unpaid_code AS 'unpaid_code'
+					, u.unpaid_exp_date AS 'unpaid_exp_date'
+					, u.unpaid_part AS 'unpaid_part'
+					, u.unpaid_sub_name AS 'unpaid_sub_name'
+					, u.unpaid_desc AS 'unpaid_desc'
+					, c.customer_code AS 'customer_code'
+					, u.customer_name AS 'customer_name'
+					, u.customer_tel AS 'customer_tel'
+					, u.unpaid_memo AS 'unpaid_memo'
+					, u.unpaid_status AS 'unpaid_status'
+					, u.unpaid_pro_date AS 'unpaid_pro_date'
+					, s1.staff_code AS 'unpaid_pro_staff_code'
+					, st1.store_name AS 'unpaid_pro_store_name'
+					, m1.member_name AS 'unpaid_pro_member_name'
+					, u.unpaid_reg_date AS 'unpaid_reg_date'
+					, u.unpaid_reg_staff_code AS 'staff_reg_staff_code'
+					, m2.member_name AS 'unpaid_reg_member_name'
+					, s2.store_code AS 'unpaid_Reg_Store_Code'
+					, st2.store_name AS 'unpaid_Reg_Store_Name'
+				FROM
+					tb_unpaid as u
+				
+					left outer JOIN
+					tb_staff AS s1
+					ON
+					s1.staff_code = u.unpaid_pro_staff_code
+					
+					JOIN
+					tb_staff AS s2
+					on
+					s2.staff_code = u.unpaid_reg_staff_code
+					
+					left OUTER JOIN
+					tb_member AS m1
+					ON
+					s1.member_id = m1.member_id
+					
+					JOIN
+					tb_member AS m2
+					ON
+					s2.member_id = m2.member_id
+					
+					left outer JOIN
+					tb_customer AS c
+					ON
+					u.customer_name = c.customer_name
+					
+					left OUTER JOIN
+					tb_store AS  st1
+					ON
+					st1.store_code = s1.store_code
+					
+					join
+					tb_store AS st2
+					on
+					st2.store_code = s2.store_code
+				
+				<where>
+					<if test="searchD1 != null and searchD1 != ''.toString() and searchD2 != null and searchD2 != ''.toString">
+						(u.unpaid_reg_date between #{searchD1} and DATE_ADD(#{searchD2}, INTERVAL 1 day))
+					</if>
+					<if test="statusSearch != null and statusSearch != ''.toString()">
+						and u.unpaid_status like #{statusSearch}
+					</if>
+					<if test="subjectSearch != null and subjectSearch != ''.toString()">
+						and u.unpaid_sub_name LIKE '%${subjectSearch}%'
+					</if>
+					<if test="staffSearch != null and staffSearch != ''.toString()">
+						and m1.member_name LIKE '%${staffSearch}%'
+					</if>
+					<if test="searchV != null and searchV != ''.toString() and searchK == 'phone'">
+						and u.customer_tel LIKE '%${searchV}'
+					</if>
+					<if test="searchV != null and searchV != ''.toString() and searchK == 'customer'">
+						and u.customer_name LIKE #{searchV}
+					</if>
+					<if test="searchV != null and searchV != ''.toString() and searchK == 'contents'">
+						and u.unpaid_desc LIKE '%${searchV}%'
+					</if>
+					<if test="searchV != null and searchV != ''.toString() and searchK == 'memo'">
+						and u.unpaid_memo LIKE '%${searchV}%'
+					</if>
+				</where>
+				
+				ORDER BY unpaid_reg_date		
 		</select>
 		
 		<!-- 처리업무삭제 -->
@@ -296,7 +444,7 @@
 
 		</select>
 		
-			<!-- 처리완료(처리직원, 날짜가 있을 때) -->
+		<!-- 처리업무 리스트 -->
 		<select id="unpaidList" parameterType="Unpaid" resultMap="unpaidSelect">
 				SELECT
 					u.unpaid_code AS 'unpaid_code'
@@ -356,7 +504,7 @@
 					on
 					st2.store_code = s2.store_code
 				
-				ORDER BY unpaid_reg_date		
+				ORDER BY unpaid_reg_date desc
 		</select>
 		
 	</mapper>

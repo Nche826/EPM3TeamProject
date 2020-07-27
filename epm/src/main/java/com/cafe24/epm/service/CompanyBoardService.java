@@ -62,4 +62,8 @@ public class CompanyBoardService {
 	public int companyCommentDelete(String companyCCode) {
 		return companyBoardMapper.companyCommentDelete(companyCCode);
 	}
+	//게시물 검색
+	public List<CompanyBoardContent> companyBoardSearch(String searchD1, String searchD2, String searchK, String searchV) {
+		return companyBoardMapper.companyBoardSearch(searchD1,searchD2,searchK,searchV);
+	}
 }

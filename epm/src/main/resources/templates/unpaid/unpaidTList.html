@@ -36,12 +36,12 @@
             <div class="card">
               <div class="card-header">
       						<div class="row">
-								<form class="form-inline" action="#" method="post">
+								<form class="form-inline" action="/unpaidTSearch" method="get">
 									<div class="form-inline">
 								            <div style="margin: 5px;"><i class="fa fa-calendar"></i></div>
-								            <input type="text" class="form-control datetimepicker-input" id="datetimepicker1" data-toggle="datetimepicker" data-target="#datetimepicker1" placeholder="YYYY-MM-DD" name="startSearch" style="margin: 5px;"/>
+								            <input type="text" class="form-control datetimepicker-input" id="datetimepicker1" data-toggle="datetimepicker" data-target="#datetimepicker1" placeholder="YYYY-MM-DD" name="searchD1" style="margin: 5px;"/>
 								            <div style="margin: 5px;"><i class="fas fa-minus"></i></div>
-								            <input type="text" class="form-control datetimepicker-input" id="datetimepicker2" data-toggle="datetimepicker" data-target="#datetimepicker2" placeholder="YYYY-MM-DD" name="endSearch" style="margin: 5px;"/>
+								            <input type="text" class="form-control datetimepicker-input" id="datetimepicker2" data-toggle="datetimepicker" data-target="#datetimepicker2" placeholder="YYYY-MM-DD" name="searchD2" style="margin: 5px;"/>
 								          
 								            <button style="margin: 5px;" type="button" class="form-control btn btn-block btn-secondary btn-xs" id="today">오늘</button>
 								           
@@ -52,9 +52,9 @@
 									<div class="form-inline">	
 				                        
 				                     <!-- *******접수직원 load******* -->
-										<select class="form-control" name="statusSearch" id="statusSearch" style="margin: 5px;">
+										<select class="form-control" name="staffSearch" id="staffSearch" style="margin: 5px;">
 				                          <option value="">접수직원</option>
-				                          <option value="take">접수직원!!</option>
+				                          <option th:each="stl : ${staffList}" th:value="${stl.staff_code}" th:text="${stl.member_name}"></option>
 				                        </select>
 	
 										<select class="form-control" name="statusSearch" id="statusSearch" style="margin: 5px;">
@@ -65,6 +65,7 @@
 				                          <option value="delete">삭제</option>
 				                        </select>
 										<select class="form-control" name="searchK" style="margin: 5px;">
+										  <option value="">검색</option>
 				                          <option value="phone">연락처 (뒷4자리)</option>
 				                          <option value="customer">고객명</option>
 				                          <option value="contents">내용 (일반업무)</option>
