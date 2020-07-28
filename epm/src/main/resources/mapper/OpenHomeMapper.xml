@@ -196,30 +196,27 @@
 	
 		
 	<insert id="openHomeInsert" parameterType="OpenHome">
-	<selectKey keyProperty="openHomeCode,openHomeName" resultType="hashmap" order="BEFORE">
+	<selectKey keyProperty="openHomeCode" resultType="hashmap" order="BEFORE">
  			SELECT 
- 				CONCAT('code', MAX(CAST(SUBSTRING(o.homeopen_code,5) AS DECIMAL)+1)) AS openHomeCode
- 				,n.homeopen_name as openHomeName
+ 				CONCAT('code', MAX(CAST(SUBSTRING(o.homeopen_code,5) AS DECIMAL)+1)) AS openHomeCode 				
  			FROM 
  				tb_homeopen as o
- 				,(select
- 					
  				)
  	</selectKey>
 	INSERT
 	into tb_homeopen
 			(		
 			homeopen_code
-			,homeopen_request_date*	
-			,dealler_code*
-			,homeopen_customer*
-			,homeopen_phone*
-			,homeopen_name*
-			,homeopen_status*
-			,homeopen_memo*
-			,homeopen_date*
-			,staff_code*
-			,homeopen_type*
+			,dealler_code
+			,homeopen_customer
+			,homeopen_phone
+			,homeopen_name
+			,homeopen_status
+			,homeopen_memo
+			,homeopen_request_date
+			,homeopen_date
+			,staff_code
+			,homeopen_type
 			,staff_reg_date
 			,homeopen_reg_date
 			,homeopen_price
@@ -228,15 +225,15 @@
 			values
 			(
 			#{openHomeCode}
-			,now()						
 			,#{openHomeDealler}						
 			,#{openHomeCustomer}						
 			,#{openHomePhone}
 			,#{openHomeName}
 			,#{openHomeStatus}
 			,#{openHomeMemo}		
-			,now()			
-			,#{openHomeStaff}	
+			,#{openHomeRDate}
+			,#{openHomeDate}			
+			,#{openHomeRStaff}	
 			,#{openHomeType}	
 			,now()
 			,#{openHomePrice}	
