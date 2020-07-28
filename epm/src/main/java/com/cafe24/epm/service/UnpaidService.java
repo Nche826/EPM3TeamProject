@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cafe24.epm.domain.Unpaid;
+import com.cafe24.epm.domain.UnpaidT;
 import com.cafe24.epm.mapper.UnpaidMapper;
 
 @Service
@@ -42,5 +43,22 @@ public class UnpaidService {
 	//처리업무삭제
 	public int unpaidDelete (String unpaidCode) {
 		return unpaidMapper.unpaidDelete(unpaidCode);
+	}
+	//처리업무 이력 리스트
+	public List<UnpaidT> unpaidTList() {
+		return unpaidMapper.unpaidTList();
+	}
+	//처리업무 이력 삭제
+	public int unpaidTDelete(String unpaidtCode) {
+		return unpaidMapper.unpaidTDelete(unpaidtCode);
+	}
+	//처리업무 검색
+	public List<Unpaid> unpaidSearch(String searchD1, String searchD2, String statusSearch, String subjectSearch, String staffSearch, String searchK, String searchV) {
+		return unpaidMapper.unpaidSearch(searchD1,searchD2,statusSearch,subjectSearch,staffSearch,searchK,searchV);
+	}
+	//처리업무 이력 검색
+	public List<Unpaid> unpaidTSearch(String searchD1, String searchD2, String statusSearch, String subjectSearch,
+			String staffSearch, String searchK, String searchV) {
+		return unpaidMapper.unpaidTSearch(searchD1,searchD2,statusSearch,subjectSearch,staffSearch,searchK,searchV);
 	}
 }

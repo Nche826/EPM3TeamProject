@@ -21,6 +21,64 @@
     		<result property="store_tel" column="store_tel"/>
     </resultMap>
     
+    <resultMap type="CustomerT" id="CustomerTSelect">
+    		<result property="customert_code" column="customert_code"/>
+    		<result property="customert_status" column="customert_status"/>
+    		<result property="customert_name" column="customert_name"/>
+    		<result property="customert_tel" column="customert_tel"/>
+    		<result property="staff_code" column="staff_code"/>
+    		<result property="customert_reg_date" column="customert_reg_date"/>
+    		<result property="staff_name" column="member_name"/>
+    		<result property="store_name" column="store_name"/>
+    </resultMap>
+    
+    <delete id="customerTDelete" parameterType="String" statementType="PREPARED">
+    DELETE 
+    FROM 
+    	tb_customert 
+    WHERE 
+    	customert_code=#{customert_code};
+    </delete>
+    
+    <select id="CustomerTList" parameterType="String" resultMap="CustomerTSelect">
+	    SELECT 
+			ct.customert_code
+			,ct.customert_status
+			,ct.customert_name
+			,ct.customert_tel
+			,ct.staff_code
+			,st.store_name
+			,ct.customert_reg_date
+			,m.member_name
+	
+		FROM 
+			tb_customert AS ct
+		JOIN 
+			tb_staff AS s
+		ON 
+			s.staff_code =ct.staff_code
+		JOIN 
+			tb_store AS st 
+		ON 
+			st.store_code = s.store_code
+		JOIN 
+			tb_member AS m
+		ON 
+			m.member_id = s.member_id
+	    ORDER BY 
+		ct.customert_reg_date DESC;
+    </select>
+    
+    <select id="getStaffName" parameterType="String" resultMap="CustomerSelect">
+    SELECT 
+    	member_id
+       ,staff_code
+	FROM 
+		tb_staff
+	GROUP BY 
+		member_id;
+    </select>
+    
     <delete id="customerDelete" parameterType="String" statementType="PREPARED">
     DELETE 
     FROM 
@@ -30,14 +88,6 @@
     </delete>
     
     <update id="customerUpdate" parameterType="customer">
-    <selectKey order="BEFORE" keyProperty="staff_code" resultType="String">
-		SELECT
-			s.staff_code
-		FROM 
-			tb_staff AS s
-		WHERE 
-			s.member_id =#{member_id}
-	</selectKey> 
 	    UPDATE 
 	    	tb_customer
 		SET
@@ -116,51 +166,111 @@
     
     </select>
     
-    <select id="CustomerList" parameterType="String" resultMap="CustomerSelect">
-   
-	SELECT 
-		customer_code
-		,customer_name 
-		,customer_tel 
-		,customer_birth 
-		,count(d.devopen_customer) 
-		,count(h.homeopen_customer) 
-		,m.member_name
-		,m.member_id
-		,st.store_name 
-		,customer_reg_date 
-		,s.staff_code
-	FROM 
-		tb_customer AS c
-		JOIN 
-			tb_staff AS s
-			ON 
-				c.staff_code=s.staff_code
-		JOIN 
-			tb_member AS m
-			ON 
-				s.member_id=m.member_id
-		join
-			tb_store AS st
-			ON 
-				s.store_code=st.store_code
-		LEFT JOIN 
-			tb_devopen AS d
-			ON 
-				d.staff_code=c.staff_code
-			AND 
-				d.devopen_customer=c.customer_name
-		LEFT JOIN 
-			tb_homeopen AS h
-			ON 
-				h.staff_code = c.staff_code
-			AND 
-				h.homeopen_customer=c.customer_name
-		GROUP BY 
-			customer_code;
-    
-    
+    <select id="customerSch" parameterType="String" resultMap="CustomerSelect">
+		SELECT 
+			customer_code
+			,customer_name 
+			,customer_tel 
+			,customer_birth 
+			,count(d.devopen_customer) 
+			,count(h.homeopen_customer) 
+			,m.member_name
+			,m.member_id
+			,st.store_name 
+			,customer_reg_date 
+			,s.staff_code
+		FROM 
+			tb_customer AS c
+			JOIN 
+				tb_staff AS s
+				ON 
+					c.staff_code=s.staff_code
+			JOIN 
+				tb_member AS m
+				ON 
+					s.member_id=m.member_id
+			join
+				tb_store AS st
+				ON 
+					s.store_code=st.store_code
+			LEFT JOIN 
+				tb_devopen AS d
+				ON 
+					d.staff_code=c.staff_code
+				AND 
+					d.devopen_customer=c.customer_name
+			LEFT JOIN 
+				tb_homeopen AS h
+				ON 
+					h.staff_code = c.staff_code
+				AND 
+					h.homeopen_customer=c.customer_name
+			<where>
+			    <if test="dateSch1 != null and dateSch1 != '' || dateSch2 != null and dateSch2 != ''">
+			       (customer_reg_date between #{dateSch1} and #{dateSch2})
+			    </if>
+			    <if test="selectSch =='customerName'">
+			        AND customer_name like #{table_search}
+			    </if>
+			    <if test="selectSch =='customerPhone'">
+			        AND customer_tel like #{%table_search}
+			    </if>
+			    <if test="selectSch =='customerBirth'">
+			        AND customer_birth like #{table_search}
+			    </if>
+			    <if test="selectSch =='staffName'">
+			        AND m.member_name like #{table_search}
+			    </if>
+  		   </where>
+  			GROUP BY 
+				customer_code
+			ORDER BY customer_reg_date DESC;
     </select>
+    
+    <select id="CustomerList" parameterType="String" resultMap="CustomerSelect">
+		SELECT 
+			customer_code
+			,customer_name 
+			,customer_tel 
+			,customer_birth 
+			,count(d.devopen_customer) 
+			,count(h.homeopen_customer) 
+			,m.member_name
+			,m.member_id
+			,st.store_name 
+			,customer_reg_date 
+			,s.staff_code
+		FROM 
+			tb_customer AS c
+			JOIN 
+				tb_staff AS s
+				ON 
+					c.staff_code=s.staff_code
+			JOIN 
+				tb_member AS m
+				ON 
+					s.member_id=m.member_id
+			join
+				tb_store AS st
+				ON 
+					s.store_code=st.store_code
+			LEFT JOIN 
+				tb_devopen AS d
+				ON 
+					d.staff_code=c.staff_code
+				AND 
+					d.devopen_customer=c.customer_name
+			LEFT JOIN 
+				tb_homeopen AS h
+				ON 
+					h.staff_code = c.staff_code
+				AND 
+					h.homeopen_customer=c.customer_name
+			GROUP BY 
+				customer_code
+			ORDER BY customer_reg_date DESC
+    </select>
+    
     
     <insert id="addCustomer" parameterType="Customer">
     <selectKey order="BEFORE" keyProperty="customer_code" resultType="String">

@@ -50,9 +50,19 @@
 		<result property="updateMemo"				column="devicein_memo"/>	
 		<result property="updateinCode"				column="devicein_code"/>	
 		
+		<result property="searchDateStart" 			column="devicein_date"/>
+		<result property="searchDateEnd"			column="devicein_date"/>
+		<result property="searchStatus" 			column="devicein_status"/>
+		<result property="searchDealler" 			column="dealler_code"/>
+		<result property="searchStaff" 				column="staff_code"/>
+		<result property="searchSerial" 			column="devicein_serial"/>
+		
+		<result property="deleteSerial"				column="devicein_serial"/>
+		
+		
 	</resultMap>
 
-	<select id = "getDeviceSelect" parameterType="String" resultMap="DeviceinSelect">
+<!-- 	<select id = "getDeviceSelect" parameterType="String" resultMap="DeviceinSelect">
 	SELECT
 		devicein_code
 		,devicein_serial
@@ -69,7 +79,8 @@
 	WHERE
 		devicein_serial = #{deviceinSerial}
 	</select>
-		
+ -->	
+ 	
 	<select id = "deviceList" parameterType="String" resultMap="DeviceinSelect">
 	SELECT
 	*
@@ -83,8 +94,102 @@
 		ON s.store_code = a.store_code
 	JOIN tb_deviceinfo as info
 		on info.dinfo_devicein = i.devicein_code
-	</select>	
-
+	</select>
+	
+	<select id = "searchList" parameterType="Device" resultMap="DeviceinSelect">
+	SELECT
+	*
+	FROM
+		tb_devicein AS i
+	join tb_device  AS d
+		on 	i.device_code = d.device_code
+	JOIN tb_staff AS s
+	 	ON i.staff_code = s.staff_code
+	JOIN tb_store AS a
+		ON s.store_code = a.store_code
+	JOIN tb_deviceinfo as info
+		on info.dinfo_devicein = i.devicein_code
+	<where>
+			<choose>
+				<!-- 5개 항목 일치시 -->
+				 <when test="searchStatus != ''.toString() and searchDealler != ''.toString()
+				 and searchStaff !=''.toString() and searchSerial !=''.toString()
+				 and searchDateStart !=''.toString() and searchDateEnd !=''.toString()">	
+				    <if test = "searchStatus != ''.toString()">
+				    	and i.devicein_status = #{searchStatus}
+				    </if>	
+				    <if test="searchDealler != ''.toString()">
+			   			and i.dealler_code = #{searchDealler}	
+			   		</if>
+			   		<if test="searchStaff != ''.toString()">
+			   			and i.staff_code = #{searchStaff}
+			   		</if>
+			   		<if test="searchSerial != ''.toString()">
+			   			and i.devicein_serial = #{searchSerial}
+			   		</if>
+			   		<if test="searchDateStart != ''.toString()">
+			   			and i.devicein_date >= #{searchDateStart}
+			   		</if>
+			   		<if test="searchDateEnd != ''.toString()">
+			   			and #{searchDateEnd} >= i.devicein_date
+			   		</if>
+			    </when>	
+			    <!-- 상태 조건 -->
+			    <when test="searchStatus != ''.toString() and searchDealler == ''.toString()
+				 and searchStaff ==''.toString() and searchSerial ==''.toString()
+				 and searchDateStart ==''.toString() and searchDateEnd ==''.toString()">	
+				    <if test = "searchStatus != ''.toString()">
+				    	and i.devicein_status = #{searchStatus}
+				    </if>					   
+			    </when>	
+			    <!-- 거래처 조건 -->
+			    <when test="searchStatus == ''.toString() and searchDealler != ''.toString()
+				 and searchStaff ==''.toString() and searchSerial ==''.toString()
+				 and searchDateStart ==''.toString() and searchDateEnd ==''.toString()">	
+				    <if test = "searchDealler != ''.toString()">
+				    	and i.dealler_code = #{searchDealler}
+				    </if>					   
+			    </when>
+			    <!-- 직원 조건 -->
+			    <when test="searchStatus == ''.toString() and searchDealler == ''.toString()
+				 and searchStaff !=''.toString() and searchSerial ==''.toString()
+				 and searchDateStart ==''.toString() and searchDateEnd ==''.toString()">	
+				    <if test = "searchStaff != ''.toString()">
+				    	and i.staff_code = #{searchStaff}
+				    </if>					   
+			    </when>
+			    <!-- 일련번호 조건 -->
+			    <when test="searchStatus == ''.toString() and searchDealler == ''.toString()
+				 and searchStaff ==''.toString() and searchSerial !=''.toString()
+				 and searchDateStart ==''.toString() and searchDateEnd ==''.toString()">	
+				    <if test = "searchSerial != ''.toString()">
+				    	and i.devicein_serial = #{searchSerial}
+				    </if>					   
+			    </when>
+			    <!-- 입고일 조건 -->
+			    <when test="searchStatus == ''.toString() and searchDealler == ''.toString()
+				 and searchStaff ==''.toString() and searchSerial ==''.toString()
+				 and searchDateStart !=''.toString() and searchDateEnd !=''.toString()">	
+				    <if test = "searchDateStart != ''.toString()">
+				    	and i.devicein_date >= #{searchDateStart}
+				    </if>
+					<if test = "searchDateEnd != ''.toString()">
+				    	and #{searchDateEnd} >= i.devicein_date
+				    </if>				   
+			    </when>
+			   
+				   			    
+			 
+			    <otherwise>
+	      			
+		   		</otherwise>
+		   		
+		   	</choose>	
+	    </where> 
+	</select>
+	
+	
+		
 	<insert id="deviceInsert" parameterType="Device">
 	<selectKey keyProperty="deviceinCode,deviceCode" resultType="hashmap" order="BEFORE">
  			SELECT 
@@ -132,9 +237,9 @@ INSERT
 			)		
 		</insert>
 		<insert id="deviceInfoInsert" parameterType="Device">	
-		<selectKey keyProperty="infoCode" resultType="String" order="BEFORE">
+		<selectKey keyProperty="infoCode" resultType="hashmap" order="BEFORE">
  			SELECT 
- 				CONCAT('code', MAX(CAST(SUBSTRING(dinfo_code,5) AS DECIMAL)+1)) AS dinfo_code
+ 				CONCAT('code', MAX(CAST(SUBSTRING(dinfo_code,5) AS DECIMAL)+1)) AS infoCode
 			FROM tb_deviceinfo
  		</selectKey>
 	INSERT		
@@ -159,36 +264,6 @@ INSERT
 	
 		</insert>
 		
-		<update id="deviceUpdate" parameterType="Device">
-	<selectKey keyProperty="deviceCode" resultType="hashmap" order="BEFORE">
-				SELECT
-						device_code as deviceCode
-				FROM
-						tb_device 
-				where
-						device_model=#{updateModel}
-						and device_type=#{updateType}
-						and device_color=#{updateColor}
-						and device_price=#{updatePrice}
- 	</selectKey>
-	update
-		tb_devicein
-	
-	set
-		devicein_serial = #{updateSerial}
-		,dealler_code = #{updateDealler}
-		,device_code = #{deviceCode}
-		,devicein_date = NOW()
-		,devicein_memo = #{updateMemo}
-		,staff_code = #{updateStaff}
-		,devicein_reg_date = NOW()
-	
-	WHERE 
-		devicein_serial = #{updateSerial}
-	
-	
-		</update>
-		
 		<update id="deviceInfoUpdate" parameterType="Device">	
 		<selectKey keyProperty="deviceinCode" resultType="hashmap" order="BEFORE">
 			SELECT
@@ -198,17 +273,78 @@ INSERT
 			where
 				devicein_serial = #{updateSerial}
 						
- 	</selectKey>
-	update		
-		tb_deviceinfo
-	set
-		dinfo_devicein = #{deviceinCode}
-		,dinfo_method = #{updateMethod}
-		,dinfo_store = #{updateStore}
-		,dinfo_memo = #{updateMemo}
-		,dinfo_reg_date = NOW()
-	where
-		dinfo_devicein = #{deviceinCode}
+		</selectKey>
+			update		
+				tb_deviceinfo
+			set
+				dinfo_devicein = #{deviceinCode}
+				,dinfo_method = #{updateMethod}
+				,dinfo_store = #{updateStore}
+				,dinfo_memo = #{updateMemo}
+				,dinfo_reg_date = NOW()
+			where
+				dinfo_devicein = #{deviceinCode}
 		</update>
+		
+		<update id="deviceUpdate" parameterType="Device">
+		<selectKey keyProperty="deviceCode" resultType="hashmap" order="BEFORE">
+			SELECT
+					device_code as deviceCode
+			FROM
+					tb_device 
+			where
+					device_model=#{updateModel}
+					and device_type=#{updateType}
+					and device_color=#{updateColor}
+					and device_price=#{updatePrice}
+ 		</selectKey>
+			update
+				tb_devicein
+			
+			set
+				devicein_serial = #{updateSerial}
+				,dealler_code = #{updateDealler}
+				,device_code = #{deviceCode}
+				,devicein_date = NOW()
+				,devicein_memo = #{updateMemo}
+				,staff_code = #{updateStaff}
+				,devicein_reg_date = NOW()
+			
+			WHERE 
+				devicein_serial = #{updateSerial}
+	
+	
+		</update>
+		
+					
+			
+		<delete id="deviceInfoDelete" parameterType="Device">
+		<!-- 
+		~ is specified twice, both as a target for 'DELETE' and as a separate source for data ~
+		서브쿼리에서 조회한 테이블과 동일한 테이블의 값을 변경하려고 할 때 발생한다.
+		해당 서브쿼리에 ALIAS를 부여한 뒤 SELECT문 으로 한번 더 감싸면 해결된다. 
+		-->
+
+			Delete From tb_deviceinfo
+			where dinfo_devicein = (SELECT *
+									FROM (SELECT
+														dinfo_devicein
+													from
+														tb_deviceinfo as i
+													join
+														tb_devicein as d
+													on
+														i.dinfo_devicein = d.devicein_code
+													where
+														devicein_serial = #{deleteSerial}) as dcode)
+		</delete>							
+		
+	
+			
+		<delete id="deviceDelete" parameterType="Device">			
+			Delete From tb_devicein
+			where devicein_serial = #{deleteSerial}				
+		</delete>
+		
 </mapper>
 	

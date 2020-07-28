@@ -1,7 +1,10 @@
 package com.cafe24.epm.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class CompanyBoardContent {
 	private String companyCode;
+	private String memberId;
 	private String staffCode;
 	private String staffName;
 	private String companyCount;
@@ -11,12 +14,18 @@ public class CompanyBoardContent {
 	private String companyDate;
 	private String commentCount;
 	private String storeName;
-	
+	private MultipartFile file;
 	public String getCompanyCode() {
 		return companyCode;
 	}
 	public void setCompanyCode(String companyCode) {
 		this.companyCode = companyCode;
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	public String getStaffCode() {
 		return staffCode;
@@ -72,12 +81,19 @@ public class CompanyBoardContent {
 	public void setStoreName(String storeName) {
 		this.storeName = storeName;
 	}
-	
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("CompanyBoardContent [companyCode=");
 		builder.append(companyCode);
+		builder.append(", memberId=");
+		builder.append(memberId);
 		builder.append(", staffCode=");
 		builder.append(staffCode);
 		builder.append(", staffName=");
@@ -96,9 +112,9 @@ public class CompanyBoardContent {
 		builder.append(commentCount);
 		builder.append(", storeName=");
 		builder.append(storeName);
+		builder.append(", file=");
+		builder.append(file);
 		builder.append("]");
 		return builder.toString();
 	}
-	
-
 }

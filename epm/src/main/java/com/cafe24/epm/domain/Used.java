@@ -1,17 +1,17 @@
 package com.cafe24.epm.domain;
 
-public class Device {
+public class Used {
 	
-	private String deviceinCode;
-	private String deviceinSerial;
-	private String deviceinDealler;
-	private String deviceinDevice;
-	private String deviceinStatus;
-	private String deviceinStatDate;
-	private String deviceinDate;
-	private String deviceinMemo;
-	private String deviceinStaff;
-	private String deviceinRegDate;
+	private String usedinCode;
+	private String usedinSerial;
+	private String usedinTelecom;
+	private String usedinDevice;
+	private String usedinStatus;
+	private String usedinDate;
+	private String usedinPrice;
+	private String usedinStaff;
+	private String usedinMemo;
+	private String usedinRegDate;
 	
 	private String deviceCode;
 	private String deviceType;
@@ -45,6 +45,8 @@ public class Device {
 	private String updateSerial;
 	private String updateMemo;
 	private String updateinCode;
+	private String updateTelecom;
+	
 	
 	private String deleteCode;
 	
@@ -57,84 +59,84 @@ public class Device {
 	
 	private String deleteSerial;
 
-	public String getDeviceinCode() {
-		return deviceinCode;
+	public String getUsedinCode() {
+		return usedinCode;
 	}
 
-	public void setDeviceinCode(String deviceinCode) {
-		this.deviceinCode = deviceinCode;
+	public void setUsedinCode(String usedinCode) {
+		this.usedinCode = usedinCode;
 	}
 
-	public String getDeviceinSerial() {
-		return deviceinSerial;
+	public String getUsedinSerial() {
+		return usedinSerial;
 	}
 
-	public void setDeviceinSerial(String deviceinSerial) {
-		this.deviceinSerial = deviceinSerial;
+	public void setUsedinSerial(String usedinSerial) {
+		this.usedinSerial = usedinSerial;
 	}
 
-	public String getDeviceinDealler() {
-		return deviceinDealler;
+	public String getUsedinTelecom() {
+		return usedinTelecom;
 	}
 
-	public void setDeviceinDealler(String deviceinDealler) {
-		this.deviceinDealler = deviceinDealler;
+	public void setUsedinTelecom(String usedinTelecom) {
+		this.usedinTelecom = usedinTelecom;
 	}
 
-	public String getDeviceinDevice() {
-		return deviceinDevice;
+	public String getUsedinDevice() {
+		return usedinDevice;
 	}
 
-	public void setDeviceinDevice(String deviceinDevice) {
-		this.deviceinDevice = deviceinDevice;
+	public void setUsedinDevice(String usedinDevice) {
+		this.usedinDevice = usedinDevice;
 	}
 
-	public String getDeviceinStatus() {
-		return deviceinStatus;
+	public String getUsedinStatus() {
+		return usedinStatus;
 	}
 
-	public void setDeviceinStatus(String deviceinStatus) {
-		this.deviceinStatus = deviceinStatus;
+	public void setUsedinStatus(String usedinStatus) {
+		this.usedinStatus = usedinStatus;
 	}
 
-	public String getDeviceinStatDate() {
-		return deviceinStatDate;
+	public String getUsedinDate() {
+		return usedinDate;
 	}
 
-	public void setDeviceinStatDate(String deviceinStatDate) {
-		this.deviceinStatDate = deviceinStatDate;
+	public void setUsedinDate(String usedinDate) {
+		this.usedinDate = usedinDate;
 	}
 
-	public String getDeviceinDate() {
-		return deviceinDate;
+	public String getUsedinPrice() {
+		return usedinPrice;
 	}
 
-	public void setDeviceinDate(String deviceinDate) {
-		this.deviceinDate = deviceinDate;
+	public void setUsedinPrice(String usedinPrice) {
+		this.usedinPrice = usedinPrice;
 	}
 
-	public String getDeviceinMemo() {
-		return deviceinMemo;
+	public String getUsedinStaff() {
+		return usedinStaff;
 	}
 
-	public void setDeviceinMemo(String deviceinMemo) {
-		this.deviceinMemo = deviceinMemo;
+	public void setUsedinStaff(String usedinStaff) {
+		this.usedinStaff = usedinStaff;
 	}
 
-	public String getDeviceinStaff() {
-		return deviceinStaff;
+	public String getUsedinMemo() {
+		return usedinMemo;
 	}
 
-	public void setDeviceinStaff(String deviceinStaff) {
-		this.deviceinStaff = deviceinStaff;
+	public void setUsedinMemo(String usedinMemo) {
+		this.usedinMemo = usedinMemo;
 	}
 
-	public String getDeviceinRegDate() {
-		return deviceinRegDate;
+	public String getUsedinRegDate() {
+		return usedinRegDate;
 	}
 
-	public void setDeviceinRegDate(String deviceinRegDate) {
-		this.deviceinRegDate = deviceinRegDate;
+	public void setUsedinRegDate(String usedinRegDate) {
+		this.usedinRegDate = usedinRegDate;
 	}
 
 	public String getDeviceCode() {
@@ -369,6 +371,14 @@ public class Device {
 		this.updateinCode = updateinCode;
 	}
 
+	public String getUpdateTelecom() {
+		return updateTelecom;
+	}
+
+	public void setUpdateTelecom(String updateTelecom) {
+		this.updateTelecom = updateTelecom;
+	}
+
 	public String getDeleteCode() {
 		return deleteCode;
 	}
@@ -435,27 +445,25 @@ public class Device {
 
 	@Override
 	public String toString() {
-		return "Device [deviceinCode=" + deviceinCode + ", deviceinSerial=" + deviceinSerial + ", deviceinDealler="
-				+ deviceinDealler + ", deviceinDevice=" + deviceinDevice + ", deviceinStatus=" + deviceinStatus
-				+ ", deviceinStatDate=" + deviceinStatDate + ", deviceinDate=" + deviceinDate + ", deviceinMemo="
-				+ deviceinMemo + ", deviceinStaff=" + deviceinStaff + ", deviceinRegDate=" + deviceinRegDate
-				+ ", deviceCode=" + deviceCode + ", deviceType=" + deviceType + ", deviceManuf=" + deviceManuf
-				+ ", deviceModel=" + deviceModel + ", deviceName=" + deviceName + ", deviceColor=" + deviceColor
-				+ ", devicePrice=" + devicePrice + ", memberId=" + memberId + ", deviceRegDate=" + deviceRegDate
-				+ ", deviceTelecom=" + deviceTelecom + ", storeName=" + storeName + ", infoCode=" + infoCode
-				+ ", infoDevicein=" + infoDevicein + ", infoMethod=" + infoMethod + ", infoStore=" + infoStore
-				+ ", infoMemo=" + infoMemo + ", infoRegDate=" + infoRegDate + ", updateStore=" + updateStore
-				+ ", updateStaff=" + updateStaff + ", updateDate=" + updateDate + ", updateMethod=" + updateMethod
-				+ ", updateDealler=" + updateDealler + ", updateModel=" + updateModel + ", updateType=" + updateType
-				+ ", updateColor=" + updateColor + ", updatePrice=" + updatePrice + ", updateSerial=" + updateSerial
-				+ ", updateMemo=" + updateMemo + ", updateinCode=" + updateinCode + ", deleteCode=" + deleteCode
-				+ ", searchDateStart=" + searchDateStart + ", searchDateEnd=" + searchDateEnd + ", searchStatus="
-				+ searchStatus + ", searchDealler=" + searchDealler + ", searchStaff=" + searchStaff + ", searchSerial="
-				+ searchSerial + ", deleteSerial=" + deleteSerial + "]";
+		return "Used [usedinCode=" + usedinCode + ", usedinSerial=" + usedinSerial + ", usedinTelecom=" + usedinTelecom
+				+ ", usedinDevice=" + usedinDevice + ", usedinStatus=" + usedinStatus + ", usedinDate=" + usedinDate
+				+ ", usedinPrice=" + usedinPrice + ", usedinStaff=" + usedinStaff + ", usedinMemo=" + usedinMemo
+				+ ", usedinRegDate=" + usedinRegDate + ", deviceCode=" + deviceCode + ", deviceType=" + deviceType
+				+ ", deviceManuf=" + deviceManuf + ", deviceModel=" + deviceModel + ", deviceName=" + deviceName
+				+ ", deviceColor=" + deviceColor + ", devicePrice=" + devicePrice + ", memberId=" + memberId
+				+ ", deviceRegDate=" + deviceRegDate + ", deviceTelecom=" + deviceTelecom + ", storeName=" + storeName
+				+ ", infoCode=" + infoCode + ", infoDevicein=" + infoDevicein + ", infoMethod=" + infoMethod
+				+ ", infoStore=" + infoStore + ", infoMemo=" + infoMemo + ", infoRegDate=" + infoRegDate
+				+ ", updateStore=" + updateStore + ", updateStaff=" + updateStaff + ", updateDate=" + updateDate
+				+ ", updateMethod=" + updateMethod + ", updateDealler=" + updateDealler + ", updateModel=" + updateModel
+				+ ", updateType=" + updateType + ", updateColor=" + updateColor + ", updatePrice=" + updatePrice
+				+ ", updateSerial=" + updateSerial + ", updateMemo=" + updateMemo + ", updateinCode=" + updateinCode
+				+ ", updateTelecom=" + updateTelecom + ", deleteCode=" + deleteCode + ", searchDateStart="
+				+ searchDateStart + ", searchDateEnd=" + searchDateEnd + ", searchStatus=" + searchStatus
+				+ ", searchDealler=" + searchDealler + ", searchStaff=" + searchStaff + ", searchSerial=" + searchSerial
+				+ ", deleteSerial=" + deleteSerial + "]";
 	}
-	
-	
-	
+
 	
 
 }

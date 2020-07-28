@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.epm.domain.Customer;
+import com.cafe24.epm.domain.CustomerT;
 import com.cafe24.epm.domain.Staff;
 import com.cafe24.epm.service.CustomerService;
 import com.cafe24.epm.service.StaffService;
@@ -22,7 +23,31 @@ public class CustomerController {
 	@Autowired private StaffService staffService;
 	
 	
+	//고객이력화면 가져오기
+	@GetMapping("/customerTList")
+	public String customerTList(Model model,CustomerT customerT ) {
+		System.out.println("========고객 이력 화면 시작 =========");
+		List<CustomerT> customerTList = customerService.CustomerTList();
+		model.addAttribute("customerTList", customerTList);
+		System.out.println("이력 리스트 --->"+customerTList);
+		return"customer/customerTList";
+	}
 	
+	//고객이력삭제처리
+	@PostMapping("/customerTDelete")
+	@ResponseBody
+	public int customerTDelete(Model model, @RequestParam(value="customertCodes[]",required = false)String[] customertCodes) {
+		System.out.println("customertCodes"+customertCodes);
+		System.out.println("=========고객 이력 삭제 시작===========");
+		int re = 0;
+		for(String customert_code : customertCodes) {
+			System.out.println("이력 삭제 :"+customert_code);
+			re=customerService.customerTDelete(customert_code);
+			System.out.println("삭제여부 --->"+re);
+			
+		}
+		return re;
+	}
 	
 	//고객삭제처리
 	@PostMapping("/customerDelete")
@@ -31,7 +56,7 @@ public class CustomerController {
 		System.out.println("customerCodes"+customerCodes);
 		System.out.println("=============고객 삭제 시작=============");
 		int re =0;
-		for(String customer_code : customerCodes) {
+		for(String customer_code : customerCodes) { 
 			System.out.println("고객 삭제 :"+customer_code);
 			re=customerService.customerDelete(customer_code);
 			System.out.println("삭제여부--->"+re);
@@ -52,11 +77,6 @@ public class CustomerController {
 	}
 	
 	
-	//고객이력화면 가져오기
-	@GetMapping("/customerTList")
-	public String customerTList() {
-		return"customer/customerTList";
-	}
 	
 	//고객 수정 처리
 	@PostMapping("/customerUpdate")
@@ -85,11 +105,31 @@ public class CustomerController {
 		return "customer/customerUpdate";
 	}
 	
+	//검색 결과 리스트 가져오기
+	@GetMapping("/customerSch")
+	public String customerSch(Model model,@RequestParam(name="dateSch1",required = false) String dateSch1
+										 ,@RequestParam(name="dateSch2",required = false) String dateSch2
+										 ,@RequestParam(name="selectSch",required = false) String selectSch
+										 ,@RequestParam(name="table_search",required = false) String table_search) {
+		System.out.println("=======검색 처리 시작 ========");
+		System.out.println("검색 날짜 :"+dateSch1+dateSch2);
+		System.out.println("검색 조건 : "+selectSch);
+		System.out.println("검색어 : "+table_search);
+		List<Customer> schList = customerService.customerSch(dateSch1, dateSch2,selectSch, table_search);
+		model.addAttribute("schList", schList);
+		System.out.println("======모달 내 셀렉트박스 직원아이디 목록 가져오기=====");
+		List<Customer> staff_id = customerService.getStaffName();
+		System.out.println("직원 리스트 --->"+ staff_id);
+		model.addAttribute("staff", staff_id);
+		System.out.println("=====================================");
+		return "customer/customerList";
+	}
+	
 	//고객리스트 화면 가져오기
 	@GetMapping("/customerList")
 	public String customerList(Model model,Customer customer ) {
 		System.out.println("======모달 내 셀렉트박스 직원아이디 목록 가져오기=====");
-		List<Staff> staff_id = staffService.staffList();
+		List<Customer> staff_id = customerService.getStaffName();
 		System.out.println("직원 리스트 --->"+ staff_id);
 		model.addAttribute("staff", staff_id);
 		System.out.println("=====================================");

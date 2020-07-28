@@ -50,8 +50,11 @@ public class StoreController {
 		System.out.println("=======수정페이지 시작============");
 		Store storeSelect = storeService.getStoreSelect(store_Name);
 		System.out.println("작업 결과 ----->"+storeSelect);
-		System.out.println("============================");
 		model.addAttribute("storeSelect", storeSelect);
+		System.out.println("============================");
+		List<Store> staffSelect =storeService.getstaffSelect(store_Name);
+		System.out.println("작업 결과 ----->"+staffSelect);
+		model.addAttribute("staffSelect", staffSelect);
 		return "setting/storeUpdate";
 	}
 	

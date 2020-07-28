@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cafe24.epm.domain.Dealler;
+import com.cafe24.epm.domain.Ledger;
 import com.cafe24.epm.domain.Staff;
 import com.cafe24.epm.domain.Store;
 import com.cafe24.epm.service.StaffService;
@@ -20,6 +22,27 @@ public class StaffController {
 	
 	@Autowired private StoreService storeService;
 	@Autowired private StaffService staffService;
+	
+	//검색 조건 처리
+	@GetMapping("/staffSch")
+	public String staffSch(Model model,@RequestParam(name="dateSch1",required = false)String dateSch1
+									   ,@RequestParam(name="dateSch2",required = false)String dateSch2
+									   ,@RequestParam(name="selectSch",required = false)String selectSch
+									   ,@RequestParam(name="table_search",required = false)String table_search) {
+		System.out.println("=======검색 처리 시작 ========");
+		System.out.println("검색 날짜 :"+dateSch1+dateSch2);
+		System.out.println("검색 조건 : "+selectSch);
+		System.out.println("검색어 : "+table_search);
+		List<Staff> staffList = staffService.staffSch(dateSch1, dateSch2, selectSch, table_search);
+		model.addAttribute("staffList", staffList);
+		System.out.println("======모달에 들어갈 셀렉트 박스 매장 리스트 가져오기 시작 =====");
+		List<Store> store_name = storeService.storeList();
+		System.out.println("매장 리스트 --->"+store_name);
+		model.addAttribute("store", store_name);
+		
+		return "setting/staffList";
+	}
+	
 	
 	//직원 삭제 처리 
 	@PostMapping("/staffDelete")
@@ -53,10 +76,10 @@ public class StaffController {
 	
 	//직원 수정 화면 가져오기
 	@GetMapping("/staffUpdate")
-	public String staffUpdate(Model model,@RequestParam(name="staff_id",required = false) String staff_id) {
-		System.out.println("staff_id--->"+staff_id);
+	public String staffUpdate(Model model,@RequestParam(name="staff_code",required = false) String staff_code) {
+		System.out.println("staff_code--->"+staff_code);
 		System.out.println("=======수정페이지 시작========");
-		Staff staffSelect = staffService.getStaffSelect(staff_id);
+		Staff staffSelect = staffService.getStaffSelect(staff_code);
 		System.out.println("staffSelect-->"+staffSelect);
 		System.out.println("==========================");
 		model.addAttribute("staffSelect", staffSelect);
@@ -74,18 +97,17 @@ public class StaffController {
 		return "redirect:/staffList";
 	}
 	//직원 관리 리스트 화면
-		@GetMapping("/staffList")
-		public String staffList(Model model,Staff staff) {
-			System.out.println("======모달에 들어갈 셀렉트 박스 매장 리스트 가져오기 시작 =====");
-			List<Store> store_name = storeService.storeList();
-			System.out.println("매장 리스트 --->"+store_name);
-			System.out.println("===========================");
-			model.addAttribute("store", store_name);
-			System.out.println("=========직원 리스트 화면 컨트롤러 시작========");
-			List<Staff> staffList = staffService.staffList();
-			System.out.println("직원 리스트 ----->"+staffList);
-			System.out.println("===========================");
-			model.addAttribute("staffList", staffList);
-			return "setting/staffList";
-		}
+	@GetMapping("/staffList")
+	public String staffList(Model model,Staff staff) {
+		System.out.println("======모달에 들어갈 셀렉트 박스 매장 리스트 가져오기 시작 =====");
+		List<Store> store_name = storeService.storeList();
+		System.out.println("매장 리스트 --->"+store_name);
+		model.addAttribute("store", store_name);
+		System.out.println("=========직원 리스트 화면 컨트롤러 시작========");
+		List<Staff> staffList = staffService.staffList();
+		System.out.println("직원 리스트 ----->"+staffList);
+		System.out.println("===========================");
+		model.addAttribute("staffList", staffList);
+		return "setting/staffList";
+	}
 }

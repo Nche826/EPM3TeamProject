@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cafe24.epm.domain.CompanyBoardComment;
 import com.cafe24.epm.domain.CompanyBoardContent;
@@ -25,6 +27,17 @@ public class CompanyBoardController {
 	@Autowired private CompanyBoardService companyBoardService;
 	@Autowired private StorageService storageService;
 	
+	//게시물 검색
+	@GetMapping("/companyBoardSearch")
+	public String companyBoardSearch (Model model, @RequestParam(name = "searchD1",required = false) String searchD1
+												 , @RequestParam(name = "searchD2",required = false) String searchD2
+												 , @RequestParam(name = "searchK",required = false) String searchK
+												 , @RequestParam(name = "searchV",required = false) String searchV) {
+		System.out.println("searchD1,searchD2,searchK,searchV : " + searchD1+searchD2+searchK+searchV);
+		List<CompanyBoardContent> companyBoardList = companyBoardService.companyBoardSearch(searchD1,searchD2,searchK,searchV);
+		model.addAttribute("companyBoardContentList",companyBoardList);		
+		return "company/companyListContents";
+	}
 	
 	//게시물 리스트
 	@GetMapping("/companyListContents")
@@ -40,6 +53,11 @@ public class CompanyBoardController {
 	public String companyContents (@RequestParam(name = "company_code", required = false) String companyCode, Model model) {
 		System.out.println("companyCode>>>" + companyCode);
 		CompanyBoardContent companyBoardContentSelect = companyBoardService.companyBoardSelect(companyCode);
+		List<CompanyBoardComment> companyBoardCommentList = companyBoardService.companyCommentList(companyCode);
+		//조회수 업데이트
+		companyBoardService.companyBoardCountUpadate(companyCode);
+		
+		model.addAttribute("companyBoardCommentList",companyBoardCommentList);
 		model.addAttribute("companyBoardContentSelect",companyBoardContentSelect);
 		return "company/companyContents";
 	}
@@ -61,16 +79,62 @@ public class CompanyBoardController {
 		return "company/companyInsertContents";
 	}
 	
+	//게시물 등록
+	@PostMapping("/companyInsertContents")
+	public String companyInsertContents (CompanyBoardContent companyBoardContent, @RequestParam(value = "file") MultipartFile file) throws IOException {
+		System.out.println("=======파일업로드=======");
+		storageService.store(file);
+		System.out.println(file+"::::::file");
+		System.out.println("=======게시물등록=======");
+		companyBoardContent.setCompanyFile(file.getOriginalFilename());
+		System.out.println(file.getOriginalFilename()+"::::::file.getOriginalFilename()");
+		companyBoardService.companyBoardInsert(companyBoardContent);
+		return "redirect:/companyListContents";
+	}
+	
 	//게시물 수정 화면
 	@GetMapping("/companyUpdateContents")
-	public String companyUpdateContents () {
+	public String companyUpdateContents (@RequestParam(name = "company_code", required = false) String companyCode, Model model) {
+		CompanyBoardContent companyBoardContentSelect = companyBoardService.companyBoardSelect(companyCode);
+		model.addAttribute("companyBoardContentSelect",companyBoardContentSelect);
 		return "company/companyUpdateContents";
+	}
+	
+	//게시물 수정 처리
+	@PostMapping("/companyUpdateContents")
+	public String companyUpdateContents (CompanyBoardContent companyBoardContent
+										, @RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
+		System.out.println("=======파일업로드=======");
+		storageService.store(file);
+		System.out.println(file+"::::::file");
+		System.out.println("=======게시물등록=======");
+		System.out.println(file.getOriginalFilename()+"::::::file.getOriginalFilename()");
+		companyBoardContent.setCompanyFile(file.getOriginalFilename());
+		System.out.println(companyBoardContent+"<<< CompanyBoardContent");
+		companyBoardService.companyBoardUpadate(companyBoardContent);
+		String companyCode = companyBoardContent.getCompanyCode();
+		return "redirect:/companyContents?company_code="+companyCode;
 	}
 	
 	//게시물 삭제
 	@GetMapping("/companyDeleteContents")
-	public String companyDeleteContents () {
+	public String companyDeleteContents (@RequestParam ( name = "company_code", required = false) String companyCode) {
+		//삭제할 게시물의 댓글 삭제
+		List<CompanyBoardComment> commentList = companyBoardService.companyCommentSelectByCode(companyCode);
+		for ( int i = 0; i < commentList.size(); i++ ) {
+			companyBoardService.companyCommentDelete(commentList.get(i).getCompanyCCode());
+		}
+		//게시물 삭제
+		companyBoardService.companyBoardDelete(companyCode);
 		return "redirect:/companyListContents";
+	}
+	
+	//댓글 등록
+	@PostMapping("/companyInsertComment")
+	public String companyInsertComment (CompanyBoardComment companyBoardComment) {
+		companyBoardService.companyCommentInsert(companyBoardComment);
+		String companyCode = companyBoardComment.getCompanyCode();
+		return "redirect:/companyContents?company_code="+companyCode;
 	}
 	
 	//댓글 목록
@@ -87,9 +151,23 @@ public class CompanyBoardController {
 		return "company/companyContents";
 	}
 	
+	//댓글 수정
+	@PostMapping(value = "/companyCommentUpdate", produces = "application/json")
+	@ResponseBody
+	public CompanyBoardComment companyUpdateComment (CompanyBoardComment companyBoardComment) {
+		companyBoardService.companyCommentUpdate(companyBoardComment);
+		System.out.println("companyBoardComment : "+companyBoardComment);
+		return companyBoardService.companyCommentSelectByCCode(companyBoardComment);
+	}
+	
 	//댓글 삭제
 	@GetMapping("/companyDeleteComment")
-	public String companyDeleteComment () {
-		return "company/companyContents";
+	public String companyDeleteComment (@RequestParam(name= "company_c_code", required = false) String companyCCode) {
+		CompanyBoardComment companyBoardComment = new CompanyBoardComment();
+		companyBoardComment.setCompanyCCode(companyCCode);
+		companyBoardComment = companyBoardService.companyCommentSelectByCCode(companyBoardComment);
+		String companyCode = companyBoardComment.getCompanyCode();;
+		companyBoardService.companyCommentDelete(companyCCode);
+		return "redirect:/companyContents?company_code="+companyCode;
 	}
 }

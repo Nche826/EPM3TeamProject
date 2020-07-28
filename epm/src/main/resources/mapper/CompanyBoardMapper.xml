@@ -6,6 +6,7 @@
 		
 		<resultMap type="CompanyBoardContent" id="companyContentSelect">
 			<result property="companyCode" column="company_code"/>
+			<result property="memberId" column="member_id"/>
 			<result property="staffCode" column="staff_code"/>
 			<result property="staffName" column="staff_name"/>
 			<result property="companyCount" column="company_count"/>
@@ -20,53 +21,18 @@
 		<resultMap type="CompanyBoardComment" id="companyCommentSelect">
 			<result property="companyCCode" column="company_c_code"/>
 			<result property="companyCode" column="company_code"/>
+			<result property="memberId" column="member_id"/>
 			<result property="staffCode" column="staff_code"/>
 			<result property="staffName" column="staff_name"/>
 			<result property="companyCDesc" column="company_c_desc"/>
 			<result property="companyCDate" column="company_c_date"/>
 		</resultMap>
-
-		<!-- 게시물 선택 -->
-		<select id="companyBoardSelect" parameterType="CompanyBoardContent" resultMap="companyContentSelect">
-			SELECT
-				b.company_code AS 'company_code'
-				, b.staff_code AS 'staff_code'
-				, m.member_name AS 'staff_name'
-				, b.company_count AS 'company_count'
-				, b.company_title AS 'company_title'
-				, b.company_desc AS 'company_desc'
-				, b.company_file AS 'company_file'
-				, b.company_date AS 'company_date'
-				, COUNT(c.company_c_code) AS 'comment_count'
-				, st.store_name AS 'store_name'
-				FROM
-					tb_company AS b
-					join
-					tb_staff AS sf
-					on
-					b.staff_code = sf.staff_code
-					join
-					tb_member AS m
-					on
-					sf.member_id = m.member_id
-					JOIN
-					tb_company_c AS c
-					on
-					b.company_code = c.company_code
-					join
-					tb_store AS st
-					on
-					sf.store_code = st.store_code
-			
-				WHERE b.company_code = #{companyCode}
-				
-			GROUP BY b.company_code
-		</select>
 		
-		<!-- 댓글 리스트  -->
-		<select id="companyCommentList" parameterType="CompanyBoardComment" resultMap="companyCommentSelect">
-		SELECT 
+		<!-- 글코드로 댓글 선택 -->
+		<select id="companyCommentSelectByCode" parameterType="String" resultMap="companyCommentSelect">
+			SELECT 
 			c.company_c_code	AS 'company_c_code'
+			, m.member_id as 'member_id'
 			, c.company_code AS 'company_code'
 			, c.staff_code AS 'staff_code'
 			, m.member_name AS 'staff_name'
@@ -92,10 +58,247 @@
 			c.company_code = #{companyCode}
 		</select>
 		
-		<!-- 게시물 리스트 -->
-		<select id="companyBoardList" parameterType="CompanyBoardContent" resultMap="companyContentSelect">
+		<!-- 댓글코드로 댓글 선택 -->
+		<select id="companyCommentSelectByCCode" parameterType="CompanyBoardComment" resultMap="companyCommentSelect">
+			SELECT 
+			c.company_c_code	AS 'company_c_code'
+			, m.member_id as 'member_id'
+			, c.company_code AS 'company_code'
+			, c.staff_code AS 'staff_code'
+			, m.member_name AS 'staff_name'
+			, c.company_c_desc AS 'company_c_desc' 
+			, c.company_c_date AS 'company_c_date'
+			
+			FROM
+			tb_company_c AS c
+			join
+			tb_company AS b
+			on
+			c.company_code = b.company_code
+			join
+			tb_staff AS sf
+			on
+			c.staff_code = sf.staff_code
+			join
+			tb_member AS m
+			on
+			sf.member_id = m.member_id
+			
+			WHERE
+			c.company_c_code = #{companyCCode}
+		</select>
+		
+		<!-- 댓글 삭제 -->
+		<delete id="companyCommentDelete" parameterType="String">
+			DELETE 
+				FROM
+					tb_company_c
+				<where> 
+					<if test="companyCCode != null and companyCCode != ''.toString()">company_c_code=#{companyCCode}</if>
+				</where>
+		</delete>
+		
+		<!-- 댓글 수정 -->
+		<update id="companyCommentUpdate" parameterType="CompanyBoardComment">
+			UPDATE tb_company_c
+			SET
+				company_c_desc=#{companyCDesc}
+			WHERE 
+				company_c_code=#{companyCCode}
+		</update>
+		
+		<!-- 댓글 등록 -->
+		<insert id="companyCommentInsert" parameterType="CompanyBoardComment">
+			<selectKey order="BEFORE" keyProperty="companyCCode" resultType="String">
+				SELECT
+					(case COUNT(*)
+					when 0 then 'companyc_1'
+					else CONCAT('companyc_',max(cast(substring(company_c_code,10) as decimal))+1)
+					END)
+				FROM 
+					tb_company_c
+			</selectKey>
+				INSERT INTO tb_company_c
+					(company_c_code
+					, company_code
+					, staff_code
+					, company_c_desc
+					, company_c_date)
+					VALUES 
+					(#{companyCCode}
+					, #{companyCode}
+					, #{staffCode}
+					, #{companyCDesc}
+					, NOW())
+		</insert>
+		
+		<!-- 댓글 리스트  -->
+		<select id="companyCommentList" parameterType="CompanyBoardComment" resultMap="companyCommentSelect">
+		SELECT 
+			c.company_c_code	AS 'company_c_code'
+			, c.company_code AS 'company_code'
+			, m.member_id as 'member_id'
+			, c.staff_code AS 'staff_code'
+			, m.member_name AS 'staff_name'
+			, c.company_c_desc AS 'company_c_desc' 
+			, c.company_c_date AS 'company_c_date'
+			
+			FROM
+			tb_company_c AS c
+			join
+			tb_company AS b
+			on
+			c.company_code = b.company_code
+			join
+			tb_staff AS sf
+			on
+			c.staff_code = sf.staff_code
+			join
+			tb_member AS m
+			on
+			sf.member_id = m.member_id
+			
+			WHERE
+			c.company_code = #{companyCode}
+			
+			ORDER BY c.company_c_date
+		</select>
+		
+		<!-- 게시물 검색 -->
+		<select id="companyBoardSearch" parameterType="String" resultMap="companyContentSelect">
+				SELECT
+				b.company_code AS 'company_code'
+				, b.staff_code AS 'staff_code'
+				, m.member_id AS 'member_id'
+				, m.member_name AS 'staff_name'
+				, b.company_count AS 'company_count'
+				, b.company_title AS 'company_title'
+				, b.company_desc AS 'company_desc'
+				, b.company_file AS 'company_file'
+				, b.company_date AS 'company_date'
+				, COUNT(c.company_c_code) AS 'comment_count'
+				, st.store_name AS 'store_name'
+				FROM
+					tb_company AS b
+					join
+					tb_staff AS sf
+					on
+					b.staff_code = sf.staff_code
+					join
+					tb_member AS m
+					on
+					sf.member_id = m.member_id
+					LEFT OUTER JOIN
+					tb_company_c AS c
+					on
+					b.company_code = c.company_code
+					join
+					tb_store AS st
+					on
+					sf.store_code = st.store_code
+						
+			<where>
+				<if test="searchD1 != null and searchD1 != ''.toString() and searchD2 != null and searchD2 != ''.toString">
+					(b.company_date between #{searchD1} and DATE_ADD(#{searchD2}, INTERVAL 1 day))
+				</if>
+				<if test="searchV != null and searchV != ''.toString() and searchK == 'name'">
+					and m.member_name like #{searchV}
+				</if>
+				<if test="searchV != null and searchV != ''.toString() and searchK == 'title'">
+					and b.company_title LIKE '%${searchV}%'
+				</if>
+				<if test="searchV != null and searchV != ''.toString() and searchK == 'contents'">
+					and b.company_desc LIKE '%${searchV}%'
+				</if>
+			</where>
+			GROUP BY b.company_code
+			ORDER BY b.company_date DESC
+		</select>
+		
+		<!-- 게시물 삭제 -->
+		<delete id="companyBoardDelete"  parameterType="String">
+			DELETE 
+				FROM tb_company
+				<where>
+					<if test="companyCode != null and companyCode != ''.toString()">company_code = #{companyCode}</if>
+				</where>		
+		</delete>
+		<!-- 게시물 수정 -->
+		<update id="companyBoardUpadate"  parameterType="CompanyBoardContent">
+			UPDATE tb_company
+				SET
+					<if test="companyFile != null and companyFile != '' ">
+						company_title= #{companyTitle}
+						, company_desc= #{companyDesc}
+						, company_file= #{companyFile}
+					</if>
+					<if test="companyFile == null or companyFile == '' ">
+						company_title= #{companyTitle}
+						, company_desc= #{companyDesc}
+					</if>
+				WHERE 
+					company_code = #{companyCode}
+		</update>
+		
+		<!-- 게시물 등록 -->
+		<insert id="companyBoardInsert" parameterType="CompanyBoardContent">
+			<selectKey order="BEFORE" keyProperty="companyCode" resultType="String">
+				SELECT
+					(case COUNT(*)
+					when 0 then 'company_1'
+					else CONCAT('company_',max(cast(substring(company_code,9) as decimal))+1)
+					END)
+				FROM 
+					tb_company
+			</selectKey>
+			
+			INSERT INTO tb_company
+				(company_code
+				, staff_code
+				, company_count
+				, company_title
+				, company_desc
+				, company_file
+				, company_date)
+			VALUES 
+				(#{companyCode}
+				, #{staffCode}
+				, 0
+				, #{companyTitle}
+				, #{companyDesc}
+				, #{companyFile}
+				, NOW())
+		</insert>
+		
+		<!-- 게시물 선택 시 조회수 업데이트-->
+		<update id="companyBoardCountUpadate" parameterType="CompanyBoardContent">
+				UPDATE tb_company
+					SET
+						company_count= (SELECT company_count +1)
+					WHERE 
+						company_code = #{companyCode}
+		</update>
+		<!--  <update id="companyBoardCountUpadate" parameterType="com.cafe24.epm.domain.CompanyBoardContent">
+			<selectKey keyColumn="company_count" keyProperty="companyCount" resultType="string">
+				SELECT 
+					CONVERT(c.company_count+1,CHAR) AS company_count
+				from
+					tb_company AS c
+				where
+					c.company_code = #{companyCode}
+			</selectKey>
+			UPDATE tb_company
+				SET
+					company_count= #{companyCount}
+				WHERE 
+					company_code = #{companyCode}
+		</update>  -->
+		
+		<!-- 게시물 선택 -->
+		<select id="companyBoardSelect" parameterType="CompanyBoardContent" resultMap="companyContentSelect">
 			SELECT
 				b.company_code AS 'company_code'
+				, m.member_id as 'member_id'
 				, b.staff_code AS 'staff_code'
 				, m.member_name AS 'staff_name'
 				, b.company_count AS 'company_count'
@@ -115,7 +318,45 @@
 					tb_member AS m
 					on
 					sf.member_id = m.member_id
-					JOIN
+					LEFT OUTER JOIN
+					tb_company_c AS c
+					on
+					b.company_code = c.company_code
+					join
+					tb_store AS st
+					on
+					sf.store_code = st.store_code
+			
+				WHERE b.company_code = #{companyCode}
+				
+			GROUP BY b.company_code
+		</select>
+		
+		<!-- 게시물 리스트 -->
+		<select id="companyBoardList" parameterType="CompanyBoardContent" resultMap="companyContentSelect">
+			SELECT
+				b.company_code AS 'company_code'
+				, b.staff_code AS 'staff_code'
+				, m.member_id AS 'member_id'
+				, m.member_name AS 'staff_name'
+				, b.company_count AS 'company_count'
+				, b.company_title AS 'company_title'
+				, b.company_desc AS 'company_desc'
+				, b.company_file AS 'company_file'
+				, b.company_date AS 'company_date'
+				, COUNT(c.company_c_code) AS 'comment_count'
+				, st.store_name AS 'store_name'
+				FROM
+					tb_company AS b
+					join
+					tb_staff AS sf
+					on
+					b.staff_code = sf.staff_code
+					join
+					tb_member AS m
+					on
+					sf.member_id = m.member_id
+					LEFT OUTER JOIN
 					tb_company_c AS c
 					on
 					b.company_code = c.company_code
@@ -125,6 +366,7 @@
 					sf.store_code = st.store_code
 			
 			GROUP BY b.company_code
+			ORDER BY b.company_date desc
 		</select>
 		
 	</mapper>

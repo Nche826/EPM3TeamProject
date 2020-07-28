@@ -26,11 +26,8 @@
   
     <!-- Main content -->
     <div class="br-pagetitle" style="padding:0">
-		<i class="icon ion-md-paper"></i>
-	
-		<div>
-			<h4></h4>
-		</div>
+		<i class="icon ion-md-paper"></i>	
+		
 	</div>
 			
 	<div class="row mg-t-20 mg-b-20" >
@@ -47,32 +44,32 @@
 					<tbody>
 						<tr>
 							<th class="tx-right">일련번호</th>
-							<td th:text="${d.deviceinSerial}"></td>
+							<td><label id="infoserial"></label></td>
 							
 						</tr>
 						<tr>
 							<th class="tx-right">거래처</th>
-							<td th:text="${d.deviceinDealler}"></td>
+							<td><label id="infodealler"></label></td>
 						</tr>
 						<tr>
 							<th class="tx-right">통신사</th>
-							<td th:text="${d.deviceTelecom}"></td>
+							<td><label id="infotelecom"></label></td>
 						</tr>
 						<tr>
 							<th class="tx-right">모델명</th>
-							<td th:text="${d.deviceModel}"><span class="tx-10 tx-gray-500 mg-l-5"></span></td>
+							<td><label id="infomodel"></label></td>
 						</tr>
 						<tr>
 							<th class="tx-right">종류</th>
-							<td th:text="${d.deviceType}"></td>
+							<td><label id="infotype"></label></td>
 						</tr>
 						<tr>
 							<th class="tx-right">색상</th>
-							<td th:text="${d.deviceColor}"></td>
+							<td><label id="infocolor"></label></td>
 						</tr>
 						<tr>
 							<th class="tx-right">입고가</th>
-							<td th:text="${d.devicePrice}"></td>
+							<td><label id="infoprice"></label></td>
 						</tr>
 					</tbody>
 				</table>
@@ -93,31 +90,31 @@
 					<tbody>
 						<tr >
 							<th class="tx-right">상태</th>
-							<td th:text="${d.deviceinStatus}"></td>
+							<td><label id="infostatus"></label></td>
 						</tr>
 						<tr>
 							<th class="tx-right">매장</th>
-							<td th:text="${d.infoStore}"></td>
+							<td><label id="infostore"></label></td>
 						</tr>
 						<tr>
 							<th class="tx-right">입고직원</th>
-							<td th:text="${d.deviceinStaff}"></td>
+							<td><label id="infostaff"></label></td>
 						</tr>
 						<tr>
 							<th class="tx-right">입고일</th>
-							<td th:text="${d.deviceinDate}"></td>
+							<td><label id="infodate"></label></td>
 						</tr>
 						<tr>
 							<th class="tx-right">입고방법</th>
-							<td th:text="${d.infoMethod}"></td>
+							<td><label id="infomethod"></label></td>
 						</tr>
 						<tr>
 							<th class="tx-right">비고</th>
-							<td th:text="${d.infoMemo}"></td>
+							<td><label id="infomemo"></label></td>
 						</tr>
 						<tr>
 							<th class="tx-right">등록일</th>
-							<td th:text="${d.infoRegDate}"></td>
+							<td><label id="inforegdate"></label></td>
 						</tr>
 					</tbody>
 				</table>

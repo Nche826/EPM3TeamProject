@@ -102,32 +102,35 @@
             <div class="card">
               <div class="card-header" style="padding: 3%;">
           <!-- 검색 Form  -->
-            <form class="form-inline" id="customerShc" action="#" method="post">
+            <form class="form-inline" action="/staffSch" method="get">
               <!-- 날짜검색1 --> 
-               <div class="form-group col-3">
+               <P style="font-weight:bolder;">Date Search </P>
+               <div class="form-group col-4">
                   <div class="input-group">
+                   <input type="date" class="form-control form-control-sm" name="dateSch1" id="dateSch1">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
-                        <i class="far fa-calendar-alt"></i>
+                        <i class="fas fa-minus"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control form-control-sm" id="reservation">
+                    <input type="date" class="form-control form-control-sm" name="dateSch2" id="dateSch2">
                   </div>
                   <!-- /.input group -->
                 </div>
          
 	          <!-- 셀렉트박스 검색창 -->
-              <div class="form-group col-2">
-                <select name="gubun" class="form-control form-control-sm">
+              <P style="font-weight:bolder; margin-right: 1%;">User </P>
+              <div class="form-group">
+                <select name="selectSch" class="form-control form-control-sm">
 					<option value="">정보선택</option>
-					<option value="opens">직원명</option>
-					<option value="homes">아이디</option>
-					<option value="bookings">매장명</option>
-					<option value="bookings">권한</option>
+					<option value="staffName">직원명</option>
+					<option value="staffId">아이디</option>
+					<option value="storeName">매장명</option>
+					<option value="levelName">권한</option>
 				</select>
 			 </div>
 	    	<!-- 검색창 -->
-	            <div class="form-group offset-4">
+	            <div class="form-group offset-3">
                     <input type="text" name="table_search" class="form-control" placeholder="Search">
 
                     <div class="input-group-append">
@@ -165,7 +168,7 @@
                       <td th:text="${s.count}"></td>
                       <td th:text="${s.logout_date}"></td>
                       <td th:text="${s.staff_reg_date}"></td>
-                      <td><a th:href="@{/staffUpdate(staff_id=${s.member_id})}"><i class="fas fa-edit"></i></a></td>
+                      <td><a th:href="@{/staffUpdate(staff_code=${s.staff_code})}"><i class="fas fa-edit"></i></a></td>
                     </tr>
                   </tbody>
                 </table>
@@ -215,7 +218,7 @@
 		            </div>
 		            <div class="modal-footer justify-content-between">
 		              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-		              <button type="button" class="staffDel btn btn-outline-light deleteCheckValue">삭제하기</button>
+		              <button type="button" class="btn btn-outline-light deleteCheckValue">삭제하기</button>
 		            </div>
 		          </div>
 		          <!-- /.modal-content -->
@@ -235,7 +238,7 @@
 
 $('#reservation').daterangepicker();
 
-
+//직원 등록시 유효성 체크 
 $(function(){
 	var store_name = $('#store_name').val();
 	var staff_id =$('#staff_id').val();
@@ -264,6 +267,7 @@ $(function(){
 });
 
 
+//직원 삭제시 체크박스 값 배열로 담아서 모달에 정보 전달 에이작스 처리 
 	
 	$('input:checkbox[name="staffNames"]').click(function(){
 		console.log($(this).val());

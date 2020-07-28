@@ -24,44 +24,213 @@
 		<result property="member_name" column="member_name"></result>
 	</resultMap>
 	
-	<select id="ledgerList" parameterType="String" resultMap="LedgerSelect">
-	SELECT 
-		r.receive_code
-		,r.receive_type 
-		,r.receive_customer 
-		,r.receive_custel 
-		,r.receive_price 
-		,r.receive_card 
-		,r.dealler_code 
-		,r.receive_remit_date 
-		,r.receive_remit_price 
-		,r.receive_remit_type 
-		,r.receive_memo 
-		,r.store_code 
-		,r.staff_code 
-		,r.receive_reg_date 
-		,d.dealler_name 
-		,s.store_name 
-		,m.member_name 
-	FROM 
-		tb_receive AS r
-		JOIN
-		 	tb_dealler AS d
-		ON 
-		r.dealler_code = d.dealler_code
-		JOIN 
-			tb_store AS s
-		ON 
-		s.store_code = r.store_code
-		JOIN 
-			tb_staff AS st
-		ON 
-		st.staff_code=r.staff_code
-		JOIN 
+	<resultMap type="LedgerT" id="LedgerTSelect">
+		<result property="ledger_code" column="ledger_code"></result>
+		<result property="ledger_status" column="ledger_status"></result>
+		<result property="ledger_type" column="ledger_type"></result>
+		<result property="ledger_name" column="ledger_name"></result>
+		<result property="member_name" column="member_name"></result>
+		<result property="store_name" column="store_name"></result>
+		<result property="ledger_reg_date" column="ledger_reg_date"></result>
+	</resultMap>
+	
+	<select id="ledgerTList" parameterType="String" resultMap="LedgerTSelect">
+		SELECT 
+			l.ledger_code
+			,l.ledger_status
+			,l.ledger_type
+			,l.ledger_name
+			,m.member_name
+			,st.store_name
+			,l.ledger_reg_date
+		FROM tb_ledger AS l
+			JOIN 
+			tb_staff AS s
+			ON 
+			l.staff_code =s.staff_code
+			JOIN 
+			tb_store AS st
+			ON 
+			s.store_code = st.store_code
+			JOIN 
 			tb_member AS m
-		ON 
-		st.member_id = m.member_id;
-		
+			ON 
+			m.member_id = s.member_id
+		ORDER BY l.ledger_reg_date DESC;
+	</select>
+	
+	<update id="ledgerEnd" parameterType="String">
+	UPDATE tb_receive
+	SET
+		receive_remit_type='완료'
+	WHERE 
+		receive_code =#{receive_code};
+	</update>
+	
+	
+	<delete id="ledgerDelete" parameterType="String" statementType="PREPARED">
+	DELETE 
+	FROM 
+		tb_receive 
+	WHERE 
+		receive_code=#{receive_code};
+	</delete>
+	<update id="ledgerUpdate" parameterType="ledger">
+		UPDATE 
+			tb_receive
+		SET
+			receive_customer=#{receive_customer},
+			receive_type=#{receive_type},
+			receive_custel=#{receive_custel},
+			receive_price=#{receive_price},
+			receive_card=#{receive_card},
+			receive_remit_date=#{receive_remit_date},
+			receive_remit_price=#{receive_remit_price},
+			receive_remit_type=#{receive_remit_type},
+			receive_memo=#{receive_memo}
+		WHERE 
+			receive_code=#{receive_code};
+	
+	</update>
+	<select id="getLedgerSelect" parameterType="String" resultMap="LedgerSelect">
+		SELECT 
+			r.receive_code
+			,r.receive_type 
+			,r.receive_customer 
+			,r.receive_custel 
+			,r.receive_price 
+			,r.receive_card 
+			,r.dealler_code 
+			,r.receive_remit_date 
+			,r.receive_remit_price 
+			,r.receive_remit_type 
+			,r.receive_memo 
+			,r.store_code 
+			,r.staff_code 
+			,r.receive_reg_date 
+			,d.dealler_name 
+			,s.store_name 
+			,m.member_name 
+		FROM 
+			tb_receive AS r
+			JOIN
+			 	tb_dealler AS d
+			ON 
+			r.dealler_code = d.dealler_code
+			JOIN 
+				tb_store AS s
+			ON 
+			s.store_code = r.store_code
+			JOIN 
+				tb_staff AS st
+			ON 
+			st.staff_code=r.staff_code
+			JOIN 
+				tb_member AS m
+			ON 
+			st.member_id = m.member_id
+			WHERE 
+			r.receive_code = #{receive_code};
+	</select>
+	
+	<select id="ledgerSch" parameterType="String" resultMap="LedgerSelect">
+		SELECT 
+			r.receive_code
+			,r.receive_type 
+			,r.receive_customer 
+			,r.receive_custel 
+			,r.receive_price 
+			,r.receive_card 
+			,r.dealler_code 
+			,r.receive_remit_date 
+			,r.receive_remit_price 
+			,r.receive_remit_type 
+			,r.receive_memo 
+			,r.store_code 
+			,r.staff_code 
+			,r.receive_reg_date 
+			,d.dealler_name 
+			,s.store_name 
+			,m.member_name 
+		FROM 
+			tb_receive AS r
+			JOIN
+			 	tb_dealler AS d
+			ON 
+			r.dealler_code = d.dealler_code
+			JOIN 
+				tb_store AS s
+			ON 
+			s.store_code = r.store_code
+			JOIN 
+				tb_staff AS st
+			ON 
+			st.staff_code=r.staff_code
+			JOIN 
+				tb_member AS m
+			ON 
+			st.member_id = m.member_id
+			<where>
+			    <if test="dateSch1 != null and dateSch1 != '' || dateSch2 != null and dateSch2 != ''">
+			       (r.receive_reg_date between #{dateSch1} and #{dateSch2})
+			    </if>
+			    <if test="selectSch =='customerName'">
+			        AND r.receive_customer like #{table_search}
+			    </if>
+			    <if test="selectSch =='customerPhone'">
+			        AND r.receive_custel like #{%table_search}
+			    </if>
+			    <if test="selectSch =='staffName'">
+			        AND m.member_name like #{table_search}
+			    </if>
+			    <if test="selectSch =='gubun'">
+			        AND r.receive_type like #{table_search}
+			    </if>
+  		   </where>
+			ORDER BY r.receive_reg_date DESC;
+	</select>
+	
+	
+	
+	
+	<select id="ledgerList" parameterType="String" resultMap="LedgerSelect">
+		SELECT 
+			r.receive_code
+			,r.receive_type 
+			,r.receive_customer 
+			,r.receive_custel 
+			,r.receive_price 
+			,r.receive_card 
+			,r.dealler_code 
+			,r.receive_remit_date 
+			,r.receive_remit_price 
+			,r.receive_remit_type 
+			,r.receive_memo 
+			,r.store_code 
+			,r.staff_code 
+			,r.receive_reg_date 
+			,d.dealler_name 
+			,s.store_name 
+			,m.member_name 
+		FROM 
+			tb_receive AS r
+			JOIN
+			 	tb_dealler AS d
+			ON 
+			r.dealler_code = d.dealler_code
+			JOIN 
+				tb_store AS s
+			ON 
+			s.store_code = r.store_code
+			JOIN 
+				tb_staff AS st
+			ON 
+			st.staff_code=r.staff_code
+			JOIN 
+				tb_member AS m
+			ON 
+			st.member_id = m.member_id
+			ORDER BY 14 DESC;
 	</select>
 
 	<insert id="addLedger" parameterType="ledger">

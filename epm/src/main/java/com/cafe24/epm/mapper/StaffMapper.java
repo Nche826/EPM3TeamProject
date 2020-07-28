@@ -4,10 +4,15 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.cafe24.epm.domain.Ledger;
 import com.cafe24.epm.domain.Staff;
 
 @Mapper
 public interface StaffMapper {
+	
+	//검색처리
+	public List<Staff> staffSch(String dateSch1,String dateSch2,String selectSch
+										 ,String table_search);
 	
 	//매장 선택시 직원 출력
 	public List<Staff> storeInStaff(String store_code);
@@ -21,8 +26,8 @@ public interface StaffMapper {
 	//직원 수정 처리
 	public int staffUpdate(Staff staff);
 	
-	//직원 수정 전단계, 아이디값 가져오기
-	public Staff getStaffSelect(String staff_id);
+	//직원 수정 전단계, 코드값 가져오기
+	public Staff getStaffSelect(String staff_code);
 	
 	//직원리스트
 	public List<Staff> staffList();

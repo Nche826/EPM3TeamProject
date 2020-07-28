@@ -85,7 +85,7 @@
 	             	<div class="form-group form-inline">
 	                	<label for="inputDescription"><i style="color: red;">*</i>수납 금액   </label>
 	                 	<input type="text" name="receive_price" class="form-control" 
-	                 		placeholder="금액입력" style="width: 51%; margin-left: 5%">
+	                 		placeholder="금액입력" style="width: 51%; margin-left: 5%" onkeyup="inputNumberFormat(this)">
 	                 	<div class="input-group-append">
                         <span class="input-group-text">원</span>
                       	</div>
@@ -102,7 +102,7 @@
 	             	</div>
 	             	<div class="form-group form-inline">
 	             		<input type="date" class="form-control" name="receive_remit_date">
-	             		<input type="text" class="form-control" name="receive_remit_price" placeholder="금액입력">
+	             		<input type="text" class="form-control" name="receive_remit_price" onkeyup="inputNumberFormat(this)" placeholder="금액입력">
 	             		<div class="input-group-append">
                        		<span class="input-group-text">원</span>
                       	</div>
@@ -144,17 +144,18 @@
             <div class="card">
               <div class="card-header" style="padding: 3%;">
           <!-- 검색 Form  -->
-            <form class="form-inline" id="customerShc" action="#" method="post">
+            <form class="form-inline" action="/ledgerSch" method="get">
               <!-- 날짜검색1 --> 
-                 <P style="font-weight:bolder;">Date Search </P>
-               <div class="form-group col-3">
+               <P style="font-weight:bolder;">Date Search </P>
+               <div class="form-group col-4">
                   <div class="input-group">
+                   <input type="date" class="form-control form-control-sm" name="dateSch1" id="dateSch1">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
-                        <i class="far fa-calendar-alt"></i>
+                        <i class="fas fa-minus"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control form-control-sm" id="reservation">
+                    <input type="date" class="form-control form-control-sm" name="dateSch2" id="dateSch2">
                   </div>
                   <!-- /.input group -->
                 </div>
@@ -162,16 +163,16 @@
 	          <!-- 셀렉트박스 검색창 -->
 	          <P style="font-weight:bolder; margin-right: 1%;">User </P>
               <div class="form-group ">
-                <select name="gubun" class="form-control form-control-sm">
+                <select name="selectSch" class="form-control form-control-sm">
 					<option value="">고객정보</option>
-					<option value="opens">고객명</option>
-					<option value="homes">핸드폰뒷자리</option>
-					<option value="homes">직원명</option>
-					<option value="homes">구 분</option>
+					<option value="customerName">고객명</option>
+					<option value="customerPhone">핸드폰뒷자리</option>
+					<option value="staffName">직원명</option>
+					<option value="gubun">구 분</option>
 				</select>
 			 </div>
 	    <!-- 검색창 -->
-	            <div class="form-group offset-4">
+	            <div class="form-group offset-3">
                     <input type="text" name="table_search" class="form-control" placeholder="Search">
 
                     <div class="input-group-append">
@@ -203,19 +204,20 @@
                   </thead>
                   <tbody>
                     <tr th:each=" l,i : ${ledgerList}">
-                      <td><input type="checkbox" value="#"></td>
-                      <td th:text="${i.count}">1</td>
+                      <td><input type="checkbox" name="ledgerNames" id="ledgerNames" th:value="${l.receive_code}"></td>
+                      <td th:text="${i.count}"></td>
                       <td th:text="${l.receive_customer}"></td>
                       <td th:text="${l.receive_custel}"></td>
                       <td th:text="${l.receive_type}"></td>
                       <td th:text="${l.receive_price}"></td>
-                      <td th:text="${l.receive_remit_type}"></td>
+                      <td th:text="${l.receive_remit_type}" th:if="${l.receive_remit_type}=='처리중'" style="color: red;"></td>
+                      <td th:text="${l.receive_remit_type}" th:if="${l.receive_remit_type}=='완료'" style="color:blue;"></td>
                       <td th:text="${l.dealler_name}"></td>
                       <td th:text="${l.store_name}"></td>
                       <td th:text="${l.member_name}"></td>
                       <td th:text="${l.receive_memo}"></td>
                       <td th:text="${l.receive_reg_date}"></td>
-                      <td><a th:href="@{/ledgerUpdate}"><i class="fas fa-edit"></i></a></td>
+                      <td><a th:href="@{/ledgerUpdate(receive_code=${l.receive_code})}"><i class="fas fa-edit"></i></a></td>
                     </tr>
                   </tbody>
                 </table>
@@ -247,9 +249,58 @@
         </div>
 			
 			
-		<div class= "btn"style="width: 100px;">
-          	<button type="button" class="btn btn-block btn-secondary btn-sm" onclick="location.href='#'">삭제</button>
+		<div class= "btn"style="width: 130px;">
+          	<button type="button" id="ledgerDelBtn" class="btn btn-block btn-danger btn-sm" data-toggle="modal" data-target="#ledgerEnd">송금완료처리</button>
 		</div>
+		<div class= "btn"style="width: 100px;">
+          	<button type="button" id="ledgerDelBtn" class="btn btn-block btn-secondary btn-sm" data-toggle="modal" data-target="#modal-sm">삭제</button>
+		</div>
+			<div class="modal fade" id="ledgerEnd">
+		        <div class="modal-dialog modal-sm">
+		          <div class="modal-content bg-danger">
+		            <div class="modal-header">
+		              <h4 class="modal-title">안내</h4>
+		              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                <span aria-hidden="true">&times;</span>
+		              </button>
+		            </div>
+		            <div class="modal-body">
+		              <p>송금 처리 완료 하시겠습니까?</p>
+		              <p style="font-size: small;">(주의)!장부 처리가 완료로 변경됩니다.</p>
+		            </div>
+		            <div class="modal-footer justify-content-between">
+		              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+		              <button type="button" class="btn btn-outline-light ledgerCheckValue">완료하기</button>
+		            </div>
+		          </div>
+		          <!-- /.modal-content -->
+		        </div>
+		        <!-- /.modal-dialog -->
+    		 </div>
+    		 <!-- /.modal 송금완료처리 모달창 끝 -->
+			<div class="modal fade" id="modal-sm">
+		        <div class="modal-dialog modal-sm">
+		          <div class="modal-content bg-secondary">
+		            <div class="modal-header">
+		              <h4 class="modal-title">안내</h4>
+		              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                <span aria-hidden="true">&times;</span>
+		              </button>
+		            </div>
+		            <div class="modal-body">
+		              <p>선택한 장부 기록을 삭제 하시겠습니까?</p>
+		              <p style="font-size: small;">(주의)!삭제된 자료는 복구되지 않습니다.</p>
+		            </div>
+		            <div class="modal-footer justify-content-between">
+		              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+		              <button type="button" class="btn btn-outline-light deleteCheckValue">삭제하기</button>
+		            </div>
+		          </div>
+		          <!-- /.modal-content -->
+		        </div>
+		        <!-- /.modal-dialog -->
+    		 </div>
+    		 <!-- /.modal 2 삭제버튼 끝 -->
 		</div>	<!-- /row -->
       </div><!-- /.container-fluid -->
     </section>
@@ -260,6 +311,9 @@
    /* 날짜 스크립트 */
    //Date range picker
     $('#reservation').daterangepicker();
+   
+   
+   //매장 선택시 매장 내 해당 직원 리스트 셀렉트박스 출력 처리 
 	var result = false;
     $('#store_code').click(function(){
     	var chkArr =$(this).val();
@@ -296,9 +350,105 @@
 		}); 
     	
     });
-	
     
+  //장부 등록시 체크박스 하나만 선택하기 
+	var reType = $("input:checkbox[name=receive_type]");
+	$(reType).click(function() {
+		  $(reType).attr("checked", false); //체크박스 전체 false
+		  $(this).attr("checked", true);  //하나만 트루 
+		  $('input:checkbox[name=receive_type]').not(this).prop("checked", false);
+		  console.log($(reType).is(':checked'));
+		}); 
+	var reReType = $("input:checkbox[name=receive_remit_type]");
+	$(reReType).click(function() {
+		  $(reReType).attr("checked", false); //체크박스 전체 false
+		  $(this).attr("checked", true);  //하나만 트루 
+		  $('input:checkbox[name=receive_remit_type]').not(this).prop("checked", false);
+		  console.log($(reReType).is(':checked'));
+		}); 
 	
+   
+   
+	
+	
+   
+   	$('input:checkbox[name="ledgerNames"]').click(function(){
+   		console.log($(this).val());
+   	});
+	//리스트 내 체크 선택시 value값 배열로 넘기고 삭제 처리  
+   	$('.deleteCheckValue').click(function(){
+		var chkArr = [];
+		$('input:checkbox[name="ledgerNames"]:checked').each(function(){
+			chkArr.push($(this).val());
+		})
+		console.log(chkArr);
+		
+		$.ajax({
+			url: '/ledgerDelete'	 
+			,type:'post'
+			,dataType:'json'
+			,data:{ 'ledgerNames' : chkArr }
+		 
+	 	})
+		.done(function(data) {
+			if(data ==1){
+			alert("삭제되었습니다.");
+			window.location.href = "/ledgerList";
+				
+			}
+		})
+			 
+		.fail(function( jqXHR, textStatus ) {
+			  alert( "삭제 처리가 실패되었습니다." );
+			 
+		}); 
+	});
+   
+	//리스트 체크시 송금처리완료 처리하기
+	$('.ledgerCheckValue').click(function(){
+		var chkList = [];
+		$('input:checkbox[name="ledgerNames"]:checked').each(function(){
+			chkList.push($(this).val());
+		})
+		console.log(chkList);
+		
+		$.ajax({
+			url: '/ledgerEnd'	 
+			,type:'post'
+			,dataType:'json'
+			,data:{ 'ledgerNames' : chkList }
+		 
+	 	})
+		.done(function(data) {
+			if(data ==1){
+			alert("변경되었습니다.");
+			window.location.href = "/ledgerList";
+				
+			}
+		})
+			 
+		.fail(function( jqXHR, textStatus ) {
+			  alert( "변경 처리가 실패되었습니다." );
+			 
+		}); 
+	});
+	
+	
+   //금액 숫자 입력시 자동으로 컴마,입력 하게 하기
+   //콤마찍기
+	function comma(str) {
+	    str = String(str);
+	    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+	}
+	//콤마풀기
+	function uncomma(str) {
+	    str = String(str);
+	    return str.replace(/[^\d]+/g, '');
+	}	
+	//값 입력시 콤마찍기
+	function inputNumberFormat(obj) {
+	    obj.value = comma(uncomma(obj.value));
+	}
 </script>
 </th:block>
 </html>

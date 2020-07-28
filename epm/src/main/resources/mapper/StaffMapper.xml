@@ -50,18 +50,19 @@
    	
    	<update id="staffUpdate" parameterType="staff">
    	
-   	UPDATE 
+  	UPDATE 
    		tb_staff
 	SET 
 		level_code=#{staff_level}
 	WHERE 
-		member_id=#{member_id};
+		staff_code=#{staff_code};
    	
    	</update>
    	
    	<select id="getStaffSelect" parameterType="String" resultMap="StaffSelect">
 	   	SELECT 
 			 s.member_id
+			,s.staff_code
 			,m.member_name
 			,st.store_name
 			,l.level_name
@@ -82,11 +83,62 @@
 		ON 
 			s.level_code = l.level_code	
 		WHERE 
-			s.member_id =#{staff_id};
+			s.staff_code =#{staff_code};
    	
    	
    	</select>
    	
+   	
+   	<select id="staffSch" parameterType="String" resultMap="StaffSelect">
+	   	SELECT 
+	   		 s.staff_code
+			,m.member_name 
+			,s.member_id 
+			,st.store_name 
+			,l.level_name 
+			,count(lo.member_id)
+			,max(lo.logout_date)
+			,staff_reg_date 
+		FROM 
+			tb_staff AS s
+			JOIN
+			tb_member AS m
+			ON
+			s.member_id = m.member_id
+			JOIN 
+			tb_store AS st
+			ON 
+			s.store_code = st.store_code
+			JOIN 
+			tb_level AS l
+			ON 
+			s.level_code = l.level_code
+			JOIN 
+			tb_login AS lo
+			ON 
+			lo.member_id = s.member_id
+			<where>
+			    <if test="dateSch1 != null and dateSch1 != '' || dateSch2 != null and dateSch2 != ''">
+			       (staff_reg_date between #{dateSch1} and #{dateSch2})
+			    </if>
+			    <if test="selectSch =='staffName'">
+			        AND m.member_name like #{table_search}
+			    </if>
+			    <if test="selectSch =='staffId'">
+			        AND s.member_id like #{%table_search}
+			    </if>
+			    <if test="selectSch =='storeName'">
+			        AND st.store_name like #{table_search}
+			    </if>
+			    <if test="selectSch =='levelName'">
+			        AND l.level_name like #{table_search}
+			    </if>
+  		   </where>
+  		   	GROUP BY 
+				s.staff_code
+			ORDER BY staff_reg_date DESC;   	
+   	
+   	</select>
    	   	
    	<select id="staffList" parameterType="String" resultMap="StaffSelect">
 	   	SELECT 
@@ -115,10 +167,10 @@
 			JOIN 
 			tb_login AS lo
 			ON 
-			s.member_id = lo.member_id
+			lo.member_id = s.member_id
 			GROUP BY 
-			lo.member_id;
-   	
+			s.staff_code
+			ORDER BY 8 DESC;   	
    	
    	</select>
    	
@@ -149,22 +201,24 @@
 	</insert>
 
 
-	   	<select id="staffSelectLogin" parameterType="String" resultMap="StaffSelect">
-	      	SELECT 
-			st.store_name 
+   	<select id="staffSelectLogin" parameterType="String" resultMap="StaffSelect">
+      	SELECT 
+	      	s.staff_code
+			,st.store_name 
 			,l.level_name  
-		FROM 
-			tb_staff AS s
-			JOIN 
-			tb_store AS st
-			ON 
-			s.store_code = st.store_code
-			JOIN 
-			tb_level AS l
-			ON 
-			s.level_code = l.level_code
-	   	where
-	   		s.member_id = #{member_Id}
+			,s.store_code
+			FROM 
+				tb_staff AS s
+				JOIN 
+				tb_store AS st
+				ON 
+				s.store_code = st.store_code
+				JOIN 
+				tb_level AS l
+				ON 
+				s.level_code = l.level_code
+		   	where
+		   		s.member_id = #{member_Id}
    	
    	</select>
 </mapper>

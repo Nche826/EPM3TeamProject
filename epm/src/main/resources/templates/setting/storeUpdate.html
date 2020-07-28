@@ -101,34 +101,16 @@
 	            	<th>연락처</th>
 	            	</tr>
 	            </thead>
-	            <tbody>
+	            <tbody th:each=" s,n :${staffSelect}">
 	            	<tr>
-	            	<td>1</td>
-	            	<td>대표</td>
-	            	<td>김수지</td>
-	            	<td>010-0000-0000</td>
+	            	<td th:text= ${n.count}></td>
+	            	<td th:text= ${s.level_name}></td>
+	            	<td th:text= ${s.member_name}></td>
+	            	<td th:text= ${s.member_tel}></td>
 	            	</tr>
-	            	<tr>
-	            	<td>2</td>
-	            	<td>점장</td>
-	            	<td>김뭉치</td>
-	            	<td>010-0000-0000</td>
-	            	</tr>
-	            	<tr>
-	            	<td>3</td>
-	            	<td>사원</td>
-	            	<td>김스디</td>
-	            	<td>010-0000-0000</td>
-	            	</tr>
-	            	<tr>
-	            	<td>4</td>
-	            	<td>사원</td>
-	            	<td>김두디</td>
-	            	<td>010-0000-0000</td>
-	            	</tr>
-	            
 	            </tbody>
 	            </table>
+	            <a href="/staffList" class="btn btn-danger float-right">직원 관리 페이지 이동</a>
             </form>
             </div>
             <!-- /.card-body -->
@@ -138,8 +120,7 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <a href="/storeList" class="btn btn-secondary">이전페이지</a>
-          <a href="/staffList" class="btn btn-danger float-right">직원 관리 페이지 이동</a>
+          <a href="/storeList" class="btn btn-secondary float-right">이전 페이지</a>
         </div>
       </div>
     </section>

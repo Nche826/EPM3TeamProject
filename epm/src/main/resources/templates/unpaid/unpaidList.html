@@ -36,13 +36,13 @@
 			            <div class="card">
 			              <div class="card-header">
 									<div class="row">
-											<form action="#" method="post">
+											<form action="/unpaidSearch" method="get">
 											
 											<div class="form-inline">
 										            <div style="margin: 5px;"><i class="fa fa-calendar"></i></div>
-										            <input type="text" class="form-control datetimepicker-input" id="datetimepicker1" data-toggle="datetimepicker" data-target="#datetimepicker1" placeholder="YYYY-MM-DD" name="startSearch" style="margin: 5px;"/>
+										            <input type="text" class="form-control datetimepicker-input" id="datetimepicker1" data-toggle="datetimepicker" data-target="#datetimepicker1" placeholder="YYYY-MM-DD" name="searchD1" style="margin: 5px;"/>
 										            <div style="margin: 5px;"><i class="fas fa-minus"></i></div>
-										            <input type="text" class="form-control datetimepicker-input" id="datetimepicker2" data-toggle="datetimepicker" data-target="#datetimepicker2" placeholder="YYYY-MM-DD" name="endSearch" style="margin: 5px;"/>
+										            <input type="text" class="form-control datetimepicker-input" id="datetimepicker2" data-toggle="datetimepicker" data-target="#datetimepicker2" placeholder="YYYY-MM-DD" name="searchD2" style="margin: 5px;"/>
 										          
 										            <button style="margin: 5px;" type="button" class="form-control btn btn-block btn-secondary btn-xs" id="today">오늘</button>
 										           
@@ -66,12 +66,13 @@
 						                        </select>
 						                        
 						                     <!-- *******접수직원 load******* -->
-												<select class="form-control" name="statusSearch" id="statusSearch" style="margin: 5px;">
+												<select class="form-control" name="staffSearch" id="staffSearch" style="margin: 5px;">
 						                          <option value="">접수직원</option>
-						                          <option value="take">접수직원!!</option>
+						                          <option th:each="stl : ${staffList}" th:value="${stl.staff_code}" th:text="${stl.member_name}"></option>
 						                        </select>
 			
 												<select class="form-control" name="searchK" style="margin: 5px;">
+						                          <option value="">검색</option>
 						                          <option value="phone">연락처 (뒷4자리)</option>
 						                          <option value="customer">고객명</option>
 						                          <option value="contents">내용 (일반업무)</option>
@@ -128,13 +129,7 @@
 			              </div>
 			              <!-- /.card-body -->
 			              <div class="card-footer" style="text-align: center;">
-						       				<a href="#"><i class="right fas fa-angle-left"></i></a>
-						       				<a href="#">1</a>
-						       				<a href="#">2</a>
-						       				<a href="#">3</a>
-						       				<a href="#">4</a>
-						       				<a href="#">5</a>
-						       				<a href="#"><i class="right fas fa-angle-right"></i></a>
+						       				
 							</div>
 			            </div>
 			            <!-- /.card -->
@@ -166,10 +161,10 @@
 									
 					              	<div class="col-8">
 					              		<input type="text" class="form-control" name="unpaidStatus" value="접수" hidden="hidden">
-					              		<!-- 매장명 받아오기★★★ -->
-					              		<input type="text" style="margin: 5px;" class="form-control" name="unpaidRegStoreName" value="삼삼1호점" readonly="readonly">
-					              		<!-- 접수직원 목록 받아오기 ★★★ -->
-					              		<input type="text" style="margin: 5px;" class="form-control" name="unpaidRegMemberName" value="김수지" readonly="readonly">
+					              		<!-- 매장명 받아오기 -->
+					              		<input type="text" style="margin: 5px;" class="form-control" id="insertStore" name="unpaidRegStoreName" readonly="readonly">
+					              		<!-- 접수직원 목록 받아오기 -->
+					              		<input type="text" style="margin: 5px;" class="form-control" id="insertReg" name="unpaidRegMemberName" readonly="readonly">
 					              		<!-- 데이트픽커 -->
 					              		<input type="date" class="form-control" name="unpaidExpDate" id="iUnpaidExpDate" style="width: 100%; margin: 5px;">
 					              		<select class="form-control" name="unpaidPart" id="iUnpaidPart" style="margin: 5px;">
@@ -452,9 +447,12 @@
 	<script type="text/javascript">
 		$(function () {
 			//세션에서 로그인 Id값 받아오기
-			$('#unpaidProMemberName').val('#loginId')
+			var loginName = $('#loginName').html()
+			$('#modalUnpaidDetailOverForm').children('#unpaidProMemberName').val(loginName);
+			$('#insertReg').val(loginName);
 			//선택한 매장 값 받아오기
-			$('#unpaidProStoreName').val('삼삼3호점')
+			$('#modalUnpaidDetailOverForm').children('#unpaidProStoreName').val(sessionStorage.getItem('storeSelect'));
+			$('#insertStore').val(sessionStorage.getItem('storeSelect'));
 			
 						
 			//미결정보삭제처리
@@ -494,14 +492,14 @@
 			
 			//미결완료처리
 	    	 $('#modalUnpaidDetailOver').click(function(){
-	    		 $('#modalUnpaidDetailOverForm').submit()
+	    		$('#modalUnpaidDetailOverForm').submit();
 	    	 });
 			
 			//미결 상세보기 modal 열릴 때 값 받아오기, 미결완료버튼 조건처리
 			$('.modalUnpaidDetailButton').click(function(){
 				var unpaidCode = $(this).attr('code');
 				$('#modalUnpaidDetailOverForm').children('#unpaidCode').val(unpaidCode);
-				 $('#modalUnpaidDetailDeleteForm').children('input[name=unpaidCode]').val(unpaidCode)
+				$('#modalUnpaidDetailDeleteForm').children('input[name=unpaidCode]').val(unpaidCode);
 				
 				//미결 상세보기 1개 select
 				var request1 = $.ajax({
@@ -556,6 +554,7 @@
 	
 			//미결정보등록처리
 		   	 $('#modalUnpaidInsertSubmit').click(function(){
+		   		 
 		   		 //등록유효성검사
 		   		 if($('#iUnpaidExpDate').val() == null
 		   				 || $('#iUnpaidExpDate').val() == '' ){
