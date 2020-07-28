@@ -34,9 +34,9 @@
             <h1>홈상품 개통</h1>
           </div>
           <div class="col-sm-6">
-	   			<ol class="breadcrumb float-sm-right">
+	   			<div class="breadcrumb float-sm-right">
 				　	<a href="/openHomeList" class="btn btn-info btn-sm pd-x-5 pd-y-0"><i class="far fa-file-alt" ></i> 홈상품 개통 목록</a>							
-				</ol>
+				</div>
 			</div> 
         </div>
       </div><!-- /.container-fluid -->
@@ -63,22 +63,22 @@
             <div class="col-sm-6">
                 <label for="inputName">구분</label>
                 <form>
-				  <input type="radio" id="normal" name="insert">
+				  <input type="radio" id="normal" name="openHomeType" value="type1">
 				  <label>단품판매</label>
-				  <input type="radio" id="barcode" name="insert">
+				  <input type="radio" id="barcode" name="openHomeType" value="type2">
 				  <label>결합판매</label>
-				  <input type="radio" id="barcode" name="insert">
+				  <input type="radio" id="barcode" name="openHomeType" value="type3">
 				  <label>동시판매</label>				  
 				</form>	
 			</div>	
 			<div class="col-sm-6">
 				<label for="inputName">상태</label>
                 <form>
-				  <input type="radio" id="normal" name="insert">
+				  <input type="radio" id="normal" name="openHomeStatus" value="Status1">
 				  <label>예약</label>
-				  <input type="radio" id="barcode" name="insert">
+				  <input type="radio" id="barcode" name="openHomeStatus" value="Status2">
 				  <label>신청</label>
-				  <input type="radio" id="barcode" name="insert">
+				  <input type="radio" id="barcode" name="openHomeStatus" value="Status3">
 				  <label>완료</label>				  
 				</form>           
              </div>
@@ -86,7 +86,7 @@
              <div class="row">     
             <div class="col-sm-6">
                <label for="inputStatus">거래처</label>
-                <select class="form-control custom-select">                  
+                <select class="form-control custom-select" name="openHomeDealler">                  
                   <option selected>거래처1</option>
                   <option>거래처2</option>
                   <option>거래처3</option>
@@ -94,7 +94,7 @@
 			</div>	
 			<div class="col-sm-6">
 				<label for="inputStatus">개통직원</label>
-                <select class="form-control custom-select">                  
+                <select class="form-control custom-select" name="openHomeRStaff">                  
                   <option selected>직원1</option>
                   <option>직원2</option>
                   <option>직원3</option>
@@ -104,40 +104,22 @@
              <div class="row">     
 	            <div class="col-sm-6">
 	               <label for="inputName">신청일</label>
-	                <input type="date" id="inputName" class="form-control" value="epm 본점">
+	                <input type="date" id="inputName" class="form-control" name="openHomeRDate" value="epm 본점">
 				</div>	
 				<div class="col-sm-6">
 					<label for="inputName">개통일</label>
-	                <input type="date" id="inputName" class="form-control" value="epm 본점">
+	                <input type="date" id="inputName" class="form-control" name="openHomeDate" value="epm 본점">
 	             </div>
              </div>  
               <div class="row">     
 	            <div class="col-sm-6">
 	               <label for="inputName">고객명</label>
-	                <input type="date" id="inputName" class="form-control" value="epm 본점">
+	                <input type="date" id="inputName" class="form-control" name="openHomeCustomer" value="epm 본점">
 				</div>	
 				<div class="col-sm-6">
-				<label for="inputName">연락처</label>
-				<div class="row">
-					<div class="col-sm-4">
-					 <select class="form-control custom-select">                  
-	                  <option selected>010</option>
-	                  <option>011</option>
-	                  <option>018</option>
-                </select>  
-					</div>
-					<div class="col-sm-4">
-					<input type="text" id="inputName" class="form-control" >
-					</div>
-					<div class="col-sm-4">
-					<input type="text" id="inputName" class="form-control" >
-					</div>
-					</div>	                
-	             </div>
-	             <div class="col-sm-12">
-	              <label for="inputName">주소</label>
-	                <input type="text" id="inputName" class="form-control" >
-				</div>
+	               <label for="inputName">연락처</label>
+	                <input type="date" id="inputName" class="form-control" name="openHomePhone" value="epm 본점">
+				</div>	       
            	 </div>
             </div>
             <div class="card card-secondary">                             
@@ -147,10 +129,10 @@
 					<div class="col-12">
 						<div class="bg-gray-100 bd bd-gray-300 rounded">
 							<div class="row mg-t-10">
-								<label class="col-4 col-xl-2 pd-y-10 tx-right tx-gray-700">상품선택</label>
+								<label class="col-4 col-xl-2 pd-y-10 tx-right tx-gray-700" >상품선택</label>
 								<div class="col-8 col-xl-10 pd-b-10">
-								<div class="row">
-									<div class="col-3"><label class="ckbox mg-0 tx-12 tx-gray-900"><input type="checkbox" id="product1" name="product1" value="1"><span>인터넷</span></label></div>
+								<div class="row" >
+									<div class="col-3"><label class="ckbox mg-0 tx-12 tx-gray-900"><input type="checkbox" id="product1" name="product1" value="1" ><span>인터넷</span></label></div>
 									<div class="col-3"><label class="ckbox mg-0 tx-12 tx-gray-900"><input type="checkbox" id="product2" name="product2" value="1"><span>TV</span></label></div>
 									<div class="col-3"><label class="ckbox mg-0 tx-12 tx-gray-900"><input type="checkbox" id="product6" name="product6" value="1"><span>홈IOT</span></label></div>
 								</div>
@@ -171,10 +153,11 @@
 			<div class="row mg-t-30 product1" style="display:none">
 				<div class="col-12">
 					<div class="tx-13 tx-gray-700 tx-bold pd-x-20 bg-gray-100 rounded mg-b-20">
-						<div class="pull-left pd-y-8">상품정보 - 인터넷</div>
+						<div class="pull-left pd-y-8"><h5 style="font-weight:bold">상품정보 - 인터넷</h5></div>
 						<div class="pull-right pd-y-5 mg-l-15">
-							<select class="form-control form-control-sm select-sm product_num" rel="1" name="p1_num" style="display:none">
+							<select class="form-control form-control-sm select-sm product_num"  name="internetCount" style="display:none">
 								<option value="1">1대</option>
+								
 							</select>
 							<i class="fa fa-angle-down" style="display:none"></i>
 						</div>
@@ -182,390 +165,207 @@
 					</div>
 					
 					<div class="row mg-t-10 product1_1">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right"><span class="tx-danger mg-r-10">*</span> 상품명/요금제</label>
+					<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right" style="text-align:right">통신사</label>
 						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
-							<input type="text" class="form-control form-control-sm" name="p1_1_title" maxlength="200">
-						</div>
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">고유번호</label>
-						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
-							<input type="text" class="form-control form-control-sm" name="p1_1_serial" maxlength="200">
-						</div>
-					</div>
-					<div class="row mg-t-10 product1_1">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">정책금액</label>
-						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0 input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm tx-right price calcprice" name="p1_1_basicprice" maxlength="10">
-							<span class="input-group-addon"><span class="tx-12">원</span></span>
-						</div>
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">약정</label>
-						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
-							<div id="form-write-p1_1_planmon1" class="pull-left wd-100p">
-								<select onchange="setPlanmon(1,1)" class="form-control form-control-sm select-sm" name="p1_1_planmon">
-									<option value="6">6개월</option>
-									<option value="12">12개월</option>
-									<option value="18">18개월</option>
-									<option value="24">24개월</option>
-									<option value="30">30개월</option>
-									<option value="36" selected>36개월</option>
-									<option value="0">무약정</option>
-									<option value="ETC">직접입력</option>
+							<select class="form-control form-control-sm select-sm" name=interTelecom>
+									<option value="">통신사</option>
+									<option value="KT">KT</option>
+									<option value="SKT">SKT</option>
+									<option value="LG U+">LG U+</option>								
 								</select>
-								<i class="fa fa-angle-down"></i>
-							</div>
-							<div id="form-write-p1_1_planmon2" class="pull-left wd-50p pd-l-5 text-right input-group input-group-sm" style="display:none">
-								<input type="text" class="form-control form-control-sm tx-right" name="p1_1_planmon_etc" maxlength="2">
-								<span class="input-group-addon"><span class="tx-12">개월</span></span>
-							</div>
-							<div style="clear:both"></div>
 						</div>
+						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right" style="text-align:right"><span class="tx-danger mg-r-10" >*</span> 상품명</label>
+						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
+							<select class="form-control form-control-sm select-sm" name=interName>
+									<option value="">상품명</option>
+									<option value="LG100Mbps">LG U+ 100Mbps</option>
+									<option value="LG500Mbps">LG U+ 500Mbps</option>
+									<option value="LG1Gbps">LG U+ 1Gbps</option>
+									<option value="SKT100Mbps">SKT 100Mbps</option>
+									<option value="SKT500Mbps">SKT 500Mbps</option>
+									<option value="SKT1Gbps">SKT 1Gbps</option>
+									<option value="KT100Mbps">KT 100Mbps</option>
+									<option value="KT500Mbps">KT 500Mbps</option>
+									<option value="KT1Gbps">KT 1Gbps</option>								
+								</select>
+						</div>
+						
 					</div>
 					<div class="row mg-t-10 product1_1">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">유통지원</label>
+						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right" style="text-align:right">정책금액</label>
 						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0 input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm tx-right price calcprice" name="p1_1_giftprice" maxlength="10">
+							<input type="text" class="form-control form-control-sm tx-right price calcprice" id="interPrice" name="interPrice" maxlength="10">
+							
 							<span class="input-group-addon"><span class="tx-12">원</span></span>
 						</div>
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">비고</label>
+						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right" style="text-align:right">약정</label>
 						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
-							<input type="text" class="form-control form-control-sm" name="p1_1_memo" maxlength="200">
+							<div id="form-write-internetPlan1" class="pull-left wd-100p">
+								<select onchange="setPlanmon(1,1)" class="form-control form-control-sm select-sm" name=interMonths>
+									<option value="12">12개월</option>
+									<option value="24">24개월</option>
+								</select>
+							</div>							
 						</div>
-					</div>
+					</div>					
 				</div>
-			</div>
+			</div><br>
+			
 			<div class="row mg-t-30 product2" style="display:none">
 				<div class="col-12">
 					<div class="tx-13 tx-gray-700 tx-bold pd-x-20 bg-gray-100 rounded mg-b-20">
-						<div class="pull-left pd-y-8">상품정보 - TV</div>
-						<div class="pull-right pd-y-5 mg-l-15">
-							<select class="form-control form-control-sm select-sm product_num" rel="2" name="p2_num">
-								<option value="1">1대</option>
-								<option value="2">2대</option>
-								<option value="3">3대</option>
-							</select>
-							<i class="fa fa-angle-down"></i>
-						</div>
-						<div style="clear:both"></div>
+						<div class="pull-left pd-y-8"><h5 style="font-weight:bold">상품정보 - TV</h5></div>						
 					</div>
 					
 					<div class="row mg-t-10 product2_1">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right"><span class="tx-danger mg-r-10">*</span> 상품명/요금제</label>
+					<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right" style="text-align:right">통신사</label>
 						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
-							<input type="text" class="form-control form-control-sm" name="p2_1_title" maxlength="200">
+							<select class="form-control form-control-sm select-sm" name=tvTelecom>
+								<option value="">통신사</option>
+								<option value="KT">KT</option>
+								<option value="SKT">SKT</option>
+								<option value="LG U+">LG U+</option>
+							</select>			
 						</div>
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">고유번호</label>
+						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right" style="text-align:right"><span class="tx-danger mg-r-10">*</span> 상품명</label>
 						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
-							<input type="text" class="form-control form-control-sm" name="p2_1_serial" maxlength="200">
+							<input type="text" class="form-control form-control-sm" name="tvName" maxlength="200">
+							<select class="form-control form-control-sm select-sm" name=tvName>
+									<option value="">상품명</option>
+									<option value="LG베이직">LG U+ 베이직</option>
+									<option value="LG프리미엄">LG U+ 프리미엄</option>
+									<option value="SKT베이직">SKT 베이직</option>
+									<option value="SKT프리미엄">SKT 프리미엄</option>
+									<option value="KT베이직">KT 베이직</option>
+									<option value="KT프리미엄">KT 프리미엄</option>
+								</select>
 						</div>
+						
 					</div>
 					<div class="row mg-t-10 product2_1">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">정책금액</label>
+						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right" style="text-align:right">정책금액</label>
 						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0 input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm tx-right price calcprice" name="p2_1_basicprice" maxlength="10">
+							<input type="text" class="form-control form-control-sm tx-right price calcprice" name="tvPrice" maxlength="10">
 							<span class="input-group-addon"><span class="tx-12">원</span></span>
 						</div>
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">약정</label>
+						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right" style="text-align:right">약정</label>
 						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
 							<div id="form-write-p2_1_planmon1" class="pull-left wd-100p">
-								<select onchange="setPlanmon(2,1)" class="form-control form-control-sm select-sm" name="p2_1_planmon">
-									<option value="6">6개월</option>
+								<select onchange="setPlanmon(2,1)" class="form-control form-control-sm select-sm" name="tvMonths">
 									<option value="12">12개월</option>
-									<option value="18">18개월</option>
 									<option value="24">24개월</option>
-									<option value="30">30개월</option>
-									<option value="36" selected>36개월</option>
-									<option value="0">무약정</option>
-									<option value="ETC">직접입력</option>
 								</select>
-								<i class="fa fa-angle-down"></i>
-							</div>
-							<div id="form-write-p2_1_planmon2" class="pull-left wd-50p pd-l-5 text-right input-group input-group-sm" style="display:none">
-								<input type="text" class="form-control form-control-sm tx-right" name="p2_1_planmon_etc" maxlength="2">
-								<span class="input-group-addon"><span class="tx-12">개월</span></span>
-							</div>
-							<div style="clear:both"></div>
+							</div>							
 						</div>
-					</div>
-					<div class="row mg-t-10 product2_1">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">유통지원</label>
-						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0 input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm tx-right price calcprice" name="p2_1_giftprice" maxlength="10">
-							<span class="input-group-addon"><span class="tx-12">원</span></span>
-						</div>
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">비고</label>
-						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
-							<input type="text" class="form-control form-control-sm" name="p2_1_memo" maxlength="200">
-						</div>
-					</div>
-					<div class="row mg-t-10 product2_2 product2_plus" style="display:none">
-						<div class="col-4 col-xl-2 mg-t-15 mg-xl-t-5">
-							<div class="bg-gray-100 bd bd-gray-100 rounded tx-right pd-r-20">TV 2</div>
-						</div>
-					</div>
-					<div class="row mg-t-10 product2_2 product2_plus" style="display:none">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right"><span class="tx-danger mg-r-10">*</span> 상품명/요금제</label>
-						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
-							<input type="text" class="form-control form-control-sm" name="p2_2_title" maxlength="200">
-						</div>
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">고유번호</label>
-						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
-							<input type="text" class="form-control form-control-sm" name="p2_2_serial" maxlength="200">
-						</div>
-					</div>
-					<div class="row mg-t-10 product2_2 product2_plus" style="display:none">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">정책금액</label>
-						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0 input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm tx-right price calcprice" name="p2_2_basicprice" maxlength="10">
-							<span class="input-group-addon"><span class="tx-12">원</span></span>
-						</div>
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">약정</label>
-						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
-							<div id="form-write-p2_2_planmon1" class="pull-left wd-100p">
-								<select onchange="setPlanmon(2,2)" class="form-control form-control-sm select-sm" name="p2_2_planmon">
-									<option value="6">6개월</option>
-									<option value="12">12개월</option>
-									<option value="18">18개월</option>
-									<option value="24">24개월</option>
-									<option value="30">30개월</option>
-									<option value="36" selected>36개월</option>
-									<option value="0">무약정</option>
-									<option value="ETC">직접입력</option>
-								</select>
-								<i class="fa fa-angle-down"></i>
-							</div>
-							<div id="form-write-p2_2_planmon2" class="pull-left wd-50p pd-l-5 text-right input-group input-group-sm" style="display:none">
-								<input type="text" class="form-control form-control-sm tx-right" name="p2_2_planmon_etc" maxlength="2">
-								<span class="input-group-addon"><span class="tx-12">개월</span></span>
-							</div>
-							<div style="clear:both"></div>
-						</div>
-					</div>
-					<div class="row mg-t-10 product2_2 product2_plus" style="display:none">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">유통지원</label>
-						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0 input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm tx-right price calcprice" name="p2_2_giftprice" maxlength="10">
-							<span class="input-group-addon"><span class="tx-12">원</span></span>
-						</div>
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">비고</label>
-						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
-							<input type="text" class="form-control form-control-sm" name="p2_2_memo" maxlength="200">
-						</div>
-					</div>
-					<div class="row mg-t-10 product2_3 product2_plus" style="display:none">
-						<div class="col-4 col-xl-2 mg-t-15 mg-xl-t-5">
-							<div class="bg-gray-100 bd bd-gray-100 rounded tx-right pd-r-20">TV 3</div>
-						</div>
-					</div>
-					<div class="row mg-t-10 product2_3 product2_plus" style="display:none">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right"><span class="tx-danger mg-r-10">*</span> 상품명/요금제</label>
-						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
-							<input type="text" class="form-control form-control-sm" name="p2_3_title" maxlength="200">
-						</div>
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">고유번호</label>
-						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
-							<input type="text" class="form-control form-control-sm" name="p2_3_serial" maxlength="200">
-						</div>
-					</div>
-					<div class="row mg-t-10 product2_3 product2_plus" style="display:none">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">정책금액</label>
-						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0 input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm tx-right price calcprice" name="p2_3_basicprice" maxlength="10">
-							<span class="input-group-addon"><span class="tx-12">원</span></span>
-						</div>
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">약정</label>
-						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
-							<div id="form-write-p2_3_planmon1" class="pull-left wd-100p">
-								<select onchange="setPlanmon(2,3)" class="form-control form-control-sm select-sm" name="p2_3_planmon">
-									<option value="6">6개월</option>
-									<option value="12">12개월</option>
-									<option value="18">18개월</option>
-									<option value="24">24개월</option>
-									<option value="30">30개월</option>
-									<option value="36" selected>36개월</option>
-									<option value="0">무약정</option>
-									<option value="ETC">직접입력</option>
-								</select>
-								<i class="fa fa-angle-down"></i>
-							</div>
-							<div id="form-write-p2_3_planmon2" class="pull-left wd-50p pd-l-5 text-right input-group input-group-sm" style="display:none">
-								<input type="text" class="form-control form-control-sm tx-right" name="p2_3_planmon_etc" maxlength="2">
-								<span class="input-group-addon"><span class="tx-12">개월</span></span>
-							</div>
-							<div style="clear:both"></div>
-						</div>
-					</div>
-					<div class="row mg-t-10 product2_3 product2_plus" style="display:none">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">유통지원</label>
-						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0 input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm tx-right price calcprice" name="p2_3_giftprice" maxlength="10">
-							<span class="input-group-addon"><span class="tx-12">원</span></span>
-						</div>
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">비고</label>
-						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
-							<input type="text" class="form-control form-control-sm" name="p2_3_memo" maxlength="200">
-						</div>
-					</div>
+					</div>					
 				</div>
-			</div>			
+			</div><br>
+				
 			<div class="row mg-t-30 product6" style="display:none">
 				<div class="col-12">
 					<div class="tx-13 tx-gray-700 tx-bold pd-x-20 bg-gray-100 rounded mg-b-20">
-						<div class="pull-left pd-y-8">상품정보 - 홈IOT</div>
-						<div class="pull-right pd-y-5 mg-l-15">
-							<select class="form-control form-control-sm select-sm product_num" rel="6" name="p6_num" style="display:none">
-								<option value="1">1대</option>
-							</select>
-							<i class="fa fa-angle-down" style="display:none"></i>
-						</div>
-						<div style="clear:both"></div>
+						<div class="pull-left pd-y-8"><h5 style="font-weight:bold">상품정보 - 홈IOT</h5></div>						
 					</div>
 					
 					<div class="row mg-t-10 product6_1">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right"><span class="tx-danger mg-r-10">*</span> 상품명/요금제</label>
+					<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right" style="text-align:right">통신사</label>
 						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
-							<input type="text" class="form-control form-control-sm" name="p6_1_title" maxlength="200">
+							<select class="form-control form-control-sm select-sm" name=iotTelecom>
+								<option value="">통신사</option>
+								<option value="KT">KT</option>
+								<option value="SKT">SKT</option>
+								<option value="LG U+">LG U+</option>
+							</select>	
 						</div>
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">고유번호</label>
+						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right" style="text-align:right"><span class="tx-danger mg-r-10" >*</span> 상품명</label>
 						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
-							<input type="text" class="form-control form-control-sm" name="p6_1_serial" maxlength="200">
+							<input type="text" class="form-control form-control-sm" name="iotName" maxlength="200">
+							<select class="form-control form-control-sm select-sm" name=tvName>
+									<option value="">상품명</option>
+									<option value="LG펫 케어">LG 펫 케어</option>
+									<option value="LG키즈 케어">LG 키즈 케어 </option>
+									<option value="LG보안">LG U+ 보안패키지</option>
+									<option value="SKT펫 케어">SKT 펫케어</option>
+									<option value="SKT키즈 케어">SKT 키즈 케어</option>
+									<option value="SKT보안">SKT 보안패키지</option>
+									<option value="KT펫 케어">KT 펫 케어</option>
+									<option value="KT키즈 케어">KT 키즈 케어</option>
+									<option value="KT보안">KT 보안패키지</option>								
+								</select>
 						</div>
+						
 					</div>
 					<div class="row mg-t-10 product6_1">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">정책금액</label>
+						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right" style="text-align:right">정책금액</label>
 						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0 input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm tx-right price calcprice" name="p6_1_basicprice" maxlength="10">
+							<input type="text" class="form-control form-control-sm tx-right price calcprice" name=iotPrice maxlength="10">
 							<span class="input-group-addon"><span class="tx-12">원</span></span>
 						</div>
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">약정</label>
+						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right" style="text-align:right">약정</label>
 						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
 							<div id="form-write-p6_1_planmon1" class="pull-left wd-100p">
-								<select onchange="setPlanmon(6,1)" class="form-control form-control-sm select-sm" name="p6_1_planmon">
-									<option value="6">6개월</option>
+								<select onchange="setPlanmon(6,1)" class="form-control form-control-sm select-sm" name="iotMonths">
 									<option value="12">12개월</option>
-									<option value="18">18개월</option>
 									<option value="24">24개월</option>
-									<option value="30">30개월</option>
-									<option value="36" selected>36개월</option>
-									<option value="0">무약정</option>
-									<option value="ETC">직접입력</option>
 								</select>
-								<i class="fa fa-angle-down"></i>
-							</div>
-							<div id="form-write-p6_1_planmon2" class="pull-left wd-50p pd-l-5 text-right input-group input-group-sm" style="display:none">
-								<input type="text" class="form-control form-control-sm tx-right" name="p6_1_planmon_etc" maxlength="2">
-								<span class="input-group-addon"><span class="tx-12">개월</span></span>
-							</div>
-							<div style="clear:both"></div>
+							</div>							
 						</div>
-					</div>
-					<div class="row mg-t-10 product6_1">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">유통지원</label>
-						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0 input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm tx-right price calcprice" name="p6_1_giftprice" maxlength="10">
-							<span class="input-group-addon"><span class="tx-12">원</span></span>
-						</div>
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">비고</label>
-						<div class="col-8 col-xl-4 mg-t-5 mg-xl-t-0">
-							<input type="text" class="form-control form-control-sm" name="p6_1_memo" maxlength="200">
-						</div>
-					</div>
+					</div>					
 				</div>
 			</div>	
 			<br><br>
-			<div class="card card-secondary">                                 
-				<div class="card-title">&nbsp;&nbsp;정산정보</div>						
-				<div style="clear:both"></div>
-			</div>	
+		<div class="card card-secondary">                                 
+			<div class="row mg-t-10" align="center">
+				<div class="card-title" style="font-weight:bold">&nbsp;&nbsp;정산정보</div>
+						<div class="col-8 col-xl-10 pd-b-10">
+						<div class="col-3"><label class="ckbox mg-0 tx-11"><input type="checkbox" id="option4"><span>결합할인</span></label></div>
+					</div>
+				</div>
+			</div>
+		
 			
 				<div class="col-12">
-				
-					<div class="tx-13 tx-gray-700 tx-bold pd-y-8 pd-x-20 bg-gray-100 rounded mg-b-20">
-						<div class="row">
-						<div class="col-3"><label class="ckbox mg-0 tx-11"><input type="checkbox" id="option4"><span>추가마진</span></label></div>
-						<div class="col-3"><label class="ckbox mg-0 tx-11"><input type="checkbox" id="option1"><span>할인</span></label></div>
-						</div>
-						<div style="clear:both"></div>
-					</div>
-					
 					<div class="row mg-t-10">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">추가정책</label>
-						<div class="col-8 col-xl-4 mg-t-10 mg-xl-t-0 input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm tx-right price calcprice" name="profitprice" maxlength="10">
-							<span class="input-group-addon"><span class="tx-12">원</span></span>
-						</div>
-					</div>
-					<div class="row mg-t-10 option1" style="display:none">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">할인금액</label>
-						<div class="col-8 col-xl-4 mg-t-10 mg-xl-t-0 input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm tx-right price calcprice" name="saleprice" maxlength="10">
-							<span class="input-group-addon"><span class="tx-12">원</span></span>
-						</div>
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">할인정보</label>
-						<div class="col-8 col-xl-4 mg-t-10 mg-xl-t-0">
-							<input type="text" class="form-control form-control-sm" name="saleinfo" maxlength="200">
-						</div>
-					</div>
-					<div class="row mg-t-10 option1" style="display:none">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right"><span class="tx-success">*</span> 할인예정일</label>
-						<div class="col-8 col-xl-4 mg-t-10 mg-xl-t-0">
-							<div class="pull-left wd-30p input-group input-group-sm">
-								<input type="text" class="form-control form-control-sm tx-right number" name="saleday" maxlength="3">
-								<span class="input-group-addon"><span class="tx-12">일</span></span>
-							</div>
-							<div class="pull-left wd-70p pd-l-5">
-								<input type="text" class="form-control form-control-sm fc-datepicker bg-white" name="saledate" maxlength="10" onkeydown="event.preventDefault()" readonly>
-								<a onclick="emptyInput('saleday'); emptyInput('saledate'); setPending();" class="input-close btn btn-light btn-xs pointer"><i class="fa fa-close tx-gray-500"></i></a>
-							</div>
-							<div style="clear:both"></div>
-						</div>
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right"><span class="tx-success">*</span> 할인예정비고</label>
-						<div class="col-8 col-xl-4 mg-t-10 mg-xl-t-0">
-							<input type="text" class="form-control form-control-sm" name="salememo" maxlength="200">
-						</div>
 					</div>
 					<div class="row mg-t-10">
-						
-					</div>
-					<div class="row mg-t-10">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">정산금액</label>
+						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right" >정산금액</label>
 						<div class="col-8 col-xl-4 mg-t-10 mg-xl-t-0 input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm tx-right price" name="sumprice" maxlength="10" style="background:#FFFCF6" readonly>
+							<input type="text" class="form-control form-control-sm tx-right price" name="openHomePrice" maxlength="10" style="background:#FFFCF6" readonly>
 							<span class="input-group-addon"><span class="tx-12">원</span></span>
 						</div>
 						<div class="col-12 col-xl-6 mg-t-10 mg-xl-t-0">
-							<div class="pd-t-10 tx-11 tx-gray-600">* 정책금액 + 추가정책 - 유통지원 <span class="tx-danger">(마이너스 표기)</span></div>
+							<div class="pd-t-10 tx-11 tx-gray-600">* 정책금액 합산 <span class="tx-danger"></span></div>
 						</div>
 					</div>
 					<div class="row mg-t-10 option4" style="display:none">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">추가마진 <i class="fa fa-question-circle-o tx-14 tx-gray-500 mg-l-2" data-toggle="tooltip" data-placement="right" title="상품권 회수 등의 수익금액"></i></label>
+						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">할인금액 <i class="fa fa-question-circle-o tx-14 tx-gray-500 mg-l-2" data-toggle="tooltip" data-placement="right" title="상품권 회수 등의 수익금액"></i></label>
 						<div class="col-8 col-xl-4 mg-t-10 mg-xl-t-0 input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm tx-right price calcprice" name="plusprice" maxlength="10">
+							<input type="text" class="form-control form-control-sm tx-right price calcprice" name="combDiscount" maxlength="10">
 							<span class="input-group-addon"><span class="tx-12">원</span></span>
 						</div>
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">추가마진정보</label>
+						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">결합정보<br>(가입정보)</label>
 						<div class="col-8 col-xl-4 mg-t-10 mg-xl-t-0">
-							<input type="text" class="form-control form-control-sm" name="plusinfo" maxlength="200">
+							<input type="text" class="form-control form-control-sm"  name="openHomeName"maxlength="200">
 						</div>
 					</div>
 					<div class="row mg-t-10">
 						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">판매마진</label>
 						<div class="col-8 col-xl-4 mg-t-10 mg-xl-t-0 input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm tx-right price" name="marginprice" maxlength="10" readonly>
+							<input type="text" class="form-control form-control-sm tx-right price" name="openHomeMargin" maxlength="10" readonly>
 							<span class="input-group-addon"><span class="tx-12">원</span></span>
 						</div>
 						<div class="col-12 col-xl-6 mg-t-10 mg-xl-t-0">
-							<div class="pd-t-10 tx-11 tx-gray-600">* 정책금액 + 추가정책 - 유통지원 - 할인금액</div>
+							<div class="pd-t-10 tx-11 tx-gray-600">* 정책금액 - 할인금액</div>
 						</div>
-					</div>
-					<div class="row mg-t-10">
-						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">실판매마진</label>
-						<div class="col-8 col-xl-4 mg-t-10 mg-xl-t-0 input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm tx-right price" name="realmargin" maxlength="10" readonly>
-							<span class="input-group-addon"><span class="tx-12">원</span></span>
+					</div><br>
+					<div class="row ">
+						<label class="col-4 col-xl-2 mg-t-15 mg-xl-t-5 tx-right">비고</label>
+						<div class="col-8 mg-t-10 mg-xl-t-0 input-group input-group-sm">
+							<input type="text" class="form-control form-control-sm tx-right price" name="openHomeMemo" readonly>
 						</div>
-						<div class="col-12 col-xl-6 mg-t-10 mg-xl-t-0">
-							<div class="pd-t-10 tx-11 tx-gray-600">* 판매마진 - 정산부가세 10.00%</div>
-						</div>
-					</div>
+						
+					</div>	
+							
 				</div>
 			   
 			    </div>		    
@@ -573,7 +373,6 @@
 	   
 		       <div class="row">
 		        <div class="col-12">
-		          <a href="#" class="btn btn-secondary">닫기</a>
 		          <input type="submit" value="확인" class="btn btn-success">
 		        </div>
 		      </div>
@@ -595,6 +394,7 @@
 <script>
 var product = new Array();
 $(function(){
+
 	$(".fc-datepicker").datepicker();
 	
 	$("#product1").click(function(){
@@ -606,6 +406,7 @@ $(function(){
 			product.splice(product.indexOf(1),1);
 		}
 		setProduct();
+		
 	});
 	$("#product2").click(function(){
 		if($(this).is(":checked") == true){
@@ -819,9 +620,9 @@ function calc()
 	var s_basicprice = 0;
 	var s_giftprice = 0;
 	if($("#form-write input[name=product1]").is(":checked") == true){
-		var p_num = $("#form-write select[name=p1_num]").val();
+		var p_num = $("#form-write select[name=internetCount]").val();
 		if(p_num >= 1){
-			var p_basicprice = $("#form-write input[name=p1_1_basicprice]").val();
+			var p_basicprice = $("#form-write input[name=internetPrice]").val();
 			if(p_basicprice) p_basicprice = parseInt(p_basicprice); else p_basicprice = 0;
 			var p_giftprice = $("#form-write input[name=p1_1_giftprice]").val();
 			if(p_giftprice) p_giftprice = parseInt(p_giftprice); else p_giftprice = 0;

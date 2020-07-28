@@ -49,7 +49,7 @@ public class UsedController {
 	}
 	
 	@PostMapping("/usedDelete")
-	public String deviceDelete(Used used) {
+	public String usedDelete(Used used) {
 		System.out.println(used.toString());
 		int delete = usedService.usedDelete(used);		
 		System.out.println("성공여부: "+delete);

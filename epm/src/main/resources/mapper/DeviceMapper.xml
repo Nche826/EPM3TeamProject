@@ -30,17 +30,17 @@
 		
 		<result property="storeName"				column="store_name"/>
 		
-		<result property="infoCode"					column="dinfo_code"/>
-		<result property="infoDevicein"				column="dinfo_devicein"/>
-		<result property="infoMethod"				column="dinfo_method"/>
-		<result property="infoStore"				column="dinfo_store"/>		
-		<result property="infoMemo"					column="dinfo_memo"/>
-		<result property="infoRegDate"				column="dinfo_reg_date"/>	
+		<result property="infoCode"					column="deviceinfo_code"/>
+		<result property="infoDevicein"				column="deviceinfo_devicein"/>
+		<result property="infoMethod"				column="deviceinfo_method"/>
+		<result property="infoStore"				column="deviceinfo_store"/>		
+		<result property="infoMemo"					column="deviceinfo_memo"/>
+		<result property="infoRegDate"				column="deviceinfo_reg_date"/>	
 		
-		<result property="updateStore"				column="dinfo_store"/>	
+		<result property="updateStore"				column="deviceinfo_store"/>	
 		<result property="updateStaff"				column="staff_code"/>	
 		<result property="updateDate"				column="devicein_date"/>	
-		<result property="updateMethod"				column="dinfo_method"/>	
+		<result property="updateMethod"				column="deviceinfo_method"/>	
 		<result property="updateDealler"			column="dealler_code"/>	
 		<result property="updateModel"				column="device_model"/>	
 		<result property="updateType"				column="device_type"/>	
@@ -93,7 +93,7 @@
 	JOIN tb_store AS a
 		ON s.store_code = a.store_code
 	JOIN tb_deviceinfo as info
-		on info.dinfo_devicein = i.devicein_code
+		on info.deviceinfo_devicein = i.devicein_code
 	</select>
 	
 	<select id = "searchList" parameterType="Device" resultMap="DeviceinSelect">
@@ -108,7 +108,7 @@
 	JOIN tb_store AS a
 		ON s.store_code = a.store_code
 	JOIN tb_deviceinfo as info
-		on info.dinfo_devicein = i.devicein_code
+		on info.deviceinfo_devicein = i.devicein_code
 	<where>
 			<choose>
 				<!-- 5개 항목 일치시 -->
@@ -239,18 +239,18 @@ INSERT
 		<insert id="deviceInfoInsert" parameterType="Device">	
 		<selectKey keyProperty="infoCode" resultType="hashmap" order="BEFORE">
  			SELECT 
- 				CONCAT('code', MAX(CAST(SUBSTRING(dinfo_code,5) AS DECIMAL)+1)) AS infoCode
+ 				CONCAT('code', MAX(CAST(SUBSTRING(deviceinfo_code,5) AS DECIMAL)+1)) AS infoCode
 			FROM tb_deviceinfo
  		</selectKey>
 	INSERT		
 		into tb_deviceinfo
 			(
-			dinfo_code
-			,dinfo_devicein
-			,dinfo_method
-			,dinfo_store
-			,dinfo_memo
-			,dinfo_reg_date
+			deviceinfo_code
+			,deviceinfo_devicein
+			,deviceinfo_method
+			,deviceinfo_store
+			,deviceinfo_memo
+			,deviceinfo_reg_date
 			)			
 			values
 			(
@@ -277,13 +277,13 @@ INSERT
 			update		
 				tb_deviceinfo
 			set
-				dinfo_devicein = #{deviceinCode}
-				,dinfo_method = #{updateMethod}
-				,dinfo_store = #{updateStore}
-				,dinfo_memo = #{updateMemo}
-				,dinfo_reg_date = NOW()
+				deviceinfo_devicein = #{deviceinCode}
+				,deviceinfo_method = #{updateMethod}
+				,deviceinfo_store = #{updateStore}
+				,deviceinfo_memo = #{updateMemo}
+				,deviceinfo_reg_date = NOW()
 			where
-				dinfo_devicein = #{deviceinCode}
+				deviceinfo_devicein = #{deviceinCode}
 		</update>
 		
 		<update id="deviceUpdate" parameterType="Device">
@@ -326,15 +326,15 @@ INSERT
 		-->
 
 			Delete From tb_deviceinfo
-			where dinfo_devicein = (SELECT *
+			where deviceinfo_devicein = (SELECT *
 									FROM (SELECT
-														dinfo_devicein
+														deviceinfo_devicein
 													from
 														tb_deviceinfo as i
 													join
 														tb_devicein as d
 													on
-														i.dinfo_devicein = d.devicein_code
+														i.deviceinfo_devicein = d.devicein_code
 													where
 														devicein_serial = #{deleteSerial}) as dcode)
 		</delete>							
